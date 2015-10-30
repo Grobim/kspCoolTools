@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body>
+  <body ng-class="$state.current.data.bodyClass">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -56,6 +56,7 @@
         <script src="kspToolsBase/kspToolsBase.services.js"></script>
         <script src="kspToolsBase/kspToolsBase.directives.js"></script>
         <script src="saveManager/app.js"></script>
+        <script src="saveManager/app.config.js"></script>
         <script src="saveManager/layout/layout.module.js"></script>
         <script src="saveManager/layout/layout.constants.js"></script>
         <script src="saveManager/layout/layout.controller.js"></script>
