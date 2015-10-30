@@ -2,10 +2,10 @@
   'use strict';
 
   angular.module('kspCoolTools.layout')
-    .config(['$stateProvider', '$urlRouterProvider', layoutRoutes])
+    .config(['$stateProvider', '$urlRouterProvider', LayoutRoutes])
   ;
 
-  function layoutRoutes($stateProvider, $urlRouterProvider) {
+  function LayoutRoutes($stateProvider, $urlRouterProvider) {
 
     $stateProvider.state('kspCoolTools', {
       url          : '/kspCoolTools',

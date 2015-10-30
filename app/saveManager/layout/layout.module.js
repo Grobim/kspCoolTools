@@ -6,6 +6,8 @@
 
     'kspToolsBase',
 
-    'kspCoolTools.layout.home'
+    'kspCoolTools.layout.home',
+    'kspCoolTools.layout.login',
+    'kspCoolTools.layout.profile'
   ]);
 })();

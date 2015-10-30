@@ -3,15 +3,15 @@
 
   angular.module('kspCoolTools.layout')
     .constant('headerStates', {
-      'kspCoolTools.home' : {
+      'kspCoolTools.home'  : {
         label : 'Home'
       },
-      'kspCoolTools.testCo' : {
-        label : 'TestCo',
+      'kspCoolTools.profile' : {
+        label : 'Profile',
         auth  : true
       },
-      'kspCoolTools.testPasCo' : {
-        label : 'TestPasCo',
+      'kspCoolTools.login' : {
+        label : 'Login',
         auth  : false
       }
     })

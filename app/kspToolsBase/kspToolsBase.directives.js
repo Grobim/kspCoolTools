@@ -3,7 +3,8 @@
 
   angular.module('kspToolsBase')
     .directive('ngShowAuth', ['KtbAuth', '$timeout', ngShowAuth])
-    .directive('ngHideAuth', ['KtbAuth', '$timeout', ngHideAuth]);
+    .directive('ngHideAuth', ['KtbAuth', '$timeout', ngHideAuth])
+  ;
 
   function ngShowAuth(KtbAuth, $timeout) {
     return {

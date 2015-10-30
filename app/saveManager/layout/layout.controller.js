@@ -6,8 +6,6 @@
 
   function LayoutController($state, KtbAuth, headerStates) {
     var _this = this;
-
-    _this.hello = 'Coucou';
     _this.goToState = goToState;
     _this.isCurrentState = isCurrentState;
     _this.userHasAuthRights = userHasAuthRights;
@@ -17,6 +15,8 @@
 
     function init() {
       _this.headerStates = _.cloneDeep(headerStates);
+
+      _this.hello = 'Coucou';
     }
 
     function goToState(state) {
@@ -43,6 +43,7 @@
 
     function logout() {
       KtbAuth.$unauth();
+      $state.go('kspCoolTools.home');
     }
   }
 })();
