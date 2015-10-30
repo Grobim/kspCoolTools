@@ -2,6 +2,8 @@
   'use strict';
 
   angular.module('kspCoolTools.layout', [
-    'ui.router'
+    'ui.router',
+
+    'kspToolsBase'
   ]);
 })();
