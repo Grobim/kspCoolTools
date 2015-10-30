@@ -2,16 +2,47 @@
   'use strict';
 
   angular.module('kspCoolTools.layout')
-    .controller('LayoutController', ['KtbAuth', LayoutController]);
+    .controller('LayoutController', ['$state', 'KtbAuth', 'headerStates', LayoutController]);
 
-  function LayoutController(KtbAuth) {
+  function LayoutController($state, KtbAuth, headerStates) {
     var _this = this;
+
     _this.hello = 'Coucou';
+    _this.goToState = goToState;
+    _this.isCurrentState = isCurrentState;
+    _this.userHasAuthRights = userHasAuthRights;
+    _this.logout = logout;
 
     init();
 
     function init() {
-      console.log(KtbAuth.$getAuth());
+      _this.headerStates = _.cloneDeep(headerStates);
+    }
+
+    function goToState(state) {
+      if (!$state.is(state)) {
+        $state.go(state);
+      }
+    }
+
+    function isCurrentState(stateName) {
+      return $state.includes(stateName);
+    }
+
+    function userHasAuthRights(state) {
+      if (_.isBoolean(state.auth)) {
+        var authData = KtbAuth.$getAuth();
+        if (authData) {
+          return state.auth === true;
+        } else {
+          return state.auth === false;
+        }
+      }
+      return true;
+    }
+
+    function logout() {
+      KtbAuth.$unauth();
     }
   }
 })();
