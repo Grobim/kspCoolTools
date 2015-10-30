@@ -4,6 +4,8 @@
   angular.module('kspCoolTools.layout', [
     'ui.router',
 
-    'kspToolsBase'
+    'kspToolsBase',
+
+    'kspCoolTools.layout.home'
   ]);
 })();

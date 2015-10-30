@@ -2,17 +2,21 @@
   'use strict';
 
   angular.module('kspCoolTools.layout')
-    .config(['$stateProvider', layoutRoutes])
-    ;
+    .config(['$stateProvider', '$urlRouterProvider', layoutRoutes])
+  ;
 
-  function layoutRoutes($stateProvider) {
+  function layoutRoutes($stateProvider, $urlRouterProvider) {
 
     $stateProvider.state('kspCoolTools', {
       url          : '/kspCoolTools',
       templateUrl  : 'saveManager/layout/layout.tpl.html',
       controller   : 'LayoutController',
-      controllerAs : 'layoutCtrl'
+      controllerAs : 'layoutCtrl',
+      abstract     : true
     });
 
+    $urlRouterProvider.otherwise('/kspCoolTools/home');
+
   }
+
 })();
