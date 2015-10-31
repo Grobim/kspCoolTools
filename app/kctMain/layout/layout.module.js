@@ -8,6 +8,7 @@
 
     'kct.layout.home',
     'kct.layout.login',
-    'kct.layout.profile'
+    'kct.layout.profile',
+    'kct.layout.saveManager'
   ]);
 })();

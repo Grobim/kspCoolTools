@@ -1,1 +1,12 @@
-Profile : {{profileCtrl.hello}}
+<h2>Profile</h2>
+<form name="profileCtrl.profileForm" ng-submit="profileCtrl.saveProfile()">
+    <p class="form-group">
+      <label for="loginName">Name</label>
+      <input id="loginName" required name="loginName" type="text" ng-model="profileCtrl.profile.nickname" class="form-control" />
+    </p>
+    <p>
+      <button class="btn btn-primary" ng-click="profileCtrl.saveProfile()">Save</button>
+      <span class="glyphicon glyphicon-ok notify-save" ng-if="profileCtrl.saved"></span>
+    </p>
+    <div ng-repeat="error in profileCtrl.errors" class="alert alert-danger">{{error.text}}</div>
+</form>

@@ -2,7 +2,10 @@
   'use strict';
 
   angular.module('kct.layout.profile', [
-    'ui.router'
+    'ui.router',
+
+    'kct.common',
+    'kct.profiles'
   ]);
 
 })();

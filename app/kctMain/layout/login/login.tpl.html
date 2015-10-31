@@ -1,7 +1,7 @@
 <h2>Login Page</h2>
 
 <fieldset>
-  <legend>Oauth</legend>
+  <legend>Fast connection</legend>
   <p>
     <button class="btn btn-primary" ng-click="loginCtrl.oauthLogin('facebook')">Facebook</button>
     <button class="btn btn-primary" ng-click="loginCtrl.oauthLogin('google')">Google</button>
@@ -11,7 +11,7 @@
 
 <fieldset>
   <legend>Email</legend>
-  <form role="form">
+  <form name="loginCtrl.loginForm" ng-submit="loginCtrl.validateForm()">
     <p class="form-group">
       <label for="loginEmail">email</label>
       <input id="loginEmail" required name="email" type="email" ng-model="loginCtrl.email" class="form-control" />
@@ -26,11 +26,11 @@
     </p>
 
     <p>
-      <button class="btn btn-primary" ng-click="loginCtrl.passwordLogin(loginCtrl.email, loginCtrl.pass)" ng-hide="loginCtrl.createMode">Log In</button>
-      <button class="btn btn-default" ng-click="loginCtrl.createMode = true" ng-hide="loginCtrl.createMode">Register</button>
-      <button class="btn btn-primary" ng-cloak ng-show="loginCtrl.createMode"
+      <button class="btn btn-primary" ng-click="loginCtrl.passwordLogin(loginCtrl.email, loginCtrl.pass)" ng-if="!loginCtrl.createMode">Log In</button>
+      <button class="btn btn-default" ng-click="loginCtrl.createMode = true" ng-if="!loginCtrl.createMode">Register</button>
+      <button class="btn btn-primary" ng-cloak ng-if="loginCtrl.createMode"
               ng-click="loginCtrl.createAccount(loginCtrl.email, loginCtrl.pass, loginCtrl.confirm)">Create Account</button>
-      <button class="btn btn-default" ng-cloak ng-show="loginCtrl.createMode" ng-click="loginCtrl.createMode = false">Cancel</button>
+      <button class="btn btn-default" ng-cloak ng-if="loginCtrl.createMode" ng-click="loginCtrl.createMode = false">Cancel</button>
     </p>
   </form>
   <p ng-show="loginCtrl.err" class="bg-danger">{{loginCtrl.err}}</p>

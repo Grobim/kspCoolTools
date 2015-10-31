@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header layout-header">
   <div class="navbar navbar-default" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -16,7 +16,29 @@
       <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
         <ul class="nav navbar-nav">
-          <li ng-repeat="(stateName, state) in layoutCtrl.headerStates"
+          <li ng-repeat="(stateName, state) in layoutCtrl.leftHeaderStates"
+              ng-class="{active : layoutCtrl.isCurrentState(stateName), dropdown : state.subStates}"
+              ng-if="layoutCtrl.userHasAuthRights(state)">
+            <a href="" ng-click="layoutCtrl.goToState(stateName)" ng-if="!state.subStates">
+              {{state.label}}
+              <span ng-if="state.args">({{state.args}})</span>
+            </a>
+            <a ng-if="state.subStates" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              {{state.label}}&nbsp;<span class="caret"></span>
+            </a>
+            <ul ng-if="state.subStates" class="dropdown-menu">
+              <li ng-repeat="(subStateName, subState) in state.subStates"
+                  ng-class="{active : layoutCtrl.isCurrentState(subStateName)}">
+                <a href="" ng-click="layoutCtrl.goToState(subStateName)">
+                  {{subState.label}}
+                  <span ng-if="subState.args">({{subState.args}})</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-repeat="(stateName, state) in layoutCtrl.rightHeaderStates"
               ng-class="{active : layoutCtrl.isCurrentState(stateName)}"
               ng-if="layoutCtrl.userHasAuthRights(state)">
             <a href="" ng-click="layoutCtrl.goToState(stateName)">
@@ -24,8 +46,10 @@
               <span ng-if="state.args">({{state.args}})</span>
             </a>
           </li>
+          <li class="li-logout">
+            <button ng-click="layoutCtrl.logout()" class="btn btn-danger navbar-btn" ng-show-auth>Logout</button>
+          </li>
         </ul>
-        <button ng-click="layoutCtrl.logout()" class="btn btn-danger navbar-btn navbar-right" ng-show-auth>Logout</button>
       </div>
     </div>
   </div>

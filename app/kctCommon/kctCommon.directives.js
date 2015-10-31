@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('kct.common')
-    .directive('ngShowAuth', ['KtbAuth', '$timeout', ngShowAuth])
-    .directive('ngHideAuth', ['KtbAuth', '$timeout', ngHideAuth])
+    .directive('ngShowAuth', ['KctAuth', '$timeout', ngShowAuth])
+    .directive('ngHideAuth', ['KctAuth', '$timeout', ngHideAuth])
   ;
 
-  function ngShowAuth(KtbAuth, $timeout) {
+  function ngShowAuth(KctAuth, $timeout) {
     return {
       restrict: 'A',
       link: function(scope, el) {
@@ -16,17 +16,17 @@
           // sometimes if ngCloak exists on same element, they argue, so make sure that
           // this one always runs last for reliability
           $timeout(function () {
-            el.toggleClass('ng-cloak', !KtbAuth.$getAuth());
+            el.toggleClass('ng-cloak', !KctAuth.$getAuth());
           }, 0);
         }
 
-        KtbAuth.$onAuth(update);
+        KctAuth.$onAuth(update);
         update();
       }
     };
   }
 
-  function ngHideAuth(KtbAuth, $timeout) {
+  function ngHideAuth(KctAuth, $timeout) {
     return {
       restrict: 'A',
       link: function(scope, el) {
@@ -35,11 +35,11 @@
           // sometimes if ngCloak exists on same element, they argue, so make sure that
           // this one always runs last for reliability
           $timeout(function () {
-            el.toggleClass('ng-cloak', !!KtbAuth.$getAuth());
+            el.toggleClass('ng-cloak', !!KctAuth.$getAuth());
           }, 0);
         }
 
-        KtbAuth.$onAuth(update);
+        KctAuth.$onAuth(update);
         update();
       }
     };

@@ -2,16 +2,16 @@
   'use strict';
 
   angular.module('kct.common')
-    .factory('KtbRootRef', ['$window', 'FBURL', KtbRootRef])
-    .factory('KtbAuth', ['$firebaseAuth', 'KtbRootRef', KtbAuth])
+    .factory('KctRootRef', ['$window', 'FBURL', KctRootRef])
+    .factory('KctAuth', ['$firebaseAuth', 'KctRootRef', KctAuth])
     ;
 
-  function KtbRootRef($window, FBURL) {
+  function KctRootRef($window, FBURL) {
     return new $window.Firebase(FBURL);
   }
 
-  function KtbAuth($firebaseAuth, KtbRootRef) {
-    return $firebaseAuth(KtbRootRef);
+  function KctAuth($firebaseAuth, KctRootRef) {
+    return $firebaseAuth(KctRootRef);
   }
 
 })();

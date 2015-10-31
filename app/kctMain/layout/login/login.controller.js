@@ -2,10 +2,10 @@
   'use strict';
 
   angular.module('kct.layout.login')
-    .controller('LoginController', ['$state', 'KtbAuth', 'ProfileRef', 'ProfilesService', LoginController])
+    .controller('LoginController', ['$state', 'KctAuth', 'ProfileRef', 'ProfilesService', LoginController])
   ;
 
-  function LoginController($state, KtbAuth, ProfileRef, ProfilesService) {
+  function LoginController($state, KctAuth, ProfileRef, ProfilesService) {
     var _this = this;
 
     _this.oauthLogin = oauthLogin;
@@ -14,12 +14,12 @@
 
     function oauthLogin(provider) {
       _this.err = null;
-      KtbAuth.$authWithOAuthPopup(provider, {rememberMe: true}).then(_checkProfile, _showError);
+      KctAuth.$authWithOAuthPopup(provider, {rememberMe: true}).then(_checkProfile, _showError);
     }
 
     function passwordLogin(email, pass) {
       _this.err = null;
-      KtbAuth.$authWithPassword({email: email, password: pass}, {rememberMe: true}).then(
+      KctAuth.$authWithPassword({email: email, password: pass}, {rememberMe: true}).then(
         _checkProfile, _showError
       );
     }
@@ -33,17 +33,16 @@
         _this.err = 'Passwords do not match';
       }
       else {
-        KtbAuth.$createUser({email: email, password: pass})
+        KctAuth.$createUser({email: email, password: pass})
           .then(function () {
             // authenticate so we have permission to write to Firebase
-            return KtbAuth.$authWithPassword({email: email, password: pass}, {rememberMe: true});
+            return KctAuth.$authWithPassword({email: email, password: pass}, {rememberMe: true});
           })
           .then(_checkProfile, _showError);
       }
     }
 
     function _checkProfile(authData) {
-      console.log(authData);
       var authProfile = new ProfileRef(authData.uid);
 
       authProfile.$loaded(function() {

@@ -2,26 +2,30 @@
   'use strict';
 
   angular.module('kct.layout')
-    .controller('LayoutController', ['$state', 'KtbAuth', 'headerStates', LayoutController]);
+    .controller('LayoutController', ['$state', 'KctAuth', 'leftHeaderStates', 'rightHeaderStates', LayoutController]);
 
-  function LayoutController($state, KtbAuth, headerStates) {
-    var _this = this;
+  function LayoutController($state, KctAuth, leftHeaderStates, rightHeaderStates) {
+    var _this = this,
+        _allStates;
+
     _this.goToState = goToState;
     _this.isCurrentState = isCurrentState;
+    _this.hasSubStates = hasSubStates;
     _this.userHasAuthRights = userHasAuthRights;
     _this.logout = logout;
 
     init();
 
     function init() {
-      _this.headerStates = _.cloneDeep(headerStates);
+      _this.leftHeaderStates = _.cloneDeep(leftHeaderStates);
+      _this.rightHeaderStates = _.cloneDeep(rightHeaderStates);
 
-      _this.hello = 'Coucou';
+      _allStates = _.assign({}, _this.leftHeaderStates, _this.rightHeaderStates);
     }
 
-    function goToState(state) {
-      if (!$state.is(state)) {
-        $state.go(state);
+    function goToState(stateName) {
+      if (!$state.is(stateName)) {
+        $state.go(stateName);
       }
     }
 
@@ -29,9 +33,13 @@
       return $state.includes(stateName);
     }
 
+    function hasSubStates(stateName) {
+      return !!_allStates[stateName].subStates;
+    }
+
     function userHasAuthRights(state) {
       if (_.isBoolean(state.auth)) {
-        var authData = KtbAuth.$getAuth();
+        var authData = KctAuth.$getAuth();
         if (authData) {
           return state.auth === true;
         } else {
@@ -42,7 +50,7 @@
     }
 
     function logout() {
-      KtbAuth.$unauth();
+      KctAuth.$unauth();
       $state.go('kct.home');
     }
   }

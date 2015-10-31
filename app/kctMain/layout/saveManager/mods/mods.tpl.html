@@ -1,0 +1,19 @@
+<fieldset>
+  <legend>Mods</legend>
+  <div class="row">
+    <div ng-repeat="mod in modsCtrl.mods"
+         class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img ng-src="{{mod.imageUrl || 'https://sigil.cupcake.io/' + mod.title}}" alt="..." />
+        <div class="caption">
+          <h3>{{mod.title}}</h3>
+          <p>{{mod.desc}}</p>
+          <p>
+            <a href="" class="btn btn-primary" role="button">Details</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+<pre>{{modsCtrl.mods | json}}</pre>
