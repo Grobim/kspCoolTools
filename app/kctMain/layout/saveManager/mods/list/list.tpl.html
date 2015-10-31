@@ -9,11 +9,11 @@
       <th>Details</th>
     </thead>
     <tbody>
-      <tr ng-repeat="mod in modsCtrl.mods track by $index">
+      <tr ng-repeat="(modId, mod) in modsCtrl.mods track by $index">
         <th>{{$index + 1}}</th>
         <td>{{mod.title}}</td>
         <td>{{mod.desc}}</td>
-        <td><a class="btn btn-primary btn-xs" role="button">Details</a></td>
+        <td><a ui-sref="kct.saveManager.modDetail({modId : modId})" class="btn btn-primary btn-xs" role="button">Details</a></td>
       </tr>
     </tbody>
   </table>
