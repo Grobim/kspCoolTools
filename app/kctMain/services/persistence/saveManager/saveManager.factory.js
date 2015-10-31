@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('kct.services.persistence.saveManager')
-    .factory('SaveManagerRef', ['$firebaseObject', 'KctRootRef', SaveManagerRef])
+    .factory('SaveManagerRef', ['KctRootRef', SaveManagerRef])
   ;
 
-  function SaveManagerRef($firebaseObject, KctRootRef) {
-    return $firebaseObject(KctRootRef.child('saveManager'));
+  function SaveManagerRef(KctRootRef) {
+    return KctRootRef.child('saveManager');
   }
 
 })();

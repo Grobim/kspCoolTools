@@ -2,16 +2,16 @@
   'use strict';
 
   angular.module('kct.layout.saveManager.mods')
-    .controller('ModsController', ['ModsRef', ModsController])
+    .controller('ModsController', ['$firebaseObject', 'ModsRef', ModsController])
   ;
 
-  function ModsController(ModsRef) {
+  function ModsController($firebaseObject, ModsRef) {
     var _this = this;
 
     init();
 
     function init() {
-      _this.mods = ModsRef;
+      _this.mods = $firebaseObject(ModsRef);
     }
   }
 

@@ -2,10 +2,10 @@
   'use strict';
 
   angular.module('kct.layout.login')
-    .controller('LoginController', ['$state', 'KctAuth', 'ProfileRef', 'ProfilesService', LoginController])
+    .controller('LoginController', ['$state', '$firebaseObject', 'KctAuth', 'ProfileRef', 'ProfilesService', LoginController])
   ;
 
-  function LoginController($state, KctAuth, ProfileRef, ProfilesService) {
+  function LoginController($state, $firebaseObject, KctAuth, ProfileRef, ProfilesService) {
     var _this = this;
 
     _this.oauthLogin = oauthLogin;
@@ -43,7 +43,7 @@
     }
 
     function _checkProfile(authData) {
-      var authProfile = new ProfileRef(authData.uid);
+      var authProfile = $firebaseObject(new ProfileRef(authData.uid));
 
       authProfile.$loaded(function() {
         var profileExists = authProfile.$value !== null;

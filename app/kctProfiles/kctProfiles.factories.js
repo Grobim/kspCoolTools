@@ -2,17 +2,17 @@
   'use strict';
 
   angular.module('kct.profiles')
-    .factory('ProfilesRef', ['$firebaseObject', 'KctRootRef', ProfilesRefFactory])
-    .factory('ProfileRef', ['$firebaseObject', 'ProfilesRef', ProfileRefFactory])
+    .factory('ProfilesRef', ['KctRootRef', ProfilesRefFactory])
+    .factory('ProfileRef', ['ProfilesRef', ProfileRefFactory])
   ;
 
-  function ProfilesRefFactory($firebaseObject, KctRootRef) {
-    return $firebaseObject(KctRootRef.child('profiles'));
+  function ProfilesRefFactory(KctRootRef) {
+    return KctRootRef.child('profiles');
   }
 
-  function ProfileRefFactory($firebaseObject, ProfilesRef) {
+  function ProfileRefFactory(ProfilesRef) {
     return function(profileId) {
-      return $firebaseObject(ProfilesRef.$ref().child(profileId));
+      return ProfilesRef.child(profileId);
     };
   }
 

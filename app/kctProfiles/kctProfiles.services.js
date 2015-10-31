@@ -2,16 +2,16 @@
   'use strict';
 
   angular.module('kct.profiles')
-    .service('ProfilesService', ['ProfileRef', ProfilesService])
+    .service('ProfilesService', ['$firebaseObject', 'ProfileRef', ProfilesService])
   ;
 
-  function ProfilesService(ProfileRef) {
+  function ProfilesService($firebaseObject, ProfileRef) {
     return {
       createProfile : createProfile
     };
 
     function createProfile(profileId, profileData) {
-      var profileRef = new ProfileRef(profileId);
+      var profileRef = $firebaseObject(new ProfileRef(profileId));
       _.assign(profileRef, profileData);
       return profileRef.$save();
     }

@@ -2,10 +2,10 @@
   'use strict';
 
   angular.module('kct.layout.profile')
-    .controller('ProfileController', ['$timeout', 'ProfileRef', 'KctAuth', ProfileController])
+    .controller('ProfileController', ['$firebaseObject', '$timeout', 'ProfileRef', 'KctAuth', ProfileController])
   ;
 
-  function ProfileController($timeout, ProfileRef, KctAuth) {
+  function ProfileController($firebaseObject, $timeout, ProfileRef, KctAuth) {
     var _this = this,
         _userAuth = KctAuth.$getAuth(),
         _timeout;
@@ -16,7 +16,7 @@
 
     function init() {
       _this.errors = [];
-      _this.profile = new ProfileRef(_userAuth.uid);
+      _this.profile = $firebaseObject(new ProfileRef(_userAuth.uid));
     }
 
     function saveProfile() {
