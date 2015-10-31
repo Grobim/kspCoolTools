@@ -19,7 +19,7 @@
           <li ng-repeat="(stateName, state) in layoutCtrl.leftHeaderStates"
               ng-class="{active : layoutCtrl.isCurrentState(stateName), dropdown : state.subStates}"
               ng-if="layoutCtrl.userHasAuthRights(state)">
-            <a href="" ng-click="layoutCtrl.goToState(stateName)" ng-if="!state.subStates">
+            <a ui-sref="{{stateName}}" ng-if="!state.subStates">
               {{state.label}}
               <span ng-if="state.args">({{state.args}})</span>
             </a>
@@ -29,7 +29,7 @@
             <ul ng-if="state.subStates" class="dropdown-menu">
               <li ng-repeat="(subStateName, subState) in state.subStates"
                   ng-class="{active : layoutCtrl.isCurrentState(subStateName)}">
-                <a href="" ng-click="layoutCtrl.goToState(subStateName)">
+                <a ui-sref="{{subStateName}}">
                   {{subState.label}}
                   <span ng-if="subState.args">({{subState.args}})</span>
                 </a>
@@ -41,7 +41,7 @@
           <li ng-repeat="(stateName, state) in layoutCtrl.rightHeaderStates"
               ng-class="{active : layoutCtrl.isCurrentState(stateName)}"
               ng-if="layoutCtrl.userHasAuthRights(state)">
-            <a href="" ng-click="layoutCtrl.goToState(stateName)">
+            <a ui-sref="{{stateName}}">
               {{state.label}}
               <span ng-if="state.args">({{state.args}})</span>
             </a>

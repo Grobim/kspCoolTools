@@ -8,7 +8,6 @@
     var _this = this,
         _allStates;
 
-    _this.goToState = goToState;
     _this.isCurrentState = isCurrentState;
     _this.hasSubStates = hasSubStates;
     _this.userHasAuthRights = userHasAuthRights;
@@ -21,12 +20,6 @@
       _this.rightHeaderStates = _.cloneDeep(rightHeaderStates);
 
       _allStates = _.assign({}, _this.leftHeaderStates, _this.rightHeaderStates);
-    }
-
-    function goToState(stateName) {
-      if (!$state.is(stateName)) {
-        $state.go(stateName);
-      }
     }
 
     function isCurrentState(stateName) {
