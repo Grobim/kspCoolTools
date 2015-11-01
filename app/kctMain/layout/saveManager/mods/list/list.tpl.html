@@ -45,6 +45,28 @@
                     previous-text="&lsaquo;"
                     next-text="&rsaquo;"></uib-pagination>
     <br />
+    <table kct-table
+           kct-table-list="modsCtrl.mods"
+           kct-table-config="modsCtrl.tableConfig"
+           class="table table-striped table-condensed table-responsive">
+      <caption>Results ({{modsCtrl.filteredMods.length || 0}}) <a ui-sref="kct.saveManager.modDetail({modId : modsCtrl.creationKey})" ng-if="modsCtrl.filteredMods.length === 0">Can't find a mod ? Add it !</a></caption>
+      <thead>
+        <tr>
+          <th kct-table-attribute="detail">
+            Details
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td kct-table-implicit kct-table-attribute="title" kct-table-title="Title"></td>
+          <td kct-table-implicit kct-table-attribute="desc" kct-table-title="Description"></td>
+          <td kct-table-attribute="detail">
+            <a ui-sref="kct.saveManager.modDetail({modId : item.$id})" class="btn btn-primary btn-xs" role="button">Details</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <div class="col-sm-6">
       <a ui-sref="kct.saveManager.modDetail({modId : modsCtrl.creationKey})" class="btn btn-primary btn-block">Add a mod</a>
     </div>

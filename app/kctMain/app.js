@@ -5,6 +5,7 @@
     'ui.router',
 
     'kct.services',
+    'kct.directives',
     'kct.layout'
   ]);
 

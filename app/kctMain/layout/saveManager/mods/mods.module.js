@@ -6,6 +6,7 @@
     'ui.bootstrap',
     'firebase',
 
-    'kct.services.persistence.saveManager'
+    'kct.services.persistence.saveManager',
+    'kct.directives.kctTable'
   ]);
 })();
