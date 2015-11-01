@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "^1.4.0",
+    "angular-bootstrap": "~0.14.3",
     "angular-ui-router": "^0.2.15",
     "angular-sanitize": "^1.4.0",
     "angularfire": "^1.1.0",
-    "at-table": "~1.0.6",
     "bootstrap-sass-official": "^3.3.0",
     "checklist-model": "0.6.0",
     "firebase": "^2.3.0",
@@ -17,8 +17,5 @@
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
-  "moduleName": "kct",
-  "resolutions": {
-    "angular": "^1.4.0"
-  }
+  "moduleName": "kct"
 }

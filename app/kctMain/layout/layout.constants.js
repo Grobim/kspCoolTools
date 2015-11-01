@@ -28,6 +28,7 @@
         auth  : false
       }
     })
+    .constant('creationKey', 'new')
   ;
 
 })();

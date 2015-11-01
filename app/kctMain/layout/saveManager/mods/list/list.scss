@@ -1,0 +1,9 @@
+body.save-manager .mod-list {
+  .sortable-header {
+    cursor: pointer;
+
+    &:active {
+      background-color: #f5f5f5;
+    }
+  }
+}
