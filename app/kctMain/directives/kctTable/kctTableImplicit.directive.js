@@ -14,7 +14,7 @@
     function compile(element) {
       var attribute = element.attr('kct-table-attribute');
       if (!attribute) {
-        throw 'at-implicit specified without at-attribute: ' + (element.html());
+        throw 'kct-table-implicit specified without kct-table-attribute: ' + (element.html());
       }
       return element.append('<span ng-bind=\'item.' + attribute + '\'></span>');
     }
