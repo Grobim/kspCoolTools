@@ -11,12 +11,6 @@
         <label>Mods per page</label>
         <select ng-model="modVersionsListCtrl.tableConfig.itemsPerPage" ng-options="o as o for o in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
       </div>
-      <div class="checkbox-inline">
-        <label>
-          <input type="checkbox" ng-model="modVersionsListCtrl.tableConfig.fillLastPage" />
-          <span>Fill</span>
-        </label>
-      </div>
     </form>
     <table kct-table
            kct-table-paginated
