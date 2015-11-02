@@ -2,10 +2,10 @@
   'use strict';
 
   angular.module('kct.layout.saveManager.mods.details.modVersions')
-    .controller('ModDetailsModVersionsController', ['$scope', '$stateParams', '$firebaseObject', '$firebaseArray', 'ModVersionsRef', 'ModRef', ModDetailsModVersionsController])
+    .controller('ModDetailsModVersionsListController', ['$scope', '$stateParams', '$firebaseObject', '$firebaseArray', 'ModVersionsRef', 'ModRef', 'creationKey', ModDetailsModVersionsListController])
   ;
 
-  function ModDetailsModVersionsController($scope, $stateParams, $firebaseObject, $firebaseArray, ModVersionsRef, ModRef) {
+  function ModDetailsModVersionsListController($scope, $stateParams, $firebaseObject, $firebaseArray, ModVersionsRef, ModRef, creationKey) {
     var _this = this;
 
     init();
@@ -16,10 +16,11 @@
       _this.modVersions.$loaded(_initWatchers);
 
       _this.filteredModVersions = [];
+      _this.creationKey = creationKey;
 
       function _initWatchers() {
 
-        $scope.$watchCollection('modVersionsCtrl.customQuery', function(newQuery) {
+        $scope.$watchCollection('modVersionsListCtrl.customQuery', function(newQuery) {
           if (newQuery && newQuery.length) {
             _this.filteredModVersions = _.filter(_this.modVersions, function(modVersion) {
               return (modVersion.$id.search(new RegExp(newQuery, 'i')) > -1) ||

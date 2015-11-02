@@ -9,9 +9,9 @@
     $stateProvider
       .state('kct.saveManager.modVersions', {
         url          : '/mods/:modId/modVersions',
-        templateUrl  : 'kctMain/layout/saveManager/mods/details/modVersions/modVersions.tpl.html',
-        controller   : 'ModDetailsModVersionsController',
-        controllerAs : 'modVersionsCtrl'
+        templateUrl  : 'kctMain/layout/saveManager/mods/details/modVersions/list/modVersionsList.tpl.html',
+        controller   : 'ModDetailsModVersionsListController',
+        controllerAs : 'modVersionsListCtrl'
       })
     ;
   }
