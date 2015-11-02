@@ -1,14 +1,12 @@
 (function() {
   'use strict';
 
-  angular.module('kct.layout.saveManager.mods')
+  angular.module('kct.layout.saveManager.mods.details')
     .controller('ModDetailController', [
-      '$scope',
       '$state',
       '$stateParams',
       '$firebaseObject',
       '$firebaseArray',
-      '$filter',
       '$timeout',
       'ModRef',
       'ModsRef',
@@ -18,12 +16,10 @@
     ])
   ;
 
-  function ModDetailController($scope,
-                               $state,
+  function ModDetailController($state,
                                $stateParams,
                                $firebaseObject,
                                $firebaseArray,
-                               $filter,
                                $timeout,
                                ModRef,
                                ModsRef,

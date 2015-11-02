@@ -2,12 +2,7 @@
   'use strict';
 
   angular.module('kct.layout.saveManager.mods', [
-    'ui.router',
-    'ui.bootstrap',
-    'firebase',
-
-    'kct.services.persistence.saveManager',
-    'kct.directives.kctTable',
-    'kct.filters'
+    'kct.layout.saveManager.mods.list',
+    'kct.layout.saveManager.mods.details'
   ]);
 })();
