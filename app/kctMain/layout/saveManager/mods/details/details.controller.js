@@ -11,6 +11,7 @@
       'ModRef',
       'ModsRef',
       'ModVersionsRef',
+      'ModVersionsService',
       'creationKey',
       ModDetailController
     ])
@@ -24,13 +25,13 @@
                                ModRef,
                                ModsRef,
                                ModVersionsRef,
+                               ModVersionsService,
                                creationKey) {
     var _this = this,
         _timeout;
 
     _this.isCreation = isCreation;
     _this.formAction = (isCreation()) ? _createMod : _editMod;
-    _this.getDepsSize = getDepsSize;
 
     init();
 
@@ -41,6 +42,9 @@
         _this.mod = $firebaseObject(new ModRef($stateParams.modId));
         _this.modVersions = $firebaseArray(new ModVersionsRef($stateParams.modId).orderByKey().limitToLast(5));
         _this.modVersions.$loaded(_reverseList);
+        _this.modVersions.$watch(function() {
+          ModVersionsService.addDepLengthToVersions(_this.modVersions);
+        });
         _this.tableConfig = {
           itemsPerPage : 5
         };
@@ -49,10 +53,6 @@
 
     function isCreation() {
       return $stateParams.modId === creationKey;
-    }
-
-    function getDepsSize(item) {
-      return _.size(item.deps);
     }
 
     function _reverseList() {

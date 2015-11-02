@@ -24,7 +24,7 @@
           {{item.$id | replaceChars:'_':'.'}}
         </td>
         <td kct-table-implicit kct-table-attribute="desc" kct-table-sortable kct-table-title="Description"></td>
-        <td kct-table-title="Known dependencies">{{item.deps | length}}</td>
+        <td kct-table-implicit kct-table-attribute="depsLength" kct-table-title="Known dependencies"></td>
         <td kct-table-title="Details">
           <a ui-sref="kct.saveManager.modVersionDetails({modId : modVersionsListCtrl.mod.$id, modVersionId : item.$id})" class="btn btn-primary btn-xs" role="button">Details</a>
         </td>
@@ -37,5 +37,4 @@
       <a ui-sref="kct.saveManager.modVersionDetails({modId : modVersionsListCtrl.mod.$id, modVersionId : modVersionsListCtrl.creationKey})" class="btn btn-primary btn-block">Add a version</a>
     </div>
   </fieldset>
-  <pre>{{modVersionsListCtrl.filteredModVersions | json}}</pre>
 </div>

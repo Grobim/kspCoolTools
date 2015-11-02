@@ -46,7 +46,7 @@
           <tr>
             <td kct-table-attribute="version">{{item.$id | replaceChars:'_':'.'}}</td>
             <td kct-table-implicit kct-table-attribute="desc" kct-table-title="Description"></td>
-            <td kct-table-title="Known dependencies">{{item.deps | length}}</td>
+            <td kct-table-implicit kct-table-attribute="depsLength" kct-table-title="Known dependencies"></td>
           </tr>
         </tbody>
       </table>
