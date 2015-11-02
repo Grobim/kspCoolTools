@@ -56,6 +56,8 @@
           _.set(pScope, pAttrs.kctTableConfig, _effectiveConfig);
           _config = pScope.$eval(pAttrs.kctTableConfig);
 
+          _initSorting();
+
           _this.filteredList = $filter('filter')(_list, _config.query);
           _this.fillerArray = [];
 
@@ -67,6 +69,14 @@
           if (pAttrs.kctTablePaginated !== void 0) {
             pScope.$watch(pAttrs.kctTableConfig + '.currentPage', update);
             pScope.$watch(pAttrs.kctTableConfig + '.itemsPerPage', update);
+          }
+
+          function _initSorting() {
+            var sortedColumn = _.find(_columns, 'initSorting');
+            _config.order = {
+              predicate   : sortedColumn.attribute,
+              sortReverse : sortedColumn.initSorting === 'desc'
+            };
           }
 
         }
@@ -121,19 +131,18 @@
         var columns = [];
         _tdElements.each(function(index, td) {
           var tdEl = angular.element(td),
-              tableAttribute = tdEl.attr('kct-table-attribute'),
               column = {};
 
-          column.hasAttribute = !!tableAttribute;
+          column.attribute = tdEl.attr('kct-table-attribute');
 
           column.isSortable = tdEl.attr('kct-table-sortable') !== void 0 || !!/(sortable)/i.exec(tdEl.attr('class'));
           if (column.isSortable) {
             column.initSorting = tdEl.attr('kct-table-initial-sorting');
           }
 
-          column.hasTitle = !!_headElement.find('tr th[kct-table-attribute=\'' + tableAttribute + '\']').length;
+          column.hasTitle = !!_headElement.find('tr th[kct-table-attribute=\'' + column.attribute + '\']').length;
           if (!column.hasTitle) {
-            column.hasTitle = !!tdEl.attr('kct-table-title') || column.hasAttribute;
+            column.hasTitle = !!tdEl.attr('kct-table-title') || !!column.attribute;
           }
           columns.push(column);
         });
@@ -154,8 +163,7 @@
 
             var relatedTd = angular.element(_tdElements[index]),
                 appendedTh,
-                attribute = (column.hasAttribute) ? relatedTd.attr('kct-table-attribute') : null,
-                relatedTh = (column.hasTitle && column.hasAttribute) ? cacheRowHeader.find('th[kct-table-attribute=' + attribute + ']') : null;
+                relatedTh = (column.hasTitle && column.attribute) ? cacheRowHeader.find('th[kct-table-attribute=' + column.attribute + ']') : null;
 
             if (column.hasTitle) {
               if (relatedTh && !!relatedTh.length) {
@@ -168,11 +176,11 @@
               appendedTh = angular.element(document.createElement('th'));
             }
 
-            if (column.isSortable && column.hasAttribute) {
+            if (column.isSortable && column.attribute) {
               appendedTh.addClass('sortable-header');
-              appendedTh.attr('ng-click', 'vm.sortTable(\'' + attribute + '\')');
-              appendedTh.append('<span ng-show="vm.showCaret(\'' + attribute + '\', true)" class="glyphicon glyphicon-chevron-down pull-right"></span>');
-              appendedTh.append('<span ng-show="vm.showCaret(\'' + attribute + '\', false)" class="glyphicon glyphicon-chevron-up pull-right"></span>');
+              appendedTh.attr('ng-click', 'vm.sortTable(\'' + column.attribute + '\')');
+              appendedTh.append('<span ng-show="vm.showCaret(\'' + column.attribute + '\', true)" class="glyphicon glyphicon-chevron-down pull-right"></span>');
+              appendedTh.append('<span ng-show="vm.showCaret(\'' + column.attribute + '\', false)" class="glyphicon glyphicon-chevron-up pull-right"></span>');
             }
 
             rowHeader.append(appendedTh);
