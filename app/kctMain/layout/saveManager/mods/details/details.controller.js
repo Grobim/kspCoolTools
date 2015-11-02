@@ -34,6 +34,8 @@
 
     _this.isCreation = isCreation;
     _this.formAction = (isCreation()) ? _createMod : _editMod;
+    _this.getDepsSize = getDepsSize;
+
     init();
 
     function init() {
@@ -51,6 +53,10 @@
 
     function isCreation() {
       return $stateParams.modId === creationKey;
+    }
+
+    function getDepsSize(item) {
+      return _.size(item.deps);
     }
 
     function _reverseList() {

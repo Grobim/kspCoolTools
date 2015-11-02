@@ -50,7 +50,8 @@
           if (!pScope.$eval(pAttrs.kctTableConfig)) {
             _effectiveConfig = _defaultConfig;
           } else {
-            _effectiveConfig = _.assign(_defaultConfig, pScope.$eval(pAttrs.kctTableConfig));
+            _effectiveConfig = _.assign({}, _defaultConfig, pScope.$eval(pAttrs.kctTableConfig));
+            _effectiveConfig.currentPage = 1;
           }
           _.set(pScope, pAttrs.kctTableConfig, _effectiveConfig);
           _config = pScope.$eval(pAttrs.kctTableConfig);
@@ -112,6 +113,7 @@
           } else {
             _this.fillerArray.length = 0;
           }
+
         }
       }
 
