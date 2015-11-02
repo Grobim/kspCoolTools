@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
-  angular.module('kct.directives.kctTable', []);
+  angular.module('kct.directives.kctTable', [
+    'ui.bootstrap'
+  ]);
 
 })();
