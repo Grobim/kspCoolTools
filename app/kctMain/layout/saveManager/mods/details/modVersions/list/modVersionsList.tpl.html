@@ -11,6 +11,12 @@
         <label>Mods per page</label>
         <select ng-model="modVersionsListCtrl.tableConfig.itemsPerPage" ng-options="o as o for o in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
       </div>
+      <div class="checkbox-inline">
+        <label>
+          <input type="checkbox" ng-model="modVersionsListCtrl.tableConfig.fillLastPage" />
+          <span>Fill</span>
+        </label>
+      </div>
     </form>
     <table kct-table
            kct-table-paginated
@@ -24,6 +30,7 @@
           {{item.$id | replaceChars:'_':'.'}}
         </td>
         <td kct-table-implicit kct-table-attribute="desc" kct-table-sortable kct-table-title="Description"></td>
+        <td kct-table-title="Known dependencies">{{item.deps | length}}</td>
         <td kct-table-title="Details">
           <a ui-sref="kct.saveManager.modVersionDetails({modId : modVersionsListCtrl.mod.$id, modVersionId : item.$id})" class="btn btn-primary btn-xs" role="button">Details</a>
         </td>
@@ -33,7 +40,7 @@
       <kct-table-pagination kct-table-config="modVersionsListCtrl.tableConfig" rotate="false" boundary-links="true"></kct-table-pagination>
     </div>
     <div class="col-sm-6">
-      <a ui-sref="kct.saveManager.modVersionDetails({modId : modVersionsListCtrl.mod.$id, modVersionId : modVersionsListCtrl.creationKey})" class="btn btn-primary btn-block">Add a versions</a>
+      <a ui-sref="kct.saveManager.modVersionDetails({modId : modVersionsListCtrl.mod.$id, modVersionId : modVersionsListCtrl.creationKey})" class="btn btn-primary btn-block">Add a version</a>
     </div>
   </fieldset>
   <pre>{{modVersionsListCtrl.filteredModVersions | json}}</pre>

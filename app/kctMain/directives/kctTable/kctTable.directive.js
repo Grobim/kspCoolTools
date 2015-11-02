@@ -10,6 +10,7 @@
       query        : '',
       currentPage  : 1,
       itemsPerPage : 10,
+      fillLastPage : true,
       order        : {
         predicate : ''
       }
@@ -42,6 +43,7 @@
         _this.sortTable = sortTable;
         _this.showCaret = showCaret;
         _this.update = update;
+        _this.fillArray = fillArray;
 
         init();
 
@@ -127,6 +129,10 @@
           }
 
         }
+
+        function fillArray() {
+          return !!_config.fillLastPage;
+        }
       }
 
       function _extractColumns() {
@@ -196,6 +202,7 @@
 
         var emptyTr = angular.element(document.createElement('tr'));
         emptyTr.attr('ng-repeat', 'filler in vm.fillerArray');
+        emptyTr.attr('ng-if', 'vm.fillArray()');
 
         for (var i = 0; i < _columns.length; ++i) {
           emptyTr.append('<td><span>&nbsp;</span></td>');
