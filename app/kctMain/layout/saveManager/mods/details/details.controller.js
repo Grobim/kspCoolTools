@@ -2,10 +2,33 @@
   'use strict';
 
   angular.module('kct.layout.saveManager.mods')
-    .controller('ModDetailController', ['$state', '$stateParams', '$firebaseObject', '$firebaseArray', '$timeout', 'ModRef', 'ModsRef', 'creationKey', ModDetailController])
+    .controller('ModDetailController', [
+      '$scope',
+      '$state',
+      '$stateParams',
+      '$firebaseObject',
+      '$firebaseArray',
+      '$filter',
+      '$timeout',
+      'ModRef',
+      'ModsRef',
+      'ModVersionsRef',
+      'creationKey',
+      ModDetailController
+    ])
   ;
 
-  function ModDetailController($state, $stateParams, $firebaseObject, $firebaseArray, $timeout, ModRef, ModsRef, creationKey) {
+  function ModDetailController($scope,
+                               $state,
+                               $stateParams,
+                               $firebaseObject,
+                               $firebaseArray,
+                               $filter,
+                               $timeout,
+                               ModRef,
+                               ModsRef,
+                               ModVersionsRef,
+                               creationKey) {
     var _this = this,
         _timeout;
 
@@ -18,11 +41,20 @@
         _this.mod = {};
       } else {
         _this.mod = $firebaseObject(new ModRef($stateParams.modId));
+        _this.modVersions = $firebaseArray(new ModVersionsRef($stateParams.modId).orderByKey().limitToLast(5));
+        _this.modVersions.$loaded(_reverseList);
+        _this.tableConfig = {
+          itemsPerPage : 5
+        };
       }
     }
 
     function isCreation() {
       return $stateParams.modId === creationKey;
+    }
+
+    function _reverseList() {
+      _this.modVersions = _this.modVersions.reverse();
     }
 
     function _createMod() {

@@ -6,6 +6,7 @@
 
     'kct.services',
     'kct.directives',
+    'kct.filters',
     'kct.layout'
   ]);
 

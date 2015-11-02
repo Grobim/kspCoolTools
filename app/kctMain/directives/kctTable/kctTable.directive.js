@@ -129,7 +129,7 @@
             column.initSorting = tdEl.attr('kct-table-initial-sorting');
           }
 
-          column.hasTitle = !!_headElement.find('tr th[kct-table-attribute=' + tableAttribute + ']').length;
+          column.hasTitle = !!_headElement.find('tr th[kct-table-attribute=\'' + tableAttribute + '\']').length;
           if (!column.hasTitle) {
             column.hasTitle = !!tdEl.attr('kct-table-title') || column.hasAttribute;
           }
@@ -156,7 +156,7 @@
                 relatedTh = (column.hasTitle && column.hasAttribute) ? cacheRowHeader.find('th[kct-table-attribute=' + attribute + ']') : null;
 
             if (column.hasTitle) {
-              if (!!relatedTh.length) {
+              if (relatedTh && !!relatedTh.length) {
                 appendedTh = relatedTh;
               } else {
                 appendedTh = angular.element(document.createElement('th'));
