@@ -73,10 +73,12 @@
 
           function _initSorting() {
             var sortedColumn = _.find(_columns, 'initSorting');
-            _config.order = {
-              predicate   : sortedColumn.attribute,
-              sortReverse : sortedColumn.initSorting === 'desc'
-            };
+            if (sortedColumn) {
+              _config.order = {
+                predicate   : sortedColumn.attribute,
+                sortReverse : sortedColumn.initSorting === 'desc'
+              };
+            }
           }
 
         }
@@ -96,7 +98,7 @@
 
         function update() {
           // Filtering
-          _this.filteredList = _this.sortedList = $filter('filter')(_list, _config.query);
+          _this.filteredList = _this.sortedList = $filter('filter')(pScope.$eval(pAttrs.kctTableList), _config.query);
           _config.totalItems = _this.filteredList.length;
 
           // Deciding range
@@ -136,7 +138,7 @@
           column.attribute = tdEl.attr('kct-table-attribute');
 
           column.isSortable = tdEl.attr('kct-table-sortable') !== void 0 || !!/(sortable)/i.exec(tdEl.attr('class'));
-          if (column.isSortable) {
+          if (column.isSortable && column.attribute) {
             column.initSorting = tdEl.attr('kct-table-initial-sorting');
           }
 
