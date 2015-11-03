@@ -25,7 +25,35 @@
         </div>
       </div>
     </form>
+    <div class="col-sm-6 row no-gutters" ng-if="!modVersionsDetailsCtrl.isCreation()">
+      <h4 class="col-md-6">Known dependencies</h4>
+      <div class="col-md-6">
+        <div class="col-sm-12">
+          <a class="btn btn-block btn-default">Manage dependencies</a>
+        </div>
+        <div class="col-sm-12 form-inline item-per-page">
+          <div class="form-group">
+            <label>Mods per page</label>
+            <select ng-model="modVersionsDetailsCtrl.tableConfig.itemsPerPage" ng-options="option as option for option in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
+          </div>
+        </div>
+      </div>
+      <table kct-table
+             kct-table-paginated
+             kct-table-list="modVersionsDetailsCtrl.modVersionDeps"
+             kct-table-config="modVersionsDetailsCtrl.tableConfig"
+             class="table table-striped table-condensed table-responsive table-bordered col-xs-12 mod-versions-table">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc" kct-table-title="Title"></td>
+            <td kct-table-implicit kct-table-attribute="minVersion" kct-table-title="Version min"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="col-sm-12">
+        <kct-table-pagination kct-table-config="modVersionsDetailsCtrl.tableConfig" rotate="false" boundary-links="true"></kct-table-pagination>
+      </div>
+    </div>
   </fieldset>
 </div>
-<pre>{{modVersionsDetailsCtrl.mod | json}}</pre>
-<pre>{{modVersionsDetailsCtrl.modVersion | json}}</pre>

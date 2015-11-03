@@ -8,8 +8,11 @@
       '$timeout',
       '$filter',
       '$firebaseObject',
+      '$firebaseArray',
       'ModRef',
       'ModVersionRef',
+      'ModVersionDepsRef',
+      'ModVersionDepsService',
       'creationKey',
       ModDetailsModVersionsDetailsController
     ])
@@ -21,8 +24,11 @@
     $timeout,
     $filter,
     $firebaseObject,
+    $firebaseArray,
     ModRef,
     ModVersionRef,
+    ModVersionDepsRef,
+    ModVersionDepsService,
     creationKey
   ) {
     var _this = this,
@@ -36,12 +42,19 @@
     function init() {
 
       _this.params = $stateParams;
+      _this.tableConfig = {
+        itemsPerPage : 5
+      };
 
       _this.mod = $firebaseObject(new ModRef($stateParams.modId));
 
       if (!isCreation()) {
 
         _this.modVersion = $firebaseObject(new ModVersionRef($stateParams.modId, $stateParams.modVersionId));
+        _this.modVersionDeps = $firebaseArray(new ModVersionDepsRef($stateParams.modId, $stateParams.modVersionId));
+        _this.modVersionDeps.$watch(function() {
+          ModVersionDepsService.addModTitleToDeps(_this.modVersionDeps);
+        });
 
       } else {
         _this.modVersion = {

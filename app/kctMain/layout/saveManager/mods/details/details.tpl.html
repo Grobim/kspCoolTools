@@ -24,7 +24,7 @@
         </div>
       </div>
     </form>
-    <div class="col-sm-6" ng-if="modDetailsCtrl.modVersions">
+    <div class="col-sm-6" ng-if="!modDetailsCtrl.isCreation()">
       <h4 class="col-sm-6">Last registered versions</h4>
       <div class="col-sm-6">
         <a ui-sref="kct.saveManager.modVersions(({modId : modDetailsCtrl.mod.$id}))" class="btn btn-block btn-default">Manage versions</a>
@@ -33,7 +33,7 @@
              kct-table-paginated
              kct-table-list="modDetailsCtrl.modVersions"
              kct-table-config="modDetailsCtrl.tableConfig"
-             class="table table-striped table-condensed table-responsive table-bordered col-md-12 modVersions-table">
+             class="table table-striped table-condensed table-responsive table-bordered col-md-12 mod-versions-table">
         <thead>
           <tr>
             <th kct-table-attribute="version">

@@ -6,7 +6,9 @@
     'firebase',
 
     'kct.filters',
-    'kct.services.persistence.saveManager'
+    'kct.services.persistence.saveManager',
+
+    'kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps'
   ]);
 
 })();
