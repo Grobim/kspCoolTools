@@ -339,7 +339,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html'],
+          src: ['*.html', '{,*/}*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -377,7 +377,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
-            'views/{,*/}*.html',
+            '{,**/}*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]
@@ -419,6 +419,9 @@ module.exports = function (grunt) {
     // Test settings
     karma: {
       unit: {
+        configFile: 'test/karma.conf.js'
+      },
+      singleRun: {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
@@ -446,13 +449,22 @@ module.exports = function (grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
-  grunt.registerTask('test', [
+  grunt.registerTask('testBase', [
     'clean:server',
     'wiredep',
     'concurrent:test',
     'autoprefixer',
-    'connect:test',
-    'karma'
+    'connect:test'
+  ]);
+
+  grunt.registerTask('test', [
+    'testBase',
+    'karma:unit'
+  ]);
+
+  grunt.registerTask('testSingleRun', [
+    'testBase',
+    'karma:singleRun'
   ]);
 
   grunt.registerTask('build', [
@@ -464,7 +476,6 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
     'cssmin',
     'uglify',
     'filerev',
@@ -474,7 +485,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'newer:jshint',
-    'test',
+    'testSingleRun',
     'build'
   ]);
 };

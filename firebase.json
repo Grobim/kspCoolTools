@@ -1,0 +1,9 @@
+{
+  "firebase": "ksp-cool-tools",
+  "public": "dist",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
