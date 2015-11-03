@@ -1,6 +1,6 @@
 {
   "name": "kspcooltools",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {},
   "repository": {},
   "devDependencies": {
@@ -40,11 +40,19 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "postinstall":"bower install",
+
     "pretest": "npm install",
     "test": "grunt test",
 
-    "postinstall":"bower install",
     "prestart": "npm install",
-    "start": "grunt serve"
+    "start": "grunt serve",
+
+    "prebuild": "npm install",
+    "build": "grunt build",
+
+    "predeploy": "npm install && grunt build",
+    "deploy": "firebase deploy",
+    "postdeploy": "firebase open"
   }
 }

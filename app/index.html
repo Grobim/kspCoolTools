@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" ng-app="kct">
+<html class="no-js" ng-app="kct" ng-controller="KctMainController as mainCtrl">
   <head>
     <meta charset="utf-8">
     <title></title>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-class="$state.current.data.bodyClass">
+  <body ng-class="mainCtrl.getBodyClass()">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -60,7 +60,7 @@
         <script src="kctProfiles/kctProfiles.factories.js"></script>
         <script src="kctProfiles/kctProfiles.services.js"></script>
         <script src="kctMain/app.js"></script>
-        <script src="kctMain/app.config.js"></script>
+        <script src="kctMain/app.controllers.js"></script>
         <script src="kctMain/services/services.module.js"></script>
         <script src="kctMain/services/persistence/persistence.module.js"></script>
         <script src="kctMain/services/persistence/saveManager/saveManager.module.js"></script>
