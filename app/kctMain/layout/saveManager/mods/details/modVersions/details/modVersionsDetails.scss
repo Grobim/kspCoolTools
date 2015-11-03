@@ -1,5 +1,14 @@
 body.save-manager .mod-versions-details {
+  .desc-field {
+    resize: none;
+    height: 145px;
+  }
+
   .return-label {
     margin-bottom: 15px;
+  }
+
+  .notify-save {
+    color : green;
   }
 }

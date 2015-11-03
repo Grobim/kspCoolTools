@@ -1,12 +1,19 @@
 @import "../app/kctMain/layout/saveManager/mods/details/modVersions/modVersions.scss";
 
 body.save-manager .mod-details {
+  .desc-field {
+    resize: none;
+    height: 145px;
+  }
+
   .return-label {
     margin-bottom: 15px;
   }
+
   .notify-save {
     color : green;
   }
+
   .modVersions-table {
     margin-top: 10px;
   }

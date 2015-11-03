@@ -39,6 +39,10 @@
         ModVersionsService.addDepLengthToVersions(_this.modVersions);
       });
 
+      _this.tableConfig = {
+        itemsPerPage : 5
+      };
+
       _this.filteredModVersions = [];
       _this.creationKey = creationKey;
 

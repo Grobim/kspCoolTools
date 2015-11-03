@@ -5,6 +5,7 @@
     'ui.router',
     'firebase',
 
+    'kct.filters',
     'kct.services.persistence.saveManager'
   ]);
 

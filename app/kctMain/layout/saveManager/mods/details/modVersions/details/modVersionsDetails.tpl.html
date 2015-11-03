@@ -1,6 +1,31 @@
 <div class="mod-versions-details">
   <a ui-sref="kct.saveManager.modVersions({modId : modVersionsDetailsCtrl.params.modId})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;Return to version list</a>
+  <fieldset>
+    <legend ng-if="modVersionsDetailsCtrl.isCreation()">Version creation</legend>
+    <legend ng-if="!modVersionsDetailsCtrl.isCreation()">Version details for {{modVersionsDetailsCtrl.mod.title}}</legend>
+    <form class="form-horizontal col-sm-6" ng-submit="modVersionsDetailsCtrl.formAction()">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="versionId">Version</label>
+        <div class="col-sm-10">
+          <input ng-model="modVersionsDetailsCtrl.newModVersionId" ng-if="modVersionsDetailsCtrl.isCreation()" class="form-control" id="versionId" />
+          <p class="form-control-static" ng-if="!modVersionsDetailsCtrl.isCreation()">{{modVersionsDetailsCtrl.modVersion.$id | replaceChars:'_':'.'}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="versionDesc">Description</label>
+        <div class="col-sm-10">
+          <textarea ng-model="modVersionsDetailsCtrl.modVersion.desc" class="form-control desc-field" id="versionDesc" />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button ng-if="modVersionsDetailsCtrl.isCreation()" type="submit" class="btn btn-primary">Create version</button>
+          <button ng-if="!modVersionsDetailsCtrl.isCreation()" type="submit" class="btn btn-primary">Edit version</button>
+          <span class="glyphicon glyphicon-ok notify-save" ng-if="modVersionsDetailsCtrl.saved"></span>
+        </div>
+      </div>
+    </form>
+  </fieldset>
 </div>
-<pre>{{modVersionsDetailsCtrl.params | json}}</pre>
 <pre>{{modVersionsDetailsCtrl.mod | json}}</pre>
 <pre>{{modVersionsDetailsCtrl.modVersion | json}}</pre>
