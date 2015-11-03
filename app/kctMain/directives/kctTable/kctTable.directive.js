@@ -50,9 +50,9 @@
         function init() {
           var _effectiveConfig;
           if (!pScope.$eval(pAttrs.kctTableConfig)) {
-            _effectiveConfig = _defaultConfig;
+            _effectiveConfig = _.cloneDeep(_defaultConfig);
           } else {
-            _effectiveConfig = _.assign({}, _defaultConfig, pScope.$eval(pAttrs.kctTableConfig));
+            _effectiveConfig = _.assign({}, _.cloneDeep(_defaultConfig), pScope.$eval(pAttrs.kctTableConfig));
             _effectiveConfig.currentPage = 1;
           }
           _.set(pScope, pAttrs.kctTableConfig, _effectiveConfig);

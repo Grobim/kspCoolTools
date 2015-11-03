@@ -12,7 +12,7 @@
 
     function addModTitleToDeps(modVersionDeps) {
       _.forEach(modVersionDeps, function(mod) {
-        mod.title = '';
+        mod.title = ' ';
         var obj = $firebaseObject(new ModRef(mod.$id));
         obj.$watch(function() {
           mod.title = obj.title;

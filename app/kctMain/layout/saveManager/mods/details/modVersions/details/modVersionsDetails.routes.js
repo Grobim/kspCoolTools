@@ -8,7 +8,7 @@
   function ModVersionsDetailsRoutes($stateProvider) {
     $stateProvider
       .state('kct.saveManager.modVersionDetails', {
-        url          : '/mods/:modId/modVersions/:modVersionId',
+        url          : '/mods/:modId/versions/:modVersionId',
         templateUrl  : 'kctMain/layout/saveManager/mods/details/modVersions/details/modVersionsDetails.tpl.html',
         controller   : 'ModDetailsModVersionsDetailsController',
         controllerAs : 'modVersionsDetailsCtrl'

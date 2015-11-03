@@ -1,0 +1,103 @@
+<div class="mod-version-deps-list">
+  <a ui-sref="kct.saveManager.modVersionDetails({modId : depsListCtrl.params.modId, modVersionId : depsListCtrl.params.modVersionId})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;Return to version details</a>
+  <fieldset>
+    <legend>Know dependencies of {{depsListCtrl.mod.title}} (v{{depsListCtrl.params.modVersionId | replaceChars:'_':'.'}})</legend>
+    <div class="col-sm-6 row no-gutters">
+      <form class="form-inline col-xs-12">
+        <div class="form-group">
+          <label>Search</label>
+          <input ng-model="depsListCtrl.depsTableConfig.query" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Mods per page</label>
+          <select ng-model="depsListCtrl.depsTableConfig.itemsPerPage" ng-options="option as option for option in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
+        </div>
+      </form>
+      <table kct-table
+             kct-table-paginated
+             kct-table-list="depsListCtrl.depsList"
+             kct-table-config="depsListCtrl.depsTableConfig"
+             class="table table-striped table-condensed table-responsive">
+        <caption>Results ({{depsListCtrl.depsTableConfig.totalItems || 0}})</caption>
+        <thead></thead>
+        <tbody>
+          <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc"></td>
+          <td kct-table-attribute="minVersion" kct-table-title="Version">
+            {{item.minVersion | replaceChars:'_':'.'}}
+          </td>
+          <td kct-table-implicit kct-table-attribute="notes"></td>
+          <td kct-table-title="Edit">
+            <button ng-click="depsListCtrl.editDependence(item)" class="btn btn-default btn-xs">Edit</button>
+          </td>
+          <td kct-table-title="Remove">
+            <button ng-click="depsListCtrl.removeDependence(item)" class="btn btn-danger btn-xs">Remove</button>
+          </td>
+        </tbody>
+      </table>
+      <div class="col-sm-12">
+        <kct-table-pagination kct-table-config="depsListCtrl.depsTableConfig" rotate="false" boundary-links="true"></kct-table-pagination>
+      </div>
+    </div>
+    <div class="col-sm-6 row no-gutters">
+    <fieldset>
+      <legend ng-if="!depsListCtrl.newDependence || depsListCtrl.newDependence.$new">Add a dependency</legend>
+      <legend ng-if="depsListCtrl.newDependence && !depsListCtrl.newDependence.$new">Edit dependency</legend>
+      <form class="form-inline col-xs-12 mod-list-filters-form" ng-if="!depsListCtrl.newDependence">
+        <div class="form-group">
+          <label>Search</label>
+          <input ng-model="depsListCtrl.modsTableConfig.query" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Mods per page</label>
+          <select ng-model="depsListCtrl.modsTableConfig.itemsPerPage" ng-options="option as option for option in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
+        </div>
+      </form>
+      <table kct-table
+             kct-table-paginated
+             kct-table-list="depsListCtrl.modList | omitFromField:depsListCtrl.depsList:'$id'"
+             kct-table-config="depsListCtrl.modsTableConfig"
+             ng-if="!depsListCtrl.newDependence"
+             class="table table-striped table-condensed table-responsive">
+        <caption>Results ({{depsListCtrl.modsTableConfig.totalItems || 0}})</caption>
+        <thead></thead>
+        <tbody>
+          <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc"></td>
+          <td kct-table-title="Add">
+            <button ng-click="depsListCtrl.setNewDependence(item)" class="btn btn-primary btn-xs">Add</button>
+          </td>
+        </tbody>
+      </table>
+      <div class="col-sm-12" ng-if="!depsListCtrl.newDependence">
+        <kct-table-pagination kct-table-config="depsListCtrl.modsTableConfig" rotate="false" boundary-links="true"></kct-table-pagination>
+      </div>
+      <form ng-if="depsListCtrl.newDependence" class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Title</label>
+          <p class="col-sm-9 form-control-static">{{depsListCtrl.newDependence.$title}}</p>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Min version</label>
+          <div class="col-sm-9">
+            <input ng-model="depsListCtrl.newDependence.minVersion" type="text" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Notes</label>
+          <div class="col-sm-9">
+            <textarea ng-model="depsListCtrl.newDependence.notes" class="form-control notes-field"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-6 col-md-offset-3 col-md-5">
+            <button ng-click="depsListCtrl.addDependence()" ng-if="depsListCtrl.newDependence.$new" class="btn btn-primary btn-block" type="submit">Add dependency</button>
+            <button ng-click="depsListCtrl.addDependence()" ng-if="!depsListCtrl.newDependence.$new" class="btn btn-primary btn-block" type="submit">Edit dependency</button>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <button ng-click="depsListCtrl.cancel()" class="btn btn-default btn-block" type="cancel">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </fieldset>
+    </div>
+  </fieldset>
+</div>

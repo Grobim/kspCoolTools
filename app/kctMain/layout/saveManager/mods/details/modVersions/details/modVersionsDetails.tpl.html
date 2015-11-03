@@ -29,7 +29,7 @@
       <h4 class="col-md-6">Known dependencies</h4>
       <div class="col-md-6">
         <div class="col-sm-12">
-          <a class="btn btn-block btn-default">Manage dependencies</a>
+          <a ui-sref="kct.saveManager.modVersionDepsList({modId : modVersionsDetailsCtrl.params.modId, modVersionId : modVersionsDetailsCtrl.params.modVersionId})" class="btn btn-block btn-default">Manage dependencies</a>
         </div>
         <div class="col-sm-12 form-inline item-per-page">
           <div class="form-group">
@@ -47,7 +47,7 @@
         <tbody>
           <tr>
             <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc" kct-table-title="Title"></td>
-            <td kct-table-implicit kct-table-attribute="minVersion" kct-table-title="Version min"></td>
+            <td kct-table-attribute="minVersion" kct-table-title="Version min">{{item.minVersion | replaceChars:'_':'.'}}</td>
           </tr>
         </tbody>
       </table>
