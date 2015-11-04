@@ -47,7 +47,6 @@
     }
 
     function addModVersionDep(newDependence) {
-      console.log(newDependence);
       var deferred = $q.defer(),
           existingModVersion;
 
