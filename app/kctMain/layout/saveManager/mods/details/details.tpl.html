@@ -5,14 +5,14 @@
     <legend ng-if="!modDetailsCtrl.isCreation()">Mod details : {{modDetailsCtrl.mod.title}}</legend>
     <form class="form-horizontal col-sm-6" ng-submit="modDetailsCtrl.formAction()">
       <div class="form-group">
-        <label class="col-sm-2 control-label" for="modTitle">Title</label>
-        <div class="col-sm-10">
+        <label class="col-sm-3 control-label" for="modTitle">Title</label>
+        <div class="col-sm-9">
           <input ng-model="modDetailsCtrl.mod.title" type="text" class="form-control" id="modTitle" />
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label" for="modDesc">Description</label>
-        <div class="col-sm-10">
+        <label class="col-sm-3 control-label" for="modDesc">Description</label>
+        <div class="col-sm-9">
           <textarea ng-model="modDetailsCtrl.mod.desc" class="form-control desc-field" id="modDesc" />
         </div>
       </div>

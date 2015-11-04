@@ -36,6 +36,7 @@
 
     _this.isCreation = isCreation;
     _this.formAction = (isCreation()) ? _createVersion : _editVersion;
+    _this.deleteVersion = deleteVersion;
 
     init();
 
@@ -66,6 +67,12 @@
 
     function isCreation() {
       return $stateParams.modVersionId === creationKey;
+    }
+
+    function deleteVersion() {
+      _this.modVersion.$remove().then(function() {
+        $state.go('kct.saveManager.modVersions', {modId : $stateParams.modId});
+      });
     }
 
     function _createVersion() {

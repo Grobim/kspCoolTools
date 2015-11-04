@@ -11,7 +11,11 @@
     _this.getBodyClass = getBodyClass;
 
     function getBodyClass() {
-      return $state.current.data.bodyClass;
+      if ($state.current && $state.current.data) {
+        return $state.current.data.bodyClass;
+      } else {
+        return '';
+      }
     }
   }
 
