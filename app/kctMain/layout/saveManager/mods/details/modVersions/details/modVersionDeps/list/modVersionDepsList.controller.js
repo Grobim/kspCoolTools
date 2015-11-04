@@ -30,11 +30,13 @@
     var _this = this;
 
     _this.setNewDependence = setNewDependence;
+    _this.setEditDependence = setEditDependence;
+
     _this.addDependence = addDependence;
+    _this.editDependence = editDependence;
     _this.cancel = cancel;
 
     _this.removeDependence = removeDependence;
-    _this.editDependence = editDependence;
 
     init();
 
@@ -65,8 +67,23 @@
       });
     }
 
+    function setEditDependence(item) {
+      _this.newDependence = $firebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, item.$id));
+      _this.newDependence.$loaded(function() {
+        _this.newDependence.minVersion = $filter('replaceChars')(_this.newDependence.minVersion, '_', '.');
+        _this.newDependence.$title = item.title;
+      });
+
+    }
+
     function addDependence() {
-      _this.newDependence.$save().then(function() {
+      ModVersionDepsService.addModVersionDep(_this.newDependence).then(function() {
+        _this.newDependence = null;
+      });
+    }
+
+    function editDependence() {
+      ModVersionDepsService.editVersionDep(_this.newDependence).then(function() {
         _this.newDependence = null;
       });
     }
@@ -76,16 +93,10 @@
     }
 
     function removeDependence(item) {
-      $firebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, item.$id)).$remove();
-    }
-
-    function editDependence(item) {
-      _this.newDependence = $firebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, item.$id));
-      _this.newDependence.$loaded(function() {
-        _this.newDependence.minVersion = $filter('replaceChars')(_this.newDependence.minVersion, '_', '.');
-        _this.newDependence.$title = item.title;
+      var removedDependence = $firebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, item.$id));
+      removedDependence.$loaded(function() {
+        ModVersionDepsService.removeModVersionDep(removedDependence);
       });
-
     }
   }
 

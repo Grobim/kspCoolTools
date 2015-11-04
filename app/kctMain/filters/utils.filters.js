@@ -20,9 +20,13 @@
   }
 
   function OmitFromFieldFilter() {
-    return function(inputList, otherList, field) {
+    return function(inputList, filtered, filteredField) {
       return _.reject(inputList, function(inputListItem) {
-        return _.find(otherList, field, _.get(inputListItem, field));
+        if (_.isArray(filtered)) {
+          return _.find(filtered, filteredField, _.get(inputListItem, filteredField));
+        } else {
+          return _.get(filtered, filteredField) === _.get(inputListItem, filteredField);
+        }
       });
     };
   }
