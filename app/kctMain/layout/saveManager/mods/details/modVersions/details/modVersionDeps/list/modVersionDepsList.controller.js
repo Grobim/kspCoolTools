@@ -3,6 +3,7 @@
 
   angular.module('kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list')
     .controller('ModDetailsModVersionDepListController', [
+      '$state',
       '$stateParams',
       '$filter',
       '$firebaseArray',
@@ -17,6 +18,7 @@
   ;
 
   function ModDetailsModVersionDepListController(
+    $state,
     $stateParams,
     $filter,
     $firebaseArray,
@@ -83,8 +85,12 @@
     }
 
     function editDependence() {
-      ModVersionDepsService.editVersionDep(_this.newDependence).then(function() {
-        _this.newDependence = null;
+      ModVersionDepsService.editVersionDep(_this.newDependence).then(function(shouldReload) {
+        if (shouldReload) {
+          $state.reload();
+        } else {
+          _this.newDependence = null;
+        }
       });
     }
 

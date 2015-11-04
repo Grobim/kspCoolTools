@@ -65,8 +65,9 @@
             diDirDep = $firebaseObject(
               new BiDirModVersionDepRef(
                 newDependence.$id,
-                newDependence.minVersion
-              ).child(biDirModVersion.modId)
+                newDependence.minVersion,
+                biDirModVersion.modId
+              )
             );
 
         diDirDep.$loaded(function() {
@@ -87,12 +88,11 @@
         editedDependence.minVersion = $filter('replaceChars')(editedDependence.minVersion, '.', '_');
         if (editedDependence.minVersion !== actualDep.minVersion) {
           removeModVersionDep(actualDep).then(addModVersionDep(editedDependence)).then(function() {
-            $state.reload();
-            deferred.resolve();
+            deferred.resolve(true);
           });
         } else {
           editedDependence.$save().then(function() {
-            deferred.resolve();
+            deferred.resolve(false);
           });
         }
       });
@@ -107,8 +107,9 @@
           diDirDep = $firebaseObject(
             new BiDirModVersionDepRef(
               removedDependence.$id,
-              removedDependence.minVersion
-            ).child(biDirModVersion.modId)
+              removedDependence.minVersion,
+              biDirModVersion.modId
+            )
           )
       ;
       removedDependence.$remove().then(function() {

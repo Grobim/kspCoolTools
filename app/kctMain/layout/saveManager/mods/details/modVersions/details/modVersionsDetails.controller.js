@@ -11,6 +11,7 @@
       '$firebaseArray',
       'ModRef',
       'ModVersionRef',
+      'ModVersionsService',
       'ModVersionDepsRef',
       'ModVersionDepsService',
       'creationKey',
@@ -27,6 +28,7 @@
     $firebaseArray,
     ModRef,
     ModVersionRef,
+    ModVersionsService,
     ModVersionDepsRef,
     ModVersionDepsService,
     creationKey
@@ -70,8 +72,10 @@
     }
 
     function deleteVersion() {
-      _this.modVersion.$remove().then(function() {
+      ModVersionsService.deleteModVersion(_this.modVersion).then(function() {
         $state.go('kct.saveManager.modVersions', {modId : $stateParams.modId});
+      }, function(error) {
+        console.log('reject', error);
       });
     }
 
