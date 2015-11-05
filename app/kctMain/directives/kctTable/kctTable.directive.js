@@ -2,19 +2,11 @@
   'use strict';
 
   angular.module('kct.directives.kctTable')
-    .directive('kctTable', ['$filter', KctTableDirective])
+    .directive('kctTable', ['$filter', '$injector', 'kctTableConstants', KctTableDirective])
   ;
 
-  function KctTableDirective($filter) {
-    var _defaultConfig = {
-      query        : '',
-      currentPage  : 1,
-      itemsPerPage : 10,
-      fillLastPage : true,
-      order        : {
-        predicate : ''
-      }
-    };
+  function KctTableDirective($filter, $injector, kctTableConstants) {
+    var _defaultConfig = kctTableConstants.defaultTableSettings;
     return {
       restrict : 'A',
       scope    : true,
@@ -25,6 +17,7 @@
       var _headElement = cElement.find('thead'),
           _bodyElement = cElement.find('tbody'),
           _tdElements = _bodyElement.find('td'),
+          _hasAngularTranslate = $injector.has('$translate'),
           _columns = _extractColumns();
 
       _constructHeader();
@@ -150,7 +143,12 @@
 
           column.hasTitle = !!_headElement.find('tr th[kct-table-attribute=\'' + column.attribute + '\']').length;
           if (!column.hasTitle) {
-            column.hasTitle = !!tdEl.attr('kct-table-title') || !!column.attribute;
+            column.hasTitle = (!!tdEl.attr('kct-table-title-key') && _hasAngularTranslate) ||
+                              !!tdEl.attr('kct-table-title') ||
+                              !!column.attribute;
+          }
+          if (!!tdEl.attr('kct-table-title-key') && !_hasAngularTranslate) {
+            console.warning('Couldn\'t find angular translate, using defaults');
           }
           columns.push(column);
         });
@@ -171,14 +169,21 @@
 
             var relatedTd = angular.element(_tdElements[index]),
                 appendedTh,
-                relatedTh = (column.hasTitle && column.attribute) ? cacheRowHeader.find('th[kct-table-attribute=' + column.attribute + ']') : null;
+                relatedTh = (column.hasTitle && column.attribute) ?
+                                  cacheRowHeader.find('th[kct-table-attribute=' + column.attribute + ']') :
+                                  null,
+                tdTitleKey = relatedTd.attr('kct-table-title-key');
 
             if (column.hasTitle) {
               if (relatedTh && !!relatedTh.length) {
                 appendedTh = relatedTh;
               } else {
                 appendedTh = angular.element(document.createElement('th'));
-                appendedTh.text(relatedTd.attr('kct-table-title') || _.capitalize(relatedTd.attr('kct-table-attribute')));
+                if (tdTitleKey && _hasAngularTranslate) {
+                  appendedTh.append('<span translate>' + tdTitleKey + '</span>');
+                } else {
+                  appendedTh.text(relatedTd.attr('kct-table-title') || _.capitalize(relatedTd.attr('kct-table-attribute')));
+                }
               }
             } else {
               appendedTh = angular.element(document.createElement('th'));
@@ -203,6 +208,7 @@
         var emptyTr = angular.element(document.createElement('tr'));
         emptyTr.attr('ng-repeat', 'filler in vm.fillerArray');
         emptyTr.attr('ng-if', 'vm.fillArray()');
+        emptyTr.attr('class', 'filler');
 
         for (var i = 0; i < _columns.length; ++i) {
           emptyTr.append('<td><span>&nbsp;</span></td>');

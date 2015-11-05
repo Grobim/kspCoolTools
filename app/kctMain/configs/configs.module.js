@@ -5,7 +5,9 @@
     'ngCookies',
     'ngSanitize',
 
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+
+    'kct.directives.kctTable'
   ]);
 
 })();

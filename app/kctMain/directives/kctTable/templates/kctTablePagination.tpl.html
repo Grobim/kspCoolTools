@@ -5,5 +5,7 @@
                 items-per-page="vm.tableConfig.itemsPerPage"
                 rotate="{{::vm.rotate}}"
                 class="pagination-md"
-                previous-text="&lsaquo;"
-                next-text="&rsaquo;"></uib-pagination>
+                previous-text="{{::vm.previousText}}"
+                next-text="{{::vm.nextText}}"
+                first-text="{{::vm.firstText}}"
+                last-text="{{::vm.lastText}}"></uib-pagination>

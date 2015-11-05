@@ -8,6 +8,7 @@
   function I18nConfig($translateProvider) {
     $translateProvider
       .fallbackLanguage('en')
+      .useMessageFormatInterpolation()
       .determinePreferredLanguage()
       .useCookieStorage()
       .registerAvailableLanguageKeys(['en', 'fr'], {
