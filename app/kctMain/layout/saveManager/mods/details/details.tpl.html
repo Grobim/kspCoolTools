@@ -21,6 +21,7 @@
           <button ng-if="modDetailsCtrl.isCreation()" type="submit" class="btn btn-primary">Create mod</button>
           <button ng-if="!modDetailsCtrl.isCreation()" type="submit" class="btn btn-primary">Edit mod</button>
           <span class="glyphicon glyphicon-ok notify-save" ng-if="modDetailsCtrl.saved"></span>
+          <button ng-click="modDetailsCtrl.deleteMod()" ng-if="!modDetailsCtrl.isCreation()" type="button" class="btn btn-danger pull-right">Delete mod</button>
         </div>
       </div>
     </form>

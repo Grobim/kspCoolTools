@@ -48,24 +48,24 @@
           modVersionId = modVersion.$id,
           deferred = $q.defer();
 
-      var biDirDeps = $firebaseObject(new BiDirModVersionDepsRef(modId, modVersionId));
+      $firebaseObject(new BiDirModVersionDepsRef(modId, modVersionId)).$loaded(function(biDirDeps) {
 
-      biDirDeps.$loaded(function() {
         if (biDirDeps.$value !== null) {
-          deferred.reject('is dep');
+          deferred.reject(biDirDeps);
         } else {
+
           var modVersionDelPromise = $q.defer(),
               modVersionDepsDelPromise = $q.defer();
 
-          var array = $firebaseArray(new ModVersionDepsRef($stateParams.modId, $stateParams.modVersionId));
+          $firebaseArray(new ModVersionDepsRef(modId, modVersionId)).$loaded(function(array) {
 
-          array.$loaded(function() {
-            angular.forEach(array, function(modVersionDep) {
-              var modVersionDepObj = $firebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, modVersionDep.$id));
+            _.forEach(array, function(modVersionDep) {
+              var modVersionDepObj = $firebaseObject(new ModVersionDepRef(modId, modVersionId, modVersionDep.$id));
               modVersionDepObj.$loaded(function() {
                 ModVersionDepsService.removeModVersionDep(modVersionDepObj);
               });
             });
+
             modVersionDepsDelPromise.resolve();
           });
 

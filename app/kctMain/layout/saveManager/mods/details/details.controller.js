@@ -10,6 +10,7 @@
       '$timeout',
       'ModRef',
       'ModsRef',
+      'ModsService',
       'ModVersionsRef',
       'ModVersionsService',
       'creationKey',
@@ -24,6 +25,7 @@
                                $timeout,
                                ModRef,
                                ModsRef,
+                               ModsService,
                                ModVersionsRef,
                                ModVersionsService,
                                creationKey) {
@@ -32,6 +34,7 @@
 
     _this.isCreation = isCreation;
     _this.formAction = (isCreation()) ? _createMod : _editMod;
+    _this.deleteMod = deleteMod;
 
     init();
 
@@ -53,6 +56,14 @@
 
     function isCreation() {
       return $stateParams.modId === creationKey;
+    }
+
+    function deleteMod() {
+      ModsService.deleteMod(_this.mod).then(function() {
+        $state.go('kct.saveManager.mods');
+      }, function(error) {
+        console.error('error, is dep', error);
+      });
     }
 
     function _reverseList() {

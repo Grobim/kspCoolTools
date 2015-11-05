@@ -2,12 +2,12 @@
   'use strict';
 
   angular.module('kct.services.persistence.saveManager')
-    .factory('BiDirModVersionDepsRef', ['SaveManagerRef', BiDirModVersionDepsRef])
+    .factory('BiDirModVersionDepsRef', ['BiDirModDepsRef', BiDirModVersionDepsRef])
   ;
 
-  function BiDirModVersionDepsRef(SaveManagerRef) {
+  function BiDirModVersionDepsRef(BiDirModDepsRef) {
     return function(depId, depVersionId) {
-      return SaveManagerRef.child('biDirModVersionDeps').child(depId).child(depVersionId);
+      return new BiDirModDepsRef(depId).child(depVersionId);
     };
   }
 
