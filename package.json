@@ -49,6 +49,9 @@
     "pretest": "npm install",
     "test": "grunt test",
 
+    "pretest-once": "npm install",
+    "test-once": "grunt testSingleRun",
+
     "prestart": "npm install",
     "start": "grunt serve",
 
