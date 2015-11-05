@@ -22,6 +22,7 @@
         _this.tableConfig = $scope.$eval($attrs.kctTableConfig);
         _this.rotate = $attrs.rotate;
         _this.boundaryLinks = $attrs.boundaryLinks;
+        _this.maxPages = $attrs.maxPages;
       }
 
     }
