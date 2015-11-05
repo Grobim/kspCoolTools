@@ -2,6 +2,8 @@
   'use strict';
 
   angular.module('kct.layout', [
+    'ngAnimate',
+    
     'ui.router',
 
     'kct.common',

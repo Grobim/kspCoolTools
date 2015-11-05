@@ -1,8 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('kct.layout.home', [
-    'ui.router',
+  angular.module('kct.configs', [
+    'ngCookies',
+    'ngSanitize',
 
     'pascalprecht.translate'
   ]);

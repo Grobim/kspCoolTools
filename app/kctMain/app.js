@@ -3,8 +3,8 @@
 
   angular.module('kct', [
     'ui.router',
-    'ngAnimate',
 
+    'kct.configs',
     'kct.services',
     'kct.directives',
     'kct.filters',

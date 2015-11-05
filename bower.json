@@ -4,15 +4,19 @@
   "dependencies": {
     "angular": "^1.4.0",
     "angular-animate": "^1.4.0",
-    "angular-bootstrap": "~0.14.3",
-    "angular-growl-v2": "~0.7.9",
+    "angular-bootstrap": "^0.14.3",
+    "angular-cookies": "^1.4.0",
+    "angular-growl-v2": "^0.7.9",
     "angular-sanitize": "^1.4.0",
+    "angular-translate": "^2.8.1",
+    "angular-translate-loader-static-files": "^2.8.1",
+    "angular-translate-storage-cookie": "^2.8.1",
     "angular-ui-router": "^0.2.15",
     "angularfire": "^1.1.0",
     "bootstrap-sass-official": "^3.3.0",
     "checklist-model": "0.6.0",
     "firebase": "^2.3.0",
-    "lodash": "~3.10.0"
+    "lodash": "^3.10.0"
   },
   "devDependencies": {
     "mockfirebase": "^0.11.0",
