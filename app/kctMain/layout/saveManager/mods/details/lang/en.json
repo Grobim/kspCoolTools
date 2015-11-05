@@ -1,0 +1,20 @@
+{
+  "kct.layout.saveManager.mods.details" : {
+    "return"   : "Return to mod list",
+    "creation" : {
+      "header" : "Mod creation",
+      "create" : "Create mod"
+    },
+    "edition"  : {
+      "header"   : "Mod details : {modTitle}",
+      "buttons"  : {
+        "edit"   : "Edit mod",
+        "delete" : "Delete mod"
+      },
+      "versions" : {
+        "header" : "Last registered versions",
+        "manage" : "Manage versions"
+      }
+    }
+  }
+}

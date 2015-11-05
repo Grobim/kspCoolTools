@@ -17,3 +17,7 @@
     padding-left: 0;
   }
 }
+
+table[kct-table] tbody tr.filler {
+  height: 33px;
+}

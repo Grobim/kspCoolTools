@@ -4,13 +4,13 @@
       <div class="navbar-header">
 
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
+          <span class="sr-only" translate>kct.layout.header.toggleNavigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" ui-sref="kct.home">KerbalCoolTools</a>
+        <a class="navbar-brand" ui-sref="kct.home" translate>kct.layout.common.appName</a>
       </div>
 
       <div class="collapse navbar-collapse" id="js-navbar-collapse">
@@ -20,17 +20,17 @@
               ng-class="{active : layoutCtrl.isCurrentState(stateName), dropdown : state.subStates}"
               ng-if="layoutCtrl.userHasAuthRights(state)">
             <a ui-sref="{{stateName}}" ng-if="!state.subStates">
-              {{state.label}}
+              <span translate>{{state.labelKey}}</span>
               <span ng-if="state.args">({{state.args}})</span>
             </a>
             <a ng-if="state.subStates" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              {{state.label}}&nbsp;<span class="caret"></span>
+              <span translate>{{state.labelKey}}</span>&nbsp;<span class="caret"></span>
             </a>
             <ul ng-if="state.subStates" class="dropdown-menu">
               <li ng-repeat="(subStateName, subState) in state.subStates"
                   ng-class="{active : layoutCtrl.isCurrentState(subStateName)}">
                 <a ui-sref="{{subStateName}}">
-                  {{subState.label}}
+                  <span translate>{{subState.labelKey}}</span>
                   <span ng-if="subState.args">({{subState.args}})</span>
                 </a>
               </li>
@@ -42,12 +42,12 @@
               ng-class="{active : layoutCtrl.isCurrentState(stateName)}"
               ng-if="layoutCtrl.userHasAuthRights(state)">
             <a ui-sref="{{stateName}}">
-              {{state.label}}
+              <span translate>{{state.labelKey}}</span>
               <span ng-if="state.args">({{state.args}})</span>
             </a>
           </li>
           <li class="li-logout">
-            <button ng-click="layoutCtrl.logout()" class="btn btn-danger navbar-btn" ng-show-auth>Logout</button>
+            <button ng-click="layoutCtrl.logout()" class="btn btn-danger navbar-btn" ng-show-auth translate>kct.layout.header.logout</button>
           </li>
         </ul>
       </div>
@@ -59,6 +59,6 @@
 
 <div class="footer">
   <div class="container">
-    <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team and Firebase</p>
+    <p>{{'kct.layout.footer.text' | translate}}</p>
   </div>
 </div>

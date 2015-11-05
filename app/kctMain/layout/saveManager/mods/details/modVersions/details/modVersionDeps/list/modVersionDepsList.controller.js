@@ -40,6 +40,8 @@
 
     _this.removeDependence = removeDependence;
 
+    _this.getFilteredModVersionId = getFilteredModVersionId;
+
     init();
 
     function init() {
@@ -103,6 +105,10 @@
       removedDependence.$loaded(function() {
         ModVersionDepsService.removeModVersionDep(removedDependence);
       });
+    }
+
+    function getFilteredModVersionId() {
+      return $filter('replaceChars')($stateParams.modVersionId, '_', '.');
     }
   }
 

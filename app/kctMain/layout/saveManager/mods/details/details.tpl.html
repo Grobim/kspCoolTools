@@ -1,34 +1,34 @@
 <div class="mod-details">
-  <a ui-sref="kct.saveManager.mods"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;Return to mod list</a>
+  <a ui-sref="kct.saveManager.mods"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.return</span></a>
   <fieldset>
-    <legend ng-if="modDetailsCtrl.isCreation()">Mod creation</legend>
-    <legend ng-if="!modDetailsCtrl.isCreation()">Mod details : {{modDetailsCtrl.mod.title}}</legend>
+    <legend ng-if="modDetailsCtrl.isCreation()" translate>kct.layout.saveManager.mods.details.creation.header</legend>
+    <legend ng-if="!modDetailsCtrl.isCreation()" translate translate-values="{modTitle : modDetailsCtrl.mod.title}">kct.layout.saveManager.mods.details.edition.header</legend>
     <form class="form-horizontal col-sm-6" ng-submit="modDetailsCtrl.formAction()">
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="modTitle">Title</label>
+        <label class="col-sm-3 control-label" for="modTitle" translate>kct.layout.common.fields.title</label>
         <div class="col-sm-9">
           <input ng-model="modDetailsCtrl.mod.title" type="text" class="form-control" id="modTitle" />
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="modDesc">Description</label>
+        <label class="col-sm-3 control-label" for="modDesc" translate>kct.layout.common.fields.desc</label>
         <div class="col-sm-9">
           <textarea ng-model="modDetailsCtrl.mod.desc" class="form-control desc-field" id="modDesc" />
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button ng-if="modDetailsCtrl.isCreation()" type="submit" class="btn btn-primary">Create mod</button>
-          <button ng-if="!modDetailsCtrl.isCreation()" type="submit" class="btn btn-primary">Edit mod</button>
-          <span class="glyphicon glyphicon-ok notify-save" ng-if="modDetailsCtrl.saved"></span>
-          <button ng-click="modDetailsCtrl.deleteMod()" ng-if="!modDetailsCtrl.isCreation()" type="button" class="btn btn-danger pull-right">Delete mod</button>
+          <button ng-if="modDetailsCtrl.isCreation()" type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.creation.create</button>
+          <button ng-if="!modDetailsCtrl.isCreation()" type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.edition.buttons.edit</button>
+          <span class="glyphicon glyphicon-ok notify-save" ng-if="modDetailsCtrl.saved" translate></span>
+          <button ng-click="modDetailsCtrl.deleteMod()" ng-if="!modDetailsCtrl.isCreation()" type="button" class="btn btn-danger pull-right" translate>kct.layout.saveManager.mods.details.edition.buttons.delete</button>
         </div>
       </div>
     </form>
     <div class="col-sm-6" ng-if="!modDetailsCtrl.isCreation()">
-      <h4 class="col-sm-6">Last registered versions</h4>
+      <h4 class="col-sm-6" translate>kct.layout.saveManager.mods.details.edition.versions.header</h4>
       <div class="col-sm-6">
-        <a ui-sref="kct.saveManager.modVersions(({modId : modDetailsCtrl.mod.$id}))" class="btn btn-block btn-default">Manage versions</a>
+        <a ui-sref="kct.saveManager.modVersions(({modId : modDetailsCtrl.mod.$id}))" class="btn btn-block btn-default" translate>kct.layout.saveManager.mods.details.edition.versions.manage</a>
       </div>
       <table kct-table
              kct-table-paginated
@@ -38,7 +38,7 @@
         <thead>
           <tr>
             <th kct-table-attribute="version">
-              Version
+              <span translate>kct.layout.common.fields.version</span>
               <span class="glyphicon glyphicon-chevron-down pull-right"></span>
             </th>
           </tr>
@@ -46,8 +46,8 @@
         <tbody>
           <tr>
             <td kct-table-attribute="version">{{item.$id | replaceChars:'_':'.'}}</td>
-            <td kct-table-implicit kct-table-attribute="desc" kct-table-title="Description"></td>
-            <td kct-table-implicit kct-table-attribute="depsLength" kct-table-title="Known dependencies"></td>
+            <td kct-table-implicit kct-table-attribute="desc" kct-table-title-key="kct.layout.common.fields.desc"></td>
+            <td kct-table-implicit kct-table-attribute="depsLength" kct-table-title-key="kct.layout.common.fields.knownDeps"></td>
           </tr>
         </tbody>
       </table>

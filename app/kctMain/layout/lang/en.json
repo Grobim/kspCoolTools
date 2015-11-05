@@ -1,0 +1,44 @@
+{
+  "kct.layout" : {
+    "common" : {
+      "appName"     : "KerbalCoolTools",
+      "save"        : "Save",
+      "add"         : "Add",
+      "details"     : "Details",
+      "edit"        : "Edit",
+      "remove"      : "Remove",
+      "search"      : "Search",
+      "cancel"      : "Cancel",
+      "resultCount" : "Results ({count})",
+      "fields" : {
+        "title"       : "Title",
+        "desc"        : "Description",
+        "details"     : "Details",
+        "notes"       : "Notes",
+        "version"     : "Version",
+        "minVersion"  : "Min version",
+        "modsPerPage" : "Mods per page",
+        "knownDeps"   : "Know dependencies"
+      },
+      "pagination"  : {
+        "first" : "First",
+        "last"  : "Last"
+      }
+    },
+    "header" : {
+      "home"             : "Home",
+      "saveManager"      : {
+        "title" : "Save Manager",
+        "saves" : "Saves",
+        "mods"  : "Mods"
+      },
+      "profile"          : "Profile",
+      "login"            : "Login",
+      "logout"           : "Logout",
+      "toggleNavigation" : "Toggle navigation"
+    },
+    "footer" : {
+      "text" : "♥ from the Yeoman team and Firebase"
+    }
+  }
+}

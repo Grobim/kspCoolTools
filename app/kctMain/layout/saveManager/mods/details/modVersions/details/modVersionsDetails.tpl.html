@@ -1,40 +1,40 @@
 <div class="mod-versions-details">
-  <a ui-sref="kct.saveManager.modVersions({modId : modVersionsDetailsCtrl.params.modId})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;Return to version list</a>
+  <a ui-sref="kct.saveManager.modVersions({modId : modVersionsDetailsCtrl.params.modId})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.modVersions.details.return</span></a>
   <fieldset>
-    <legend ng-if="modVersionsDetailsCtrl.isCreation()">Version creation</legend>
-    <legend ng-if="!modVersionsDetailsCtrl.isCreation()">Version details for {{modVersionsDetailsCtrl.mod.title}}</legend>
+    <legend ng-if="modVersionsDetailsCtrl.isCreation()" translate>kct.layout.saveManager.mods.details.modVersions.details.create.header</legend>
+    <legend ng-if="!modVersionsDetailsCtrl.isCreation()" translate translate-values="{modTitle : modVersionsDetailsCtrl.mod.title}">kct.layout.saveManager.mods.details.modVersions.details.edit.header</legend>
     <form class="form-horizontal col-sm-6" ng-submit="modVersionsDetailsCtrl.formAction()">
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="versionId">Version</label>
+        <label class="col-sm-3 control-label" for="versionId" translate>kct.layout.common.fields.version</label>
         <div class="col-sm-9">
           <input ng-model="modVersionsDetailsCtrl.newModVersionId" ng-if="modVersionsDetailsCtrl.isCreation()" class="form-control" id="versionId" />
           <p class="form-control-static" ng-if="!modVersionsDetailsCtrl.isCreation()">{{modVersionsDetailsCtrl.modVersion.$id | replaceChars:'_':'.'}}</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="versionDesc">Description</label>
+        <label class="col-sm-3 control-label" for="versionDesc" translate>kct.layout.common.fields.desc</label>
         <div class="col-sm-9">
           <textarea ng-model="modVersionsDetailsCtrl.modVersion.desc" class="form-control desc-field" id="versionDesc" />
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-          <button ng-if="modVersionsDetailsCtrl.isCreation()" type="submit" class="btn btn-primary">Create version</button>
-          <button ng-if="!modVersionsDetailsCtrl.isCreation()" type="submit" class="btn btn-primary">Edit version</button>
+          <button ng-if="modVersionsDetailsCtrl.isCreation()" type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.modVersions.details.create.create</button>
+          <button ng-if="!modVersionsDetailsCtrl.isCreation()" type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.modVersions.details.edit.edit</button>
           <span class="glyphicon glyphicon-ok notify-save" ng-if="modVersionsDetailsCtrl.saved"></span>
-          <button ng-if="!modVersionsDetailsCtrl.isCreation()" ng-click="modVersionsDetailsCtrl.deleteVersion()" class="btn btn-danger pull-right" type="button">Delete version</button>
+          <button ng-if="!modVersionsDetailsCtrl.isCreation()" ng-click="modVersionsDetailsCtrl.deleteVersion()" class="btn btn-danger pull-right" type="button" translate>kct.layout.saveManager.mods.details.modVersions.details.edit.delete</button>
         </div>
       </div>
     </form>
-    <div class="col-sm-6 row no-gutters" ng-if="!modVersionsDetailsCtrl.isCreation()">
-      <h4 class="col-md-6">Known dependencies</h4>
+    <div class="col-sm-6 row no-gutters" ng-show="!modVersionsDetailsCtrl.isCreation()">
+      <h4 class="col-md-6" translate>kct.layout.common.fields.knownDeps</h4>
       <div class="col-md-6">
         <div class="col-sm-12">
-          <a ui-sref="kct.saveManager.modVersionDepsList({modId : modVersionsDetailsCtrl.params.modId, modVersionId : modVersionsDetailsCtrl.params.modVersionId})" class="btn btn-block btn-default">Manage dependencies</a>
+          <a ui-sref="kct.saveManager.modVersionDepsList({modId : modVersionsDetailsCtrl.params.modId, modVersionId : modVersionsDetailsCtrl.params.modVersionId})" class="btn btn-block btn-default" translate>kct.layout.saveManager.mods.details.modVersions.details.edit.manage</a>
         </div>
         <div class="col-sm-12 form-inline item-per-page">
           <div class="form-group">
-            <label>Mods per page</label>
+            <label translate>kct.layout.common.fields.modsPerPage</label>
             <select ng-model="modVersionsDetailsCtrl.tableConfig.itemsPerPage" ng-options="option as option for option in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
           </div>
         </div>
@@ -43,17 +43,18 @@
              kct-table-paginated
              kct-table-list="modVersionsDetailsCtrl.modVersionDeps"
              kct-table-config="modVersionsDetailsCtrl.tableConfig"
-             class="table table-striped table-condensed table-responsive table-bordered col-xs-12 mod-versions-table">
+             class="table table-striped table-condensed table-responsive table-bordered col-xs-12 mod-versions-table"
+             ng-if="!modVersionsDetailsCtrl.isCreation()">
         <thead></thead>
         <tbody>
           <tr>
-            <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc" kct-table-title="Title"></td>
-            <td kct-table-attribute="minVersion" kct-table-title="Version min">{{item.minVersion | replaceChars:'_':'.'}}</td>
+            <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc" kct-table-title-key="kct.layout.common.fields.title"></td>
+            <td kct-table-attribute="minVersion" kct-table-title-key="kct.layout.common.fields.minVersion">{{item.minVersion | replaceChars:'_':'.'}}</td>
           </tr>
         </tbody>
       </table>
       <div class="col-sm-12">
-        <kct-table-pagination kct-table-config="modVersionsDetailsCtrl.tableConfig" rotate="false" boundary-links="true"></kct-table-pagination>
+        <kct-table-pagination kct-table-config="modVersionsDetailsCtrl.tableConfig" rotate="false" boundary-links="true" max-pages="4"></kct-table-pagination>
       </div>
     </div>
   </fieldset>

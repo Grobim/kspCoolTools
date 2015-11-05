@@ -1,15 +1,15 @@
 <div class="mod-version-deps-list">
-  <a ui-sref="kct.saveManager.modVersionDetails({modId : depsListCtrl.params.modId, modVersionId : depsListCtrl.params.modVersionId})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;Return to version details</a>
+  <a ui-sref="kct.saveManager.modVersionDetails({modId : depsListCtrl.params.modId, modVersionId : depsListCtrl.params.modVersionId})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.return</span></a>
   <fieldset>
-    <legend>Know dependencies of {{depsListCtrl.mod.title}} (v{{depsListCtrl.params.modVersionId | replaceChars:'_':'.'}})</legend>
+    <legend translate translate-values="{modId : depsListCtrl.mod.title, modVersionId : depsListCtrl.getFilteredModVersionId()}">kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.header</legend>
     <div class="col-sm-6 row no-gutters">
       <form class="form-inline col-xs-12">
         <div class="form-group">
-          <label>Search</label>
+          <label translate>kct.layout.common.search</label>
           <input ng-model="depsListCtrl.depsTableConfig.query" type="text" class="form-control" />
         </div>
         <div class="form-group">
-          <label>Mods per page</label>
+          <label translate>kct.layout.common.fields.modsPerPage</label>
           <select ng-model="depsListCtrl.depsTableConfig.itemsPerPage" ng-options="option as option for option in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
         </div>
       </form>
@@ -18,19 +18,19 @@
              kct-table-list="depsListCtrl.depsList"
              kct-table-config="depsListCtrl.depsTableConfig"
              class="table table-striped table-condensed table-responsive">
-        <caption>Results ({{depsListCtrl.depsTableConfig.totalItems || 0}})</caption>
+        <caption translate translate-values="{count : depsListCtrl.depsTableConfig.totalItems || 0}">kct.layout.common.resultCount</caption>
         <thead></thead>
         <tbody>
-          <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc"></td>
-          <td kct-table-attribute="minVersion" kct-table-title="Version">
+          <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc" kct-table-title-key="kct.layout.common.fields.title"></td>
+          <td kct-table-attribute="minVersion" kct-table-title-key="kct.layout.common.fields.version">
             {{item.minVersion | replaceChars:'_':'.'}}
           </td>
-          <td kct-table-implicit kct-table-attribute="notes"></td>
-          <td kct-table-title="Edit">
-            <button ng-click="depsListCtrl.setEditDependence(item)" class="btn btn-default btn-xs">Edit</button>
+          <td kct-table-implicit kct-table-attribute="notes" kct-table-title-key="kct.layout.common.fields.notes"></td>
+          <td kct-table-title-key="kct.layout.common.edit">
+            <button ng-click="depsListCtrl.setEditDependence(item)" class="btn btn-default btn-xs" translate>kct.layout.common.edit</button>
           </td>
-          <td kct-table-title="Remove">
-            <button ng-click="depsListCtrl.removeDependence(item)" class="btn btn-danger btn-xs">Remove</button>
+          <td kct-table-title-key="kct.layout.common.remove">
+            <button ng-click="depsListCtrl.removeDependence(item)" class="btn btn-danger btn-xs" translate>kct.layout.common.remove</button>
           </td>
         </tbody>
       </table>
@@ -40,8 +40,8 @@
     </div>
     <div class="col-sm-6 row no-gutters">
     <fieldset>
-      <legend ng-if="!depsListCtrl.newDependence || depsListCtrl.newDependence.$new">Add a dependency</legend>
-      <legend ng-if="depsListCtrl.newDependence && !depsListCtrl.newDependence.$new">Edit dependency</legend>
+      <legend ng-if="!depsListCtrl.newDependence || depsListCtrl.newDependence.$new" translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.add.header</legend>
+      <legend ng-if="depsListCtrl.newDependence && !depsListCtrl.newDependence.$new" translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.edit.header</legend>
       <form class="form-inline col-xs-12 mod-list-filters-form" ng-if="!depsListCtrl.newDependence">
         <div class="form-group">
           <label>Search</label>
@@ -56,44 +56,44 @@
              kct-table-paginated
              kct-table-list="depsListCtrl.modList | omitFromField:depsListCtrl.depsList:'$id' | omitFromField:depsListCtrl.mod:'title'"
              kct-table-config="depsListCtrl.modsTableConfig"
-             ng-if="!depsListCtrl.newDependence"
+             ng-show="!depsListCtrl.newDependence"
              class="table table-striped table-condensed table-responsive">
-        <caption>Results ({{depsListCtrl.modsTableConfig.totalItems || 0}})</caption>
+        <caption translate translate-values="{count : depsListCtrl.modsTableConfig.totalItems || 0}">kct.layout.common.resultCount</caption>
         <thead></thead>
         <tbody>
-          <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc"></td>
-          <td kct-table-title="Add">
-            <button ng-click="depsListCtrl.setNewDependence(item)" class="btn btn-primary btn-xs">Add</button>
+          <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc" kct-table-title-key="kct.layout.common.fields.title"></td>
+          <td kct-table-title-key="kct.layout.common.add">
+            <button ng-click="depsListCtrl.setNewDependence(item)" class="btn btn-primary btn-xs" translate>kct.layout.common.add</button>
           </td>
         </tbody>
       </table>
-      <div class="col-sm-12" ng-if="!depsListCtrl.newDependence">
-        <kct-table-pagination kct-table-config="depsListCtrl.modsTableConfig" rotate="false" boundary-links="true"></kct-table-pagination>
+      <div class="col-sm-12" ng-show="!depsListCtrl.newDependence">
+        <kct-table-pagination kct-table-config="depsListCtrl.modsTableConfig" rotate="false" boundary-links="true" max-pages="4"></kct-table-pagination>
       </div>
       <form ng-if="depsListCtrl.newDependence" class="form-horizontal">
         <div class="form-group">
-          <label class="col-sm-3 control-label">Title</label>
+          <label class="col-sm-3 control-label" translate>kct.layout.common.fields.title</label>
           <p class="col-sm-9 form-control-static">{{depsListCtrl.newDependence.$title}}</p>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Min version</label>
+          <label class="col-sm-3 control-label" translate>kct.layout.common.fields.minVersion</label>
           <div class="col-sm-9">
             <input ng-model="depsListCtrl.newDependence.minVersion" type="text" class="form-control" />
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Notes</label>
+          <label class="col-sm-3 control-label" translate>kct.layout.common.fields.notes</label>
           <div class="col-sm-9">
             <textarea ng-model="depsListCtrl.newDependence.notes" class="form-control notes-field"></textarea>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-6 col-md-offset-3 col-md-5">
-            <button ng-click="depsListCtrl.addDependence()" ng-if="depsListCtrl.newDependence.$new" class="btn btn-primary btn-block" type="submit">Add dependency</button>
-            <button ng-click="depsListCtrl.editDependence()" ng-if="!depsListCtrl.newDependence.$new" class="btn btn-primary btn-block" type="submit">Edit dependency</button>
+            <button ng-click="depsListCtrl.addDependence()" ng-if="depsListCtrl.newDependence.$new" class="btn btn-primary btn-block" type="submit" translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.add.add</button>
+            <button ng-click="depsListCtrl.editDependence()" ng-if="!depsListCtrl.newDependence.$new" class="btn btn-primary btn-block" type="submit" translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.edit.edit</button>
           </div>
           <div class="col-sm-6 col-md-4">
-            <button ng-click="depsListCtrl.cancel()" class="btn btn-default btn-block" type="cancel">Cancel</button>
+            <button ng-click="depsListCtrl.cancel()" class="btn btn-default btn-block" type="cancel" translate>kct.layout.common.cancel</button>
           </div>
         </div>
       </form>

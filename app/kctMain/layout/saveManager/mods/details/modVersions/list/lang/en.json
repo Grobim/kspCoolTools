@@ -1,0 +1,7 @@
+{
+  "kct.layout.saveManager.mods.details.modVersions.list" : {
+    "return" : "Return to mod details",
+    "header" : "Versions of {modTitle}",
+    "add"    : "Add a version"
+  }
+}

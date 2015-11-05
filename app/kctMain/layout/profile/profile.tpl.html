@@ -1,11 +1,11 @@
-<h2>Profile</h2>
+<h2 translate>kct.layout.profile.header</h2>
 <form name="profileCtrl.profileForm" ng-submit="profileCtrl.saveProfile()">
     <p class="form-group">
-      <label for="loginName">Name</label>
+      <label for="loginName" translate>kct.layout.profile.fields.name</label>
       <input id="loginName" required name="loginName" type="text" ng-model="profileCtrl.profile.nickname" class="form-control" />
     </p>
     <p>
-      <button class="btn btn-primary" ng-click="profileCtrl.saveProfile()">Save</button>
+      <button translate class="btn btn-primary" ng-click="profileCtrl.saveProfile()">kct.layout.common.save</button>
       <span class="glyphicon glyphicon-ok notify-save" ng-if="profileCtrl.saved"></span>
     </p>
     <div ng-repeat="error in profileCtrl.errors" class="alert alert-danger">{{error.text}}</div>

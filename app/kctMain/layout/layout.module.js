@@ -5,6 +5,7 @@
     'ngAnimate',
     
     'ui.router',
+    'pascalprecht.translate',
 
     'kct.common',
 

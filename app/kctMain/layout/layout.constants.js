@@ -4,27 +4,27 @@
   angular.module('kct.layout')
     .constant('leftHeaderStates', {
       'kct.home'        : {
-        label : 'Home'
+        labelKey : 'kct.layout.header.home'
       },
       'kct.saveManager' : {
-        label     : 'Save Manager',
+        labelKey  : 'kct.layout.header.saveManager.title',
         subStates : {
           'kct.saveManager.saves' : {
-            label : 'Saves'
+            labelKey : 'kct.layout.header.saveManager.saves'
           },
           'kct.saveManager.mods'  : {
-            label : 'Mods'
+            labelKey : 'kct.layout.header.saveManager.mods'
           }
         }
       }
     })
     .constant('rightHeaderStates', {
       'kct.profile' : {
-        label : 'Profile',
+        labelKey : 'kct.layout.header.profile',
         auth  : true
       },
       'kct.login'   : {
-        label : 'Login',
+        labelKey : 'kct.layout.header.login',
         auth  : false
       }
     })

@@ -1,0 +1,15 @@
+{
+  "kct.layout.saveManager.mods.details.modVersions.details" : {
+    "return" : "Return to version list",
+    "create" : {
+      "header" : "Version creation",
+      "create" : "Create version"
+    },
+    "edit"   : {
+      "header" : "Version details for {modTitle}",
+      "edit"   : "Edit version",
+      "delete" : "Delete version",
+      "manage" : "Manage dependencies"
+    }
+  }
+}
