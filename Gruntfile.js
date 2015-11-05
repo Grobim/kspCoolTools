@@ -60,6 +60,13 @@ module.exports = function (grunt) {
           '.tmp/styles/{,**/}*.css',
           '<%= yeoman.app %>/images/{,**/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+      },
+      langs: {
+        files: ['<%= yeoman.app %>/{,**/}lang/*.json'],
+        tasks: ['generateLocales'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
       }
     },
 
@@ -379,7 +386,8 @@ module.exports = function (grunt) {
             '*.html',
             '{,**/}*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'styles/fonts/{,*/}*.*',
+            'langs/locale-*.json'
           ]
         }, {
           expand: true,
@@ -425,7 +433,32 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    // Generate locales settings
+    generateLocales: {
+      options : {
+        src       : '<%= yeoman.app %>/**/lang/',
+        srcSuffix : '.json',
+        dest      : '<%= yeoman.app %>/langs/',
+        prefix    : 'locale-',
+        suffix    : '.json',
+        langs     : [
+        'fr',
+        'en'
+        ]
+      }
     }
+  });
+
+  grunt.registerTask('generateLocales', 'Generate locale files', function() {
+    var taskModule      = require('./lib/grunt-custom-tasks/generate-locales')(grunt),
+        generateLocales = taskModule.generateLocales;
+
+    generateLocales(this.options({
+      cwd : process.cwd()
+    }));
+
   });
 
 
@@ -436,6 +469,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'generateLocales',
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
@@ -451,6 +485,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('testBase', [
     'clean:server',
+    'generateLocales',
     'wiredep',
     'concurrent:test',
     'autoprefixer',
@@ -469,6 +504,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'generateLocales',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
