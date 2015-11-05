@@ -75,7 +75,7 @@
       ModVersionsService.deleteModVersion(_this.modVersion).then(function() {
         $state.go('kct.saveManager.modVersions', {modId : $stateParams.modId});
       }, function(error) {
-        console.log('error, is dep', error);
+        console.error('error, is dep', error);
       });
     }
 

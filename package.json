@@ -48,8 +48,8 @@
     "prestart": "npm install",
     "start": "grunt serve",
 
-    "preserve-build": "npm install",
-    "serve-build": "grunt serve:dist",
+    "prestart-build": "npm install",
+    "start-build": "grunt serve:dist",
 
     "predeploy": "npm install && grunt build",
     "deploy": "firebase deploy",
