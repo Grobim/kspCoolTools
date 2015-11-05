@@ -3,8 +3,10 @@
 
   angular.module('kct.layout', [
     'ngAnimate',
+    'ngSanitize',
     
     'ui.router',
+    'ui.select',
     'pascalprecht.translate',
 
     'kct.common',
