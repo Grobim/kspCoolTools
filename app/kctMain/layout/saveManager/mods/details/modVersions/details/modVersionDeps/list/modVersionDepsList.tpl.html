@@ -44,11 +44,11 @@
       <legend ng-if="depsListCtrl.newDependence && !depsListCtrl.newDependence.$new" translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.edit.header</legend>
       <form class="form-inline col-xs-12 mod-list-filters-form" ng-if="!depsListCtrl.newDependence">
         <div class="form-group">
-          <label>Search</label>
+          <label translate>kct.layout.common.search</label>
           <input ng-model="depsListCtrl.modsTableConfig.query" type="text" class="form-control" />
         </div>
         <div class="form-group">
-          <label>Mods per page</label>
+          <label translate>kct.layout.common.fields.modsPerPage</label>
           <select ng-model="depsListCtrl.modsTableConfig.itemsPerPage" ng-options="option as option for option in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
         </div>
       </form>

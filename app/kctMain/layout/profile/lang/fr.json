@@ -1,0 +1,8 @@
+{
+  "kct.layout.profile" : {
+    "header" : "Profil",
+    "fields" : {
+      "name" : "Nom"
+    }
+  }
+}

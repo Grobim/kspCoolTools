@@ -76,6 +76,7 @@
 
     function changeLang($item) {
       $translate.use($item.lang);
+      $state.reload();
     }
   }
 })();

@@ -1,0 +1,7 @@
+{
+  "kct.layout.saveManager.mods.list" : {
+    "header"  : "Mods",
+    "fastAdd" : "Mod introuvable ? Ajoute le !",
+    "addMod"  : "Ajouter un mod"
+  }
+}

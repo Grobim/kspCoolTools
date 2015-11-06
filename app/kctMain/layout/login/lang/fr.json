@@ -1,0 +1,24 @@
+{
+  "kct.layout.login" : {
+    "header"          : "Page de connexion",
+    "fastConnection"  : {
+      "header"   : "Connexion rapide",
+      "facebook" : "Facebook",
+      "google"   : "Google",
+      "twitter"  : "Twitter"
+    },
+    "emailConnection" : {
+      "header" : "Connexion par compte mail",
+      "fields" : {
+        "email" : "Email",
+        "password" : "Mot de passe",
+        "confirmPassword" : "Confirmer mot de passe"
+      },
+      "buttons" : {
+        "login" : "Connexion",
+        "register" : "Nouveau compte",
+        "create" : "Créer nouveau compte"
+      }
+    }
+  }
+}

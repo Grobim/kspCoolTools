@@ -1,0 +1,14 @@
+{
+  "kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list" : {
+    "return" : "Retour aux détails de version",
+    "header" : "Dépendances connues pour {modId} (v{modVersionId})",
+    "add"    : {
+      "header" : "Ajout de dépendance",
+      "add"    : "Ajouter dépendance"
+    },
+    "edit"   : {
+      "header" : "Modification de dépendance",
+      "edit"   : "Modifier dépendance"
+    }
+  }
+}
