@@ -5,6 +5,7 @@
     'ngCookies',
     'ngSanitize',
 
+    'ui.router',
     'pascalprecht.translate',
 
     'kct.directives.kctTable'

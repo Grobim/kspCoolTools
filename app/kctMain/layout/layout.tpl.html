@@ -9,6 +9,18 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
+        <div class="visible-xs-block select-wrapper-sm">
+          <ui-select on-select="layoutCtrl.changeLang($item, $model)" ng-model="layoutCtrl.selectedLang">
+            <ui-select-match placeholder="{{'kct.layout.common.search' | translate}}">
+              <img ng-src="images/flags/22x14/{{$select.selected.flag}}.png"></img>
+            </ui-select-match>
+            <ui-select-choices repeat="langObj.lang as langObj in layoutCtrl.langs | filter: $select.search">
+              <span ng-bind-html="langObj.lang | uppercase | highlight: $select.search"></span> - 
+              <span ng-bind-html="'kct.layout.languages.' + langObj.lang | translate | highlight: $select.search"></span>
+              <img class="select-option-flag pull-right" ng-src="images/flags/22x14/{{langObj.flag}}.png"></img>
+            </ui-select-choices>
+          </ui-select>
+        </div>
 
         <a class="navbar-brand" ui-sref="kct.home" translate>kct.layout.common.appName</a>
       </div>
@@ -38,7 +50,7 @@
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li>
+          <li class="hidden-xs">
             <ui-select on-select="layoutCtrl.changeLang($item, $model)" ng-model="layoutCtrl.selectedLang">
               <ui-select-match placeholder="{{'kct.layout.common.search' | translate}}">
                 <img ng-src="images/flags/22x14/{{$select.selected.flag}}.png"></img>

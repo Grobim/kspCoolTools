@@ -37,3 +37,32 @@ ul.nav.navbar-nav li div.ui-select-container {
     margin-top : 3px;
   }
 }
+
+.select-wrapper-sm {
+  float: right;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: 15px;
+  width: 65px;
+
+  .ui-select-container {
+    &.open {
+      width : 100px;
+    }
+
+    .ui-select-search {
+      right: 35px;
+      position: relative;
+    }
+  }
+
+  .ui-select-choices {
+    left: auto;
+    right: 35px;
+  }
+
+  .ui-select-choices-row-inner .select-option-flag {
+    margin-top : 3px;
+  }
+
+}

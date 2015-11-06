@@ -8,14 +8,14 @@
   function LayoutRoutes($stateProvider, $urlRouterProvider) {
 
     $stateProvider.state('kct', {
-      url          : '/kct',
+      url          : '/kct/:langKey',
       templateUrl  : 'kctMain/layout/layout.tpl.html',
       controller   : 'LayoutController',
       controllerAs : 'layoutCtrl',
       abstract     : true
     });
 
-    $urlRouterProvider.otherwise('/kct/home');
+    $urlRouterProvider.otherwise('/kct/en/home');
 
   }
 

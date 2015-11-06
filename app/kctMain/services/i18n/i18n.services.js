@@ -7,7 +7,8 @@
 
   function I18nService(i18nAvailableLangs, i18nFlagMap) {
     return {
-      getLangList : getLangList
+      getLangList    : getLangList,
+      isValidLangKey : isValidLangKey
     };
 
     function getLangList() {
@@ -23,6 +24,10 @@
       });
 
       return langList;
+    }
+
+    function isValidLangKey(langKey) {
+      return i18nAvailableLangs.indexOf(langKey) > -1;
     }
 
   }

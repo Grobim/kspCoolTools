@@ -6,7 +6,7 @@
       'en',
       'fr'
     ])
-    .constant('i18nRelatedLangMap', {
+    .constant('i18nAliasesLangMap', {
       en : 'en_*',
       fr : 'fr_*'
     })
