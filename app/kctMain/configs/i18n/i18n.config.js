@@ -4,6 +4,7 @@
   angular.module('kct.configs')
     .config([
       '$translateProvider',
+      'i18nDefaultFallBackLanguage',
       'i18nAvailableLangs',
       'i18nAliasesLangMap',
       I18nConfig
@@ -12,6 +13,7 @@
 
   function I18nConfig(
     $translateProvider,
+    i18nDefaultFallBackLanguage,
     i18nAvailableLangs,
     i18nAliasesLangMap
   ) {
@@ -40,8 +42,8 @@
     }
 
     $translateProvider
-      .preferredLanguage(fallbackLanguage || 'en')
-      .fallbackLanguage('en')
+      .preferredLanguage(fallbackLanguage || i18nDefaultFallBackLanguage)
+      .fallbackLanguage(i18nDefaultFallBackLanguage)
       .useMessageFormatInterpolation()
       .useCookieStorage()
       .useSanitizeValueStrategy('escape')

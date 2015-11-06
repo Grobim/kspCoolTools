@@ -7,6 +7,7 @@
 
     'ui.router',
     'pascalprecht.translate',
+    'ncy-angular-breadcrumb',
 
     'kct.directives.kctTable'
   ]);

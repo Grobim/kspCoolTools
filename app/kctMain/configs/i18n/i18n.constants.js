@@ -2,6 +2,7 @@
   'use strict';
 
   angular.module('kct.configs')
+    .constant('i18nDefaultFallBackLanguage', 'en')
     .constant('i18nAvailableLangs', [
       'en',
       'fr'

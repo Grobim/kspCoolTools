@@ -8,6 +8,7 @@
     'ui.router',
     'ui.select',
     'pascalprecht.translate',
+    'ncy-angular-breadcrumb',
 
     'kct.common',
     'kct.configs',

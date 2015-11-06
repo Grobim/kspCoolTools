@@ -32,7 +32,7 @@
             $translate.use(toParams.langKey);
           } else {
             // If invalid key => fallBack language
-            $translate.use($translate.preferedLanguage());
+            $translate.use($translate.fallbackLanguage());
           }
         } else if ($stateParams.langKey !== undefined &&
                    $stateParams.langKey !== $translate.use()) {
