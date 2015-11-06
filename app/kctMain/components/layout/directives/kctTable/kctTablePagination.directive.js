@@ -18,7 +18,7 @@
     return {
       restrict    : 'AE',
       scope       : true,
-      templateUrl : 'kctMain/directives/kctTable/templates/kctTablePagination.tpl.html',
+      templateUrl : 'kctMain/components/layout/directives/kctTable/templates/kctTablePagination.tpl.html',
       link        : link
     };
 
