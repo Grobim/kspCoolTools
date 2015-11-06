@@ -41,7 +41,7 @@
 
     $translateProvider
       .preferredLanguage(fallbackLanguage || 'en')
-      .fallbackLanguage(fallbackLanguage || 'en')
+      .fallbackLanguage('en')
       .useMessageFormatInterpolation()
       .useCookieStorage()
       .useSanitizeValueStrategy('escape')
