@@ -2,14 +2,10 @@
   'use strict';
 
   angular.module('kct.layout.home')
-    .controller('HomeController', ['$translate', HomeController]);
+    .controller('HomeController', [HomeController]);
 
-  function HomeController($translate) {
+  function HomeController() {
     var _this = this;
-
-    _this.lang = function(lang) {
-      $translate.use(lang);
-    };
 
     init();
 

@@ -1,6 +1,6 @@
 {
   "kct.layout" : {
-    "common" : {
+    "common"    : {
       "appName"     : "KerbalCoolTools",
       "save"        : "Save",
       "add"         : "Add",
@@ -25,7 +25,7 @@
         "last"  : "Last"
       }
     },
-    "header" : {
+    "header"    : {
       "home"             : "Home",
       "saveManager"      : {
         "title" : "Save Manager",
@@ -37,8 +37,12 @@
       "logout"           : "Logout",
       "toggleNavigation" : "Toggle navigation"
     },
-    "footer" : {
+    "footer"    : {
       "text" : "♥ from the Yeoman team and Firebase"
+    },
+    "languages" : {
+      "en" : "English",
+      "fr" : "French"
     }
   }
 }
