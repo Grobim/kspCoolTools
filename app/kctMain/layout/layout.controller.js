@@ -2,9 +2,26 @@
   'use strict';
 
   angular.module('kct.layout')
-    .controller('LayoutController', ['$state', 'KctAuth', 'leftHeaderStates', 'rightHeaderStates', LayoutController]);
+    .controller('LayoutController', [
+      '$rootScope',
+      '$state',
+      '$translate',
+      'KctAuth',
+      'leftHeaderStates',
+      'rightHeaderStates',
+      'i18nService',
+      LayoutController
+    ]);
 
-  function LayoutController($state, KctAuth, leftHeaderStates, rightHeaderStates) {
+  function LayoutController(
+    $rootScope,
+    $state,
+    $translate,
+    KctAuth,
+    leftHeaderStates,
+    rightHeaderStates,
+    i18nService
+  ) {
     var _this = this,
         _allStates;
 
@@ -13,6 +30,8 @@
     _this.userHasAuthRights = userHasAuthRights;
     _this.logout = logout;
 
+    _this.changeLang = changeLang;
+
     init();
 
     function init() {
@@ -20,6 +39,14 @@
       _this.rightHeaderStates = _.cloneDeep(rightHeaderStates);
 
       _allStates = _.assign({}, _this.leftHeaderStates, _this.rightHeaderStates);
+
+      _this.langs = i18nService.getLangList();
+      _this.selectedLang = $translate.use();
+
+      $rootScope.$on('$translateChangeSuccess', function(e, data) {
+        _this.selectedLang = data.language;
+      });
+
     }
 
     function isCurrentState(stateName) {
@@ -45,6 +72,10 @@
     function logout() {
       KctAuth.$unauth();
       $state.go('kct.home');
+    }
+
+    function changeLang($item) {
+      $translate.use($item.lang);
     }
   }
 })();

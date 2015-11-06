@@ -21,3 +21,19 @@
 table[kct-table] tbody tr.filler {
   height: 33px;
 }
+
+ul.nav.navbar-nav li div.ui-select-container {
+  margin: 8px;
+
+  &.open {
+    width : 100px;
+  }
+
+  .ui-select-match-text {
+    margin-right: 15px;
+  }
+
+  .ui-select-choices-row-inner .select-option-flag {
+    margin-top : 3px;
+  }
+}

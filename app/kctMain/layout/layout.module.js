@@ -10,6 +10,8 @@
     'pascalprecht.translate',
 
     'kct.common',
+    'kct.configs',
+    'kct.services.i18n',
 
     'kct.layout.home',
     'kct.layout.login',
