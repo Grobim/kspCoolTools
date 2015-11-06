@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('kct.directives.kctTable')
+  angular.module('kct.components.ui.directives.kctTable')
     .directive('kctTablePagination', [
       '$injector',
       'kctTablePaginationConfig',
@@ -18,7 +18,7 @@
     return {
       restrict    : 'AE',
       scope       : true,
-      templateUrl : 'kctMain/components/layout/directives/kctTable/templates/kctTablePagination.tpl.html',
+      templateUrl : 'kctMain/components/ui/directives/kctTable/templates/kctTablePagination.tpl.html',
       link        : link
     };
 

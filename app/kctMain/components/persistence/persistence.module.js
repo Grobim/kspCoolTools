@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  angular.module('kct.services.persistence', [
-    'kct.services.persistence.saveManager'
+  angular.module('kct.components.persistence', [
+    'kct.components.persistence.saveManager'
   ]);
 
 })();

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('kct.filters')
+  angular.module('kct.components.filters')
     .filter('replaceChars', [ReplaceCharFilter])
     .filter('length', [LengthFilter])
     .filter('omitFromField', [OmitFromFieldFilter])

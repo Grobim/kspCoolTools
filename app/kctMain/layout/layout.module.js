@@ -11,8 +11,9 @@
     'ncy-angular-breadcrumb',
 
     'kct.common',
-    'kct.configs',
-    'kct.services.i18n',
+    'kct.components.i18n',
+    'kct.components.ui.breadCrumb',
+    'kct.components.ui.directives.kctTable',
 
     'kct.layout.home',
     'kct.layout.login',

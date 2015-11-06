@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('kct.services.i18n')
+  angular.module('kct.components.i18n')
     .service('i18nService', ['i18nAvailableLangs', 'i18nFlagMap', I18nService])
   ;
 

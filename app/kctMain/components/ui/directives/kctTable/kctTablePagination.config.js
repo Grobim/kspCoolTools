@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('kct.configs')
+  angular.module('kct.components.ui.directives.kctTable')
     .config(['kctTablePaginationConfigProvider', KctTablePaginationConfig])
   ;
 

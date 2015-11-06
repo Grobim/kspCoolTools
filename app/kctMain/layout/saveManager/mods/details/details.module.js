@@ -5,8 +5,8 @@
     'ui.router',
     'firebase',
 
-    'kct.services.persistence.saveManager',
-    'kct.directives.kctTable',
+    'kct.components.persistence.saveManager',
+    'kct.components.ui.directives.kctTable',
 
     'kct.layout.saveManager.mods.details.modVersions'
   ]);

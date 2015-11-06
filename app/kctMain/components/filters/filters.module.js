@@ -1,6 +1,6 @@
 (function() {
   'use strict';
 
-  angular.module('kct.filters', []);
+  angular.module('kct.components.filters', []);
 
 })();

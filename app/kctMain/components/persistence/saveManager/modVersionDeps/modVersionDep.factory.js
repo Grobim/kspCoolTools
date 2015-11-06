@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('kct.services.persistence.saveManager')
+  angular.module('kct.components.persistence.saveManager')
     .factory('ModVersionDepRef', ['ModVersionDepsRef', ModVersionDepRefFactory])
   ;
 

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('kct.configs')
+  angular.module('kct.components.i18n')
     .run([
       '$state',
       '$rootScope',

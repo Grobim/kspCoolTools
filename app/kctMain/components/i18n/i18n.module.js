@@ -1,6 +1,11 @@
 (function() {
   'use strict';
 
-  angular.module('kct.services.i18n', ['kct.configs']);
+  angular.module('kct.components.i18n', [
+    'ngCookies',
+
+    'ui.router',
+    'pascalprecht.translate'
+  ]);
 
 })();

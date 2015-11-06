@@ -6,9 +6,9 @@
     'firebase',
     'pascalprecht.translate',
 
-    'kct.services.persistence.saveManager',
-    'kct.directives.kctTable',
-    'kct.filters'
+    'kct.components.persistence.saveManager',
+    'kct.components.ui.directives.kctTable',
+    'kct.components.filters'
   ]);
 
 })();
