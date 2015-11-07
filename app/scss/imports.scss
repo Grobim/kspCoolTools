@@ -1,4 +1,6 @@
-@import "../app/scss/yoLegacy.scss";
+@import "vendors_custom/bootstrap/stylesheets/_bootstrap.scss";
 
-@import "../app/kctMain/layout/layout.scss";
-@import "../app/kctMain/components/components.scss";
+@import "yoLegacy.scss";
+
+@import "../kctMain/layout/layout.scss";
+@import "../kctMain/components/components.scss";

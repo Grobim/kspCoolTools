@@ -1,7 +1,9 @@
+@import "../app/scss/variables_custom.scss";
+
 table[kct-table] thead tr .sortable-header {
   cursor: pointer;
 
   &:active {
-    background-color: #f5f5f5;
+    background-color: $table-bg-hover;
   }
 }

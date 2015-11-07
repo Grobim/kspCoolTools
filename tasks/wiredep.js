@@ -27,8 +27,9 @@
         }
     },
     sass: {
-      src: ['<%= yeoman.app %>/{,*/}*.{scss,sass}'],
-      ignorePath: /(\.\.\/){1,2}bower_components\//
+      src        : ['<%= yeoman.app %>/{,*/}*.{scss,sass}'],
+      ignorePath : /(\.\.\/){1,2}bower_components\//,
+      exclude    : ['/bower_components/bootstrap-sass-official/']
     }
   };
 
