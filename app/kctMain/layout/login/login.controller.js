@@ -2,10 +2,23 @@
   'use strict';
 
   angular.module('kct.layout.login')
-    .controller('LoginController', ['$state', '$firebaseObject', 'KctAuth', 'ProfileRef', 'ProfilesService', LoginController])
+    .controller('LoginController', [
+      '$state',
+      '$firebaseObject',
+      'KctAuth',
+      'ProfileRef',
+      'ProfilesService',
+      LoginController
+    ])
   ;
 
-  function LoginController($state, $firebaseObject, KctAuth, ProfileRef, ProfilesService) {
+  function LoginController(
+    $state,
+    $firebaseObject,
+    KctAuth,
+    ProfileRef,
+    ProfilesService
+  ) {
     var _this = this;
 
     _this.oauthLogin = oauthLogin;
@@ -64,13 +77,16 @@
       .catch(_showError);
 
       function _createProfileData(authData) {
-        var profileData = {};
+        var profileData = {
+          public : {},
+          private : {}
+        };
 
         if (authData.provider === 'password') {
-          profileData.nickname = _firstPartOfEmail(authData.password.email);
-          profileData.email = authData.password.email;
+          profileData.public.nickname = _firstPartOfEmail(authData.password.email);
+          profileData.private.email = authData.password.email;
         } else {
-          profileData.nickname = authData[authData.provider].displayName;
+          profileData.public.nickname = authData[authData.provider].displayName;
         }
 
         return profileData;
