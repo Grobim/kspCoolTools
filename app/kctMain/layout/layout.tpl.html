@@ -81,9 +81,11 @@
 
 <div class="container" ncy-breadcrumb></div>
 
-<div class="container" ui-view></div>
+<div kct-fill-window>
+  <div class="container" ui-view></div>
+  </div>
 
-<div class="footer">
+<div class="footer" kct-fill-window-target>
   <div class="container">
     <p>{{'kct.layout.footer.text' | translate}}</p>
   </div>
