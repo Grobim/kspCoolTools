@@ -2,6 +2,8 @@
 @import "../app/kctMain/layout/saveManager/saveManager.scss";
 
 .layout-header {
+  min-height: 72px;
+
   .li-logout {
     padding-left: 10px;
   }
