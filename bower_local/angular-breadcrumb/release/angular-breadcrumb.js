@@ -235,10 +235,13 @@ function BreadcrumbDirective($interpolate, $breadcrumb, $rootScope, $injector) {
                                 step.ncyBreadcrumbLabel = step.ncyBreadcrumb.translate;
 
                                 if (step.ncyBreadcrumb.translateValues) {
-                                    var parseValues = $interpolate(step.ncyBreadcrumb.translateValues);
-                                    step.ncyBreadcrumbTranslateValues = parseValues(viewScope);
                                     // Watcher for further viewScope updates
-                                    // registerWatchers(labelWatchers, parseValues, viewScope, step);
+                                    labelWatchers.push(viewScope.$watch(function() {
+                                        return viewScope.$eval(step.ncyBreadcrumb.translateValues);
+                                    }, function(newValue) {
+                                        step.ncyBreadcrumbTranslateValues = JSON.stringify(newValue);
+                                    },
+                                    true));
                                 }
 
                             } else {
