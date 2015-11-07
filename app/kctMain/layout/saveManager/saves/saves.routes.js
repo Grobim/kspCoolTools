@@ -7,10 +7,13 @@
 
   function SavesRoutes($stateProvider) {
     $stateProvider.state('kct.saveManager.saves', {
-      url          : '/saves',
-      templateUrl  : 'kctMain/layout/saveManager/saves/saves.tpl.html',
-      controller   : 'SavesController',
-      controllerAs : 'savesCtrl'
+      url           : '/saves',
+      templateUrl   : 'kctMain/layout/saveManager/saves/saves.tpl.html',
+      controller    : 'SavesController',
+      controllerAs  : 'savesCtrl',
+      ncyBreadcrumb : {
+        label : 'Saves'
+      }
     });
   }
 

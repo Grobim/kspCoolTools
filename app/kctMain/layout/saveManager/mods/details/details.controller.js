@@ -32,14 +32,14 @@
     var _this = this,
         _timeout;
 
-    _this.isCreation = isCreation;
-    _this.formAction = (isCreation()) ? _createMod : _editMod;
+    _this.createMod = createMod;
+    _this.editMod = editMod;
     _this.deleteMod = deleteMod;
 
     init();
 
     function init() {
-      if (isCreation()) {
+      if (_isCreation()) {
         _this.mod = {};
       } else {
         _this.mod = $firebaseObject(new ModRef($stateParams.modId));
@@ -54,8 +54,18 @@
       }
     }
 
-    function isCreation() {
+    function _isCreation() {
       return $stateParams.modId === creationKey;
+    }
+
+    function createMod() {
+      $firebaseArray(ModsRef).$add(_this.mod).then(function() {
+        $state.go('kct.saveManager.mods');
+      });
+    }
+
+    function editMod() {
+      _this.mod.$save().then(_notifySave);
     }
 
     function deleteMod() {
@@ -68,16 +78,6 @@
 
     function _reverseList() {
       _this.modVersions = _this.modVersions.reverse();
-    }
-
-    function _createMod() {
-      $firebaseArray(ModsRef).$add(_this.mod).then(function() {
-        $state.go('kct.saveManager.mods');
-      });
-    }
-
-    function _editMod() {
-      _this.mod.$save().then(_notifySave);
     }
 
     function _notifySave() {

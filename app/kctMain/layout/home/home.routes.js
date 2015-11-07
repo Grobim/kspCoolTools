@@ -13,10 +13,11 @@
       controller    : 'HomeController',
       controllerAs  : 'homeCtrl',
       data          : {
-        bodyClass : 'home'
+        bodyClass      : 'home',
+        windowTitleKey : 'kct.layout.header.home'
       },
       ncyBreadcrumb : {
-        label: 'Home'
+        translate       : 'kct.layout.header.home'
       }
     });
 

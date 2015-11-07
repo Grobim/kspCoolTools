@@ -11,6 +11,7 @@
 
     function init() {
       _this.hello = 'lala';
+      _this.test = 'test';
     }
   }
 

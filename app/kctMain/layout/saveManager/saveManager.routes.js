@@ -7,11 +7,11 @@
 
   function SaveManagerRoutes($stateProvider) {
     $stateProvider.state('kct.saveManager', {
-      url         : '/saveManager',
-      abstract    : true,
-      templateUrl : 'kctMain/layout/saveManager/saveManager.tpl.html',
-      data        : {
-        bodyClass : 'save-manager'
+      url           : '/saveManager',
+      abstract      : true,
+      templateUrl   : 'kctMain/layout/saveManager/saveManager.tpl.html',
+      data          : {
+        bodyClass      : 'save-manager'
       }
     });
   }

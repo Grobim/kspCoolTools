@@ -1,9 +1,9 @@
 <div class="mod-details">
   <a ui-sref="kct.saveManager.mods"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.return</span></a>
+  <pre>{{modDetailsCtrl.mod.title | json}}</pre>
   <fieldset>
-    <legend ng-if="modDetailsCtrl.isCreation()" translate>kct.layout.saveManager.mods.details.creation.header</legend>
-    <legend ng-if="!modDetailsCtrl.isCreation()" translate translate-values="{modTitle : modDetailsCtrl.mod.title}">kct.layout.saveManager.mods.details.edition.header</legend>
-    <form class="form-horizontal col-sm-6" ng-submit="modDetailsCtrl.formAction()">
+    <legend translate translate-values="{modTitle : modDetailsCtrl.mod.title}">kct.layout.saveManager.mods.details.edition.header</legend>
+    <form class="form-horizontal col-sm-6" ng-submit="modDetailsCtrl.editMod()">
       <div class="form-group">
         <label class="col-sm-3 control-label" for="modTitle" translate>kct.layout.common.fields.title</label>
         <div class="col-sm-9">
@@ -18,14 +18,13 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button ng-if="modDetailsCtrl.isCreation()" type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.creation.create</button>
-          <button ng-if="!modDetailsCtrl.isCreation()" type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.edition.buttons.edit</button>
+          <button type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.edition.buttons.edit</button>
           <span class="glyphicon glyphicon-ok notify-save" ng-if="modDetailsCtrl.saved" translate></span>
-          <button ng-click="modDetailsCtrl.deleteMod()" ng-if="!modDetailsCtrl.isCreation()" type="button" class="btn btn-danger pull-right" translate>kct.layout.saveManager.mods.details.edition.buttons.delete</button>
+          <button ng-click="modDetailsCtrl.deleteMod()" type="button" class="btn btn-danger pull-right" translate>kct.layout.saveManager.mods.details.edition.buttons.delete</button>
         </div>
       </div>
     </form>
-    <div class="col-sm-6" ng-if="!modDetailsCtrl.isCreation()">
+    <div class="col-sm-6">
       <h4 class="col-sm-6" translate>kct.layout.saveManager.mods.details.edition.versions.header</h4>
       <div class="col-sm-6">
         <a ui-sref="kct.saveManager.modVersions(({modId : modDetailsCtrl.mod.$id}))" class="btn btn-block btn-default" translate>kct.layout.saveManager.mods.details.edition.versions.manage</a>

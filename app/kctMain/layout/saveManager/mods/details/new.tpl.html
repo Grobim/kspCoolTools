@@ -1,0 +1,25 @@
+<div class="mod-details">
+  <a ui-sref="kct.saveManager.mods"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.return</span></a>
+  <fieldset>
+    <legend translate>kct.layout.saveManager.mods.details.creation.header</legend>
+    <form class="form-horizontal col-sm-6" ng-submit="newModCtrl.createMod()">
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="modTitle" translate>kct.layout.common.fields.title</label>
+        <div class="col-sm-9">
+          <input ng-model="newModCtrl.mod.title" type="text" class="form-control" id="modTitle" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="modDesc" translate>kct.layout.common.fields.desc</label>
+        <div class="col-sm-9">
+          <textarea ng-model="newModCtrl.mod.desc" class="form-control desc-field" id="modDesc" />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.creation.create</button>
+        </div>
+      </div>
+    </form>
+  </fieldset>
+</div>

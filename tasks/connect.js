@@ -20,6 +20,10 @@
               connect.static('./bower_components')
             ),
             connect().use(
+              '/bower_local',
+              connect.static('./bower_local')
+            ),
+            connect().use(
               '/app/styles',
               connect.static('./app/styles')
             ),

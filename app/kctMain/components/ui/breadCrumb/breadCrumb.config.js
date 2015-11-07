@@ -7,7 +7,8 @@
 
   function BreadCrumbConfig($breadcrumbProvider) {
     $breadcrumbProvider.setOptions({
-      prefixStateName: 'kct.home'
+      prefixStateName : 'kct.home',
+      templateUrl     : 'kctMain/components/ui/breadCrumb/breadCrumb.tpl.html'
     });
   }
 

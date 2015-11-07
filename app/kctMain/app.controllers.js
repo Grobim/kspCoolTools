@@ -20,7 +20,8 @@
     }
 
     function getWindowTitleKey() {
-      if ($state.current && $state.current.data) {
+      var curStateDef = $state.get($state.current.name);
+      if (curStateDef && curStateDef.data && curStateDef.data.windowTitleKey) {
         return $state.current.data.windowTitleKey;
       } else {
         return 'kct.layout.common.appName';
