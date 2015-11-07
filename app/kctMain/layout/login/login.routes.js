@@ -12,7 +12,12 @@
       controller   : 'LoginController',
       controllerAs : 'loginCtrl',
       data         : {
-        bodyClass  : 'login'
+        bodyClass  : 'login',
+        windowTitleKey : 'kct.layout.header.login'
+      },
+      ncyBreadcrumb : {
+        translate : 'kct.layout.header.login',
+        parent    : 'kct.home'
       }
     });
   }

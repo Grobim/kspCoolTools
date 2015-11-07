@@ -16,8 +16,8 @@
         windowTitleKey : 'kct.layout.header.profile'
       },
       ncyBreadcrumb : {
-        label  : 'kct.layout.header.profile',
-        parent : 'kct.home'
+        translate : 'kct.layout.header.profile',
+        parent    : 'kct.home'
       }
     });
   }
