@@ -2,6 +2,14 @@
   'use strict';
 
   angular.module('kct.layout.saveManager.mods.details')
+    
+    .controller('ModDetailMainController', [
+      '$firebaseObject',
+      '$stateParams',
+      'ModRef',
+      'breadCrumbModelService',
+      ModDetailMainController
+    ])
     .controller('ModDetailController', [
       '$state',
       '$stateParams',
@@ -16,7 +24,12 @@
       'creationKey',
       ModDetailController
     ])
+
   ;
+
+  function ModDetailMainController($firebaseObject, $stateParams, ModRef, breadCrumbModelService) {
+    breadCrumbModelService.value('mod', $firebaseObject(new ModRef($stateParams.modId)));
+  }
 
   function ModDetailController($state,
                                $stateParams,
@@ -43,6 +56,7 @@
         _this.mod = {};
       } else {
         _this.mod = $firebaseObject(new ModRef($stateParams.modId));
+
         _this.modVersions = $firebaseArray(new ModVersionsRef($stateParams.modId).orderByKey().limitToLast(5));
         _this.modVersions.$loaded(_reverseList);
         _this.modVersions.$watch(function() {

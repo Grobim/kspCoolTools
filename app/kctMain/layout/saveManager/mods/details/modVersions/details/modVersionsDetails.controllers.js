@@ -2,6 +2,15 @@
   'use strict';
 
   angular.module('kct.layout.saveManager.mods.details.modVersions.details')
+
+    .controller('ModDetailsModVersionsDetailsMainController', [
+      '$firebaseObject',
+      '$stateParams',
+      '$filter',
+      'ModVersionRef',
+      'breadCrumbModelService',
+      ModDetailsModVersionsDetailsMainController
+    ])
     .controller('ModDetailsModVersionsDetailsController', [
       '$state',
       '$stateParams',
@@ -17,7 +26,22 @@
       'creationKey',
       ModDetailsModVersionsDetailsController
     ])
+
   ;
+
+  function ModDetailsModVersionsDetailsMainController(
+    $firebaseObject,
+    $stateParams,
+    $filter,
+    ModVersionRef,
+    breadCrumbModelService
+  ) {
+    var modVersion = $firebaseObject(new ModVersionRef($stateParams.modId, $stateParams.modVersionId));
+    modVersion.$loaded(function() {
+      modVersion.$formattedVersion = $filter('replaceChars')(modVersion.$id, '_', '.');
+    });
+    breadCrumbModelService.value('modVersion', modVersion);
+  }
 
   function ModDetailsModVersionsDetailsController(
     $state,
@@ -73,7 +97,7 @@
 
     function deleteVersion() {
       ModVersionsService.deleteModVersion(_this.modVersion).then(function() {
-        $state.go('kct.saveManager.modVersions', {modId : $stateParams.modId});
+        $state.go('kct.saveManager.mod.versions', {modId : $stateParams.modId});
       }, function(error) {
         console.error('error, is dep', error);
       });
@@ -85,7 +109,7 @@
         if (newModVersion.$value === null) {
           newModVersion.desc = _this.modVersion.desc;
           newModVersion.$save().then(function() {
-            $state.go('kct.saveManager.modVersionDetails', {modId : $stateParams.modId, modVersionId : newModVersion.$id});
+            $state.go('kct.saveManager.mod.version.details', {modId : $stateParams.modId, modVersionId : newModVersion.$id});
           });
         } else {
           console.error('existe déjà');

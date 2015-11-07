@@ -2,6 +2,7 @@
   "kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list" : {
     "return" : "Return to version details",
     "header" : "Know dependencies of {modId} (v{modVersionId})",
+    "title"  : "Know dependencies",
     "add"    : {
       "header" : "Add a dependency",
       "add"    : "Add dependency"

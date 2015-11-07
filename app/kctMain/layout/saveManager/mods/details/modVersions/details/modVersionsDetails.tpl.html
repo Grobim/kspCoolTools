@@ -1,5 +1,5 @@
 <div class="mod-versions-details">
-  <a ui-sref="kct.saveManager.modVersions({modId : modVersionsDetailsCtrl.params.modId})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.modVersions.details.return</span></a>
+  <a ui-sref="kct.saveManager.mod.versions({modId : modVersionsDetailsCtrl.params.modId})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.modVersions.details.return</span></a>
   <fieldset>
     <legend ng-if="modVersionsDetailsCtrl.isCreation()" translate>kct.layout.saveManager.mods.details.modVersions.details.create.header</legend>
     <legend ng-if="!modVersionsDetailsCtrl.isCreation()" translate translate-values="{modTitle : modVersionsDetailsCtrl.mod.title}">kct.layout.saveManager.mods.details.modVersions.details.edit.header</legend>
@@ -30,7 +30,7 @@
       <h4 class="col-md-6" translate>kct.layout.common.fields.knownDeps</h4>
       <div class="col-md-6">
         <div class="col-sm-12">
-          <a ui-sref="kct.saveManager.modVersionDepsList({modId : modVersionsDetailsCtrl.params.modId, modVersionId : modVersionsDetailsCtrl.params.modVersionId})" class="btn btn-block btn-default" translate>kct.layout.saveManager.mods.details.modVersions.details.edit.manage</a>
+          <a ui-sref="kct.saveManager.mod.version.deps({modId : modVersionsDetailsCtrl.params.modId, modVersionId : modVersionsDetailsCtrl.params.modVersionId})" class="btn btn-block btn-default" translate>kct.layout.saveManager.mods.details.modVersions.details.edit.manage</a>
         </div>
         <div class="col-sm-12 form-inline item-per-page">
           <div class="form-group">

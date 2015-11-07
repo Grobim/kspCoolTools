@@ -1,5 +1,5 @@
 <div class="mod-versions-list">
-  <a ui-sref="kct.saveManager.modDetail({modId : modVersionsListCtrl.mod.$id})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.modVersions.list.return</span></a>
+  <a ui-sref="kct.saveManager.mod.details({modId : modVersionsListCtrl.mod.$id})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.modVersions.list.return</span></a>
   <fieldset class="row no-gutters">
     <legend translate translate-values="{modTitle : modVersionsListCtrl.mod.title}">kct.layout.saveManager.mods.details.modVersions.list.header</legend>
     <form class="form-inline col-xs-12">
@@ -26,7 +26,7 @@
         <td kct-table-implicit kct-table-attribute="desc" kct-table-sortable kct-table-title-key="kct.layout.common.fields.desc"></td>
         <td kct-table-implicit kct-table-attribute="depsLength" kct-table-title-key="kct.layout.common.fields.knownDeps"></td>
         <td kct-table-title-key="kct.layout.common.fields.details">
-          <a ui-sref="kct.saveManager.modVersionDetails({modId : modVersionsListCtrl.mod.$id, modVersionId : item.$id})" class="btn btn-primary btn-xs" role="button" translate>kct.layout.common.details</a>
+          <a ui-sref="kct.saveManager.mod.version.details({modId : modVersionsListCtrl.mod.$id, modVersionId : item.$id})" class="btn btn-primary btn-xs" role="button" translate>kct.layout.common.details</a>
         </td>
       </tbody>
     </table>
@@ -34,7 +34,7 @@
       <kct-table-pagination kct-table-config="modVersionsListCtrl.tableConfig" rotate="false" boundary-links="true"></kct-table-pagination>
     </div>
     <div class="col-sm-6">
-      <a ui-sref="kct.saveManager.modVersionDetails({modId : modVersionsListCtrl.mod.$id, modVersionId : modVersionsListCtrl.creationKey})" class="btn btn-primary btn-block" translate>kct.layout.saveManager.mods.details.modVersions.list.add</a>
+      <a ui-sref="kct.saveManager.mod.version.create({modId : modVersionsListCtrl.mod.$id, modVersionId : modVersionsListCtrl.creationKey})" class="btn btn-primary btn-block" translate>kct.layout.saveManager.mods.details.modVersions.list.add</a>
     </div>
   </fieldset>
 </div>

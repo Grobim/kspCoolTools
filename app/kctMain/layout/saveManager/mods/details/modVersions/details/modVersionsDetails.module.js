@@ -9,6 +9,7 @@
     'kct.constants',
     'kct.components.filters',
     'kct.components.persistence.saveManager',
+    'kct.components.ui.breadCrumb',
 
     'kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps'
   ]);

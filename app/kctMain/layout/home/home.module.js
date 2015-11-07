@@ -3,8 +3,9 @@
 
   angular.module('kct.layout.home', [
     'ui.router',
+    'pascalprecht.translate',
 
-    'pascalprecht.translate'
+    'kct.components.ui.breadCrumb'
   ]);
 
 })();

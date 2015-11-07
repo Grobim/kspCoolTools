@@ -7,11 +7,18 @@
 
   function DepsListRoutes($stateProvider) {
     $stateProvider
-      .state('kct.saveManager.modVersionDepsList', {
-        url          : '/mods/:modId/versions/:modVersionId/deps',
-        templateUrl  : 'kctMain/layout/saveManager/mods/details/modVersions/details/modVersionDeps/list/modVersionDepsList.tpl.html',
-        controller   : 'ModDetailsModVersionDepListController',
-        controllerAs : 'depsListCtrl'
+      .state('kct.saveManager.mod.version.deps', {
+        url           : '/deps',
+        templateUrl   : 'kctMain/layout/saveManager/mods/details/modVersions/details/modVersionDeps/list/modVersionDepsList.tpl.html',
+        controller    : 'ModDetailsModVersionDepListController',
+        controllerAs  : 'depsListCtrl',
+        data          : {
+          windowTitleKey : 'kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.title'
+        },
+        ncyBreadcrumb : {
+          translate : 'kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.title',
+          parent    : 'kct.saveManager.mod.version.details'
+        }
       })
     ;
   }

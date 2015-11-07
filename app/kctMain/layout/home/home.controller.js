@@ -2,16 +2,15 @@
   'use strict';
 
   angular.module('kct.layout.home')
-    .controller('HomeController', ['$scope', HomeController]);
+    .controller('HomeController', [HomeController]);
 
-  function HomeController($scope) {
+  function HomeController() {
     var _this = this;
 
     init();
 
     function init() {
       _this.hello = 'lala';
-      _this.test = $scope.test = 'test';
     }
   }
 

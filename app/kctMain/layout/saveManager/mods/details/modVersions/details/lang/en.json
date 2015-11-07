@@ -6,10 +6,12 @@
       "create" : "Create version"
     },
     "edit"   : {
-      "header" : "Version details for {modTitle}",
-      "edit"   : "Edit version",
-      "delete" : "Delete version",
-      "manage" : "Manage dependencies"
+      "header"      : "Version details for {modTitle}",
+      "title"       : "v{modVersion}",
+      "windowTitle" : "Version details",
+      "edit"        : "Edit version",
+      "delete"      : "Delete version",
+      "manage"      : "Manage dependencies"
     }
   }
 }

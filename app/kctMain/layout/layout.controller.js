@@ -10,6 +10,7 @@
       'leftHeaderStates',
       'rightHeaderStates',
       'i18nService',
+      'breadCrumbModelService',
       LayoutController
     ]);
 
@@ -20,7 +21,8 @@
     KctAuth,
     leftHeaderStates,
     rightHeaderStates,
-    i18nService
+    i18nService,
+    breadCrumbModelService
   ) {
     var _this = this,
         _allStates;
@@ -35,6 +37,8 @@
     init();
 
     function init() {
+      $rootScope.bcModel = breadCrumbModelService.model;
+
       _this.leftHeaderStates = _.cloneDeep(leftHeaderStates);
       _this.rightHeaderStates = _.cloneDeep(rightHeaderStates);
 

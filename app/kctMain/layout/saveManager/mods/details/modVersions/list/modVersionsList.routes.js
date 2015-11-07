@@ -7,8 +7,8 @@
 
   function ModVersionsConfig($stateProvider) {
     $stateProvider
-      .state('kct.saveManager.modVersions', {
-        url          : '/mods/:modId/versions',
+      .state('kct.saveManager.mod.versions', {
+        url          : '/versions',
         templateUrl  : 'kctMain/layout/saveManager/mods/details/modVersions/list/modVersionsList.tpl.html',
         controller   : 'ModDetailsModVersionsListController',
         controllerAs : 'modVersionsListCtrl',
@@ -17,7 +17,7 @@
         },
         ncyBreadcrumb : {
           translate       : 'kct.layout.saveManager.mods.details.modVersions.list.title',
-          parent          : 'kct.saveManager.modDetail'
+          parent          : 'kct.saveManager.mod.details'
         }
       })
     ;

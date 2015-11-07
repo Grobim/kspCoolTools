@@ -7,6 +7,7 @@
     },
     "edition"  : {
       "header"   : "Mod details : {modTitle}",
+      "title"    : "Mod details",
       "buttons"  : {
         "edit"   : "Edit mod",
         "delete" : "Delete mod"

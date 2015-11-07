@@ -8,6 +8,7 @@
     'kct.constants',
     'kct.components.persistence.saveManager',
     'kct.components.ui.directives.kctTable',
+    'kct.components.ui.breadCrumb',
 
     'kct.layout.saveManager.mods.details.modVersions'
   ]);
