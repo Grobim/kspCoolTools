@@ -1,6 +1,5 @@
 <div class="mod-details">
   <a ui-sref="kct.saveManager.mods"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.return</span></a>
-  <pre>{{modDetailsCtrl.mod.title | json}}</pre>
   <fieldset>
     <legend translate translate-values="{modTitle : modDetailsCtrl.mod.title}">kct.layout.saveManager.mods.details.edition.header</legend>
     <form class="form-horizontal col-sm-6" ng-submit="modDetailsCtrl.editMod()">

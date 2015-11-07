@@ -5,6 +5,7 @@
     'ui.router',
     'firebase',
 
+    'kct.constants',
     'kct.components.persistence.saveManager',
     'kct.components.ui.directives.kctTable',
 

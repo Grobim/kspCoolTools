@@ -2,23 +2,23 @@
   'use strict';
 
   angular.module('kct.layout.saveManager.mods.details')
-    .config(['$stateProvider', DetailsRoutesConfig])
+    .config(['$stateProvider', 'creationKey', DetailsRoutesConfig])
   ;
 
-  function DetailsRoutesConfig($stateProvider) {
+  function DetailsRoutesConfig($stateProvider, creationKey) {
 
     $stateProvider
       .state('kct.saveManager.modCreation', {
-        url          : '/mods/{modId:(?:new)}',
+        url          : '/mods/{modId:(?:' + creationKey + ')}',
         templateUrl  : 'kctMain/layout/saveManager/mods/details/new.tpl.html',
         controller   : 'ModDetailController',
         controllerAs : 'newModCtrl',
         data          : {
-          windowTitleKey : 'kct.layout.saveManager.mods.details'
+          windowTitleKey : 'kct.layout.saveManager.mods.details.creation.header'
         },
         ncyBreadcrumb : {
-          label                : 'kct.layout.saveManager.mods.details.creation.header',
-          parent               : 'kct.saveManager.mods'
+          translate : 'kct.layout.saveManager.mods.details.creation.header',
+          parent    : 'kct.saveManager.mods'
         }
       })
       .state('kct.saveManager.modDetail', {
@@ -27,12 +27,12 @@
         controller   : 'ModDetailController',
         controllerAs : 'modDetailsCtrl',
         data          : {
-          windowTitleKey : 'kct.layout.saveManager.mods.details'
+          windowTitleKey    : 'kct.layout.saveManager.mods.details.edition.header'
         },
         ncyBreadcrumb : {
-          label                : 'kct.layout.saveManager.mods.details.edition.header',
-          labelTranslateValues : '{modTitle : modDetailsCtrl.mod.title}',
-          parent               : 'kct.saveManager.mods'
+          translate       : 'kct.layout.saveManager.mods.details.edition.header',
+          translateValues : '{modTitle : modDetailsCtrl.mod.title || \'\'}',
+          parent          : 'kct.saveManager.mods'
         }
       })
     ;

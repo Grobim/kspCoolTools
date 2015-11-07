@@ -17,7 +17,7 @@
         windowTitleKey : 'kct.layout.header.home'
       },
       ncyBreadcrumb : {
-        translate       : 'kct.layout.header.home'
+        label       : 'kct.layout.header.home {{test}}'
       }
     });
 

@@ -6,6 +6,7 @@
     'firebase',
     'pascalprecht.translate',
 
+    'kct.constants',
     'kct.components.filters',
     'kct.components.persistence.saveManager',
 

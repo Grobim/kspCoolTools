@@ -41,7 +41,8 @@
         init();
 
         function init() {
-          var _effectiveConfig;
+          var _effectiveConfig,
+              _watcherCancels = [];
           if (!pScope.$eval(pAttrs.kctTableConfig)) {
             _effectiveConfig = _.cloneDeep(_defaultConfig);
           } else {
@@ -56,14 +57,14 @@
           _this.filteredList = $filter('filter')(_list, _config.query);
           _this.fillerArray = [];
 
-          pScope.$watchCollection(pAttrs.kctTableList, update);
-          pScope.$watch(pAttrs.kctTableConfig + '.query', update);
-          pScope.$watch(pAttrs.kctTableConfig + '.order.predicate', update);
-          pScope.$watch(pAttrs.kctTableConfig + '.order.sortReverse', update);
+          _watcherCancels.push(pScope.$watchCollection(pAttrs.kctTableList, update));
+          _watcherCancels.push(pScope.$watch(pAttrs.kctTableConfig + '.query', update));
+          _watcherCancels.push(pScope.$watch(pAttrs.kctTableConfig + '.order.predicate', update));
+          _watcherCancels.push(pScope.$watch(pAttrs.kctTableConfig + '.order.sortReverse', update));
 
           if (pAttrs.kctTablePaginated !== void 0) {
-            pScope.$watch(pAttrs.kctTableConfig + '.currentPage', update);
-            pScope.$watch(pAttrs.kctTableConfig + '.itemsPerPage', update);
+            _watcherCancels.push(pScope.$watch(pAttrs.kctTableConfig + '.currentPage', update));
+            _watcherCancels.push(pScope.$watch(pAttrs.kctTableConfig + '.itemsPerPage', update));
           }
 
           function _initSorting() {
@@ -93,7 +94,7 @@
 
         function update() {
           // Filtering
-          _this.filteredList = _this.sortedList = $filter('filter')(pScope.$eval(pAttrs.kctTableList), _config.query);
+          _this.filteredList = _this.sortedList = $filter('filter')(pScope.$eval(pAttrs.kctTableList), _config.query) || [];
           _config.totalItems = _this.filteredList.length;
 
           // Deciding range

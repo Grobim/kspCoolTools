@@ -11,7 +11,14 @@
         url          : '/mods/:modId/versions',
         templateUrl  : 'kctMain/layout/saveManager/mods/details/modVersions/list/modVersionsList.tpl.html',
         controller   : 'ModDetailsModVersionsListController',
-        controllerAs : 'modVersionsListCtrl'
+        controllerAs : 'modVersionsListCtrl',
+        data          : {
+          windowTitleKey    : 'kct.layout.saveManager.mods.details.modVersions.list.title'
+        },
+        ncyBreadcrumb : {
+          translate       : 'kct.layout.saveManager.mods.details.modVersions.list.title',
+          parent          : 'kct.saveManager.modDetail'
+        }
       })
     ;
   }
