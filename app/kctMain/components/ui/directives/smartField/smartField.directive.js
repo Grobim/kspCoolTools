@@ -13,6 +13,7 @@
 
     function compile($element) {
       var _input = angular.element($element.find('input,select').get(0)),
+          _label = angular.element('label[for=' + _input.attr('id') + ']'),
           _config,
           _elementKey;
 
@@ -35,6 +36,14 @@
         return;
       }
 
+      if (_config.required && _input.attr('id') && _label.length) {
+        _label.append('<span class="label-required-marker">(*)</span>');
+      }
+
+      if (_config.email) {
+        _input.attr('email-override', '');
+      }
+
       _injectMessages();
 
       return link;
@@ -46,22 +55,33 @@
           config.required = true;
         }
 
-        if (_input.attr('ng-min-length') || _input.attr('maxlength') || _input.attr('ng-max-length')) {
-          config.length = {
-            min : _input.attr('ng-min-length'),
-            max : _input.attr('maxlength') || _input.attr('ng-max-length')
+        if (_input.attr('ng-minlength') && (_input.attr('maxlength') || _input.attr('ng-maxlength'))) {
+          config.rangelength = {
+            min : _input.attr('ng-minlength'),
+            max : _input.attr('maxlength') || _input.attr('ng-maxlength')
           };
+        } else if (_input.attr('ng-minlength')) {
+          config.minlength = _input.attr('ng-minlength');
+        } else if (_input.attr('maxlength') || _input.attr('ng-maxlength')) {
+          config.maxlength = _input.attr('maxlength') || _input.attr('ng-maxlength');
         }
 
         if (_input.attr('type') === 'email') {
           config.email = true;
         }
 
-        if (_input.attr('type') === 'number' || _input.attr('min') || _input.attr('max')) {
-          config.number = {
-            min : _input.attr('min'),
-            max : _input.attr('max')
-          };
+        if (_input.attr('type') === 'number') {
+          config.number = true;
+          if (_input.attr('min') && _input.attr('max')) {
+            config.rangenumber = {
+              min : _input.attr('min'),
+              max : _input.attr('max')
+            };
+          } else if (_input.attr('min')) {
+            config.min = _input.attr('min');
+          } else if (_input.attr('max')) {
+            config.max = _input.attr('max');
+          }
         }
 
         return config;
@@ -89,15 +109,40 @@
                    'ng-show="' + _elementKey + '.$invalid && ' + _elementKey + '.$dirty" ' +
                    'role="alert">' +
               '</div>',
-            _messagesEl = angular.element(_messagesTemplate);
+            _messagesEl = angular.element(_messagesTemplate),
+            _smartFieldTarget = $element.find('smart-field-target');
 
-        _input.after(_messagesEl);
+        if (_smartFieldTarget.length) {
+          _smartFieldTarget.replaceWith(_messagesEl);
+        } else {
+          _input.after(_messagesEl);
+        }
+
 
         _.forOwn(_config, function(value, key) {
-          var messageTemplate = '<div ng-message="' + key + '" class="kct-smart-field-message">' +
-                                  '<span translate>kct.layout.common.errors.' + key + '</span>' +
-                                '</div>';
-          _messagesEl.append(angular.element(messageTemplate));
+          var messageEl = angular.element('<div ng-message="' + key + '" class="kct-smart-field-message"></div>'),
+              spanEl = angular.element('<span translate>kct.layout.common.errors.' + key + '</span>');
+          messageEl.append(spanEl);
+          _messagesEl.append(messageEl);
+
+          if (key === 'rangelength') {
+            spanEl.attr(
+              'translate-values',
+              '{ min : ' + value.min + ', max : ' + value.max + '}'
+            );
+          } else if (_.endsWith(key, 'length')) {
+            spanEl.attr('translate-values', '{' + key.substring(0, key.indexOf('length')) + ' : ' + value + '}');
+          }
+
+          if (key === 'rangenumber') {
+            spanEl.attr(
+              'translate-values',
+              '{ min : ' + value.min + ', max : ' + value.max + '}'
+            );
+          } else if (key === 'min' || key === 'max') {
+            spanEl.attr('translate-values', '{ ' + key + ' : ' + value + '}');
+          }
+
         });
       }
 

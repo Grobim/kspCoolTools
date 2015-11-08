@@ -21,7 +21,16 @@
         "knownDeps"   : "Dépendances connues"
       },
       "errors"      : {
-        "required" : "Ce champ est requis"
+        "required"    : "Ce champ est requis",
+        "maxlength"   : "This field should not exceed {max, plural, one{1 character} other{# characters}}",
+        "minlength"   : "This field should contain {min, plural, one{1 maximun character} other{# maximum characters}}",
+        "rangelength" : "This field should contain between {min} and {max} characters",
+        "email"       : "Invalid email",
+        "number"      : "Invalid number",
+        "min"         : "The value should be higher than {min}",
+        "max"         : "The value should be lower than {max}",
+        "rangenumber" : "The value should be between {min} and {max}"
+
       },
       "pagination"  : {
         "first" : "Première",
