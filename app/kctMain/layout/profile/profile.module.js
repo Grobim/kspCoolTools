@@ -9,7 +9,8 @@
     'pascalprecht.translate',
 
     'kct.common',
-    'kct.profiles'
+    'kct.profiles',
+    'kct.components.ui.directives.smartField'
   ]);
 
 })();
