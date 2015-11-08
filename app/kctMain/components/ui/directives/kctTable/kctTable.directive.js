@@ -24,9 +24,7 @@
 
       _constructBody();
 
-      return {
-        post : post
-      };
+      return post;
 
       function post(pScope, pElement, pAttrs) {
         var _this = pScope.vm = {},
@@ -161,7 +159,6 @@
             rowHeader;
 
         if (_headElement.length) {
-          _headElement.empty();
 
           rowHeader = angular.element(document.createElement('tr'));
           _headElement.empty().append(rowHeader);

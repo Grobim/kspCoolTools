@@ -2,10 +2,18 @@
   'use strict';
 
   angular.module('kct.layout.profile')
-    .controller('ProfileController', ['$firebaseObject', '$timeout', 'ProfileRef', 'KctAuth', ProfileController])
+    .controller('ProfileController', [
+      '$q',
+      '$intFirebaseObject',
+      '$timeout',
+      'ProfileRef',
+      'ProfilePrivateInfoRef',
+      'KctAuth',
+      ProfileController
+    ])
   ;
 
-  function ProfileController($firebaseObject, $timeout, ProfileRef, KctAuth) {
+  function ProfileController($q, $intFirebaseObject, $timeout, ProfileRef, ProfilePrivateInfoRef, KctAuth) {
     var _this = this,
         _userAuth = KctAuth.$getAuth(),
         _timeout;
@@ -16,11 +24,12 @@
 
     function init() {
       _this.errors = [];
-      _this.profile = $firebaseObject(new ProfileRef(_userAuth.uid));
+      _this.profile = $intFirebaseObject(new ProfileRef(_userAuth.uid));
+      _this.profilePrivateInfos = $intFirebaseObject(new ProfilePrivateInfoRef(_userAuth.uid));
     }
 
     function saveProfile() {
-      _this.profile.$save().then(_notifySave, _error);
+      $q.all([_this.profile.$save(), _this.profilePrivateInfos.$save()]).then(_notifySave);
     }
 
     function _notifySave() {
@@ -31,14 +40,6 @@
       _timeout = $timeout(function() {
         _this.saved = false;
         _timeout = null;
-      }, 3000);
-    }
-
-    function _error(err) {
-      var error = {text : err + ''};
-      _this.errors.unshift(error);
-      $timeout(function() {
-        _this.errors.splice(_this.errors.indexOf(error), 1);
       }, 3000);
     }
   }

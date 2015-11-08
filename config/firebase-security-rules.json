@@ -1,0 +1,28 @@
+{
+  "rules": {
+    ".read"               : false,
+    ".write"              : false,
+    "profiles"            : {
+      ".read"       : true,
+      "$profile_id" : {
+        ".write" : "auth != null && $profile_id === auth.uid"
+      }
+    },
+    "profilePrivateInfos" : {
+      "$profile_id" : {
+        ".read" : "auth != null && $profile_id === auth.uid",
+        ".write" : "auth != null && $profile_id === auth.uid"
+      }
+    },
+    "saveManager"         : {
+      ".read"  : true,
+      ".write" : "auth != null",
+      "mods": {
+      },
+      "modsVersions" : {
+      },
+      "saves": {
+      }
+    }
+  }
+}

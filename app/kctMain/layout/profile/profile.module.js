@@ -5,11 +5,11 @@
     'ngMessages',
 
     'ui.router',
-    'firebase',
+    'kct.angularFireInterceptor',
+    'kct.components.persistence',
     'pascalprecht.translate',
 
     'kct.common',
-    'kct.profiles',
     'kct.components.ui.directives.smartField'
   ]);
 

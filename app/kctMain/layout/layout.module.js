@@ -15,6 +15,7 @@
     'kct.components.ui.breadCrumb',
     'kct.components.ui.directives.kctTable',
     'kct.components.ui.directives.kctFillWindow',
+    'kct.components.interceptors',
 
     'kct.layout.home',
     'kct.layout.login',

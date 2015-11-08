@@ -59,7 +59,13 @@
     "start-build": "grunt serve:dist",
 
     "predeploy": "npm install && grunt build",
-    "deploy": "firebase deploy",
-    "postdeploy": "firebase open"
+    "deploy": "firebase deploy:hosting",
+    "postdeploy": "firebase open",
+
+    "deploy-rules": "firebase deploy:rules",
+
+    "predeploy-full": "npm install && grunt build",
+    "deploy-full": "firebase deploy",
+    "postdeploy-full": "firebase open"
   }
 }
