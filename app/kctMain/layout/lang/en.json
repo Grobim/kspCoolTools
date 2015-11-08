@@ -20,6 +20,9 @@
         "modsPerPage" : "Mods per page",
         "knownDeps"   : "Know dependencies"
       },
+      "errors"      : {
+        "required" : "This field is required"
+      },
       "pagination"  : {
         "first" : "First",
         "last"  : "Last"

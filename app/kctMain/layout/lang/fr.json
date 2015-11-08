@@ -20,6 +20,9 @@
         "modsPerPage" : "Mods par page",
         "knownDeps"   : "Dépendances connues"
       },
+      "errors"      : {
+        "required" : "Ce champ est requis"
+      },
       "pagination"  : {
         "first" : "Première",
         "last"  : "Dernière"
