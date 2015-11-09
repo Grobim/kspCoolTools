@@ -42,7 +42,7 @@
         },
         ncyBreadcrumb : {
           translate       : 'kct.layout.saveManager.mods.details.modVersions.details.edit.title',
-          translateValues : '{modVersion : bcModel.modVersion.getId() || \'\'}',
+          translateValues : '{modVersion : bcModel.modVersion.$formattedVersion || \'\'}',
           parent          : 'kct.saveManager.mod.versions'
         }
       })

@@ -35,7 +35,7 @@
              class="table table-striped table-condensed table-responsive table-bordered col-md-12 mod-versions-table">
         <thead>
           <tr>
-            <th kct-table-attribute="getId()">
+            <th kct-table-attribute="$id">
               <span translate>kct.layout.common.fields.version</span>
               <span class="glyphicon glyphicon-chevron-down pull-right"></span>
             </th>
@@ -43,7 +43,9 @@
         </thead>
         <tbody>
           <tr>
-            <td kct-table-implicit kct-table-attribute="getId()"></td>
+            <td kct-table-attribute="$id">
+              {{item.$id | replaceChars:'_':'.'}}
+            </td>
             <td kct-table-implicit kct-table-attribute="desc" kct-table-title-key="kct.layout.common.fields.desc"></td>
             <td kct-table-implicit kct-table-attribute="depsLength" kct-table-title-key="kct.layout.common.fields.knownDeps"></td>
           </tr>

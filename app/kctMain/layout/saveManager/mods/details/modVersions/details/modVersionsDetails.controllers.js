@@ -5,8 +5,9 @@
 
     .controller('ModDetailsModVersionsDetailsMainController', [
       '$stateParams',
+      '$filter',
+      '$intFirebaseObject',
       'ModVersionRef',
-      'ModVersionFactory',
       'breadCrumbModelService',
       ModDetailsModVersionsDetailsMainController
     ])
@@ -28,8 +29,11 @@
 
   ;
 
-  function ModDetailsModVersionsDetailsMainController($stateParams, ModVersionRef, ModVersionFactory, breadCrumbModelService) {
-    var modVersion = new ModVersionFactory(new ModVersionRef($stateParams.modId, $stateParams.modVersionId));
+  function ModDetailsModVersionsDetailsMainController($stateParams, $filter, $intFirebaseObject, ModVersionRef, breadCrumbModelService) {
+    var modVersion = $intFirebaseObject(new ModVersionRef($stateParams.modId, $stateParams.modVersionId));
+    modVersion.$loaded(function() {
+      modVersion.$formattedVersion = $filter('replaceChars')(modVersion.$id, '_', '.');
+    });
     breadCrumbModelService.value('modVersion', modVersion);
   }
 

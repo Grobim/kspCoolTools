@@ -6,7 +6,7 @@
       '$scope',
       '$stateParams',
       '$firebaseObject',
-      'ModVersionsFactory',
+      '$intFirebaseArray',
       'ModVersionsRef',
       'ModRef',
       'ModVersionDepsRef',
@@ -20,7 +20,7 @@
     $scope,
     $stateParams,
     $firebaseObject,
-    ModVersionsFactory,
+    $intFirebaseArray,
     ModVersionsRef,
     ModRef,
     ModVersionDepsRef,
@@ -33,7 +33,7 @@
 
     function init() {
       _this.mod = $firebaseObject(new ModRef($stateParams.modId));
-      _this.modVersions = new ModVersionsFactory(new ModVersionsRef($stateParams.modId));
+      _this.modVersions = $intFirebaseArray(new ModVersionsRef($stateParams.modId));
       _this.modVersions.$loaded(_initWatchers);
       _this.modVersions.$watch(function() {
         ModVersionsService.addDepLengthToVersions($stateParams.modId, _this.modVersions);

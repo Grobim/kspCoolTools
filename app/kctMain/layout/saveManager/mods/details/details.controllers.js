@@ -14,14 +14,13 @@
       '$state',
       '$stateParams',
       '$firebaseObject',
-      '$firebaseArray',
+      '$intFirebaseArray',
       '$timeout',
       'ModRef',
       'ModsRef',
       'ModsService',
       'ModVersionsRef',
       'ModVersionsService',
-      'ModVersionsFactory',
       'creationKey',
       ModDetailController
     ])
@@ -35,14 +34,13 @@
   function ModDetailController($state,
                                $stateParams,
                                $firebaseObject,
-                               $firebaseArray,
+                               $intFirebaseArray,
                                $timeout,
                                ModRef,
                                ModsRef,
                                ModsService,
                                ModVersionsRef,
                                ModVersionsService,
-                               ModVersionsFactory,
                                creationKey) {
     var _this = this,
         _timeout;
@@ -59,7 +57,7 @@
       } else {
         _this.mod = $firebaseObject(new ModRef($stateParams.modId));
 
-        _this.modVersions = new ModVersionsFactory(new ModVersionsRef($stateParams.modId).orderByKey().limitToLast(5));
+        _this.modVersions = $intFirebaseArray(new ModVersionsRef($stateParams.modId).orderByKey().limitToLast(5));
         _this.modVersions.$loaded(_reverseList);
         _this.modVersions.$watch(function() {
           ModVersionsService.addDepLengthToVersions($stateParams.modId, _this.modVersions);
@@ -75,7 +73,7 @@
     }
 
     function createMod() {
-      $firebaseArray(ModsRef).$add(_this.mod).then(function() {
+      $intFirebaseArray(ModsRef).$add(_this.mod).then(function() {
         $state.go('kct.saveManager.mods');
       });
     }

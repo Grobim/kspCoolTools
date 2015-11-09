@@ -34,8 +34,9 @@
         "max"         : "The value should be lower than {max}",
         "rangenumber" : "The value should be between {min} and {max}",
         "permissions" : {
-          "save"  : "Your persmissions are insufficent to edit that.",
-          "error" : "Your persmissions are insufficent to read that."
+          "save"   : "Your permissions are insufficent to edit that",
+          "error"  : "Your permissions are insufficent to read that",
+          "loaded" : "An error occured while loading data"
         }
       },
       "pagination"  : {

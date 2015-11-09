@@ -7,6 +7,7 @@
     'pascalprecht.translate',
 
     'kct.constants',
+    'kct.angularFireInterceptor',
     'kct.components.persistence.saveManager',
     'kct.components.ui.directives.kctTable',
     'kct.components.filters'
