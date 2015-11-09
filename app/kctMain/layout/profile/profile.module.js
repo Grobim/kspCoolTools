@@ -5,11 +5,13 @@
     'ngMessages',
 
     'ui.router',
-    'kct.angularFireInterceptor',
-    'kct.components.persistence',
     'pascalprecht.translate',
+    'angular-growl',
+
+    'kct.angularFireInterceptor',
 
     'kct.common',
+    'kct.components.persistence',
     'kct.components.ui.directives.smartField'
   ]);
 

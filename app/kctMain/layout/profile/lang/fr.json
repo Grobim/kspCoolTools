@@ -3,6 +3,9 @@
     "header" : "Profil",
     "fields" : {
       "name" : "Nom"
+    },
+    "messages" : {
+      "success" : "Votre profil a été sauvegardé avec succès"
     }
   }
 }

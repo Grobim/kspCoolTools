@@ -9,11 +9,6 @@
     },
     "emailConnection" : {
       "header" : "Connexion par compte mail",
-      "fields" : {
-        "email" : "Email",
-        "password" : "Mot de passe",
-        "confirmPassword" : "Confirmer mot de passe"
-      },
       "buttons" : {
         "login" : "Connexion",
         "register" : "Nouveau compte",

@@ -33,10 +33,10 @@
       deleteModVersion       : deleteModVersion
     };
 
-    function addDepLengthToVersions(modVersions) {
+    function addDepLengthToVersions(modId, modVersions) {
       _.forEach(modVersions, function(modVersion) {
         modVersion.depsLength = 0;
-        var array = $firebaseArray(new ModVersionDepsRef($stateParams.modId, modVersion.$id));
+        var array = $firebaseArray(new ModVersionDepsRef(modId, modVersion.$id));
         array.$watch(function () {
           modVersion.depsLength = array.length;
         });

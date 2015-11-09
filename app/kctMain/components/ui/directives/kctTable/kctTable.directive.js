@@ -168,7 +168,7 @@
             var relatedTd = angular.element(_tdElements[index]),
                 appendedTh,
                 relatedTh = (column.hasTitle && column.attribute) ?
-                                  cacheRowHeader.find('th[kct-table-attribute=' + column.attribute + ']') :
+                                  cacheRowHeader.find('th[kct-table-attribute=' + escapeJquery(column.attribute) + ']') :
                                   null,
                 tdTitleKey = relatedTd.attr('kct-table-title-key');
 
@@ -197,6 +197,16 @@
             rowHeader.append(appendedTh);
           });
 
+        }
+        function escapeJquery(input) {
+          var output = input,
+              escapedChars = ['$', '(', ')'];
+
+          _.forEach(escapedChars, function(escapedChar) {
+            output = output.split(escapedChar).join('\\' + escapedChar);
+          });
+
+          return output;
         }
       }
 

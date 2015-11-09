@@ -11,14 +11,17 @@
       "cancel"      : "Annuler",
       "resultCount" : "Résultats ({count})",
       "fields" : {
-        "title"       : "Titre",
-        "desc"        : "Description",
-        "details"     : "Détails",
-        "notes"       : "Notes",
-        "version"     : "Version",
-        "minVersion"  : "Version min",
-        "modsPerPage" : "Mods par page",
-        "knownDeps"   : "Dépendances connues"
+        "title"           : "Titre",
+        "desc"            : "Description",
+        "details"         : "Détails",
+        "notes"           : "Notes",
+        "version"         : "Version",
+        "minVersion"      : "Version min",
+        "modsPerPage"     : "Mods par page",
+        "knownDeps"       : "Dépendances connues",
+        "email"           : "Email",
+        "password"        : "Mot de passe",
+        "confirmPassword" : "Confirmer mot de passe"
       },
       "errors"      : {
         "required"    : "Ce champ est requis",
@@ -29,7 +32,11 @@
         "number"      : "Invalid number",
         "min"         : "The value should be higher than {min}",
         "max"         : "The value should be lower than {max}",
-        "rangenumber" : "The value should be between {min} and {max}"
+        "rangenumber" : "The value should be between {min} and {max}",
+        "permissions" : {
+          "save"  : "Vous n'avez pas les droits suffisants pour éditer ça.",
+          "error" : "Vous n'avez pas les droits suffisants pour consulter ça."
+        }
 
       },
       "pagination"  : {

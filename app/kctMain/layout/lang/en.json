@@ -11,14 +11,17 @@
       "cancel"      : "Cancel",
       "resultCount" : "Results ({count})",
       "fields" : {
-        "title"       : "Title",
-        "desc"        : "Description",
-        "details"     : "Details",
-        "notes"       : "Notes",
-        "version"     : "Version",
-        "minVersion"  : "Min version",
-        "modsPerPage" : "Mods per page",
-        "knownDeps"   : "Know dependencies"
+        "title"           : "Title",
+        "desc"            : "Description",
+        "details"         : "Details",
+        "notes"           : "Notes",
+        "version"         : "Version",
+        "minVersion"      : "Min version",
+        "modsPerPage"     : "Mods per page",
+        "knownDeps"       : "Know dependencies",
+        "email"           : "Email",
+        "password"        : "Password",
+        "confirmPassword" : "Confirm password"
       },
       "errors"      : {
         "required"    : "This field is required",
@@ -29,8 +32,11 @@
         "number"      : "Invalid number",
         "min"         : "The value should be higher than {min}",
         "max"         : "The value should be lower than {max}",
-        "rangenumber" : "The value should be between {min} and {max}"
-
+        "rangenumber" : "The value should be between {min} and {max}",
+        "permissions" : {
+          "save"  : "Your persmissions are insufficent to edit that.",
+          "error" : "Your persmissions are insufficent to read that."
+        }
       },
       "pagination"  : {
         "first" : "First",

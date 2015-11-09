@@ -20,9 +20,7 @@
       <caption translate translate-values="{count : modVersionsListCtrl.filteredModVersions.length || 0}">kct.layout.common.resultCount</caption>
       <thead></thead>
       <tbody>
-        <td kct-table-title-key="kct.layout.common.fields.version" kct-table-attribute="$id" kct-table-sortable kct-table-initial-sorting="desc">
-          {{item.$id | replaceChars:'_':'.'}}
-        </td>
+        <td kct-table-implicit kct-table-title-key="kct.layout.common.fields.version" kct-table-attribute="getId()" kct-table-sortable kct-table-initial-sorting="desc"></td>
         <td kct-table-implicit kct-table-attribute="desc" kct-table-sortable kct-table-title-key="kct.layout.common.fields.desc"></td>
         <td kct-table-implicit kct-table-attribute="depsLength" kct-table-title-key="kct.layout.common.fields.knownDeps"></td>
         <td kct-table-title-key="kct.layout.common.fields.details">

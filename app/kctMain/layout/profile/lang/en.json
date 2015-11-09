@@ -1,8 +1,11 @@
 {
   "kct.layout.profile" : {
-    "header" : "Profile",
-    "fields" : {
+    "header"   : "Profile",
+    "fields"   : {
       "name" : "Name"
+    },
+    "messages" : {
+      "success" : "Your profile has been successfully saved"
     }
   }
 }

@@ -9,11 +9,6 @@
     },
     "emailConnection" : {
       "header" : "Email connection",
-      "fields" : {
-        "email" : "Email",
-        "password" : "Password",
-        "confirmPassword" : "Confirm password"
-      },
       "buttons" : {
         "login" : "Log in",
         "register" : "Register",

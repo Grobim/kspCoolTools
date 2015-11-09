@@ -5,7 +5,7 @@
     .controller('ProfileController', [
       '$q',
       '$intFirebaseObject',
-      '$timeout',
+      'growl',
       'ProfileRef',
       'ProfilePrivateInfoRef',
       'KctAuth',
@@ -13,10 +13,9 @@
     ])
   ;
 
-  function ProfileController($q, $intFirebaseObject, $timeout, ProfileRef, ProfilePrivateInfoRef, KctAuth) {
+  function ProfileController($q, $intFirebaseObject, growl, ProfileRef, ProfilePrivateInfoRef, KctAuth) {
     var _this = this,
-        _userAuth = KctAuth.$getAuth(),
-        _timeout;
+        _userAuth = KctAuth.$getAuth();
 
     _this.saveProfile = saveProfile;
 
@@ -33,14 +32,7 @@
     }
 
     function _notifySave() {
-      _this.saved = true;
-      if (_timeout) {
-        $timeout.cancel(_timeout);
-      }
-      _timeout = $timeout(function() {
-        _this.saved = false;
-        _timeout = null;
-      }, 3000);
+      growl.success('kct.layout.profile.messages.success');
     }
   }
 

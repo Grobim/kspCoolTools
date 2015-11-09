@@ -1,28 +1,22 @@
 {
   "rules": {
-    ".read"               : false,
-    ".write"              : false,
-    "profiles"            : {
-      ".read"       : true,
-      "$profile_id" : {
-        ".write" : "auth != null && $profile_id === auth.uid"
+    ".read": false,
+    ".write": false,
+    "profiles": {
+      ".read": true,
+      "$profile_id": {
+        ".write": "auth != null && $profile_id === auth.uid"
       }
     },
-    "profilePrivateInfos" : {
-      "$profile_id" : {
-        ".read" : "auth != null && $profile_id === auth.uid",
-        ".write" : "auth != null && $profile_id === auth.uid"
+    "profilePrivateInfos": {
+      "$profilePrivateInfo_id": {
+        ".read": "auth != null && $profilePrivateInfo_id === auth.uid",
+        ".write": "auth != null && $profilePrivateInfo_id === auth.uid"
       }
     },
-    "saveManager"         : {
-      ".read"  : true,
-      ".write" : "auth != null",
-      "mods": {
-      },
-      "modsVersions" : {
-      },
-      "saves": {
-      }
+    "saveManager": {
+      ".read": true,
+      ".write": "auth != null"
     }
   }
 }

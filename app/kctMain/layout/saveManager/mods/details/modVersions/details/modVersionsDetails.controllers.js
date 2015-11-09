@@ -4,10 +4,9 @@
   angular.module('kct.layout.saveManager.mods.details.modVersions.details')
 
     .controller('ModDetailsModVersionsDetailsMainController', [
-      '$firebaseObject',
       '$stateParams',
-      '$filter',
       'ModVersionRef',
+      'ModVersionFactory',
       'breadCrumbModelService',
       ModDetailsModVersionsDetailsMainController
     ])
@@ -29,17 +28,8 @@
 
   ;
 
-  function ModDetailsModVersionsDetailsMainController(
-    $firebaseObject,
-    $stateParams,
-    $filter,
-    ModVersionRef,
-    breadCrumbModelService
-  ) {
-    var modVersion = $firebaseObject(new ModVersionRef($stateParams.modId, $stateParams.modVersionId));
-    modVersion.$loaded(function() {
-      modVersion.$formattedVersion = $filter('replaceChars')(modVersion.$id, '_', '.');
-    });
+  function ModDetailsModVersionsDetailsMainController($stateParams, ModVersionRef, ModVersionFactory, breadCrumbModelService) {
+    var modVersion = new ModVersionFactory(new ModVersionRef($stateParams.modId, $stateParams.modVersionId));
     breadCrumbModelService.value('modVersion', modVersion);
   }
 
