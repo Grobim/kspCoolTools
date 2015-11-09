@@ -3,7 +3,7 @@
 
   angular.module('kct.layout.saveManager.saves', [
     'ui.router',
-    'firebase',
+    'kct.angularFireInterceptor',
 
     'kct.components.persistence.saveManager'
   ]);

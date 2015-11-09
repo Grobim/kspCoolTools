@@ -3,14 +3,14 @@
 
   angular.module('kct.layout.saveManager.saves')
     .controller('SavesController', [
-      '$firebaseArray',
+      '$intFirebaseArray',
       'SavesRef',
       SavesController
     ])
   ;
 
   function SavesController(
-    $firebaseArray,
+    $intFirebaseArray,
     SavesRef
   ) {
 
@@ -19,7 +19,7 @@
     init();
 
     function init() {
-      _this.saves = $firebaseArray(new SavesRef());
+      _this.saves = $intFirebaseArray(new SavesRef());
     }
 
 

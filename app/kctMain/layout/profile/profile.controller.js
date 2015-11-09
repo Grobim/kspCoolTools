@@ -14,17 +14,17 @@
   ;
 
   function ProfileController($q, $intFirebaseObject, growl, ProfileRef, ProfilePrivateInfoRef, KctAuth) {
-    var _this = this,
-        _userAuth = KctAuth.$getAuth();
+    var _this = this;
 
     _this.saveProfile = saveProfile;
+    _this.userAuth = KctAuth.$getAuth();
 
     init();
 
     function init() {
       _this.errors = [];
-      _this.profile = $intFirebaseObject(new ProfileRef(_userAuth.uid));
-      _this.profilePrivateInfos = $intFirebaseObject(new ProfilePrivateInfoRef(_userAuth.uid));
+      _this.profile = $intFirebaseObject(new ProfileRef(_this.userAuth.uid));
+      _this.profilePrivateInfos = $intFirebaseObject(new ProfilePrivateInfoRef(_this.userAuth.uid));
     }
 
     function saveProfile() {
