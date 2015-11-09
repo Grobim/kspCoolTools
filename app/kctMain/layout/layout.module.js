@@ -13,7 +13,6 @@
     'kct.common',
     'kct.components.i18n',
     'kct.components.ui.breadCrumb',
-    'kct.components.ui.directives.kctTable',
     'kct.components.ui.directives.kctFillWindow',
     'kct.components.ui.growl',
     'kct.components.interceptors',

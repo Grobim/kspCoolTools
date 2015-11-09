@@ -4,7 +4,8 @@
   angular.module('kct.layout.login')
     .controller('LoginController', [
       '$state',
-      '$firebaseObject',
+      '$intFirebaseObject',
+      'growl',
       'KctAuth',
       'ProfileRef',
       'ProfilesService',
@@ -14,7 +15,8 @@
 
   function LoginController(
     $state,
-    $firebaseObject,
+    $intFirebaseObject,
+    growl,
     KctAuth,
     ProfileRef,
     ProfilesService
@@ -26,24 +28,18 @@
     _this.createAccount = createAccount;
 
     function oauthLogin(provider) {
-      _this.err = null;
       KctAuth.$authWithOAuthPopup(provider, {rememberMe: true}).then(_checkProfile, _showError);
     }
 
     function passwordLogin(email, pass) {
-      _this.err = null;
       KctAuth.$authWithPassword({email: email, password: pass}, {rememberMe: true}).then(
         _checkProfile, _showError
       );
     }
 
     function createAccount(email, pass, confirm) {
-      _this.err = null;
-      if( !pass ) {
-        _this.err = 'Please enter a password';
-      }
-      else if( pass !== confirm ) {
-        _this.err = 'Passwords do not match';
+      if( pass !== confirm ) {
+        growl.error('kct.layout.login.emailConnection.errors.passwordsNotMatch');
       }
       else {
         KctAuth.$createUser({email: email, password: pass})
@@ -56,19 +52,21 @@
     }
 
     function _checkProfile(authData) {
-      var authProfile = $firebaseObject(new ProfileRef(authData.uid));
+      var authProfile = $intFirebaseObject(new ProfileRef(authData.uid));
 
       authProfile.$loaded(function() {
         var profileExists = authProfile.$value !== null;
 
         if (profileExists) {
 
+          growl.success('kct.layout.login.emailConnection.success.login');
           $state.go('kct.home');
 
         } else {
 
           ProfilesService.createProfile(authData.uid, _createProfileData(authData))
           .then(function() {
+            growl.success('kct.layout.login.emailConnection.success.register');
             $state.go('kct.profile');
           }, _showError);
 
@@ -105,7 +103,16 @@
     }
 
     function _showError(err) {
-      _this.err = err;
+      _this.pass = '';
+      _this.confirm = '';
+      if (err.code === 'EMAIL_TAKEN') {
+        growl.error('kct.layout.login.emailConnection.errors.emailTaken');
+      } else if (err.code === 'INVALID_PASSWORD') {
+        growl.error('kct.layout.login.emailConnection.errors.invalidPassword');
+      } else {
+        console.log(err, err.code);
+        growl.error(err);
+      }
     }
   }
 

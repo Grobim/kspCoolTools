@@ -13,6 +13,15 @@
         "login" : "Connexion",
         "register" : "Nouveau compte",
         "create" : "Créer nouveau compte"
+      },
+      "errors"  : {
+        "passwordsNotMatch" : "Les mots de passes ne sont pas identiques",
+        "emailTaken"        : "Cet email est déjà prit",
+        "invalidPassword"   : "Le mot de passe est incorrect"
+      },
+      "success" : {
+        "login"    : "Connexion réussie",
+        "register" : "Compte créé avec succès"
       }
     }
   }

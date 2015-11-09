@@ -11,27 +11,52 @@
 
 <fieldset>
   <legend translate>kct.layout.login.emailConnection.header</legend>
-  <form name="loginCtrl.loginForm" ng-submit="loginCtrl.validateForm()">
-    <p class="form-group">
-      <label for="loginEmail" translate>kct.layout.login.emailConnection.fields.email</label>
+  <form name="loginCtrl.loginForm">
+    <div class="form-group" smart-field>
+      <label for="loginEmail"><span translate>kct.layout.common.fields.email</span></label>
       <input id="loginEmail" required name="email" type="email" ng-model="loginCtrl.email" class="form-control" />
-    </p>
-    <p class="form-group">
-      <label for="loginPass" translate>kct.layout.login.emailConnection.fields.password</label>
+    </div>
+    <div class="form-group" smart-field>
+      <label for="loginPass"><span translate>kct.layout.common.fields.password</span></label>
       <input id="loginPass" required name="pass" type="password" ng-model="loginCtrl.pass" class="form-control" />
-    </p>
-    <p class="form-group" ng-cloak ng-show="loginCtrl.createMode">
-      <label for="loginConfirm" translate>kct.layout.login.emailConnection.fields.confirmPassword</label>
-      <input id="loginConfirm" name="confirm" type="password" ng-model="loginCtrl.confirm" class="form-control" />
-    </p>
-
-    <p>
-      <button translate class="btn btn-primary" ng-click="loginCtrl.passwordLogin(loginCtrl.email, loginCtrl.pass)" ng-if="!loginCtrl.createMode">kct.layout.login.emailConnection.buttons.login</button>
-      <button translate class="btn btn-default" ng-click="loginCtrl.createMode = true" ng-if="!loginCtrl.createMode">kct.layout.login.emailConnection.buttons.register</button>
-      <button translate class="btn btn-primary" ng-cloak ng-if="loginCtrl.createMode"
-              ng-click="loginCtrl.createAccount(loginCtrl.email, loginCtrl.pass, loginCtrl.confirm)">kct.layout.login.emailConnection.buttons.create</button>
-      <button translate class="btn btn-default" ng-cloak ng-if="loginCtrl.createMode" ng-click="loginCtrl.createMode = false">kct.layout.common.cancel</button>
-    </p>
+    </div>
+    <div class="form-group" ng-cloak ng-show="loginCtrl.createMode" smart-field>
+      <label for="loginConfirm"><span translate>kct.layout.common.fields.confirmPassword</span></label>
+      <input id="loginConfirm" ng-required="loginCtrl.createMode" name="confirm" type="password" ng-model="loginCtrl.confirm" class="form-control" />
+    </div>
+    <div>
+      <button translate
+              type="submit"
+              ng-click="loginCtrl.passwordLogin(loginCtrl.email, loginCtrl.pass)"
+              ng-if="!loginCtrl.createMode"
+              ng-disabled="loginCtrl.loginForm.$invalid"
+              class="btn btn-primary">
+        kct.layout.login.emailConnection.buttons.login
+      </button>
+      <button translate
+              type="button"
+              ng-click="loginCtrl.createMode = true"
+              ng-if="!loginCtrl.createMode"
+              class="btn btn-default">
+        kct.layout.login.emailConnection.buttons.register
+      </button>
+      <button translate
+              type="submit"
+              ng-cloak
+              ng-if="loginCtrl.createMode"
+              ng-click="loginCtrl.createAccount(loginCtrl.email, loginCtrl.pass, loginCtrl.confirm)"
+              ng-disabled="loginCtrl.loginForm.$invalid"
+              class="btn btn-primary">
+        kct.layout.login.emailConnection.buttons.create
+      </button>
+      <button translate
+              type="button"
+              ng-cloak
+              ng-if="loginCtrl.createMode"
+              ng-click="loginCtrl.createMode = false"
+              class="btn btn-default">
+        kct.layout.common.cancel
+      </button>
+    </div>
   </form>
-  <p ng-show="loginCtrl.err" class="bg-danger">{{loginCtrl.err}}</p>
 </fieldset>

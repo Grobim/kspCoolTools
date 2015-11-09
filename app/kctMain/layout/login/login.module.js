@@ -3,8 +3,9 @@
 
   angular.module('kct.layout.login', [
     'ui.router',
-    'firebase',
     'pascalprecht.translate',
+    'angular-growl',
+    'kct.angularFireInterceptor',
 
     'kct.profiles'
   ]);
