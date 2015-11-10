@@ -3,10 +3,6 @@
 
   // Watches files for changes and runs tasks based on the changed files
   module.exports = {
-    bower: {
-      files: ['bower.json'],
-      tasks: ['wiredep']
-    },
     js: {
       files: ['<%= yeoman.app %>/{,**/}*.js'],
       tasks: ['newer:jshint:all'],
@@ -14,16 +10,9 @@
         livereload: '<%= connect.options.livereload %>'
       }
     },
-    jsTest: {
-      files: ['test/spec/{,**/}*.js'],
-      tasks: ['newer:jshint:test', 'karma']
-    },
     compass: {
       files: ['<%= yeoman.app %>/{,**/}*.{scss,sass}'],
       tasks: ['compass:server', 'autoprefixer']
-    },
-    gruntfile: {
-      files: ['Gruntfile.js']
     },
     livereload: {
       options: {
