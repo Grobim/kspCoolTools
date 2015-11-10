@@ -16,8 +16,8 @@
       '$stateParams',
       '$timeout',
       '$filter',
-      '$firebaseObject',
-      '$firebaseArray',
+      '$intFirebaseObject',
+      '$intFirebaseArray',
       'ModRef',
       'ModVersionRef',
       'ModVersionsService',
@@ -42,8 +42,8 @@
     $stateParams,
     $timeout,
     $filter,
-    $firebaseObject,
-    $firebaseArray,
+    $intFirebaseObject,
+    $intFirebaseArray,
     ModRef,
     ModVersionRef,
     ModVersionsService,
@@ -67,12 +67,12 @@
         itemsPerPage : 5
       };
 
-      _this.mod = $firebaseObject(new ModRef($stateParams.modId));
+      _this.mod = $intFirebaseObject(new ModRef($stateParams.modId));
 
       if (!isCreation()) {
 
-        _this.modVersion = $firebaseObject(new ModVersionRef($stateParams.modId, $stateParams.modVersionId));
-        _this.modVersionDeps = $firebaseArray(new ModVersionDepsRef($stateParams.modId, $stateParams.modVersionId));
+        _this.modVersion = $intFirebaseObject(new ModVersionRef($stateParams.modId, $stateParams.modVersionId));
+        _this.modVersionDeps = $intFirebaseArray(new ModVersionDepsRef($stateParams.modId, $stateParams.modVersionId));
         _this.modVersionDeps.$watch(function() {
           ModVersionDepsService.addModTitleToDeps(_this.modVersionDeps);
         });
@@ -98,7 +98,7 @@
     }
 
     function _createVersion() {
-      var newModVersion = $firebaseObject(new ModVersionRef($stateParams.modId, $filter('replaceChars')(_this.newModVersionId, '.', '_')));
+      var newModVersion = $intFirebaseObject(new ModVersionRef($stateParams.modId, $filter('replaceChars')(_this.newModVersionId, '.', '_')));
       newModVersion.$loaded(function() {
         if (newModVersion.$value === null) {
           newModVersion.desc = _this.modVersion.desc;

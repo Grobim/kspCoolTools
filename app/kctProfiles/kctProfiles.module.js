@@ -2,8 +2,7 @@
   'use strict';
 
   angular.module('kct.profiles', [
-    'firebase',
-
+    'kct.angularFireInterceptor',
     'kct.common'
   ]);
 

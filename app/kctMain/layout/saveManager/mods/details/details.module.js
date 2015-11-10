@@ -3,8 +3,9 @@
 
   angular.module('kct.layout.saveManager.mods.details', [
     'ui.router',
-    'firebase',
+    'pascalprecht.translate',
 
+    'kct.angularFireInterceptor',
     'kct.constants',
     'kct.angularFireInterceptor',
     'kct.components.persistence.saveManager',

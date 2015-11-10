@@ -4,8 +4,8 @@
   angular.module('kct.components.persistence.saveManager')
     .service('ModsService', [
       '$q',
-      '$firebaseArray',
-      '$firebaseObject',
+      '$intFirebaseArray',
+      '$intFirebaseObject',
       'ModVersionRef',
       'ModVersionsRef',
       'ModVersionsService',
@@ -16,8 +16,8 @@
 
   function ModsService(
     $q,
-    $firebaseArray,
-    $firebaseObject,
+    $intFirebaseArray,
+    $intFirebaseObject,
     ModVersionRef,
     ModVersionsRef,
     ModVersionsService,
@@ -29,7 +29,7 @@
 
     function deleteMod(deletedMod) {
       var deferred = $q.defer();
-      $firebaseArray(new BiDirModDepsRef(deletedMod.$id)).$loaded(function(modDeps) {
+      $intFirebaseArray(new BiDirModDepsRef(deletedMod.$id)).$loaded(function(modDeps) {
 
         if (modDeps.length) {
           deferred.reject(modDeps);
@@ -38,10 +38,10 @@
           var modDelPromise = $q.defer(),
               modVersionsDelPromise = $q.defer();
 
-          $firebaseArray(new ModVersionsRef(deletedMod.$id)).$loaded(function(versions) {
+          $intFirebaseArray(new ModVersionsRef(deletedMod.$id)).$loaded(function(versions) {
 
             _.forEach(versions, function(version) {
-              $firebaseObject(new ModVersionRef(deletedMod.$id, version.$id)).$loaded(function(modVersion) {
+              $intFirebaseObject(new ModVersionRef(deletedMod.$id, version.$id)).$loaded(function(modVersion) {
                 ModVersionsService.deleteModVersion(modVersion);
               });
             });

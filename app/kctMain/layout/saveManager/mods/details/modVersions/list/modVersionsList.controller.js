@@ -5,7 +5,7 @@
     .controller('ModDetailsModVersionsListController', [
       '$scope',
       '$stateParams',
-      '$firebaseObject',
+      '$intFirebaseObject',
       '$intFirebaseArray',
       'ModVersionsRef',
       'ModRef',
@@ -19,7 +19,7 @@
   function ModDetailsModVersionsListController(
     $scope,
     $stateParams,
-    $firebaseObject,
+    $intFirebaseObject,
     $intFirebaseArray,
     ModVersionsRef,
     ModRef,
@@ -32,7 +32,7 @@
     init();
 
     function init() {
-      _this.mod = $firebaseObject(new ModRef($stateParams.modId));
+      _this.mod = $intFirebaseObject(new ModRef($stateParams.modId));
       _this.modVersions = $intFirebaseArray(new ModVersionsRef($stateParams.modId));
       _this.modVersions.$loaded(_initWatchers);
       _this.modVersions.$watch(function() {

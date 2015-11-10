@@ -5,8 +5,8 @@
     .service('ModVersionsService', [
       '$q',
       '$stateParams',
-      '$firebaseArray',
-      '$firebaseObject',
+      '$intFirebaseArray',
+      '$intFirebaseObject',
       'ModVersionRef',
       'ModVersionDepRef',
       'ModVersionDepsRef',
@@ -19,8 +19,8 @@
   function ModVersionsService(
     $q,
     $stateParams,
-    $firebaseArray,
-    $firebaseObject,
+    $intFirebaseArray,
+    $intFirebaseObject,
     ModVersionRef,
     ModVersionDepRef,
     ModVersionDepsRef,
@@ -36,7 +36,7 @@
     function addDepLengthToVersions(modId, modVersions) {
       _.forEach(modVersions, function(modVersion) {
         modVersion.depsLength = 0;
-        var array = $firebaseArray(new ModVersionDepsRef(modId, modVersion.$id));
+        var array = $intFirebaseArray(new ModVersionDepsRef(modId, modVersion.$id));
         array.$watch(function () {
           modVersion.depsLength = array.length;
         });
@@ -48,7 +48,7 @@
           modVersionId = modVersion.$id,
           deferred = $q.defer();
 
-      $firebaseObject(new BiDirModVersionDepsRef(modId, modVersionId)).$loaded(function(biDirDeps) {
+      $intFirebaseObject(new BiDirModVersionDepsRef(modId, modVersionId)).$loaded(function(biDirDeps) {
 
         if (biDirDeps.$value !== null) {
           deferred.reject(biDirDeps);
@@ -57,10 +57,10 @@
           var modVersionDelPromise = $q.defer(),
               modVersionDepsDelPromise = $q.defer();
 
-          $firebaseArray(new ModVersionDepsRef(modId, modVersionId)).$loaded(function(array) {
+          $intFirebaseArray(new ModVersionDepsRef(modId, modVersionId)).$loaded(function(array) {
 
             _.forEach(array, function(modVersionDep) {
-              var modVersionDepObj = $firebaseObject(new ModVersionDepRef(modId, modVersionId, modVersionDep.$id));
+              var modVersionDepObj = $intFirebaseObject(new ModVersionDepRef(modId, modVersionId, modVersionDep.$id));
               modVersionDepObj.$loaded(function() {
                 ModVersionDepsService.removeModVersionDep(modVersionDepObj);
               });

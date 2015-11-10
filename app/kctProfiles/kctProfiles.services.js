@@ -4,21 +4,21 @@
   angular.module('kct.profiles')
     .service('ProfilesService', [
       '$q',
-      '$firebaseObject',
+      '$intFirebaseObject',
       'ProfileRef',
       'ProfilePrivateInfoRef',
       ProfilesService
     ])
   ;
 
-  function ProfilesService($q, $firebaseObject, ProfileRef, ProfilePrivateInfoRef) {
+  function ProfilesService($q, $intFirebaseObject, ProfileRef, ProfilePrivateInfoRef) {
     return {
       createProfile : createProfile
     };
 
     function createProfile(profileId, profileData) {
-      var profileRef = $firebaseObject(new ProfileRef(profileId)),
-          profilePrivateInfoRef = $firebaseObject(new ProfilePrivateInfoRef(profileId));
+      var profileRef = $intFirebaseObject(new ProfileRef(profileId)),
+          profilePrivateInfoRef = $intFirebaseObject(new ProfilePrivateInfoRef(profileId));
 
       _.assign(profileRef, profileData.public);
       _.assign(profilePrivateInfoRef, profileData.private);

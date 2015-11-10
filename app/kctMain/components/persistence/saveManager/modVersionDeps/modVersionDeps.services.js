@@ -7,8 +7,8 @@
       '$stateParams',
       '$filter',
       '$q',
-      '$firebaseObject',
-      '$firebaseArray',
+      '$intFirebaseObject',
+      '$intFirebaseArray',
       'ModRef',
       'ModVersionRef',
       'ModVersionDepRef',
@@ -22,8 +22,8 @@
     $stateParams,
     $filter,
     $q,
-    $firebaseObject,
-    $firebaseArray,
+    $intFirebaseObject,
+    $intFirebaseArray,
     ModRef,
     ModVersionRef,
     ModVersionDepRef,
@@ -39,7 +39,7 @@
     function addModTitleToDeps(modVersionDeps) {
       _.forEach(modVersionDeps, function(mod) {
         mod.title = ' ';
-        var obj = $firebaseObject(new ModRef(mod.$id));
+        var obj = $intFirebaseObject(new ModRef(mod.$id));
         obj.$watch(function() {
           mod.title = obj.title;
         });
@@ -52,7 +52,7 @@
 
       newDependence.minVersion = $filter('replaceChars')(newDependence.minVersion, '.', '_');
 
-      existingModVersion = $firebaseObject(new ModVersionRef(newDependence.$id, newDependence.minVersion));
+      existingModVersion = $intFirebaseObject(new ModVersionRef(newDependence.$id, newDependence.minVersion));
       existingModVersion.$loaded(function() {
         if (existingModVersion.$value === null) {
           existingModVersion.desc = '';
@@ -62,7 +62,7 @@
 
       newDependence.$save().then(function() {
         var biDirModVersion = _getVersionInfoFromDep(newDependence),
-            diDirDep = $firebaseObject(
+            diDirDep = $intFirebaseObject(
               new BiDirModVersionDepRef(
                 newDependence.$id,
                 newDependence.minVersion,
@@ -83,7 +83,7 @@
     function editVersionDep(editedDependence) {
       var deferred = $q.defer();
 
-      var actualDep = $firebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, editedDependence.$id));
+      var actualDep = $intFirebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, editedDependence.$id));
       actualDep.$loaded(function() {
         editedDependence.minVersion = $filter('replaceChars')(editedDependence.minVersion, '.', '_');
         if (editedDependence.minVersion !== actualDep.minVersion) {
@@ -104,7 +104,7 @@
       var deferredBiDirRemoved = $q.defer(),
           deferredRemoved = $q.defer(),
           biDirModVersion = _getVersionInfoFromDep(removedDependence),
-          diDirDep = $firebaseObject(
+          diDirDep = $intFirebaseObject(
             new BiDirModVersionDepRef(
               removedDependence.$id,
               removedDependence.minVersion,

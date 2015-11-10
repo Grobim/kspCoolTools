@@ -17,7 +17,8 @@
       "errors"  : {
         "passwordsNotMatch" : "Les mots de passes ne sont pas identiques",
         "emailTaken"        : "Cet email est déjà prit",
-        "invalidPassword"   : "Le mot de passe est incorrect"
+        "invalidPassword"   : "Le mot de passe est incorrect",
+        "invalidUser"       : "Aucun compte rattaché à cet email"
       },
       "success" : {
         "login"    : "Connexion réussie",

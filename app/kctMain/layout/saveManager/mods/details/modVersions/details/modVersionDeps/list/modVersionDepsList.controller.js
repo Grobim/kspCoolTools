@@ -6,8 +6,8 @@
       '$state',
       '$stateParams',
       '$filter',
-      '$firebaseArray',
-      '$firebaseObject',
+      '$intFirebaseArray',
+      '$intFirebaseObject',
       'ModRef',
       'ModsRef',
       'ModVersionDepRef',
@@ -21,8 +21,8 @@
     $state,
     $stateParams,
     $filter,
-    $firebaseArray,
-    $firebaseObject,
+    $intFirebaseArray,
+    $intFirebaseObject,
     ModRef,
     ModsRef,
     ModVersionDepRef,
@@ -52,19 +52,19 @@
         itemsPerPage : 5
       };
 
-      _this.mod = $firebaseObject(new ModRef($stateParams.modId));
+      _this.mod = $intFirebaseObject(new ModRef($stateParams.modId));
 
-      _this.depsList = $firebaseArray(new ModVersionDepsRef($stateParams.modId, $stateParams.modVersionId));
+      _this.depsList = $intFirebaseArray(new ModVersionDepsRef($stateParams.modId, $stateParams.modVersionId));
       _this.depsList.$watch(function() {
         ModVersionDepsService.addModTitleToDeps(_this.depsList);
       });
 
-      _this.modList = $firebaseArray(ModsRef);
+      _this.modList = $intFirebaseArray(ModsRef);
 
     }
 
     function setNewDependence(mod) {
-      _this.newDependence = $firebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, mod.$id));
+      _this.newDependence = $intFirebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, mod.$id));
       _this.newDependence.$loaded(function() {
         _this.newDependence.$title = mod.title;
         _this.newDependence.$new = true;
@@ -72,7 +72,7 @@
     }
 
     function setEditDependence(item) {
-      _this.newDependence = $firebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, item.$id));
+      _this.newDependence = $intFirebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, item.$id));
       _this.newDependence.$loaded(function() {
         _this.newDependence.minVersion = $filter('replaceChars')(_this.newDependence.minVersion, '_', '.');
         _this.newDependence.$title = item.title;
@@ -101,7 +101,7 @@
     }
 
     function removeDependence(item) {
-      var removedDependence = $firebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, item.$id));
+      var removedDependence = $intFirebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, item.$id));
       removedDependence.$loaded(function() {
         ModVersionDepsService.removeModVersionDep(removedDependence);
       });

@@ -4,7 +4,7 @@
   angular.module('kct.layout.saveManager.mods.details')
     
     .controller('ModDetailMainController', [
-      '$firebaseObject',
+      '$intFirebaseObject',
       '$stateParams',
       'ModRef',
       'breadCrumbModelService',
@@ -13,7 +13,7 @@
     .controller('ModDetailController', [
       '$state',
       '$stateParams',
-      '$firebaseObject',
+      '$intFirebaseObject',
       '$intFirebaseArray',
       '$timeout',
       'ModRef',
@@ -27,13 +27,13 @@
 
   ;
 
-  function ModDetailMainController($firebaseObject, $stateParams, ModRef, breadCrumbModelService) {
-    breadCrumbModelService.value('mod', $firebaseObject(new ModRef($stateParams.modId)));
+  function ModDetailMainController($intFirebaseObject, $stateParams, ModRef, breadCrumbModelService) {
+    breadCrumbModelService.value('mod', $intFirebaseObject(new ModRef($stateParams.modId)));
   }
 
   function ModDetailController($state,
                                $stateParams,
-                               $firebaseObject,
+                               $intFirebaseObject,
                                $intFirebaseArray,
                                $timeout,
                                ModRef,
@@ -55,7 +55,7 @@
       if (_isCreation()) {
         _this.mod = {};
       } else {
-        _this.mod = $firebaseObject(new ModRef($stateParams.modId));
+        _this.mod = $intFirebaseObject(new ModRef($stateParams.modId));
 
         _this.modVersions = $intFirebaseArray(new ModVersionsRef($stateParams.modId).orderByKey().limitToLast(5));
         _this.modVersions.$loaded(_reverseList);

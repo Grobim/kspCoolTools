@@ -109,6 +109,8 @@
         growl.error('kct.layout.login.emailConnection.errors.emailTaken');
       } else if (err.code === 'INVALID_PASSWORD') {
         growl.error('kct.layout.login.emailConnection.errors.invalidPassword');
+      } else if (err.code === 'INVALID_USER') {
+        growl.error('kct.layout.login.emailConnection.errors.invalidUser');
       } else {
         console.log(err, err.code);
         growl.error(err);
