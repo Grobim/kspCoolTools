@@ -48,6 +48,9 @@ module.exports = function(config) {
       'app/kctMain/app.js',
       'app/**/*.module.js',
       'app/**/*.js',
+      'test/mock/init.js',
+      'test/mock/test.js',
+      'test/mock/**/*.module.js',
       'test/mock/**/*.js',
       'test/spec/**/*.spec.js'
     ],

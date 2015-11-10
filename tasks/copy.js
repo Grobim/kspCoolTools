@@ -30,6 +30,33 @@
         dest: '<%= yeoman.dist %>'
       }]
     },
+    prod: {
+      files: [{
+        expand: true,
+        dot: true,
+        cwd: '<%= yeoman.app %>',
+        dest: '<%= yeoman.dist %>',
+        src: [
+          '*.{ico,png,txt}',
+          '.htaccess',
+          '404.html',
+          '{,**/}*.html',
+          'images/{,*/}*.{webp}',
+          'styles/fonts/{,*/}*.*',
+          'langs/locale-*.json'
+        ]
+      }, {
+        expand: true,
+        cwd: '.tmp/images',
+        dest: '<%= yeoman.dist %>/images',
+        src: ['generated/*']
+      }, {
+        expand: true,
+        cwd: '.',
+        src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
+        dest: '<%= yeoman.dist %>'
+      }]
+    },
     styles: {
       expand: true,
       cwd: '<%= yeoman.app %>/styles',

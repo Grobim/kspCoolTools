@@ -54,50 +54,50 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
+  grunt.registerTask('test', function(target) {
+    if (target === 'dist') {
+      return grunt.task.run(['build', 'karma:dist']);
+    } 
+
+    grunt.task.run('wiredep:test');
+
+    if (target === 'once') {
+      grunt.task.run('karma:once');
+    } else {
+      grunt.task.run([
+        'clean:server',
+        'concurrent:test',
+        'autoprefixer',
+        'generateLocales',
+        'connect:test',
+        'karma:unit'
+      ]);
+    }
   });
 
-  grunt.registerTask('testBase', [
-    'clean:server',
-    'generateLocales',
-    'wiredep',
-    'concurrent:test',
-    'autoprefixer',
-    'connect:test'
-  ]);
-
-  grunt.registerTask('test', [
-    'testBase',
-    'karma:unit'
-  ]);
-
-  grunt.registerTask('testSingleRun', [
-    'testBase',
-    'karma:singleRun'
-  ]);
-
-  grunt.registerTask('build', [
-    'clean:dist',
-    'generateLocales',
-    'wiredep',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'concat',
-    'ngAnnotate',
-    'copy:dist',
-    'cssmin',
-    'uglify',
-    'filerev',
-    'usemin',
-    'htmlmin'
-  ]);
+  grunt.registerTask('build', function(target) {
+    grunt.task.run([
+      'clean:dist',
+      'generateLocales',
+      'wiredep',
+      'preprocess:' + ((target === 'prod') ? 'prod' : 'dist'),
+      'useminPrepare',
+      'concurrent:dist',
+      'autoprefixer',
+      'concat',
+      'ngAnnotate',
+      'copy:dist',
+      'cssmin',
+      'uglify',
+      'filerev',
+      'usemin',
+      'htmlmin'
+    ]);
+  });
 
   grunt.registerTask('default', [
     'newer:jshint',
-    'testSingleRun',
+    'test:once',
     'build'
   ]);
 

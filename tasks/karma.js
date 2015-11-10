@@ -3,12 +3,15 @@
   'use strict';
 
   module.exports = {
-    unit: {
-      configFile: 'test/karma.conf.js'
+    unit : {
+      configFile : 'test/karma.conf.js'
     },
-    singleRun: {
-      configFile: 'test/karma.conf.js',
-      singleRun: true
+    dist : {
+      configFile : 'test/karma.dist.conf.js'
+    },
+    once : {
+      configFile : 'test/karma.conf.js',
+      singleRun  : true
     }
   };
 

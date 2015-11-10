@@ -24,6 +24,7 @@
     "grunt-filerev": "^2.1.2",
     "grunt-google-cdn": "^0.4.3",
     "grunt-karma": "*",
+    "grunt-preprocess": "^5.0.1",
     "grunt-newer": "^1.1.0",
     "grunt-ng-annotate": "^0.9.2",
     "grunt-svgmin": "^2.0.0",
@@ -38,19 +39,21 @@
     "load-grunt-tasks": "^3.1.0",
     "lodash": "^3.10.0",
     "time-grunt": "^1.0.0",
-    "phantomjs":"^1.9.7"
+    "phantomjs": "^1.9.7"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "postinstall":"bower install",
+    "postinstall": "bower install",
+
 
     "pretest": "npm install",
     "test": "grunt test",
 
     "pretest-once": "npm install",
-    "test-once": "grunt testSingleRun",
+    "test-once": "grunt test:once",
+
 
     "prestart": "npm install",
     "start": "grunt serve",
@@ -58,14 +61,19 @@
     "prestart-build": "npm install",
     "start-build": "grunt serve:dist",
 
-    "predeploy": "npm install && grunt build",
+
+    "predeploy": "npm install && grunt test:once && grunt build",
     "deploy": "firebase deploy:hosting",
     "postdeploy": "firebase open",
 
     "deploy-rules": "firebase deploy:rules",
 
-    "predeploy-full": "npm install && grunt build",
+    "predeploy-full": "npm install && grunt test:once && grunt build",
     "deploy-full": "firebase deploy",
-    "postdeploy-full": "firebase open"
+    "postdeploy-full": "firebase open",
+
+    "predeploy-prod": "npm install && grunt test:once && grunt build:prod",
+    "deploy-prod": "firebase deploy:hosting -f ksp-cool-tools",
+    "postdeploy-prod": "firebase open -f ksp-cool-tools"
   }
 }

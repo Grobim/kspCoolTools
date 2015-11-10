@@ -12,7 +12,8 @@
       'i18nService',
       'breadCrumbModelService',
       LayoutController
-    ]);
+    ])
+  ;
 
   function LayoutController(
     $rootScope,
