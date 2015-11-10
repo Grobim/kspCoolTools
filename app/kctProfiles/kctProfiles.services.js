@@ -20,8 +20,13 @@
       var profileRef = $intFirebaseObject(new ProfileRef(profileId)),
           profilePrivateInfoRef = $intFirebaseObject(new ProfilePrivateInfoRef(profileId));
 
+      if (!profileData.public) {
+        throw 'No public information provided';
+      }
       _.assign(profileRef, profileData.public);
-      _.assign(profilePrivateInfoRef, profileData.private);
+      if (profileData.private) {
+        _.assign(profilePrivateInfoRef, profileData.private);
+      }
 
       return $q.all([profileRef.$save(), profilePrivateInfoRef.$save()]);
     }
