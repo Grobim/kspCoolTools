@@ -7,7 +7,7 @@
   "esnext": true,
   "immed": true,
   "jasmine": true,
-  "latedef": true,
+  "latedef": "nofunc",
   "newcap": true,
   "noarg": true,
   "node": true,

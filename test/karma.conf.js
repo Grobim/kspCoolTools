@@ -52,6 +52,7 @@ module.exports = function(config) {
       'test/mock/test.js',
       'test/mock/**/*.module.js',
       'test/mock/**/*.js',
+      'test/spec/examples/*.js',
       'test/spec/**/*.spec.js'
     ],
 
