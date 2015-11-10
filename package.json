@@ -73,7 +73,7 @@
     "postdeploy-full": "firebase open",
 
     "predeploy-prod": "npm install && grunt test:once && grunt build:prod",
-    "deploy-prod": "firebase deploy:hosting -f ksp-cool-tools",
+    "deploy-prod": "firebase deploy -f ksp-cool-tools",
     "postdeploy-prod": "firebase open -f ksp-cool-tools"
   }
 }
