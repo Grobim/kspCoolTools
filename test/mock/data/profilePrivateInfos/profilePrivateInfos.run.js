@@ -10,7 +10,9 @@
   ;
 
   function profilePrivateInfosInjector(ProfilePrivateInfosRef, profilePrivateInfosMockData) {
+
     ProfilePrivateInfosRef.set(profilePrivateInfosMockData);
+
   }
 
 })();

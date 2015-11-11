@@ -5,7 +5,6 @@
     .run([
       'ProfilesRef',
       'profilesMockData',
-      '$firebaseObject',
       profilesInjector
     ])
   ;

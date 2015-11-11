@@ -17,6 +17,9 @@
   "unused": true,
   "globals": {
     "angular": false,
-    "inject": false
+    "_": false,
+    "inject": "false",
+    "ngDescribe": false,
+    "la": false
   }
 }

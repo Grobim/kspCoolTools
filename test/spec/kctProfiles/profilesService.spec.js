@@ -1,36 +1,26 @@
 (function() {
   'use strict';
 
-  describe('ProfilesService', function() {
+  ngDescribe({
+    name    : 'ProfilesService',
+    modules : ['kct.mocks', 'kct.mocks.data', 'kct.profiles'],
+    inject  : ['KctRootRef', 'ProfilesService'],
+    tests   : testsFunc
+  });
 
-    var rootRef, service;
-
-    beforeEach(function() {
-
-      module('kct.mocks');
-      module('kct.mocks.data');
-      module('kct.profiles');
-
-      inject(function($injector) {
-
-        rootRef = $injector.get('KctRootRef');
-        service = $injector.get('ProfilesService');
-
-      });
-
-    });
+  function testsFunc(deps) {
 
     describe('Definiton', function() {
 
       it('should be defined', function() {
 
-        expect(service).toBeDefined();
+        la(deps.ProfilesService !== undefined);
 
       });
 
-      it('should be abble to create a profile', function() {
+      it('should be able to create a profile', function() {
 
-        expect(service.createProfile).toBeDefined();
+        la(deps.ProfilesService.createProfile !== undefined);
 
       });
 
@@ -52,24 +42,29 @@
             email : 'TestEmail'
           }
         };
-        profileRef = rootRef.child('profiles').child('testId');
-        provilePrivateInfoRef = rootRef.child('profilePrivateInfos').child('testId');
+        profileRef = deps.KctRootRef.child('profiles').child('testId');
+        provilePrivateInfoRef = deps.KctRootRef.child('profilePrivateInfos').child('testId');
 
       });
 
       it('should create a profile with public and private data', function() {
 
-        service.createProfile('testId', profileData);
+        deps.ProfilesService.createProfile('testId', profileData);
 
         profileRef.once('value', function(snap) {
-          expect(snap.val()).toEqual(profileData.public);
+
+          la(_.isEqual(snap.val(), profileData.public));
+
         });
 
         provilePrivateInfoRef.once('value', function(snap) {
-          expect(snap.val()).toEqual(profileData.private);
+
+          la(_.isEqual(snap.val(), profileData.private));
+
         });
 
-        rootRef.flush();
+        deps.KctRootRef.flush();
+        deps.step();
 
       });
 
@@ -77,42 +72,58 @@
 
         delete profileData.private;
 
-        service.createProfile('testId', profileData);
+        deps.ProfilesService.createProfile('testId', profileData);
 
         profileRef.once('value', function(snap) {
-          expect(snap.val()).toEqual(profileData.public);
+          la(_.isEqual(snap.val(), profileData.public));
         });
 
         provilePrivateInfoRef.once('value', function(snap) {
-          expect(snap.val()).toBeNull();
+          la(snap.val() === null);
         });
 
-        rootRef.flush();
+        deps.KctRootRef.flush();
 
       });
 
-      it('should throw when no public data provided', function() {
+      it('should throw when no public data provided and not save anything', function() {
 
         delete profileData.public;
 
         expect(function() {
-          service.createProfile('testId', profileData);
+          deps.ProfilesService.createProfile('testId', profileData);
         }).toThrow();
 
         profileRef.once('value', function(snap) {
-          expect(snap.val()).toBeNull();
+          la(snap.val() === null);
         });
 
         provilePrivateInfoRef.once('value', function(snap) {
-          expect(snap.val()).toBeNull();
+          la(snap.val() === null);
         });
 
-        rootRef.flush();
+        deps.KctRootRef.flush();
+
+      });
+
+      it('sould resolve a promise', function() {
+
+        var wrapper = {spy: _.noop};
+
+        spyOn(wrapper, 'spy');
+
+        deps.ProfilesService.createProfile('testId', profileData).then(wrapper.spy);
+
+        deps.KctRootRef.flush();
+        deps.step();
+
+        expect(wrapper.spy).toHaveBeenCalled();
+        la(wrapper.spy.calls.count() === 1);
 
       });
 
     });
 
-  });
+  }
 
 })();

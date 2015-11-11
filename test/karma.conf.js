@@ -42,14 +42,14 @@ module.exports = function(config) {
       'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
       'bower_components/checklist-model/checklist-model.js',
       'bower_components/lodash/lodash.js',
-      'bower_components/mockfirebase/browser/mockfirebase.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/mockfirebase/browser/mockfirebase.js',
+      'bower_components/ng-describe/dist/ng-describe.js',
       // endbower
       'app/kctMain/app.js',
       'app/**/*.module.js',
       'app/**/*.js',
       'test/mock/init.js',
-      'test/mock/test.js',
       'test/mock/**/*.module.js',
       'test/mock/**/*.js',
       'test/spec/examples/*.js',
@@ -72,7 +72,6 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      'PhantomJS',
       'Chrome',
       'Firefox',
       'IE'
@@ -83,7 +82,6 @@ module.exports = function(config) {
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-ie-launcher',
-      'karma-phantomjs-launcher',
       'karma-jasmine'
     ],
 

@@ -24,10 +24,10 @@ module.exports = function(config) {
       'scripts/vendor.*.js',
       'scripts/scripts.*.js',
       '../node_modules/jasmine-core/lib/jasmine.js',
-      '../bower_components/mockfirebase/browser/mockfirebase.js',
       '../bower_components/angular-mocks/angular-mocks.js',
+      '../bower_components/mockfirebase/browser/mockfirebase.js',
+      '../bower_components/ng-describe/dist/ng-describe.js',
       '../test/mock/init.js',
-      '../test/mock/test.js',
       '../test/mock/**/*.module.js',
       '../test/mock/**/*.js',
       '../test/spec/examples/*.js',
@@ -50,7 +50,6 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      'PhantomJS',
       'Chrome',
       'Firefox',
       'IE'
@@ -61,7 +60,6 @@ module.exports = function(config) {
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-ie-launcher',
-      'karma-phantomjs-launcher',
       'karma-jasmine'
     ],
 

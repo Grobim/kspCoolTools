@@ -65,9 +65,6 @@ module.exports = function (grunt) {
       grunt.task.run('karma:once');
     } else {
       grunt.task.run([
-        'concurrent:test',
-        'autoprefixer',
-        'generateLocales',
         'connect:test',
         'karma:unit'
       ]);
