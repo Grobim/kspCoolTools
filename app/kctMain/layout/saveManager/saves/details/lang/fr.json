@@ -1,0 +1,15 @@
+{
+  "kct.layout.saveManager.saves.details" : {
+    "return"   : "Return to save list",
+    "creation" : {
+      "title"           : "Création de partie",
+      "windowTitle"     : "Création de partie",
+      "breadCrumbTitle" : "Création de partie"
+    },
+    "edition" : {
+      "windowTitle"     : "Édition de partie",
+      "title"           : "Édition de partie : {saveTitle}",
+      "breadCrumbTitle" : "Édition de partie : {saveTitle}"
+    }
+  }
+}
