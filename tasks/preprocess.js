@@ -7,10 +7,6 @@
         DEBUG: false
       }
     },
-    dist : {
-      src : '<%= yeoman.app %>/index.html',
-      dest : '.tmp/index.html'
-    },
     prod : {
       src : '<%= yeoman.app %>/index.html',
       dest : '.tmp/index.html',
@@ -19,6 +15,10 @@
           'NODE_ENV' : 'production'
         }
       }
+    },
+    dist : {
+      src : '<%= yeoman.app %>/index.html',
+      dest : '.tmp/index.html'
     }
   };
 

@@ -8,7 +8,8 @@
     },
     app: {
       src: ['<%= yeoman.app %>/index.html'],
-      ignorePath:  /\.\.\//
+      ignorePath:  /\.\.\//,
+      exclude : ['/bower_components/angular-material/angular-material.css']
     },
     test: {
       devDependencies: true,
@@ -16,20 +17,21 @@
       ignorePath:  /\.\.\//,
       fileTypes:{
         js: {
-          block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-            detect: {
-              js: /'(.*\.js)'/gi
-            },
-            replace: {
-              js: '\'{{filePath}}\','
-            }
+        block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
+          detect: {
+            js: /'(.*\.js)'/gi
+          },
+          replace: {
+            js: '\'{{filePath}}\','
           }
         }
+      }
     },
     sass: {
       src        : ['<%= yeoman.app %>/{,*/}*.{scss,sass}'],
-      ignorePath : /(\.\.\/){1,2}bower_components\//,
-      exclude    : ['/bower_components/bootstrap-sass-official/']
+      exclude    : [
+        '/bower_components/bootstrap-sass-official/*'
+      ]
     }
   };
 

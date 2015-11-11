@@ -13,7 +13,8 @@
         ]
       }]
     },
-    server: '.tmp'
+    server: '.tmp',
+    index : '.tmp/index.html'
   };
 
 })();

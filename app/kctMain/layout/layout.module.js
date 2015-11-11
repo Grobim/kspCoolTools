@@ -4,6 +4,7 @@
   angular.module('kct.layout', [
     'ngAnimate',
     'ngSanitize',
+    'ngMaterial',
     
     'ui.router',
     'ui.select',

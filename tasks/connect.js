@@ -11,10 +11,10 @@
     },
     livereload: {
       options: {
+        base: '.tmp',
         open: true,
         middleware: function (connect) {
           return [
-            connect.static('.tmp'),
             connect().use(
               '/bower_components',
               connect.static('./bower_components')
@@ -24,10 +24,14 @@
               connect.static('./bower_local')
             ),
             connect().use(
-              '/app/styles',
-              connect.static('./app/styles')
+              '/' + utils.getConfig().app + '/styles',
+              connect.static('./' + utils.getConfig().app + '/styles')
             ),
-            connect.static(utils.getConfig().app)
+            connect.static('.tmp'),
+            connect().use(
+              '/',
+              connect.static('./' + utils.getConfig().app)
+            )
           ];
         }
       }

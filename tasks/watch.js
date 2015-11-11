@@ -24,6 +24,15 @@
         '<%= yeoman.app %>/images/{,**/}*.{png,jpg,jpeg,gif,webp,svg}'
       ]
     },
+    preprocess: {
+      options : {
+        livereload : '<%= connect.options.livereload %>'
+      },
+      files   : [
+        '<%= yeoman.app %>/index.html'
+      ],
+      tasks   : ['preprocess:dist']
+    },
     langs: {
       files: ['<%= yeoman.app %>/{,**/}lang/*.json'],
       tasks: ['generateLocales'],

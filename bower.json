@@ -7,6 +7,7 @@
     "angular-bootstrap": "^0.14.3",
     "angular-cookies": "^1.4.0",
     "angular-growl-v2": "^0.7.9",
+    "angular-material": "^0.11.4",
     "angular-messages": "^1.4.0",
     "angular-sanitize": "^1.4.0",
     "angular-translate": "^2.8.1",

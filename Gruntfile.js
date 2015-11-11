@@ -49,6 +49,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
+      'preprocess:dist',
       'connect:livereload',
       'watch'
     ]);
