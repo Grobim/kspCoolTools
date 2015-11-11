@@ -31,6 +31,10 @@
             connect().use(
               '/',
               connect.static('./' + utils.getConfig().app)
+            ),
+            connect().use(
+              '/fonts',
+              connect.static('./bower_components/font-awesome/fonts')
             )
           ];
         }

@@ -5,6 +5,8 @@
     .filter('replaceChars', [ReplaceCharFilter])
     .filter('length', [LengthFilter])
     .filter('omitFromField', [OmitFromFieldFilter])
+    .filter('nospace', [NoSpaceFilter])
+    .filter('humanizeDoc', [HumanizeDocFilter])
   ;
 
   function ReplaceCharFilter() {
@@ -28,6 +30,26 @@
           return _.get(filtered, filteredField) === _.get(inputListItem, filteredField);
         }
       });
+    };
+  }
+
+  function NoSpaceFilter() {
+    return function (value) {
+      return (!value) ? '' : value.replace(/ /g, '');
+    };
+  }
+
+  function HumanizeDocFilter() {
+    return function (doc) {
+      if (!doc) {
+        return;
+      }
+      if (doc.type === 'directive') {
+        return doc.name.replace(/([A-Z])/g, function ($1) {
+          return '-' + $1.toLowerCase();
+        });
+      }
+      return doc.label || doc.name;
     };
   }
 

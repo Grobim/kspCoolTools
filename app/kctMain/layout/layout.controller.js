@@ -6,11 +6,13 @@
       '$rootScope',
       '$state',
       '$translate',
+      '$mdSidenav',
       'KctAuth',
-      'leftHeaderStates',
+      'leftMenuStates',
       'rightHeaderStates',
       'i18nService',
       'breadCrumbModelService',
+      'KctMenu',
       LayoutController
     ])
   ;
@@ -19,19 +21,25 @@
     $rootScope,
     $state,
     $translate,
+    $mdSidenav,
     KctAuth,
-    leftHeaderStates,
+    leftMenuStates,
     rightHeaderStates,
     i18nService,
-    breadCrumbModelService
+    breadCrumbModelService,
+    KctMenu
   ) {
     var _this = this,
         _allStates;
 
+    _this.goToState = goToState;
     _this.isCurrentState = isCurrentState;
     _this.hasSubStates = hasSubStates;
+
     _this.userHasAuthRights = userHasAuthRights;
     _this.logout = logout;
+
+    _this.toggleNavbar = toggleNavbar;
 
     _this.changeLang = changeLang;
 
@@ -40,10 +48,10 @@
     function init() {
       $rootScope.bcModel = breadCrumbModelService.model;
 
-      _this.leftHeaderStates = _.cloneDeep(leftHeaderStates);
+      _this.leftMenuStates = _.cloneDeep(leftMenuStates);
       _this.rightHeaderStates = _.cloneDeep(rightHeaderStates);
 
-      _allStates = _.assign({}, _this.leftHeaderStates, _this.rightHeaderStates);
+      _allStates = _.assign({}, _this.leftMenuStates, _this.rightHeaderStates);
 
       _this.langs = i18nService.getLangList();
       _this.selectedLang = $translate.use();
@@ -52,6 +60,10 @@
         _this.selectedLang = data.language;
       });
 
+    }
+
+    function goToState(stateKey) {
+      $state.go(stateKey);
     }
 
     function isCurrentState(stateName) {
@@ -79,9 +91,30 @@
       $state.go('kct.home');
     }
 
+    function toggleNavbar() {
+      $mdSidenav('mainMenu').toggle();
+    }
+
     function changeLang($item) {
       $translate.use($item.lang);
       $state.reload();
+    }
+    _this.isOpen = isOpen;
+    _this.toggleOpen = toggleOpen;
+    _this.autoFocusContent = false;
+    _this.menu = KctMenu;
+
+    _this.status = {
+      isFirstOpen: true,
+      isFirstDisabled: false
+    };
+
+    function isOpen(section) {
+      return KctMenu.isSectionSelected(section);
+    }
+
+    function toggleOpen(section) {
+      KctMenu.toggleSelectSection(section);
     }
   }
 })();

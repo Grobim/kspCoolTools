@@ -18,6 +18,8 @@
     'kct.components.ui.growl',
     'kct.components.interceptors',
 
+    'kct.components.ui.directives.kctMenu',
+
     'kct.layout.home',
     'kct.layout.login',
     'kct.layout.profile',
