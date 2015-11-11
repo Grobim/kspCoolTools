@@ -16,12 +16,14 @@
         "details"         : "Détails",
         "notes"           : "Notes",
         "version"         : "Version",
+        "kspVersion"      : "Version de KSP",
         "minVersion"      : "Version min",
         "modsPerPage"     : "Mods par page",
         "knownDeps"       : "Dépendances connues",
         "email"           : "Email",
         "password"        : "Mot de passe",
-        "confirmPassword" : "Confirmer mot de passe"
+        "confirmPassword" : "Confirmer mot de passe",
+        "author"          : "Auteur"
       },
       "errors"      : {
         "required"    : "Ce champ est requis",

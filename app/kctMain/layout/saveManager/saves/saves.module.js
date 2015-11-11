@@ -2,10 +2,8 @@
   'use strict';
 
   angular.module('kct.layout.saveManager.saves', [
-    'ui.router',
-    'kct.angularFireInterceptor',
-
-    'kct.components.persistence.saveManager'
+    'kct.layout.saveManager.saves.list',
+    'kct.layout.saveManager.saves.details'
   ]);
 
 })();

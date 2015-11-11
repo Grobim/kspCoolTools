@@ -76,6 +76,7 @@
     <!-- @if NODE_ENV='production' -->
     <script src="kctCommon/kctCommon.constants.production.js"></script>
     <!-- @endif -->
+    <script src="kctCommon/kctCommon.factories.js"></script>
     <script src="kctCommon/kctCommon.services.js"></script>
     <script src="kctCommon/kctCommon.directives.js"></script>
     <script src="kctProfiles/kctProfiles.module.js"></script>
@@ -130,6 +131,7 @@
     <script src="kctMain/components/persistence/saveManager/biDirModVersionDeps/biDirModVersionDep.factory.js"></script>
     <script src="kctMain/components/persistence/saveManager/saves/saves.factory.js"></script>
     <script src="kctMain/components/persistence/saveManager/saves/save.factory.js"></script>
+    <script src="kctMain/components/persistence/saveManager/saves/saves.services.js"></script>
     <script src="kctMain/components/persistence/saveManager/saveInclMods/saveInclMods.factory.js"></script>
     <script src="kctMain/components/filters/filters.module.js"></script>
     <script src="kctMain/components/filters/utils.filters.js"></script>
@@ -151,8 +153,12 @@
     <script src="kctMain/layout/saveManager/saveManager.module.js"></script>
     <script src="kctMain/layout/saveManager/saveManager.routes.js"></script>
     <script src="kctMain/layout/saveManager/saves/saves.module.js"></script>
-    <script src="kctMain/layout/saveManager/saves/saves.controller.js"></script>
-    <script src="kctMain/layout/saveManager/saves/saves.routes.js"></script>
+    <script src="kctMain/layout/saveManager/saves/list/savesList.module.js"></script>
+    <script src="kctMain/layout/saveManager/saves/list/savesList.controllers.js"></script>
+    <script src="kctMain/layout/saveManager/saves/list/savesList.routes.js"></script>
+    <script src="kctMain/layout/saveManager/saves/details/savesDetails.module.js"></script>
+    <script src="kctMain/layout/saveManager/saves/details/savesDetails.controllers.js"></script>
+    <script src="kctMain/layout/saveManager/saves/details/savesDetails.routes.js"></script>
     <script src="kctMain/layout/saveManager/mods/mods.module.js"></script>
     <script src="kctMain/layout/saveManager/mods/list/list.module.js"></script>
     <script src="kctMain/layout/saveManager/mods/list/list.controller.js"></script>

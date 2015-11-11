@@ -6,9 +6,7 @@
   ;
 
   function SavesRefFactory(SaveManagerRef) {
-    return function() {
-      return SaveManagerRef.child('saves');
-    };
+    return SaveManagerRef.child('saves');
   }
 
 })();

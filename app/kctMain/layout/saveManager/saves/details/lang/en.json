@@ -1,0 +1,15 @@
+{
+  "kct.layout.saveManager.saves.details" : {
+    "return"   : "Return to save list",
+    "creation" : {
+      "title"           : "Save creation",
+      "windowTitle"     : "Save creation",
+      "breadCrumbTitle" : "Save creation"
+    },
+    "edition" : {
+      "windowTitle"     : "Save edition",
+      "title"           : "Save edition : {saveTitle}",
+      "breadCrumbTitle" : "Save edition : {saveTitle}"
+    }
+  }
+}
