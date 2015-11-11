@@ -21,11 +21,16 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'scripts/**/vendor.*.js',
-      'scripts/**/scripts.*.js',
+      'scripts/vendor.*.js',
+      'scripts/scripts.*.js',
+      '../node_modules/jasmine-core/lib/jasmine.js',
+      '../bower_components/mockfirebase/browser/mockfirebase.js',
+      '../bower_components/angular-mocks/angular-mocks.js',
       '../test/mock/init.js',
       '../test/mock/test.js',
+      '../test/mock/**/*.module.js',
       '../test/mock/**/*.js',
+      '../test/spec/examples/*.js',
       '../test/spec/**/*.spec.js'
     ],
 

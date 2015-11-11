@@ -54,6 +54,9 @@
     "pretest-once": "npm install",
     "test-once": "grunt test:once",
 
+    "pretest-build": "npm install",
+    "test-build": "grunt test:dist",
+
 
     "prestart": "npm install",
     "start": "grunt serve",
@@ -62,17 +65,17 @@
     "start-build": "grunt serve:dist",
 
 
-    "predeploy": "npm install && grunt test:once && grunt build",
+    "predeploy": "npm install && grunt test:dist",
     "deploy": "firebase deploy:hosting",
     "postdeploy": "firebase open",
 
     "deploy-rules": "firebase deploy:rules",
 
-    "predeploy-full": "npm install && grunt test:once && grunt build",
+    "predeploy-full": "npm install && grunt test:dist",
     "deploy-full": "firebase deploy",
     "postdeploy-full": "firebase open",
 
-    "predeploy-prod": "npm install && grunt test:once && grunt build:prod",
+    "predeploy-prod": "npm install && grunt test:dist && grunt build:prod",
     "deploy-prod": "firebase deploy -f ksp-cool-tools",
     "postdeploy-prod": "firebase open -f ksp-cool-tools"
   }
