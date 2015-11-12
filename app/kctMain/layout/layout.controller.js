@@ -7,9 +7,9 @@
       '$state',
       '$translate',
       '$mdSidenav',
+      '$mdMedia',
+      '$window',
       'KctAuth',
-      'leftMenuStates',
-      'rightHeaderStates',
       'i18nService',
       'breadCrumbModelService',
       'KctMenu',
@@ -23,20 +23,17 @@
     $state,
     $translate,
     $mdSidenav,
+    $mdMedia,
+    $window,
     KctAuth,
-    leftMenuStates,
-    rightHeaderStates,
     i18nService,
     breadCrumbModelService,
     KctMenu,
     menuStates
   ) {
-    var _this = this,
-        _allStates;
+    var _this = this;
 
-    _this.goToState = goToState;
     _this.isCurrentState = isCurrentState;
-    _this.hasSubStates = hasSubStates;
 
     _this.userHasAuthRights = userHasAuthRights;
     _this.logout = logout;
@@ -45,41 +42,27 @@
 
     _this.changeLang = changeLang;
 
-    _this.test = function(test) {
-      console.log('test', test);
-    };
-
     init();
 
     function init() {
-      $rootScope.bcModel = breadCrumbModelService.model;
 
-      _this.leftMenuStates = _.cloneDeep(leftMenuStates);
-      _this.rightHeaderStates = _.cloneDeep(rightHeaderStates);
+      $rootScope.bcModel = breadCrumbModelService.model;
 
       _this.menuStates = menuStates;
 
-      _allStates = _.assign({}, _this.leftMenuStates, _this.rightHeaderStates);
-
       _this.langs = i18nService.getLangList();
       _this.selectedLang = $translate.use();
+      _this.selectedItem = _.find(_this.langs, 'lang', _this.selectedLang);
 
       $rootScope.$on('$translateChangeSuccess', function(e, data) {
         _this.selectedLang = data.language;
+        _this.selectedItem = _.find(_this.langs, 'lang', _this.selectedLang);
       });
 
     }
 
-    function goToState(stateKey) {
-      $state.go(stateKey);
-    }
-
     function isCurrentState(stateName) {
       return $state.includes(stateName);
-    }
-
-    function hasSubStates(stateName) {
-      return !!_allStates[stateName].subStates;
     }
 
     function userHasAuthRights(state) {
@@ -100,17 +83,19 @@
     }
 
     function toggleNavbar() {
-      $mdSidenav('mainMenu').toggle();
+      return $mdSidenav('mainMenu').toggle();
     }
 
     function changeLang($item) {
-      $translate.use($item.lang);
-      $state.reload();
+      if ($item) {
+        toggleNavbar().then(function() {
+          $translate.use($item.lang);
+          $state.reload();
+        });
+      }
     }
     _this.isOpen = isOpen;
     _this.toggleOpen = toggleOpen;
-    _this.autoFocusContent = false;
-    _this.menu = KctMenu;
 
     function isOpen(section) {
       return KctMenu.isSectionSelected(section);
@@ -118,6 +103,34 @@
 
     function toggleOpen(section) {
       KctMenu.toggleSelectSection(section);
+    }
+
+    // list of `state` value/display objects
+    _this.states        = i18nService.getLangList();
+    _this.querySearch   = querySearch;
+
+    // ******************************
+    // Internal methods
+    // ******************************
+
+    /**
+     * Search for states... use $timeout to simulate
+     * remote dataservice call.
+     */
+    function querySearch (query) {
+      return query ? _this.states.filter( createFilterFor(query)) : _this.states;
+    }
+
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+      return function filterFn(lang) {
+        return lang.lang.indexOf(lowercaseQuery) !== -1 ||
+               angular.lowercase(lang.translation).indexOf(lowercaseQuery) !== -1;
+      };
+
     }
   }
 })();

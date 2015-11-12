@@ -10,8 +10,7 @@
       scope: {
         section          : '=',
         isOpen           : '&',
-        toggle           : '&',
-        autoFocusContent : '='
+        toggle           : '&'
       },
       templateUrl: 'kctMain/components/ui/directives/kctMenu/kctMenuToggle.tpl.html',
       link: link

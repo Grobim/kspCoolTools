@@ -1,6 +1,25 @@
 @import "common.scss";
 @import "saveManager/saveManager.scss";
 
+.side-menu .lang-selector md-icon {
+  margin: auto;
+  background-repeat: no-repeat no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  fill: currentColor;
+  height: 24px;
+  width: 24px;
+}
+
+.md-icon.md-button.my-icon-button {
+  padding-left : 12px;
+  min-width    : 0;
+  min-height   : 0;
+  line-height  : normal;
+  width        : initial;
+  cursor       : default;
+}
+
 .lang-select-container .dropdown-menu {
   right: 0;
   left: auto;

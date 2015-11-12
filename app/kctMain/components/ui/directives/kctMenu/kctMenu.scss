@@ -32,7 +32,7 @@ md-sidenav {
   text-transform: none;
 }
 
-.side-menu > li {
+.side-menu > li:not(.border-less) {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 

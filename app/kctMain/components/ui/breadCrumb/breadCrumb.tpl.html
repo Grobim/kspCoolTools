@@ -1,12 +1,6 @@
 <div>
-  <ol class="breadcrumb">
-      <li ng-repeat="step in steps | limitTo:(steps.length-1)">
-          <a href="{{step.ncyBreadcrumbLink}}" ng-if="step.ncyBreadcrumbTranslate" translate translate-values="{{step.ncyBreadcrumbTranslateValues}}">{{step.ncyBreadcrumbLabel}}</a>
-          <a href="{{step.ncyBreadcrumbLink}}" ng-if="!step.ncyBreadcrumbTranslate">{{step.ncyBreadcrumbLabel}}</a>
-      </li>
-      <li ng-repeat="step in steps | limitTo:-1" class="active">
-          <span ng-if="step.ncyBreadcrumbTranslate" translate translate-values="{{step.ncyBreadcrumbTranslateValues}}">{{step.ncyBreadcrumbLabel}}</span>
-          <span ng-if="!step.ncyBreadcrumbTranslate">{{step.ncyBreadcrumbLabel}}</span>
-      </li>
-  </ol>
+  <div ng-cloak class="my-breadcrumb flat">
+    <a href="{{step.ncyBreadcrumbLink}}" ng-repeat="step in steps | limitTo:(steps.length-1)" translate translate-values="{{step.ncyBreadcrumbTranslateValues}}">{{step.ncyBreadcrumbLabel}}</a>
+    <a href="{{step.ncyBreadcrumbLink}}" ng-repeat="step in steps | limitTo:-1" class="active" translate translate-values="{{step.ncyBreadcrumbTranslateValues}}">{{step.ncyBreadcrumbLabel}}</a>
+  </div>
 </div>

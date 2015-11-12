@@ -1,7 +1,8 @@
 <section layout="row" flex class="layout-header">
 
   
-  <md-sidenav class="md-sidenav-left md-whiteframe-1dp" md-component-id="mainMenu"
+  <md-sidenav class="md-sidenav-left md-whiteframe-1dp"
+              md-component-id="mainMenu"
               md-is-locked-open="$mdMedia('gt-md')">
     
     <md-toolbar md-scroll-shrink>
@@ -10,143 +11,76 @@
       </div>
     </md-toolbar>
     
-    <md-content role="navigation">
+    <md-content role="navigation" layout="column">
       <ul class="side-menu">
         <li ng-repeat="section in layoutCtrl.menuStates"
             class="parent-list-item"
-            ng-class="{'parentActive' : layoutCtrl.isSectionSelected(section)}"
+            ng-class="{parentActive  : layoutCtrl.isSectionSelected(section),
+                       'border-less' : section.borderLess}"
             ng-if="layoutCtrl.userHasAuthRights(section)">
           <h2 class="menu-heading" ng-if="section.type === 'heading'"
               id="heading_{{ section.name | nospace }}">
-            {{section}}
+            <span translate>{{section.name | translate}}</span>
           </h2>
           <kct-menu-link section="section"
-                         ng-if="section.type === 'link'"
-                         auto-focus-content="layoutCtrl.autoFocusContent"></kct-menu-link>
+                         ng-if="section.type === 'link'"></kct-menu-link>
           <kct-menu-toggle section="section"
                            ng-if="section.type === 'toggle'"
                            is-open="layoutCtrl.isOpen(section)"
-                           toggle="layoutCtrl.toggleOpen(section)"
-                           auto-focus-content="layoutCtrl.autoFocusContent"></kct-menu-toggle>
+                           toggle="layoutCtrl.toggleOpen(section)"></kct-menu-toggle>
+        </li>
+        <li ng-show-auth>
+          <md-button flex layout="row" ng-click="layoutCtrl.logout()">
+            <md-icon md-font-set="fa fa-chevron-down"></md-icon>
+            <span translate>kct.layout.header.logout</span>
+          </md-button>
+        </li>
+        <li class="parent-list-item lang-selector" layout="row">
+          <md-button disabled class="md-icon my-icon-button" aria-label="Bookmark" flex="none">
+            <img ng-src="images/flags/22x14/{{layoutCtrl.selectedItem.flag}}.png" alt="Bookmark">
+          </md-button>
+          <md-autocomplete
+            md-selected-item="layoutCtrl.selectedItem"
+            md-search-text="layoutCtrl.searchText"
+            md-selected-item-change="layoutCtrl.changeLang(item)"
+            md-items="item in layoutCtrl.querySearch(layoutCtrl.searchText)"
+            md-item-text="item.translation"
+            md-min-length="0"
+            flex=""
+            layout-margin>
+          <md-item-template>
+            <span md-highlight-text="layoutCtrl.searchText" md-highlight-flags="^i">
+              {{item.translation}}
+            </span>
+          </md-item-template>
+          <md-not-found>
+            No language matching "{{layoutCtrl.searchText}}" were found.
+          </md-not-found>
+        </md-autocomplete>
         </li>
       </ul>
     </md-content>
   </md-sidenav>
-  <md-content flex="">
-    <md-toolbar hide-gt-md="">
-      <div class="md-toolbar-tools">
-        <md-button ng-click="layoutCtrl.toggleNavbar()" class="md-icon-button" hide-gt-md="" aria-label="Settings">
-          <md-icon md-svg-icon="images/pictos/menu.svg"></md-icon>
-        </md-button>
-        <h2>
-          <a ui-sref="kct.home" translate>kct.layout.common.appName</a>
-        </h2>
-        <div flex=""></div>
-        <div class="lang-select-container">
-          <ui-select on-select="layoutCtrl.changeLang($item, $model)" ng-model="layoutCtrl.selectedLang">
-            <ui-select-match placeholder="{{'kct.layout.common.search' | translate}}">
-              <img ng-src="images/flags/22x14/{{$select.selected.flag}}.png"></img>
-            </ui-select-match>
-            <ui-select-choices repeat="langObj.lang as langObj in layoutCtrl.langs | filter: $select.search">
-              <span ng-bind-html="langObj.lang | uppercase | highlight: $select.search"></span> - 
-              <span ng-bind-html="'kct.layout.languages.' + langObj.lang | translate | highlight: $select.search"></span>
-              <img class="select-option-flag pull-right" ng-src="images/flags/22x14/{{langObj.flag}}.png"></img>
-            </ui-select-choices>
-          </ui-select>
+  <md-content flex layout="row">
+    <div layout="column" layout-margin>
+      <md-toolbar hide-gt-md="">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="layoutCtrl.toggleNavbar()" class="md-icon-button" hide-gt-md="" aria-label="Settings">
+            <md-icon md-svg-icon="images/pictos/menu.svg"></md-icon>
+          </md-button>
+          <h2>
+            <a ui-sref="kct.home" translate>kct.layout.common.appName</a>
+          </h2>
         </div>
-      </div>
-    </md-toolbar>
-    <div class="header layout-header-old">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
+      </md-toolbar>
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only" translate>kct.layout.header.toggleNavigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <div class="visible-xs-block select-wrapper-sm">
-              <ui-select on-select="layoutCtrl.changeLang($item, $model)" ng-model="layoutCtrl.selectedLang">
-                <ui-select-match placeholder="{{'kct.layout.common.search' | translate}}">
-                  <img ng-src="images/flags/22x14/{{$select.selected.flag}}.png"></img>
-                </ui-select-match>
-                <ui-select-choices repeat="langObj.lang as langObj in layoutCtrl.langs | filter: $select.search">
-                  <span ng-bind-html="langObj.lang | uppercase | highlight: $select.search"></span> - 
-                  <span ng-bind-html="'kct.layout.languages.' + langObj.lang | translate | highlight: $select.search"></span>
-                  <img class="select-option-flag pull-right" ng-src="images/flags/22x14/{{langObj.flag}}.png"></img>
-                </ui-select-choices>
-              </ui-select>
-            </div>
+      <div ncy-breadcrumb></div>
 
-            <a class="navbar-brand" ui-sref="kct.home" translate>kct.layout.common.appName</a>
-          </div>
+      <div class="growl-element" growl></div>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+      <div ui-view flex></div>
 
-            <ul class="nav navbar-nav">
-              <li ng-repeat="(stateName, state) in layoutCtrl.leftMenuStates"
-                  ng-class="{active : layoutCtrl.isCurrentState(stateName), dropdown : state.subStates}"
-                  ng-if="layoutCtrl.userHasAuthRights(state)">
-                <a ui-sref="{{stateName}}" ng-if="!state.subStates">
-                  <span translate>{{state.labelKey}}</span>
-                  <span ng-if="state.args">({{state.args}})</span>
-                </a>
-                <a ng-if="state.subStates" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <span translate>{{state.labelKey}}</span>&nbsp;<span class="caret"></span>
-                </a>
-                <ul ng-if="state.subStates" class="dropdown-menu">
-                  <li ng-repeat="(subStateName, subState) in state.subStates"
-                      ng-class="{active : layoutCtrl.isCurrentState(subStateName)}">
-                    <a ui-sref="{{subStateName}}">
-                      <span translate>{{subState.labelKey}}</span>
-                      <span ng-if="subState.args">({{subState.args}})</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="hidden-xs">
-                <ui-select on-select="layoutCtrl.changeLang($item, $model)" ng-model="layoutCtrl.selectedLang">
-                  <ui-select-match placeholder="{{'kct.layout.common.search' | translate}}">
-                    <img ng-src="images/flags/22x14/{{$select.selected.flag}}.png"></img>
-                  </ui-select-match>
-                  <ui-select-choices repeat="langObj.lang as langObj in layoutCtrl.langs | filter: $select.search">
-                    <span ng-bind-html="langObj.lang | uppercase | highlight: $select.search"></span> - 
-                    <span ng-bind-html="'kct.layout.languages.' + langObj.lang | translate | highlight: $select.search"></span>
-                    <img class="select-option-flag pull-right" ng-src="images/flags/22x14/{{langObj.flag}}.png"></img>
-                  </ui-select-choices>
-                </ui-select>
-              </li>
-              <li ng-repeat="(stateName, state) in layoutCtrl.rightHeaderStates"
-                  ng-class="{active : layoutCtrl.isCurrentState(stateName)}"
-                  ng-if="layoutCtrl.userHasAuthRights(state)">
-                <a ui-sref="{{stateName}}">
-                  <span translate>{{state.labelKey}}</span>
-                  <span ng-if="state.args">({{state.args}})</span>
-                </a>
-              </li>
-              <li class="li-logout">
-                <button ng-click="layoutCtrl.logout()" class="btn btn-danger navbar-btn" ng-show-auth translate>kct.layout.header.logout</button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container" ncy-breadcrumb></div>
-
-    <div class="growl-element" growl></div>
-
-    <div kct-fill-window>
-      <div class="container" ui-view></div>
-    </div>
-
-    <div class="footer" kct-fill-window-target>
-      <div class="container">
+      <div class="footer">
         <p>{{'kct.layout.footer.text' | translate}}</p>
       </div>
     </div>
