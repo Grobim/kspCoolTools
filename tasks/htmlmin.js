@@ -13,7 +13,7 @@
       files: [{
         expand: true,
         cwd: '<%= yeoman.dist %>',
-        src: ['*.html', '{,*/}*.html'],
+        src: ['*.html', '{,**/}*.html'],
         dest: '<%= yeoman.dist %>'
       }]
     }

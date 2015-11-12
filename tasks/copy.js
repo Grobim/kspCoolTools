@@ -30,8 +30,8 @@
         dest: '<%= yeoman.dist %>'
       }, {
         expand: true,
-        cwd: '.',
-        src: 'bower_components/font-awesome/fonts/*',
+        cwd: 'bower_components/font-awesome/',
+        src: 'fonts/*',
         dest: '<%= yeoman.dist %>'
       }]
     },
