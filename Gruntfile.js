@@ -82,7 +82,6 @@ module.exports = function (grunt) {
       'concurrent:dist',
       'autoprefixer',
       'concat',
-      'ngAnnotate',
       'copy:dist',
       'cssmin',
       'uglify',
@@ -91,11 +90,5 @@ module.exports = function (grunt) {
       'htmlmin'
     ]);
   });
-
-  grunt.registerTask('default', [
-    'newer:jshint',
-    'test:once',
-    'build'
-  ]);
 
 };
