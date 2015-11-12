@@ -10,8 +10,8 @@
       prefix    : 'locale-',
       suffix    : '.json',
       langs     : [
-      'fr',
-      'en'
+        'fr',
+        'en'
       ]
     }
   };
