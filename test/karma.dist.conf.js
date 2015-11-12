@@ -23,7 +23,6 @@ module.exports = function(config) {
     files: [
       'scripts/vendor.*.js',
       'scripts/scripts.*.js',
-      '../node_modules/jasmine-core/lib/jasmine.js',
       '../bower_components/angular-mocks/angular-mocks.js',
       '../bower_components/mockfirebase/browser/mockfirebase.js',
       '../bower_components/ng-describe/dist/ng-describe.js',
