@@ -1,12 +1,10 @@
-<div>
-  <md-button ui-sref-active="active"
-             ui-sref="{{section.state}}"
-             ng-click="focusSection()">
-  <i ng-class="{'{{section.icon}}' : true}"></i>
-  {{section | humanizeDoc}}
+<md-button ui-sref-active="active"
+           ui-sref="{{section.state}}"
+           ng-click="focusSection()">
+  <md-icon md-font-set="{{section.icon}}"></md-icon>
+  {{section | humanizeDoc | translate}}
   <span class="md-visually-hidden"
-    ng-if="isSelected()">
+        ng-if="isSelected()">
     current page
   </span>
-  </md-button>
-</div>
+</md-button>

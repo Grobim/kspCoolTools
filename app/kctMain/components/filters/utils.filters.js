@@ -7,6 +7,7 @@
     .filter('omitFromField', [OmitFromFieldFilter])
     .filter('nospace', [NoSpaceFilter])
     .filter('humanizeDoc', [HumanizeDocFilter])
+    .filter('trunc', [TruncFilter])
   ;
 
   function ReplaceCharFilter() {
@@ -50,6 +51,12 @@
         });
       }
       return doc.label || doc.name;
+    };
+  }
+
+  function TruncFilter() {
+    return function(input, length) {
+      return _.trunc(input, length);
     };
   }
 

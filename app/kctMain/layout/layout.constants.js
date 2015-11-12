@@ -28,27 +28,44 @@
     })
     .constant('rightHeaderStates', {
     })
-    .constant('menuStates', {
-      name: 'Beers',
-      type: 'toggle',
-      pages: [{
-        name: 'IPAs',
-        type: 'link',
-        state: 'beers.ipas',
-        icon: 'fa fa-group'
-      }, {
-        name: 'Porters',
-        state: 'home.toollist',
-        type: 'link',
-        icon: 'fa fa-map-marker'
-      },
+    .constant('menuStates', [
       {
-        name: 'Wheat',
-        state: 'home.createTool',
-        type: 'link',
-        icon: 'fa fa-plus'
-      }]
-    })
+        name  : 'kct.layout.header.home',
+        state : 'kct.home',
+        type  : 'link',
+            icon  : 'fa fa-group'
+      }, {
+        name  : 'kct.layout.header.saveManager.title',
+        state : 'kct.saveManager',
+        type  : 'toggle',
+            icon  : 'fa fa-group',
+        pages : [
+          {
+            name  : 'kct.layout.header.saveManager.saves',
+            state : 'kct.saveManager.saves',
+            type  : 'link',
+            icon  : 'fa fa-group'
+          }, {
+            name  : 'kct.layout.header.saveManager.mods',
+            state : 'kct.saveManager.mods',
+            type  : 'link',
+            icon  : 'fa fa-map-marker'
+          }
+        ]
+      }, {
+        name  : 'kct.layout.header.profile',
+        state : 'kct.profile',
+        type  : 'link',
+        auth  : true,
+            icon  : 'fa fa-group'
+      }, {
+        name  : 'kct.layout.header.login',
+        state : 'kct.login',
+        type  : 'link',
+        auth  : false,
+            icon  : 'fa fa-group'
+      }
+    ])
   ;
 
 })();

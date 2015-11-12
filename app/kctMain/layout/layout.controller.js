@@ -13,6 +13,7 @@
       'i18nService',
       'breadCrumbModelService',
       'KctMenu',
+      'menuStates',
       LayoutController
     ])
   ;
@@ -27,7 +28,8 @@
     rightHeaderStates,
     i18nService,
     breadCrumbModelService,
-    KctMenu
+    KctMenu,
+    menuStates
   ) {
     var _this = this,
         _allStates;
@@ -43,6 +45,10 @@
 
     _this.changeLang = changeLang;
 
+    _this.test = function(test) {
+      console.log('test', test);
+    };
+
     init();
 
     function init() {
@@ -50,6 +56,8 @@
 
       _this.leftMenuStates = _.cloneDeep(leftMenuStates);
       _this.rightHeaderStates = _.cloneDeep(rightHeaderStates);
+
+      _this.menuStates = menuStates;
 
       _allStates = _.assign({}, _this.leftMenuStates, _this.rightHeaderStates);
 
@@ -103,11 +111,6 @@
     _this.toggleOpen = toggleOpen;
     _this.autoFocusContent = false;
     _this.menu = KctMenu;
-
-    _this.status = {
-      isFirstOpen: true,
-      isFirstDisabled: false
-    };
 
     function isOpen(section) {
       return KctMenu.isSectionSelected(section);

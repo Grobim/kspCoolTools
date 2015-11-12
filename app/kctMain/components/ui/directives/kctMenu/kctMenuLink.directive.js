@@ -8,19 +8,19 @@
   function MenuLinkDirective() {
     return {
       scope: {
-        section: '='
+        section          : '=',
+        autoFocusContent : '='
       },
       templateUrl: 'kctMain/components/ui/directives/kctMenu/kctMenuLink.tpl.html',
       link: link
     };
 
-    function link($scope, $element) {
-      var controller = $element.parent().controller();
+    function link($scope) {
 
       $scope.focusSection = function () {
         // set flag to be used later when
         // $locationChangeSuccess calls openPage()
-        controller.autoFocusContent = true;
+        $scope.autoFocusContent = true;
       };
     }
   }
