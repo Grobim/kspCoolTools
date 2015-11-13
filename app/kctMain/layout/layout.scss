@@ -1,24 +1,41 @@
 @import "common.scss";
 @import "saveManager/saveManager.scss";
 
-.side-menu .lang-selector {
-  md-icon {
-    margin: auto;
-    background-repeat: no-repeat no-repeat;
-    display: inline-block;
-    vertical-align: middle;
-    fill: currentColor;
-    height: 24px;
-    width: 24px;
+.side-menu {
+  li.toggle-menu {
+    .right-icon {
+      float: right;
+      margin-top: 15px;
+    }
   }
+  .lang-selector {
+    md-icon {
+      margin: auto;
+      background-repeat: no-repeat no-repeat;
+      display: inline-block;
+      vertical-align: middle;
+      fill: currentColor;
+      height: 24px;
+      width: 24px;
+    }
 
-  md-autocomplete {
-    .md-whiteframe-1dp,.md-whiteframe-z1 {
-      box-shadow: none;
+    md-autocomplete {
+      .md-whiteframe-1dp,.md-whiteframe-z1 {
+        box-shadow: none;
+      }
+
+      md-autocomplete-wrap {
+        margin-top: 5px;
+
+        button {
+          margin-right: 13px;
+        }
+
+      }
+
     }
   }
 }
-
 .md-icon.md-button.my-icon-button {
   padding-left : 12px;
   min-width    : 0;

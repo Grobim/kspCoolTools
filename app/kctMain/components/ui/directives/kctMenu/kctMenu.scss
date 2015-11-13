@@ -32,8 +32,17 @@ md-sidenav {
   text-transform: none;
 }
 
-.side-menu > li:not(.border-less) {
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+.side-menu > li {
+  &:not(.toggle-menu) {
+    height : 52px;
+  }
+
+  &:not(.border-less) {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  &:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
 }
 
 .md-button-toggle .md-toggle-icon.toggled {

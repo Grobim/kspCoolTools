@@ -5,7 +5,7 @@
               md-component-id="mainMenu"
               md-is-locked-open="$mdMedia('gt-md')">
     
-    <md-toolbar md-scroll-shrink>
+    <md-toolbar class="md-hue-2" md-scroll-shrink>
       <div class="md-toolbar-tools" ng-click="layoutCtrl.toggleNavbar()">
         <span translate>kct.layout.common.appName</span>
       </div>
@@ -16,7 +16,8 @@
         <li ng-repeat="section in layoutCtrl.menuStates"
             class="parent-list-item"
             ng-class="{parentActive  : layoutCtrl.isSectionSelected(section),
-                       'border-less' : section.borderLess}"
+                       'border-less' : section.borderLess,
+                       'toggle-menu' : section.type === 'toggle'}"
             ng-if="layoutCtrl.userHasAuthRights(section)">
           <h2 class="menu-heading" ng-if="section.type === 'heading'"
               id="heading_{{ section.name | nospace }}">
@@ -46,11 +47,12 @@
             md-items="item in layoutCtrl.querySearch(layoutCtrl.searchText)"
             md-item-text="item.translation"
             md-min-length="0"
-            flex="">
-          <md-item-template>
+            layout-fill>
+          <md-item-template layout="row">
             <span md-highlight-text="layoutCtrl.searchText" md-highlight-flags="^i">
               {{item.translation}}
             </span>
+            <img class="in-select-lang-img" ng-src="images/flags/22x14/{{item.flag}}.png" />
           </md-item-template>
           <md-not-found>
             No language matching "{{layoutCtrl.searchText}}" were found.
@@ -61,18 +63,18 @@
     </md-content>
   </md-sidenav>
   <div layout="column" layout-fill style="overflow:auto;">
+    <div layout="column" layout-fill>
 
-    <md-toolbar hide-gt-md="">
-      <div class="md-toolbar-tools">
-        <md-button ng-click="layoutCtrl.toggleNavbar()" class="md-icon-button" hide-gt-md="" aria-label="Settings">
-          <md-icon md-svg-icon="images/pictos/menu.svg"></md-icon>
-        </md-button>
-        <h2>
-          <a ui-sref="kct.home" translate>kct.layout.common.appName</a>
-        </h2>
-      </div>
-    </md-toolbar>
-    <div layout layout-fill>
+      <md-toolbar hide-gt-md="">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="layoutCtrl.toggleNavbar()" class="md-icon-button" hide-gt-md="" aria-label="Settings">
+            <md-icon md-svg-icon="images/pictos/menu.svg"></md-icon>
+          </md-button>
+          <h2>
+            <a ui-sref="kct.home" translate>kct.layout.common.appName</a>
+          </h2>
+        </div>
+      </md-toolbar>
       <div layout="column" layout-margin="" flex="grow">
 
         <div ncy-breadcrumb></div>

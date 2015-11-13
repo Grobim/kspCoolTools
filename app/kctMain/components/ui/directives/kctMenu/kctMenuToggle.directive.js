@@ -23,7 +23,20 @@
         var heading = parentNode.querySelector('h2');
         $element[0].firstChild.setAttribute('aria-describedby', heading.id);
       }
-        
+
+      $scope.getIcon = function() {
+        if ($scope.isOpen()) {
+          return 'keyboard_arrow_up';
+        } else {
+          return 'keyboard_arrow_down';
+        }
+      };
+
+      $scope.getOptions = function() {
+        return {
+          easing : 'linear'
+        };
+      };
     }
   }
 

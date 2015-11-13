@@ -51,12 +51,10 @@
       _this.menuStates = menuStates;
 
       _this.langs = i18nService.getLangList();
-      _this.selectedLang = $translate.use();
-      _this.selectedItem = _.find(_this.langs, 'lang', _this.selectedLang);
+      _this.selectedItem = _.find(_this.langs, 'lang', $translate.use());
 
       $rootScope.$on('$translateChangeSuccess', function(e, data) {
-        _this.selectedLang = data.language;
-        _this.selectedItem = _.find(_this.langs, 'lang', _this.selectedLang);
+        _this.selectedItem = _.find(_this.langs, 'lang', data.language);
       });
 
     }
@@ -78,8 +76,8 @@
     }
 
     function logout() {
-      KctAuth.$unauth();
       $state.go('kct.home');
+      KctAuth.$unauth();
     }
 
     function toggleNavbar() {
@@ -87,10 +85,9 @@
     }
 
     function changeLang($item) {
-      if ($item) {
+      if ($item && $translate.use() !== $item.lang) {
         toggleNavbar().then(function() {
           $translate.use($item.lang);
-          $state.reload();
         });
       }
     }
