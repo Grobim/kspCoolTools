@@ -20,7 +20,6 @@
     "angularfire": "^1.1.0",
     "bootstrap-sass-official": "^3.3.0",
     "checklist-model": "0.6.0",
-    "font-awesome": "fontawesome#~4.4.0",
     "firebase": "^2.3.0",
     "lodash": "^3.10.0",
     "svg-morpheus": "^0.1.8"

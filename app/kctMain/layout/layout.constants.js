@@ -7,37 +7,34 @@
         name  : 'kct.layout.header.home',
         state : 'kct.home',
         type  : 'link',
-        icon  : 'fa fa-group'
+        icon  : 'home'
       }, {
         name  : 'kct.layout.header.saveManager.title',
         state : 'kct.saveManager',
         type  : 'toggle',
-        icon  : 'fa fa-group',
         pages : [
           {
             name  : 'kct.layout.header.saveManager.saves',
             state : 'kct.saveManager.saves',
-            type  : 'link',
-            icon  : 'fa fa-group'
+            type  : 'link'
           }, {
             name  : 'kct.layout.header.saveManager.mods',
             state : 'kct.saveManager.mods',
-            type  : 'link',
-            icon  : 'fa fa-map-marker'
+            type  : 'link'
           }
         ]
       }, {
         name  : 'kct.layout.header.profile',
         state : 'kct.profile',
         type  : 'link',
-        auth  : true,
-        icon  : 'fa fa-group'
+        icon  : 'person',
+        auth  : true
       }, {
         name  : 'kct.layout.header.login',
         state : 'kct.login',
         type  : 'link',
         auth  : false,
-        icon  : 'fa fa-group'
+        icon  : 'login'
       }
     ])
   ;

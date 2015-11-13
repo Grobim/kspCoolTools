@@ -10,6 +10,7 @@
     'ui.select',
     'pascalprecht.translate',
     'ncy-angular-breadcrumb',
+    'mdColors',
 
     'kct.common',
     'kct.components.i18n',

@@ -2,15 +2,13 @@
   'use strict';
 
   angular.module('kct.components.ui.directives.kctMenu')
-    .directive('kctMenuToggle', [MenuToggleDirective])
+    .directive('kctMenuToggle', ['$state', 'KctMenu', MenuToggleDirective])
   ;
 
-  function MenuToggleDirective() {
+  function MenuToggleDirective($state, KctMenu) {
     return {
       scope: {
-        section          : '=',
-        isOpen           : '&',
-        toggle           : '&'
+        section          : '='
       },
       templateUrl: 'kctMain/components/ui/directives/kctMenu/kctMenuToggle.tpl.html',
       link: link
@@ -24,7 +22,7 @@
         $element[0].firstChild.setAttribute('aria-describedby', heading.id);
       }
 
-      $scope.getIcon = function() {
+      $scope.getCaretIcon = function() {
         if ($scope.isOpen()) {
           return 'keyboard_arrow_up';
         } else {
@@ -32,10 +30,16 @@
         }
       };
 
-      $scope.getOptions = function() {
-        return {
-          easing : 'linear'
-        };
+      $scope.isCurrentState = function() {
+        return $state.includes($scope.section.state);
+      };
+
+      $scope.isOpen = function() {
+        return KctMenu.isSectionSelected($scope.section);
+      };
+
+      $scope.toggle = function() {
+        KctMenu.toggleSelectSection($scope.section);
       };
     }
   }

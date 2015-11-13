@@ -1,7 +1,7 @@
-<md-button ui-sref-active="active"
+<md-button ui-sref-active="md-default-theme md-fg md-primary md-hue-2"
            ui-sref="{{section.state}}"
-           ng-click="focusSection();goToState(section.state)">
-  <md-icon md-font-set="{{section.icon}}"></md-icon>
+           ng-click="focusSection();goToState()">
+  <ng-md-icon icon="{{section.icon}}" ng-style="{fill : (!section.icon) ? 'transparent': ''}"></ng-md-icon> 
   {{section | humanizeDoc | translate}}
   <span class="md-visually-hidden"
         ng-if="isSelected()">

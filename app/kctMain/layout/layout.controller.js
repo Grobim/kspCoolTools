@@ -12,7 +12,6 @@
       'KctAuth',
       'i18nService',
       'breadCrumbModelService',
-      'KctMenu',
       'menuStates',
       LayoutController
     ])
@@ -28,7 +27,6 @@
     KctAuth,
     i18nService,
     breadCrumbModelService,
-    KctMenu,
     menuStates
   ) {
     var _this = this;
@@ -42,7 +40,9 @@
 
     _this.changeLang = changeLang;
 
-    init();
+    _this.querySearch   = querySearch;
+
+    return init();
 
     function init() {
 
@@ -50,7 +50,7 @@
 
       _this.menuStates = menuStates;
 
-      _this.langs = i18nService.getLangList();
+      _this.langs        = i18nService.getLangList();
       _this.selectedItem = _.find(_this.langs, 'lang', $translate.use());
 
       $rootScope.$on('$translateChangeSuccess', function(e, data) {
@@ -91,37 +91,12 @@
         });
       }
     }
-    _this.isOpen = isOpen;
-    _this.toggleOpen = toggleOpen;
 
-    function isOpen(section) {
-      return KctMenu.isSectionSelected(section);
-    }
-
-    function toggleOpen(section) {
-      KctMenu.toggleSelectSection(section);
-    }
-
-    // list of `state` value/display objects
-    _this.states        = i18nService.getLangList();
-    _this.querySearch   = querySearch;
-
-    // ******************************
-    // Internal methods
-    // ******************************
-
-    /**
-     * Search for states... use $timeout to simulate
-     * remote dataservice call.
-     */
     function querySearch (query) {
-      return query ? _this.states.filter( createFilterFor(query)) : _this.states;
+      return query ? _this.langs.filter( _createFilterFor(query)) : _this.langs;
     }
 
-    /**
-     * Create filter function for a query string
-     */
-    function createFilterFor(query) {
+    function _createFilterFor(query) {
       var lowercaseQuery = angular.lowercase(query);
       return function filterFn(lang) {
         return lang.lang.indexOf(lowercaseQuery) !== -1 ||
