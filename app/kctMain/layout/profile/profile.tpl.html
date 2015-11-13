@@ -1,21 +1,22 @@
 <h2 class="col-sm-offset-2" translate>kct.layout.profile.header</h2>
 <form class="form-horizontal" name="profileCtrl.profileForm" ng-submit="profileCtrl.saveProfile()">
-    <div class="form-group">
-      <label class="col-sm-2 control-label" for="loginName"><span translate>kct.layout.profile.fields.name</span></label>
-      <div class="col-sm-10" smart-field>
-        <input id="loginName" required name="loginName" type="text" ng-model="profileCtrl.profile.nickname" class="form-control" />
-      </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="loginName"><span translate>kct.layout.profile.fields.name</span></label>
+    <div class="col-sm-10" smart-field>
+      <input id="loginName" required name="loginName" type="text" ng-model="profileCtrl.profile.nickname" class="form-control" />
     </div>
-    <div class="form-group">
-      <label class="col-sm-2 control-label" for="loginEmail"><span translate>kct.layout.common.fields.email</span></label>
-      <div class="col-sm-10" smart-field>
-      <p class="form-control-static" ng-if="profileCtrl.userAuth.provider === 'password'">{{profileCtrl.profilePrivateInfos.email}}</p>
-      <input id="loginEmail" name="loginEmail" type="email" ng-if="profileCtrl.userAuth.provider !== 'password'" ng-model="profileCtrl.profilePrivateInfos.email" class="form-control" />
-      </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="loginEmail"><span translate>kct.layout.common.fields.email</span></label>
+    <div class="col-sm-10" smart-field>
+    <p class="form-control-static" ng-if="profileCtrl.userAuth.provider === 'password'">{{profileCtrl.profilePrivateInfos.email}}</p>
+    <input id="loginEmail" name="loginEmail" type="email" ng-if="profileCtrl.userAuth.provider !== 'password'" ng-model="profileCtrl.profilePrivateInfos.email" class="form-control" />
     </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button ng-disabled="profileCtrl.profileForm.$invalid" type="submit" translate class="btn btn-primary">kct.layout.common.save</button>
-      </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button ng-disabled="profileCtrl.profileForm.$invalid" type="submit" translate class="btn btn-primary">kct.layout.common.save</button>
     </div>
+  </div>
+  <md-button class="md-raised md-primary">Primary</md-button>
 </form>

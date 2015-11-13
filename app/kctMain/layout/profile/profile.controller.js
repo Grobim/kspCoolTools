@@ -3,6 +3,7 @@
 
   angular.module('kct.layout.profile')
     .controller('ProfileController', [
+      '$scope',
       '$q',
       '$intFirebaseObject',
       'growl',
@@ -13,7 +14,15 @@
     ])
   ;
 
-  function ProfileController($q, $intFirebaseObject, growl, ProfileRef, ProfilePrivateInfoRef, KctAuth) {
+  function ProfileController(
+    $scope,
+    $q,
+    $intFirebaseObject,
+    growl,
+    ProfileRef,
+    ProfilePrivateInfoRef,
+    KctAuth
+  ) {
     var _this = this;
 
     _this.saveProfile = saveProfile;
@@ -25,6 +34,10 @@
       _this.errors = [];
       _this.profile = $intFirebaseObject(new ProfileRef(_this.userAuth.uid));
       _this.profilePrivateInfos = $intFirebaseObject(new ProfilePrivateInfoRef(_this.userAuth.uid));
+
+      $scope.$on('$destroy', function() {
+        _this.profilePrivateInfos.$destroy();
+      });
     }
 
     function saveProfile() {

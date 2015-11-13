@@ -1,7 +1,7 @@
-<section layout="row" flex class="layout-header">
+<div layout="row" layout-fill>
 
   
-  <md-sidenav class="md-sidenav-left md-whiteframe-1dp"
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2"
               md-component-id="mainMenu"
               md-is-locked-open="$mdMedia('gt-md')">
     
@@ -11,7 +11,7 @@
       </div>
     </md-toolbar>
     
-    <md-content role="navigation" layout="column">
+    <md-content role="navigation">
       <ul class="side-menu">
         <li ng-repeat="section in layoutCtrl.menuStates"
             class="parent-list-item"
@@ -35,7 +35,7 @@
             <span translate>kct.layout.header.logout</span>
           </md-button>
         </li>
-        <li class="parent-list-item lang-selector" layout="row">
+        <li class="lang-selector" layout="row">
           <md-button disabled class="md-icon my-icon-button" aria-label="Bookmark" flex="none">
             <img ng-src="images/flags/22x14/{{layoutCtrl.selectedItem.flag}}.png" alt="Bookmark">
           </md-button>
@@ -46,8 +46,7 @@
             md-items="item in layoutCtrl.querySearch(layoutCtrl.searchText)"
             md-item-text="item.translation"
             md-min-length="0"
-            flex=""
-            layout-margin>
+            flex="">
           <md-item-template>
             <span md-highlight-text="layoutCtrl.searchText" md-highlight-flags="^i">
               {{item.translation}}
@@ -61,28 +60,32 @@
       </ul>
     </md-content>
   </md-sidenav>
-  <md-content flex layout="row">
-    <div layout="column" layout-margin>
-      <md-toolbar hide-gt-md="">
-        <div class="md-toolbar-tools">
-          <md-button ng-click="layoutCtrl.toggleNavbar()" class="md-icon-button" hide-gt-md="" aria-label="Settings">
-            <md-icon md-svg-icon="images/pictos/menu.svg"></md-icon>
-          </md-button>
-          <h2>
-            <a ui-sref="kct.home" translate>kct.layout.common.appName</a>
-          </h2>
+  <div layout="column" layout-fill style="overflow:auto;">
+
+    <md-toolbar hide-gt-md="">
+      <div class="md-toolbar-tools">
+        <md-button ng-click="layoutCtrl.toggleNavbar()" class="md-icon-button" hide-gt-md="" aria-label="Settings">
+          <md-icon md-svg-icon="images/pictos/menu.svg"></md-icon>
+        </md-button>
+        <h2>
+          <a ui-sref="kct.home" translate>kct.layout.common.appName</a>
+        </h2>
+      </div>
+    </md-toolbar>
+    <div layout layout-fill>
+      <div layout="column" layout-margin="" flex="grow">
+
+        <div ncy-breadcrumb></div>
+
+        <div class="growl-element" growl></div>
+
+        <div ui-view flex></div>
+
+        <div class="footer">
+          <p>{{'kct.layout.footer.text' | translate}}</p>
         </div>
-      </md-toolbar>
 
-      <div ncy-breadcrumb></div>
-
-      <div class="growl-element" growl></div>
-
-      <div ui-view flex></div>
-
-      <div class="footer">
-        <p>{{'kct.layout.footer.text' | translate}}</p>
       </div>
     </div>
-  </md-content>
-</section>
+  </div>
+</div>

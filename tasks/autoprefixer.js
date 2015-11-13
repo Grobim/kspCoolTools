@@ -13,7 +13,7 @@
       files: [{
         expand: true,
         cwd: '.tmp/styles/',
-        src: '{,*/}*.css',
+        src: '*.css',
         dest: '.tmp/styles/'
       }]
     },
@@ -21,7 +21,7 @@
       files: [{
         expand: true,
         cwd: '.tmp/styles/',
-        src: '{,*/}*.css',
+        src: '*.css',
         dest: '.tmp/styles/'
       }]
     }

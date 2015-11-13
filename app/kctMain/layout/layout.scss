@@ -1,14 +1,22 @@
 @import "common.scss";
 @import "saveManager/saveManager.scss";
 
-.side-menu .lang-selector md-icon {
-  margin: auto;
-  background-repeat: no-repeat no-repeat;
-  display: inline-block;
-  vertical-align: middle;
-  fill: currentColor;
-  height: 24px;
-  width: 24px;
+.side-menu .lang-selector {
+  md-icon {
+    margin: auto;
+    background-repeat: no-repeat no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    fill: currentColor;
+    height: 24px;
+    width: 24px;
+  }
+
+  md-autocomplete {
+    .md-whiteframe-1dp,.md-whiteframe-z1 {
+      box-shadow: none;
+    }
+  }
 }
 
 .md-icon.md-button.my-icon-button {
@@ -18,11 +26,6 @@
   line-height  : normal;
   width        : initial;
   cursor       : default;
-}
-
-.lang-select-container .dropdown-menu {
-  right: 0;
-  left: auto;
 }
 
 div.ui-select-container {
@@ -68,12 +71,4 @@ div.ui-select-container {
     margin-top : 3px;
   }
 
-}
-
-.layout-header-old {
-  min-height: 72px;
-
-  .li-logout {
-    padding-left: 10px;
-  }
 }
