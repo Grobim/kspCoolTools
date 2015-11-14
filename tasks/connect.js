@@ -14,27 +14,29 @@
         base: '.tmp',
         open: true,
         middleware: function (connect) {
+          var serveStatic = require('serve-static'),
+              app = connect();
           return [
-            connect().use(
+            app.use(
               '/bower_components',
-              connect.static('./bower_components')
+              serveStatic('./bower_components')
             ),
-            connect().use(
+            app.use(
               '/bower_local',
-              connect.static('./bower_local')
+              serveStatic('./bower_local')
             ),
-            connect().use(
+            app.use(
               '/' + utils.getConfig().app + '/styles',
-              connect.static('./' + utils.getConfig().app + '/styles')
+              serveStatic('./' + utils.getConfig().app + '/styles')
             ),
-            connect.static('.tmp'),
-            connect().use(
+            serveStatic('.tmp'),
+            app.use(
               '/',
-              connect.static('./' + utils.getConfig().app)
+              serveStatic('./' + utils.getConfig().app)
             ),
-            connect().use(
+            app.use(
               '/fonts',
-              connect.static('./bower_components/font-awesome/fonts')
+              serveStatic('./bower_components/font-awesome/fonts')
             )
           ];
         }
@@ -44,14 +46,15 @@
       options: {
         port: 9001,
         middleware: function (connect) {
+          var serveStatic = require('serve-static');
           return [
-            connect.static('.tmp'),
-            connect.static('test'),
+            serveStatic('.tmp'),
+            serveStatic('test'),
             connect().use(
               '/bower_components',
-              connect.static('./bower_components')
+              serveStatic('./bower_components')
             ),
-            connect.static(utils.getConfig().app)
+            serveStatic(utils.getConfig().app)
           ];
         }
       }
