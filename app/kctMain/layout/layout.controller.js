@@ -3,12 +3,12 @@
 
   angular.module('kct.layout')
     .controller('LayoutController', [
+      '$q',
       '$rootScope',
       '$state',
+      '$window',
       '$translate',
       '$mdSidenav',
-      '$mdMedia',
-      '$window',
       'KctAuth',
       'i18nService',
       'breadCrumbModelService',
@@ -18,12 +18,12 @@
   ;
 
   function LayoutController(
+    $q,
     $rootScope,
     $state,
+    $window,
     $translate,
     $mdSidenav,
-    $mdMedia,
-    $window,
     KctAuth,
     i18nService,
     breadCrumbModelService,
@@ -39,8 +39,9 @@
     _this.toggleNavbar = toggleNavbar;
 
     _this.changeLang = changeLang;
-
     _this.querySearch   = querySearch;
+
+    _this.getTitleKey = getTitleKey;
 
     return init();
 
@@ -81,7 +82,12 @@
     }
 
     function toggleNavbar() {
-      return $mdSidenav('mainMenu').toggle();
+      var defer = $q.defer();
+      $mdSidenav('mainMenu').toggle().then(function() {
+        defer.resolve();
+        $window.scrollTo(0, 0);
+      });
+      return defer.promise;
     }
 
     function changeLang($item) {
@@ -94,6 +100,10 @@
 
     function querySearch (query) {
       return query ? _this.langs.filter( _createFilterFor(query)) : _this.langs;
+    }
+
+    function getTitleKey() {
+      return $state.current.data.titleKey || '';
     }
 
     function _createFilterFor(query) {

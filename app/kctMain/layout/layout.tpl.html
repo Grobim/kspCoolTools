@@ -1,9 +1,13 @@
 <div layout="row" layout-fill>
 
   
-  <md-sidenav class="md-sidenav-left md-whiteframe-z2"
+  <md-sidenav class="md-sidenav-left md-whiteframe-z1"
               md-component-id="mainMenu"
-              md-is-locked-open="$mdMedia('gt-md')">
+              md-is-locked-open="$mdMedia('gt-md')"
+              ng-class="{'md-whiteframe-z3' : mainMenuHovered}"
+              ng-mouseover="mainMenuHovered = true;"
+              ng-mouseleave="mainMenuHovered = false;"
+              style="top:2px;">
     
     <md-toolbar class="md-hue-2" md-scroll-shrink>
       <div class="md-toolbar-tools" ng-click="layoutCtrl.toggleNavbar()">
@@ -45,6 +49,7 @@
             md-items="item in layoutCtrl.querySearch(layoutCtrl.searchText)"
             md-item-text="item.translation"
             md-min-length="0"
+            md-select-on-match="true"
             layout-fill>
           <md-item-template layout="row">
             <span md-highlight-text="layoutCtrl.searchText" md-highlight-flags="^i">
@@ -53,7 +58,7 @@
             <img class="in-select-lang-img" ng-src="images/flags/22x14/{{item.flag}}.png" />
           </md-item-template>
           <md-not-found>
-            No language matching "{{layoutCtrl.searchText}}" were found.
+            <span translate translate-values="{selectedLang : layoutCtrl.searchText}">kct.layout.siveNav.langNotFound</span>
           </md-not-found>
         </md-autocomplete>
         </li>
@@ -61,31 +66,27 @@
     </md-content>
   </md-sidenav>
   <div layout="column" layout-fill style="overflow:auto;">
-    <div layout="column" layout-fill>
 
-      <md-toolbar hide-gt-md="">
-        <div class="md-toolbar-tools">
-          <md-button ng-click="layoutCtrl.toggleNavbar()" class="md-icon-button" hide-gt-md="" aria-label="Settings">
-            <ng-md-icon icon="menu"></ng-md-icon> 
-          </md-button>
-          <h2>
-            <a ui-sref="kct.home" translate>kct.layout.common.appName</a>
-          </h2>
-        </div>
-      </md-toolbar>
-      <div layout="column" layout-margin="" flex="grow">
-
-        <div ncy-breadcrumb></div>
-
-        <div class="growl-element" growl></div>
-
-        <div ui-view flex></div>
-
-        <div class="footer">
-          <p>{{'kct.layout.footer.text' | translate}}</p>
-        </div>
-
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button hide-gt-md="" ng-click="layoutCtrl.toggleNavbar()" class="md-icon-button" aria-label="Settings">
+          <ng-md-icon icon="menu"></ng-md-icon> 
+        </md-button>
+        <h2 translate>{{layoutCtrl.getTitleKey()}}</h2>
       </div>
+    </md-toolbar>
+    <div layout="column" layout-margin="" flex="grow">
+
+      <div ncy-breadcrumb></div>
+
+      <div class="growl-element" growl></div>
+
+      <div ui-view flex></div>
+
+      <div class="footer">
+        <p>{{'kct.layout.footer.text' | translate}}</p>
+      </div>
+
     </div>
   </div>
 </div>

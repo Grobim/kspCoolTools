@@ -13,7 +13,8 @@
       controllerAs  : 'profileCtrl',
       data          : {
         bodyClass      : 'profile',
-        windowTitleKey : 'kct.layout.header.profile'
+        windowTitleKey : 'kct.layout.header.profile',
+        titleKey       : 'kct.layout.profile.header'
       },
       ncyBreadcrumb : {
         translate : 'kct.layout.header.profile',

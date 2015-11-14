@@ -1,10 +1,13 @@
 {
   "kct.layout.profile" : {
-    "header" : "Profil",
-    "fields" : {
-      "name" : "Nom"
+    "header"      : "Profil",
+    "publicData"  : "Données publiques",
+    "privateData" : "Données privées",
+    "makePublic"  : "Rendre public",
+    "fields"      : {
+      "name"      : "Nom"
     },
-    "messages" : {
+    "messages"    : {
       "success" : "Votre profil a été sauvegardé avec succès"
     }
   }

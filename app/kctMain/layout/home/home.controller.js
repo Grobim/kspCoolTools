@@ -7,7 +7,7 @@
   function HomeController() {
     var _this = this;
 
-    init();
+    return init();
 
     function init() {
       _this.hello = 'lala';

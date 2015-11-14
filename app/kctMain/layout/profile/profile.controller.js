@@ -6,7 +6,8 @@
       '$scope',
       '$q',
       '$intFirebaseObject',
-      'growl',
+      '$mdToast',
+      '$translate',
       'ProfileRef',
       'ProfilePrivateInfoRef',
       'KctAuth',
@@ -18,7 +19,8 @@
     $scope,
     $q,
     $intFirebaseObject,
-    growl,
+    $mdToast,
+    $translate,
     ProfileRef,
     ProfilePrivateInfoRef,
     KctAuth
@@ -41,11 +43,13 @@
     }
 
     function saveProfile() {
-      $q.all([_this.profile.$save(), _this.profilePrivateInfos.$save()]).then(_notifySave);
+      return $q.all([_this.profile.$save(), _this.profilePrivateInfos.$save()]).then(_notifySave);
     }
 
     function _notifySave() {
-      growl.success('kct.layout.profile.messages.success');
+      $translate('kct.layout.profile.messages.success').then(function(translation) {
+        $mdToast.showSimple(translation);
+      });
     }
   }
 

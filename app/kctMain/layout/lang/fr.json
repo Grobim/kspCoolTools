@@ -64,6 +64,9 @@
     "languages" : {
       "en" : "Anglais",
       "fr" : "Français"
+    },
+    "siveNav"   : {
+      "langNotFound" : "\"{selectedLang}\" n'est pas disponible"
     }
   }
 }
