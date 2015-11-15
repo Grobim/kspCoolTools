@@ -20,6 +20,9 @@
       'browserName' : 'internet explorer',
       'version'     : 10
     }],
+    onPrepare: function() {
+      return require(require('path').resolve(__dirname, 'e2e/utils.js'))().prepareFireBase();
+    },
    
     // or configure a single browser
     /*

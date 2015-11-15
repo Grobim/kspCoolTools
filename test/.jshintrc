@@ -23,6 +23,7 @@
     "la": false,
     "browser": false,
     "element": false,
-    "by": false
+    "by": false,
+    "protractor": false
   }
 }
