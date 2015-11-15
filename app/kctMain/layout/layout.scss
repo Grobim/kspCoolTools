@@ -41,8 +41,13 @@
   min-width    : 0;
   min-height   : 0;
   line-height  : normal;
-  width        : initial;
+  width        : auto;
   cursor       : default;
+}
+
+.main-side-nav {
+  top : 2px;
+  transition : box-shadow ease-out 0.2s;
 }
 
 div.ui-select-container {

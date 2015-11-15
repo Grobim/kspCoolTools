@@ -20,6 +20,9 @@
     "_": false,
     "inject": "false",
     "ngDescribe": false,
-    "la": false
+    "la": false,
+    "browser": false,
+    "element": false,
+    "by": false
   }
 }

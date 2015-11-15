@@ -25,6 +25,7 @@
     "grunt-google-cdn": "^0.4.3",
     "grunt-karma": "^0.12.1",
     "grunt-preprocess": "^5.0.1",
+    "grunt-protractor-runner": "^2.1.0",
     "grunt-newer": "^1.1.0",
     "grunt-svgmin": "^3.0.0",
     "grunt-usemin": "^3.0.0",
@@ -36,7 +37,8 @@
     "karma-ie-launcher": "^0.2.0",
     "load-grunt-tasks": "^3.1.0",
     "lodash": "^3.10.0",
-    "serve-static": "1.10.0",
+    "protractor": "^2.5.1",
+    "serve-static": "^1.10.0",
     "time-grunt": "^1.0.0"
   },
   "engines": {
@@ -54,6 +56,10 @@
 
     "pretest-build": "npm install",
     "test-build": "grunt test:dist",
+
+
+    "pree2e": "npm install",
+    "e2e": "grunt e2e",
 
 
     "prestart": "npm install",

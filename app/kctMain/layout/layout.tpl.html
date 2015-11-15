@@ -1,13 +1,10 @@
 <div layout="row" layout-fill>
-
-  
-  <md-sidenav class="md-sidenav-left md-whiteframe-z1"
+  <md-sidenav class="md-sidenav-left md-whiteframe-z1 main-side-nav"
               md-component-id="mainMenu"
               md-is-locked-open="$mdMedia('gt-md')"
               ng-class="{'md-whiteframe-z3' : mainMenuHovered}"
               ng-mouseover="mainMenuHovered = true;"
-              ng-mouseleave="mainMenuHovered = false;"
-              style="top:2px;">
+              ng-mouseleave="mainMenuHovered = false;">
     
     <md-toolbar class="md-hue-2" md-scroll-shrink>
       <div class="md-toolbar-tools" ng-click="layoutCtrl.toggleNavbar()">
@@ -32,7 +29,7 @@
           <kct-menu-toggle section="section"
                            ng-if="section.type === 'toggle'"></kct-menu-toggle>
         </li>
-        <li ng-show-auth class="md-default-theme md-bg md-warn md-hue-1">
+        <li id="logout-menu-item" ng-show-auth class="md-default-theme md-bg md-warn md-hue-1">
           <md-button flex layout="row" ng-click="layoutCtrl.logout()">
             <ng-md-icon icon="logout"></ng-md-icon> 
             <span translate>kct.layout.header.logout</span>

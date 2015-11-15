@@ -80,7 +80,7 @@ module.exports = function (grunt) {
       'preprocess:' + ((target === 'prod') ? 'prod' : 'dist'),
       'useminPrepare',
       'concurrent:dist',
-      'autoprefixer',
+      'autoprefixer:dist',
       'concat',
       'copy:dist',
       'cssmin',
@@ -89,6 +89,10 @@ module.exports = function (grunt) {
       'usemin',
       'htmlmin'
     ]);
+  });
+
+  grunt.registerTask('e2e', function() {
+    grunt.task.run(['preprocess:e2e', 'connect:e2e', 'protractor']);
   });
 
 };
