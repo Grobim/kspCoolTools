@@ -21,11 +21,7 @@
 
   describe('login w/ redirection', function() {
 
-    var utils;
-
     beforeAll(function() {
-      var path = require('path');
-      utils = require(path.join(path.resolve('.'), 'test/e2e/utils.js'))();
       browser.ignoreSynchronization = true;
       browser.driver.manage().window().maximize();
     });
@@ -33,17 +29,17 @@
     it('test', function() {
       browser.get('/#/kct/xx/login');
 
-      utils.waitForRouteChange(/\/login$/);
+      global.waitForRouteChange(/\/login$/);
 
       element(by.model('loginCtrl.email')).sendKeys('test@test.fr');
       element(by.model('loginCtrl.pass')).sendKeys('test');
       element(by.css('form div button.btn-primary')).click();
 
-      utils.waitForRouteChange(/\/home$/);
+      global.waitForRouteChange(/\/home$/);
 
       browser.get('/#/kct/xx/profile');
 
-      utils.waitForRouteChange(/\/profile$/);
+      global.waitForRouteChange(/\/profile$/);
 
       element(by.model('profileCtrl.profile.nickname')).getAttribute('value').then(function(text) {
         expect(text).toBe('TestTest');
