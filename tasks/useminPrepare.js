@@ -5,10 +5,40 @@
   'use strict';
 
   module.exports = {
+    options: {
+      dest: '<%= yeoman.dist %>'
+    },
+    dist : {
+      src: '.tmp/index.html',
+      options: {
+        flow: {
+          html: {
+            steps: {
+              js: ['concat', 'uglifyjs'],
+              css: ['cssmin']
+            },
+            post: {}
+          }
+        }
+      }
+    },
     prod : {
       src: '.tmp/index.html',
       options: {
-        dest: '<%= yeoman.dist %>',
+        flow: {
+          html: {
+            steps: {
+              js: ['concat', 'uglifyjs'],
+              css: ['cssmin']
+            },
+            post: {}
+          }
+        }
+      }
+    },
+    e2e : {
+      src: '.e2e/index.html',
+      options: {
         flow: {
           html: {
             steps: {

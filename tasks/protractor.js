@@ -19,7 +19,12 @@
       debug : false,
       webdriverManagerUpdate : true
     },
-    e2e: {}
+    dist: {},
+    e2e: {
+      options: {
+        configFile: 'test/protractor-conf.dist.js',
+      }
+    }
   };
 
 })();

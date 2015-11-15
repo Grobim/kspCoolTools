@@ -23,9 +23,15 @@
         generatedImagesDir: '<%= yeoman.dist %>/images/generated'
       }
     },
-    server: {
-      options: {
-        sourcemap: true
+    server : {
+      options : {
+        sourcemap : true
+      }
+    },
+    e2e : {
+      options : {
+        sourcemap : true,
+        cssDir    : '.e2e/styles',
       }
     }
   };

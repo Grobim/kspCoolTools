@@ -46,7 +46,8 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'generateLocales',
-      'wiredep',
+      'wiredep:app',
+      'wiredep:sass',
       'concurrent:server',
       'autoprefixer:server',
       'preprocess:dist',
@@ -60,6 +61,7 @@ module.exports = function (grunt) {
       return grunt.task.run(['build', 'karma:dist']);
     } 
 
+    grunt.task.run('preprocess:dist');
     grunt.task.run('wiredep:test');
 
     if (target === 'once') {
@@ -75,10 +77,12 @@ module.exports = function (grunt) {
   grunt.registerTask('build', function(target) {
     grunt.task.run([
       'clean:dist',
+      'clean:e2e',
       'generateLocales',
-      'wiredep',
-      'preprocess:' + ((target === 'prod') ? 'prod' : 'dist'),
-      'useminPrepare',
+      'wiredep:app',
+      'wiredep:sass',
+      'preprocess:' + ((!!target && target.length) ? target : 'dist'),
+      'useminPrepare:' + ((!!target && target.length) ? target : 'dist'),
       'concurrent:dist',
       'autoprefixer:dist',
       'concat',
@@ -91,8 +95,22 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('e2e', function() {
-    grunt.task.run(['preprocess:e2e', 'connect:e2e', 'protractor']);
+  grunt.registerTask('e2e', function(target) {
+    if (target === 'dist') {
+      return grunt.task.run([
+        'build:e2e',
+        'connect:e2eDist',
+        'protractor:e2e'
+      ]);
+    }
+    grunt.task.run([
+      'clean:e2e',
+      'generateLocales',
+      'preprocess:e2e',
+      'compass:e2e',
+      'connect:e2e',
+      'protractor:dist'
+    ]);
   });
 
 };
