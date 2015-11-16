@@ -1,7 +1,6 @@
-<h2 class="md-display-1" translate>kct.layout.profile.publicData</h2>
 <form name="profileCtrl.profileForm" ng-submit="profileCtrl.saveProfile()">
-
-  <md-input-container class="md-icon-float md-block">
+  <h2 class="md-display-1" translate>kct.layout.profile.publicData</h2>
+  <md-input-container class="md-icon-float md-block" smart-field>
     <label for="loginName"><span translate>kct.layout.profile.fields.name</span></label>
     <ng-md-icon icon="person"></ng-md-icon>
     <input id="loginName" label="loginName" name="loginName" type="text" ng-model="profileCtrl.profile.nickname" required/>

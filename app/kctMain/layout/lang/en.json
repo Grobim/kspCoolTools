@@ -67,6 +67,7 @@
     },
     "siveNav"   : {
       "langNotFound" : "No language matching \"{selectedLang}\""
-    }
+    },
+    "logout"    : "Successfully logged out"
   }
 }

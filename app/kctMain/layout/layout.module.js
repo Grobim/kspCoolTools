@@ -17,6 +17,7 @@
     'kct.components.ui.breadCrumb',
     'kct.components.ui.directives.kctFillWindow',
     'kct.components.ui.growl',
+    'kct.components.ui.toast',
     'kct.components.interceptors',
 
     'kct.components.ui.directives.kctMenu',

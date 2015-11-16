@@ -13,6 +13,7 @@
       'i18nService',
       'breadCrumbModelService',
       'menuStates',
+      'ToastService',
       LayoutController
     ])
   ;
@@ -27,7 +28,8 @@
     KctAuth,
     i18nService,
     breadCrumbModelService,
-    menuStates
+    menuStates,
+    ToastService
   ) {
     var _this = this;
 
@@ -77,8 +79,10 @@
     }
 
     function logout() {
-      $state.go('kct.home');
-      KctAuth.$unauth();
+      $state.go('kct.home').then(function() {
+        KctAuth.$unauth();
+        ToastService.simple('kct.layout.logout');
+      });
     }
 
     function toggleNavbar() {

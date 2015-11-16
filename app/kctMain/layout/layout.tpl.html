@@ -72,9 +72,12 @@
         <h2 translate>{{layoutCtrl.getTitleKey()}}</h2>
       </div>
     </md-toolbar>
-    <div layout="column" layout-margin="" flex="grow">
 
-      <div ncy-breadcrumb></div>
+    <div ncy-breadcrumb layout-margin=""></div>
+
+    <md-divider></md-divider>
+
+    <md-content layout="column" layout-margin="" flex>
 
       <div class="growl-element" growl></div>
 
@@ -84,6 +87,6 @@
         <p>{{'kct.layout.footer.text' | translate}}</p>
       </div>
 
-    </div>
+    </md-content>
   </div>
 </div>

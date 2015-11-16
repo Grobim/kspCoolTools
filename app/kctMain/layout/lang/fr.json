@@ -67,6 +67,7 @@
     },
     "siveNav"   : {
       "langNotFound" : "\"{selectedLang}\" n'est pas disponible"
-    }
+    },
+    "logout"    : "Déconnexion réussie"
   }
 }

@@ -2,18 +2,17 @@
   'use strict';
 
   angular.module('kct.components.ui.directives.smartField')
-    .directive('smartField', [smartFieldDirective])
+    .directive('smartField', ['$animate', smartFieldDirective])
   ;
 
-  function smartFieldDirective() {
+  function smartFieldDirective($animate) {
     return {
       restrict : 'A',
       compile  : compile
     };
 
     function compile($element) {
-      var _input = angular.element($element.find('input,select').get(0)),
-          _label = angular.element('label[for=' + _input.attr('id') + ']'),
+      var _input = $($element.find('input,select').get(0)),
           _config,
           _elementKey;
 
@@ -34,10 +33,6 @@
       if (!_elementKey || !_elementKey.length) {
         console.warn('couldn\'t determine key');
         return;
-      }
-
-      if (_config.required && _input.attr('id') && _label.length) {
-        _label.append('<span class="label-required-marker">(*)</span>');
       }
 
       if (_config.email) {
@@ -93,7 +88,7 @@
 
         if (_parentForms.length) {
           angular.forEach(_parentForms, function(form) {
-            var formEl = angular.element(form);
+            var formEl = $(form);
             _workKey = (formEl.attr('ng-form') || formEl.attr('name')) + '.' + _workKey;
           });
           return _workKey + _input.attr('name');
@@ -104,26 +99,27 @@
 
       function _injectMessages() {
         var _messagesTemplate = 
-              '<div class="kct-smart-field-messages" ' +
+              '<div ' +
                    'ng-messages="' + _elementKey + '.$error" ' +
                    'ng-show="' + _elementKey + '.$invalid && ' + _elementKey + '.$dirty" ' +
                    'role="alert">' +
               '</div>',
-            _messagesEl = angular.element(_messagesTemplate),
+            _messagesEl = $(_messagesTemplate),
             _smartFieldTarget = $element.find('smart-field-target');
 
         if (_smartFieldTarget.length) {
-          _smartFieldTarget.replaceWith(_messagesEl);
+          $animate.enter(_messagesEl, null, _smartFieldTarget);
+          _smartFieldTarget.remove();
         } else {
-          _input.after(_messagesEl);
+          $animate.enter(_messagesEl, null, _input);
         }
 
 
         _.forOwn(_config, function(value, key) {
-          var messageEl = angular.element('<div ng-message="' + key + '" class="kct-smart-field-message"></div>'),
-              spanEl = angular.element('<span translate>kct.layout.common.errors.' + key + '</span>');
-          messageEl.append(spanEl);
-          _messagesEl.append(messageEl);
+          var messageEl = $('<div ng-message="' + key + '"></div>'),
+              spanEl = $('<span translate>kct.layout.common.errors.' + key + '</span>');
+          $animate.enter(spanEl, messageEl);
+          $animate.enter(messageEl, _messagesEl);
 
           if (key === 'rangelength') {
             spanEl.attr(
@@ -147,7 +143,7 @@
       }
 
       function link(scope) {
-        var parentDiv = angular.element(_input.parents('div').get(0)),
+        var parentDiv = $(_input.parents('div').get(0)),
             cancel;
 
         cancel = scope.$watch(_elementKey + '.$invalid && ' + _elementKey + '.$dirty', function(newValue) {
