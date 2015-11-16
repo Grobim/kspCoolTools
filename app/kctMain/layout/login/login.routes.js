@@ -13,7 +13,8 @@
       controllerAs : 'loginCtrl',
       data         : {
         bodyClass  : 'login',
-        windowTitleKey : 'kct.layout.header.login'
+        windowTitleKey : 'kct.layout.header.login',
+        titleKey       : 'kct.layout.login.header'
       },
       ncyBreadcrumb : {
         translate : 'kct.layout.header.login',

@@ -6,7 +6,7 @@
               ng-mouseover="mainMenuHovered = true;"
               ng-mouseleave="mainMenuHovered = false;">
     
-    <md-toolbar class="md-hue-2" md-scroll-shrink>
+    <md-toolbar class="md-hue-2 md-whiteframe-z1">
       <div class="md-toolbar-tools" ng-click="layoutCtrl.toggleNavbar()">
         <span translate>kct.layout.common.appName</span>
       </div>
@@ -65,7 +65,7 @@
   <div layout="column" layout-fill style="overflow:auto;">
 
     <md-toolbar>
-      <div class="md-toolbar-tools">
+      <div class="md-toolbar-tools md-whiteframe-z1">
         <md-button hide-gt-md="" ng-click="layoutCtrl.toggleNavbar()" class="md-icon-button" aria-label="Settings">
           <ng-md-icon icon="menu"></ng-md-icon> 
         </md-button>

@@ -5,7 +5,7 @@
     .controller('LoginController', [
       '$state',
       '$intFirebaseObject',
-      'growl',
+      'ToastService',
       'KctAuth',
       'ProfileRef',
       'ProfilesService',
@@ -16,7 +16,7 @@
   function LoginController(
     $state,
     $intFirebaseObject,
-    growl,
+    ToastService,
     KctAuth,
     ProfileRef,
     ProfilesService
@@ -39,7 +39,7 @@
 
     function createAccount(email, pass, confirm) {
       if( pass !== confirm ) {
-        growl.error('kct.layout.login.emailConnection.errors.passwordsNotMatch');
+        ToastService.error('kct.layout.login.emailConnection.errors.passwordsNotMatch');
       }
       else {
         KctAuth.$createUser({email: email, password: pass})
@@ -59,14 +59,14 @@
 
         if (profileExists) {
 
-          growl.success('kct.layout.login.emailConnection.success.login');
+          ToastService.simple('kct.layout.login.emailConnection.success.login');
           $state.go('kct.home');
 
         } else {
 
           ProfilesService.createProfile(authData.uid, _createProfileData(authData))
           .then(function() {
-            growl.success('kct.layout.login.emailConnection.success.register');
+            ToastService.simple('kct.layout.login.emailConnection.success.register');
             $state.go('kct.profile');
           }, _showError);
 
@@ -82,22 +82,18 @@
 
         if (authData.provider === 'password') {
           profileData.public.nickname = _firstPartOfEmail(authData.password.email);
-          profileData.private.email = authData.password.email;
         } else {
           profileData.public.nickname = authData[authData.provider].displayName;
+        }
+
+        if (authData.provider !== 'twitter') {
+          profileData.private.email = authData[authData.provider].email;
         }
 
         return profileData;
 
         function _firstPartOfEmail(email) {
-          return _ucfirst(email.substr(0, email.indexOf('@'))||'');
-        }
-
-        function _ucfirst (str) {
-          // inspired by: http://kevin.vanzonneveld.net
-          str += '';
-          var f = str.charAt(0).toUpperCase();
-          return f + str.substr(1);
+          return _.capitalize(email.substr(0, email.indexOf('@'))||'');
         }
       }
     }
@@ -106,14 +102,14 @@
       _this.pass = '';
       _this.confirm = '';
       if (err.code === 'EMAIL_TAKEN') {
-        growl.error('kct.layout.login.emailConnection.errors.emailTaken');
+        ToastService.error('kct.layout.login.emailConnection.errors.emailTaken');
       } else if (err.code === 'INVALID_PASSWORD') {
-        growl.error('kct.layout.login.emailConnection.errors.invalidPassword');
+        ToastService.error('kct.layout.login.emailConnection.errors.invalidPassword');
       } else if (err.code === 'INVALID_USER') {
-        growl.error('kct.layout.login.emailConnection.errors.invalidUser');
+        ToastService.error('kct.layout.login.emailConnection.errors.invalidUser');
       } else {
         console.log(err, err.code);
-        growl.error(err);
+        ToastService.error(err);
       }
     }
   }

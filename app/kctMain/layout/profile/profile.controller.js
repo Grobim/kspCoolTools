@@ -6,8 +6,7 @@
       '$scope',
       '$q',
       '$intFirebaseObject',
-      '$mdToast',
-      '$translate',
+      'ToastService',
       'ProfileRef',
       'ProfilePrivateInfoRef',
       'KctAuth',
@@ -19,8 +18,7 @@
     $scope,
     $q,
     $intFirebaseObject,
-    $mdToast,
-    $translate,
+    ToastService,
     ProfileRef,
     ProfilePrivateInfoRef,
     KctAuth
@@ -47,9 +45,7 @@
     }
 
     function _notifySave() {
-      $translate('kct.layout.profile.messages.success').then(function(translation) {
-        $mdToast.showSimple(translation);
-      });
+      ToastService.simple('kct.layout.profile.messages.success');
     }
   }
 
