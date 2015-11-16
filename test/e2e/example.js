@@ -33,7 +33,7 @@
 
       element(by.model('loginCtrl.email')).sendKeys('test@test.fr');
       element(by.model('loginCtrl.pass')).sendKeys('test');
-      element(by.css('form div button.btn-primary')).click();
+      element(by.css('form div button.md-primary')).click();
 
       global.waitForRouteChange(/\/home$/);
 

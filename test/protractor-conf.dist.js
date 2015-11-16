@@ -21,7 +21,10 @@
       'version'     : 10
     }],
     onPrepare: function() {
-      return require(require('path').resolve(__dirname, 'e2e/utils.js'))().prepareFireBase();
+
+      global.waitForRouteChange = waitForRouteChange;
+
+      return _prepareFireBase();
     },
    
     // or configure a single browser
@@ -38,4 +41,45 @@
     framework: 'jasmine2',
     seleniumArgs: ['-Dwebdriver.ie.driver=E:\\DevP\\MyGitRepos\\kspCoolTools\\node_modules\\protractor\\selenium\\IEDriverServer.exe']
   };
+
+  function waitForRouteChange(urlRegex) {
+    var currentUrl;
+
+    return browser.getCurrentUrl().then(function storeCurrentUrl(url) {
+            currentUrl = url;
+        }
+    ).then(function waitForUrlToChangeTo() {
+            return browser.wait(function waitForUrlToChangeTo() {
+                return browser.getCurrentUrl().then(function compareCurrentUrl(url) {
+                    return urlRegex.test(url);
+                });
+            }, 10000);
+        }
+    );
+  }
+
+  function _prepareFireBase() {
+    var deferred = protractor.promise.defer(),
+        Firebase = require('firebase'),
+        data = require('./e2e/data'),
+        ref = new Firebase('https://ksp-cool-tools-test.firebaseio.com/');
+
+    ref.authWithPassword({email : 'test@test.fr', password: 'test'}, function(authError){
+      if (authError) {
+        deferred.reject('connection error');
+        ref.unauth();
+      } else {
+        ref.set(data, function(error) {
+          if (error) {
+            deferred.reject('save error');
+          } else {
+            deferred.fulfill();
+          }
+          ref.unauth();
+        });
+      }
+    });
+    
+    return deferred.promise;
+  }
 })();
