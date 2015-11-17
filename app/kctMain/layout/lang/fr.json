@@ -46,6 +46,10 @@
         "last"  : "Dernière"
       }
     },
+    "messages"  : {
+      "saved"  : "Sauvegarde réussie",
+      "logout" : "Déconnexion réussie"
+    },
     "header"    : {
       "home"             : "Accueil",
       "saveManager"      : {
@@ -67,7 +71,6 @@
     },
     "siveNav"   : {
       "langNotFound" : "\"{selectedLang}\" n'est pas disponible"
-    },
-    "logout"    : "Déconnexion réussie"
+    }
   }
 }

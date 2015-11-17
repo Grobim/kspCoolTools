@@ -1,56 +1,52 @@
-<div class="mod-details">
-  <a ui-sref="kct.saveManager.mods"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.return</span></a>
-  <fieldset>
-    <legend translate translate-values="{modTitle : modDetailsCtrl.mod.title}">kct.layout.saveManager.mods.details.edition.header</legend>
-    <form class="form-horizontal col-sm-6" ng-submit="modDetailsCtrl.editMod()">
-      <div class="form-group">
-        <label class="col-sm-3 control-label" for="modTitle" translate>kct.layout.common.fields.title</label>
-        <div class="col-sm-9">
-          <input ng-model="modDetailsCtrl.mod.title" type="text" class="form-control" id="modTitle" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label" for="modDesc" translate>kct.layout.common.fields.desc</label>
-        <div class="col-sm-9">
-          <textarea ng-model="modDetailsCtrl.mod.desc" class="form-control desc-field" id="modDesc"></textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.edition.buttons.edit</button>
-          <span class="glyphicon glyphicon-ok notify-save" ng-if="modDetailsCtrl.saved" translate></span>
-          <button ng-click="modDetailsCtrl.deleteMod()" type="button" class="btn btn-danger pull-right" translate>kct.layout.saveManager.mods.details.edition.buttons.delete</button>
-        </div>
-      </div>
+<div class="mod-details" layout="column">
+  <div layout="row">
+    <md-button class="md-primary" ui-sref="kct.saveManager.mods" flex="initial" layout-align="left center">
+      <ng-md-icon icon="chevron_left"></ng-md-icon>
+      <span translate>kct.layout.saveManager.mods.details.return</span>
+    </md-button>
+  </div>
+  <h2 class="md-headline" translate translate-values="{modTitle : modDetailsCtrl.mod.title || ''}">kct.layout.saveManager.mods.details.edition.header</h2>
+  <div layout="row" layout-sm="column" layout-padding="">
+    <form ng-submit="modDetailsCtrl.editMod()" flex flex-sm="100" name="modDetailsCtrl.modForm">
+      <md-input-container smart-field>
+        <label for="modTitle"><span translate>kct.layout.common.fields.title</span></label>
+        <input id="modTitle" required name="modTitle" type="text" ng-model="modDetailsCtrl.mod.title" ng-model-options="{ updateOn: 'blur' }" />
+      </md-input-container>
+      <md-input-container>
+        <label for="modDesc" translate>kct.layout.common.fields.desc</label>
+        <textarea ng-model="modDetailsCtrl.mod.desc" id="modDesc" rows="5"></textarea>
+      </md-input-container>
+      <md-input-container layout="row" layout-md="column" layout-sm="column">
+        <md-button class="md-raised md-primary" flex flex-md="100" flex-sm="100"><span translate>kct.layout.saveManager.mods.details.edition.buttons.edit</span></md-button>
+        <div flex="10" hide-md hide-sm></div>
+        <md-button ng-click="modDetailsCtrl.deleteMod()" class="md-raised md-warn" type="button" flex flex-md="100" flex-sm="100"><span translate>kct.layout.saveManager.mods.details.edition.buttons.delete</span></md-button>
+      </md-input-container>
     </form>
-    <div class="col-sm-6">
-      <h4 class="col-sm-6" translate>kct.layout.saveManager.mods.details.edition.versions.header</h4>
-      <div class="col-sm-6">
-        <a ui-sref="kct.saveManager.mod.versions(({modId : modDetailsCtrl.mod.$id}))" class="btn btn-block btn-default" translate>kct.layout.saveManager.mods.details.edition.versions.manage</a>
+    <div flex flex-sm="100">
+      <div flex layout="row" layout-sm="column" layout-md="column">
+        <h4 flex flex-sm="100" flex-md="100" class="md-title" translate>kct.layout.saveManager.mods.details.edition.versions.header</h4>
+        <div flex flex-sm="100" flex-md="100" layout="row" layout-align="center center">
+          <md-button class="md-raised" ui-sref="kct.saveManager.mod.versions(({modId : modDetailsCtrl.mod.$id}))" flex>
+            <span translate>kct.layout.saveManager.mods.details.edition.versions.manage</span>
+          </md-button>
+        </div>
       </div>
-      <table kct-table
-             kct-table-paginated
-             kct-table-list="modDetailsCtrl.modVersions"
-             kct-table-config="modDetailsCtrl.tableConfig"
-             class="table table-striped table-condensed table-responsive table-bordered col-md-12 mod-versions-table">
-        <thead>
-          <tr>
-            <th kct-table-attribute="$id">
-              <span translate>kct.layout.common.fields.version</span>
-              <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td kct-table-attribute="$id">
-              {{item.$id | replaceChars:'_':'.'}}
-            </td>
-            <td kct-table-implicit kct-table-attribute="desc" kct-table-title-key="kct.layout.common.fields.desc"></td>
-            <td kct-table-implicit kct-table-attribute="depsLength" kct-table-title-key="kct.layout.common.fields.knownDeps"></td>
-          </tr>
-        </tbody>
-      </table>
+      <md-data-table-container>
+        <table md-data-table class="md-data-table-condensed">
+          <thead> 
+            <tr>
+              <th name-key="kct.layout.common.fields.version" order-by="'$id'" descend-first="" order-by-static=""></th>
+              <th name-key="kct.layout.common.fields.knownDeps"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="modVersion in modDetailsCtrl.modVersions">
+              <td>{{modVersion.$id | replaceChars:'_':'.'}}</td>
+              <td>{{modVersion.depsLength}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </md-data-table-container>
     </div>
-  </fieldset>
+  </div>
 </div>

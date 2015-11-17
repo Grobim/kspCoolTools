@@ -14,6 +14,9 @@
       "versions" : {
         "header" : "Dernières versions enregistrées",
         "manage" : "Gérer versions"
+      },
+      "errors": {
+        "isDep" : "Ce mod est en dépendance d'un autre"
       }
     }
   }

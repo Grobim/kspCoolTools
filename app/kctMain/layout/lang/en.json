@@ -46,6 +46,10 @@
         "last"  : "Last"
       }
     },
+    "messages"  : {
+      "saved"  : "Save successfull",
+      "logout" : "Successfully logged out"
+    },
     "header"    : {
       "home"             : "Home",
       "saveManager"      : {
@@ -67,7 +71,6 @@
     },
     "siveNav"   : {
       "langNotFound" : "No language matching \"{selectedLang}\""
-    },
-    "logout"    : "Successfully logged out"
+    }
   }
 }

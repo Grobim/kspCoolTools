@@ -1,5 +1,5 @@
 <div class="mod-list">
-  <h2 class="md-display-1" translate>kct.layout.saveManager.mods.list.header</h2>
+  <h2 class="md-headline" translate>kct.layout.saveManager.mods.list.header</h2>
   <div layout="row" layout-sm="column">
     <div flex="50" flex-sm="100" layout="row">
       <ng-md-icon icon="search"></ng-md-icon>
@@ -15,14 +15,12 @@
       <thead md-order="modsCtrl.tableConfig.order" md-trigger="modsCtrl.onQueryChange">
         <tr>
           <th name-key="kct.layout.common.fields.title" order-by="title"></th>
-          <th name-key="kct.layout.common.fields.desc"></th>
           <th name-key="kct.layout.common.fields.details"></th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="mod in modsCtrl.tableMods">
           <td>{{mod.title}}</td>
-          <td>{{mod.desc}}</td>
           <td>
             <md-button ui-sref="kct.saveManager.mod.details({modId : mod.$id})" class="md-primary md-raised"><span translate>kct.layout.common.details</span></md-button>
           </td>

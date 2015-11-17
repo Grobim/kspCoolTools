@@ -15,6 +15,9 @@
       "versions" : {
         "header" : "Last registered versions",
         "manage" : "Manage versions"
+      },
+      "errors": {
+        "isDep" : "This mod is a dependence of another one"
       }
     }
   }

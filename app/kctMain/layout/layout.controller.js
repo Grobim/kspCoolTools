@@ -81,7 +81,7 @@
     function logout() {
       $state.go('kct.home').then(function() {
         KctAuth.$unauth();
-        ToastService.simple('kct.layout.logout');
+        ToastService.simple('kct.layout.messages.logout');
       });
     }
 

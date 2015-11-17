@@ -15,7 +15,7 @@
       '$stateParams',
       '$intFirebaseObject',
       '$intFirebaseArray',
-      '$timeout',
+      'ToastService',
       'ModRef',
       'ModsRef',
       'ModsService',
@@ -35,15 +35,14 @@
                                $stateParams,
                                $intFirebaseObject,
                                $intFirebaseArray,
-                               $timeout,
+                               ToastService,
                                ModRef,
                                ModsRef,
                                ModsService,
                                ModVersionsRef,
                                ModVersionsService,
                                creationKey) {
-    var _this = this,
-        _timeout;
+    var _this = this;
 
     _this.createMod = createMod;
     _this.editMod = editMod;
@@ -86,7 +85,8 @@
       ModsService.deleteMod(_this.mod).then(function() {
         $state.go('kct.saveManager.mods');
       }, function(error) {
-        console.error('error, is dep', error);
+        ToastService.error('kct.layout.saveManager.mods.details.edition.errors.isDep');
+        console.error('error, is dep', error, error.length);
       });
     }
 
@@ -95,14 +95,7 @@
     }
 
     function _notifySave() {
-      _this.saved = true;
-      if (_timeout) {
-        $timeout.cancel(_timeout);
-      }
-      _timeout = $timeout(function() {
-        _this.saved = false;
-        _timeout = null;
-      }, 3000);
+      ToastService.simple('kct.layout.messages.saved');
     }
   }
 
