@@ -1,38 +1,42 @@
 <div class="mod-list">
-  <fieldset class="row no-gutters">
-    <legend translate>kct.layout.saveManager.mods.list.header</legend>
-    <form class="form-inline col-xs-12">
-      <div class="form-group">
+  <h2 class="md-display-1" translate>kct.layout.saveManager.mods.list.header</h2>
+  <div layout="row" layout-sm="column">
+    <div flex="50" flex-sm="100" layout="row">
+      <ng-md-icon icon="search"></ng-md-icon>
+      <md-input-container flex>
         <label translate>kct.layout.common.search</label>
-        <input ng-model="modsCtrl.tableConfig.query" type="text" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label translate>kct.layout.common.fields.modsPerPage</label>
-        <select ng-model="modsCtrl.tableConfig.itemsPerPage" ng-options="o as o for o in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
-      </div>
-    </form>
-    <table kct-table
-           kct-table-paginated
-           kct-table-list="modsCtrl.mods"
-           kct-table-config="modsCtrl.tableConfig"
-           class="table table-striped table-condensed table-responsive">
-      <caption><span translate translate-values="{count : modsCtrl.tableConfig.totalItems || 0}">kct.layout.common.resultCount</span> <a ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" ng-if="modsCtrl.tableConfig.totalItems === 0" translate>kct.layout.saveManager.mods.list.fastAdd</a></caption>
-      <thead></thead>
-      <tbody>
+        <input ng-model="modsCtrl.tableConfig.query" ng-change="modsCtrl.onQueryChange(modsCtrl.tableConfig.query)" type="text" />
+      </md-input-container>
+    </div>
+  </div>
+  <md-data-table-container>
+    <table md-data-table>
+      <caption class="md-caption"><span translate translate-values="{count : modsCtrl.tableConfig.totalItems || 0}">kct.layout.common.resultCount</span> <a ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" ng-if="modsCtrl.tableConfig.totalItems === 0" translate>kct.layout.saveManager.mods.list.fastAdd</a></caption>
+      <thead md-order="modsCtrl.tableConfig.order" md-trigger="modsCtrl.onQueryChange">
         <tr>
-          <td kct-table-implicit kct-table-attribute="title" kct-table-title-key="kct.layout.common.fields.title" kct-table-sortable kct-table-initial-sorting="asc"></td>
-          <td kct-table-implicit kct-table-attribute="desc" kct-table-title-key="kct.layout.common.fields.desc" kct-table-sortable></td>
-          <td kct-table-title-key="kct.layout.common.fields.details">
-            <a ui-sref="kct.saveManager.mod.details({modId : item.$id})" class="btn btn-primary btn-xs" role="button" translate>kct.layout.common.details</a>
+          <th name-key="kct.layout.common.fields.title" order-by="title"></th>
+          <th name-key="kct.layout.common.fields.desc"></th>
+          <th name-key="kct.layout.common.fields.details"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="mod in modsCtrl.tableMods">
+          <td>{{mod.title}}</td>
+          <td>{{mod.desc}}</td>
+          <td>
+            <md-button ui-sref="kct.saveManager.mod.details({modId : mod.$id})" class="md-primary md-raised"><span translate>kct.layout.common.details</span></md-button>
           </td>
         </tr>
       </tbody>
     </table>
-    <div class="col-sm-12">
-      <kct-table-pagination kct-table-config="modsCtrl.tableConfig" max-pages="10" rotate="false" boundary-links="true"></kct-table-pagination>
-    </div>
-    <div class="col-sm-6">
-      <a ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" class="btn btn-primary btn-block" translate>kct.layout.saveManager.mods.list.addMod</a>
-    </div>
-  </fieldset>
+  </md-data-table-container>
+  <md-data-table-pagination
+    md-limit="modsCtrl.tableConfig.limit"
+    md-page="modsCtrl.tableConfig.page"
+    md-total="{{modsCtrl.tableConfig.totalItems}}"
+    md-trigger="modsCtrl.onQueryChange">
+  </md-data-table-pagination>
+  <div flex="50" flex-sm="100" layout="row">
+    <md-button ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" class="md-primary md-raised" flex><span translate>kct.layout.saveManager.mods.list.addMod</span></md-button>
+  </div>
 </div>

@@ -1,23 +1,14 @@
-.row.no-gutters {
-  margin-right: 0;
-  margin-left: 0;
-
-  > [class^="col-"],
-  > [class*=" col-"] {
-    padding-right: 0;
-    padding-left: 0;
-  }
-}
-
 table[kct-table] tbody tr.filler {
   height: 33px;
-}
-
-.notify-save {
-  color : green;
 }
 
 .in-select-lang-img {
   float: right;
   margin-top: 17px;
+}
+
+md-data-table-container [md-table-cell] a.md-button {
+  height: 30px;
+  min-height: initial;
+  line-height: 30px;
 }

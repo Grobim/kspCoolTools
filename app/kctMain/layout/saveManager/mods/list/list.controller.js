@@ -5,20 +5,38 @@
     .controller('ModsController', [
       '$intFirebaseArray',
       'ModsRef',
+      'MdDataTableUtils',
       'creationKey',
       ModsController
     ])
   ;
 
-  function ModsController($intFirebaseArray, ModsRef, creationKey) {
+  function ModsController($intFirebaseArray, ModsRef, MdDataTableUtils, creationKey) {
     var _this = this;
 
-    _this.creationKey = creationKey;
+    _this.onQueryChange = onQueryChange;
 
-    init();
+    return init();
 
     function init() {
+
       _this.mods = $intFirebaseArray(ModsRef);
+      _this.tableConfig = {
+        filter: '',
+        order: '',
+        limit: 10,
+        page: 1
+      };
+
+      _this.mods.$loaded(function() {
+        onQueryChange();
+      });
+
+      _this.creationKey = creationKey;
+    }
+
+    function onQueryChange() {
+      _this.tableMods = MdDataTableUtils.onQueryChange(_this.mods, _this.tableConfig);
     }
 
   }

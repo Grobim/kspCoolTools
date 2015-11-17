@@ -5,6 +5,7 @@
     'kct.components.ui.breadCrumb',
     'kct.components.ui.growl',
     'kct.components.ui.toast',
+    'kct.components.ui.mdDataTableUtils',
 
     'kct.components.ui.directives'
   ]);
