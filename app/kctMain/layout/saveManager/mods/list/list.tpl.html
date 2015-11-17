@@ -49,7 +49,8 @@
     md-limit="modsCtrl.tableConfig.limit"
     md-page="modsCtrl.tableConfig.page"
     md-total="{{modsCtrl.tableConfig.totalItems}}"
-    md-trigger="modsCtrl.onQueryChange">
+    md-trigger="modsCtrl.onQueryChange"
+    md-row-select="[5, 10, 20, 50]">
   </md-data-table-pagination>
   <div layout="row">
     <md-button ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" class="md-primary md-raised" flex="50" flex-sm="100"><span translate>kct.layout.saveManager.mods.list.addMod</span></md-button>

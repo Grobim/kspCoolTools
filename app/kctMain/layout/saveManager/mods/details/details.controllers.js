@@ -31,17 +31,19 @@
     breadCrumbModelService.value('mod', $intFirebaseObject(new ModRef($stateParams.modId)));
   }
 
-  function ModDetailController($state,
-                               $stateParams,
-                               $intFirebaseObject,
-                               $intFirebaseArray,
-                               ToastService,
-                               ModRef,
-                               ModsRef,
-                               ModsService,
-                               ModVersionsRef,
-                               ModVersionsService,
-                               creationKey) {
+  function ModDetailController(
+    $state,
+    $stateParams,
+    $intFirebaseObject,
+    $intFirebaseArray,
+    ToastService,
+    ModRef,
+    ModsRef,
+    ModsService,
+    ModVersionsRef,
+    ModVersionsService,
+    creationKey
+  ) {
     var _this = this;
 
     _this.createMod = createMod;

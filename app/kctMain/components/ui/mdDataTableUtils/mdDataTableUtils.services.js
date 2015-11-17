@@ -6,6 +6,7 @@
   ;
 
   function MdDataTableUtilsService($filter) {
+
     return {
       onQueryChange : onQueryChange
     };

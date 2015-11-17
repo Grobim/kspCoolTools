@@ -1,20 +1,11 @@
 @import "modVersionDeps/list/modVersionDepsList.scss";
 
 body.save-manager .mod-versions-details {
-  .desc-field {
-    resize: none;
-    height: 145px;
+
+  md-data-table-pagination {
+    div span.label {
+      display: none;
+    }
   }
 
-  .return-label {
-    margin-bottom: 15px;
-  }
-
-  .mod-versions-table {
-    margin-top: 10px;
-  }
-
-  .item-per-page {
-    margin-top: 10px;
-  }
 }

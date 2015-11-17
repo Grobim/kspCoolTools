@@ -1,61 +1,77 @@
-<div class="mod-versions-details">
-  <a ui-sref="kct.saveManager.mod.versions({modId : modVersionsDetailsCtrl.params.modId})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.modVersions.details.return</span></a>
-  <fieldset>
-    <legend ng-if="modVersionsDetailsCtrl.isCreation()" translate>kct.layout.saveManager.mods.details.modVersions.details.create.header</legend>
-    <legend ng-if="!modVersionsDetailsCtrl.isCreation()" translate translate-values="{modTitle : modVersionsDetailsCtrl.mod.title}">kct.layout.saveManager.mods.details.modVersions.details.edit.header</legend>
-    <form class="form-horizontal col-sm-6" ng-submit="modVersionsDetailsCtrl.formAction()">
-      <div class="form-group">
-        <label class="col-sm-3 control-label" for="versionId" translate>kct.layout.common.fields.version</label>
-        <div class="col-sm-9">
-          <input ng-model="modVersionsDetailsCtrl.newModVersionId" ng-if="modVersionsDetailsCtrl.isCreation()" class="form-control" id="versionId" />
-          <p class="form-control-static" ng-if="!modVersionsDetailsCtrl.isCreation()">{{modVersionsDetailsCtrl.modVersion.$id | replaceChars:'_':'.'}}</p>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label" for="versionDesc" translate>kct.layout.common.fields.desc</label>
-        <div class="col-sm-9">
-          <textarea ng-model="modVersionsDetailsCtrl.modVersion.desc" class="form-control desc-field" id="versionDesc"></textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
-          <button ng-if="modVersionsDetailsCtrl.isCreation()" type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.modVersions.details.create.create</button>
-          <button ng-if="!modVersionsDetailsCtrl.isCreation()" type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.modVersions.details.edit.edit</button>
-          <span class="glyphicon glyphicon-ok notify-save" ng-if="modVersionsDetailsCtrl.saved"></span>
-          <button ng-if="!modVersionsDetailsCtrl.isCreation()" ng-click="modVersionsDetailsCtrl.deleteVersion()" class="btn btn-danger pull-right" type="button" translate>kct.layout.saveManager.mods.details.modVersions.details.edit.delete</button>
-        </div>
-      </div>
-    </form>
-    <div class="col-sm-6 row no-gutters" ng-show="!modVersionsDetailsCtrl.isCreation()">
-      <h4 class="col-md-6" translate>kct.layout.common.fields.knownDeps</h4>
-      <div class="col-md-6">
-        <div class="col-sm-12">
-          <a ui-sref="kct.saveManager.mod.version.deps({modId : modVersionsDetailsCtrl.params.modId, modVersionId : modVersionsDetailsCtrl.params.modVersionId})" class="btn btn-block btn-default" translate>kct.layout.saveManager.mods.details.modVersions.details.edit.manage</a>
-        </div>
-        <div class="col-sm-12 form-inline item-per-page">
-          <div class="form-group">
-            <label translate>kct.layout.common.fields.modsPerPage</label>
-            <select ng-model="modVersionsDetailsCtrl.tableConfig.itemsPerPage" ng-options="option as option for option in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
+<div class="mod-versions-details" layout="column" flex="{{modVersionsDetailsCtrl.getFormFlex()}}">
+
+  <div layout="row">
+    <md-button class="md-primary" ui-sref="kct.saveManager.mod.versions({modId : modVersionsDetailsCtrl.params.modId})" flex="initial" layout-align="left center">
+      <ng-md-icon icon="chevron_left"></ng-md-icon>
+      <span translate>kct.layout.saveManager.mods.details.modVersions.details.return</span>
+    </md-button>
+  </div>
+  <md-card layout="column" layout-padding="">
+    <h2 ng-if="modVersionsDetailsCtrl.isCreation()"
+        class="md-headline"
+        translate>kct.layout.saveManager.mods.details.modVersions.details.create.header</h2>
+    <h2 ng-if="!modVersionsDetailsCtrl.isCreation()"
+        class="md-headline"
+        translate
+        translate-values="{modTitle : modVersionsDetailsCtrl.mod.title || ''}">kct.layout.saveManager.mods.details.modVersions.details.edit.header</h2>
+    <md-divider></md-divider>
+    <div layout="row" layout-sm="column" layout-margin="">
+      <form flex-sm="100" name="modVersionsDetailsCtrl.modVersionForm" ng-submit="modVersionsDetailsCtrl.formAction()" flex>
+        <md-input-container smart-field>
+          <label for="modVersion"><span translate>kct.layout.common.fields.version</span></label>
+          <input ng-if="modVersionsDetailsCtrl.isCreation()" id="modVersion" required name="modVersion" type="text" ng-model="modVersionsDetailsCtrl.newModVersionId" />
+          <input ng-if="!modVersionsDetailsCtrl.isCreation()" id="modVersion" required disabled name="modVersion" type="text" value="{{modVersionsDetailsCtrl.modVersion.$id | replaceChars:'_':'.'}}" ng-if="!modVersionsDetailsCtrl.isCreation()" />
+        </md-input-container>
+        <md-input-container>
+          <label for="versionDesc" translate>kct.layout.common.fields.desc</label>
+          <textarea ng-model="modVersionsDetailsCtrl.modVersion.desc" id="versionDesc" name="versionDesc" rows="5"></textarea>
+        </md-input-container>
+
+        <md-input-container layout="row" layout-md="column" layout-sm="column">
+          <md-button ng-if="modVersionsDetailsCtrl.isCreation()" class="md-raised md-primary" flex flex-md="100" flex-sm="100">
+            <span translate>kct.layout.saveManager.mods.details.modVersions.details.create.create</span>
+          </md-button>
+          <md-button ng-if="!modVersionsDetailsCtrl.isCreation()" class="md-raised md-primary" flex flex-md="100" flex-sm="100">
+            <span translate>kct.layout.saveManager.mods.details.modVersions.details.edit.edit</span>
+          </md-button>
+          <div flex="10" hide-md hide-sm ng-if="!modVersionsDetailsCtrl.isCreation()"></div>
+          <md-button ng-if="!modVersionsDetailsCtrl.isCreation()" ng-click="modVersionsDetailsCtrl.deleteVersion()" class="md-raised md-warn" type="button" flex flex-md="100" flex-sm="100"><span translate>kct.layout.saveManager.mods.details.modVersions.details.edit.delete</span></md-button>
+        </md-input-container>
+
+      </form>
+      <div flex flex-sm="100" ng-if="!modVersionsDetailsCtrl.isCreation()">
+        <div flex layout="row" layout-sm="column" layout-md="column">
+          <h4 flex flex-sm="100" flex-md="100" class="md-title" translate>kct.layout.common.fields.knownDeps</h4>
+          <div flex flex-sm="100" flex-md="100" layout="row" layout-align="center center">
+            <md-button class="md-raised" ui-sref="kct.saveManager.mod.version.deps({modId : modVersionsDetailsCtrl.params.modId, modVersionId : modVersionsDetailsCtrl.params.modVersionId})" flex>
+              <span translate>kct.layout.saveManager.mods.details.modVersions.details.edit.manage</span>
+            </md-button>
           </div>
         </div>
-      </div>
-      <table kct-table
-             kct-table-paginated
-             kct-table-list="modVersionsDetailsCtrl.modVersionDeps"
-             kct-table-config="modVersionsDetailsCtrl.tableConfig"
-             class="table table-striped table-condensed table-responsive table-bordered col-xs-12 mod-versions-table"
-             ng-if="!modVersionsDetailsCtrl.isCreation()">
-        <thead></thead>
-        <tbody>
-          <tr>
-            <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc" kct-table-title-key="kct.layout.common.fields.title"></td>
-            <td kct-table-attribute="minVersion" kct-table-title-key="kct.layout.common.fields.minVersion">{{item.minVersion | replaceChars:'_':'.'}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="col-sm-12">
-        <kct-table-pagination kct-table-config="modVersionsDetailsCtrl.tableConfig" rotate="false" boundary-links="true" max-pages="4"></kct-table-pagination>
+        <md-data-table-container>
+          <table md-data-table class="md-data-table-condensed">
+          <thead md-order="modVersionsDetailsCtrl.tableConfig.order" md-trigger="modVersionsDetailsCtrl.onQueryChange">
+            <tr>
+              <th name-key="kct.layout.common.fields.title" order-by="'title'"></th>
+              <th name-key="kct.layout.common.fields.minVersion"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="modVersionDep in modVersionsDetailsCtrl.tableModVersionDeps">
+              <td>{{modVersionDep.title}}</td>
+              <td>{{modVersionDep.minVersion | replaceChars:'_':'.'}}</td>
+            </tr>
+          </tbody>
+          </table>
+        </md-data-table-container>
+        <md-data-table-pagination
+          md-limit="modVersionsDetailsCtrl.tableConfig.limit"
+          md-page="modVersionsDetailsCtrl.tableConfig.page"
+          md-total="{{modVersionsDetailsCtrl.tableConfig.totalItems}}"
+          md-trigger="modVersionsDetailsCtrl.onQueryChange"
+          md-row-select="[5, 10, 20, 50]">
+        </md-data-table-pagination>
       </div>
     </div>
-  </fieldset>
+  </md-card>
 </div>

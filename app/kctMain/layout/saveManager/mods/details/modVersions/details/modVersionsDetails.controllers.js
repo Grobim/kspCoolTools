@@ -23,6 +23,8 @@
       'ModVersionsService',
       'ModVersionDepsRef',
       'ModVersionDepsService',
+      'MdDataTableUtils',
+      'ToastService',
       'creationKey',
       ModDetailsModVersionsDetailsController
     ])
@@ -49,22 +51,30 @@
     ModVersionsService,
     ModVersionDepsRef,
     ModVersionDepsService,
+    MdDataTableUtils,
+    ToastService,
     creationKey
   ) {
-    var _this = this,
-        _timeout;
+    var _this = this;
 
     _this.isCreation = isCreation;
     _this.formAction = (isCreation()) ? _createVersion : _editVersion;
     _this.deleteVersion = deleteVersion;
 
-    init();
+    _this.onQueryChange = onQueryChange;
+
+    _this.getFormFlex = getFormFlex;
+
+    return init();
 
     function init() {
 
       _this.params = $stateParams;
       _this.tableConfig = {
-        itemsPerPage : 5
+        filter: '',
+        order: '',
+        limit: 5,
+        page: 1
       };
 
       _this.mod = $intFirebaseObject(new ModRef($stateParams.modId));
@@ -73,6 +83,7 @@
 
         _this.modVersion = $intFirebaseObject(new ModVersionRef($stateParams.modId, $stateParams.modVersionId));
         _this.modVersionDeps = $intFirebaseArray(new ModVersionDepsRef($stateParams.modId, $stateParams.modVersionId));
+        _this.modVersionDeps.$loaded(onQueryChange);
         _this.modVersionDeps.$watch(function() {
           ModVersionDepsService.addModTitleToDeps(_this.modVersionDeps);
         });
@@ -97,6 +108,16 @@
       });
     }
 
+    function onQueryChange() {
+      _this.tableModVersionDeps = MdDataTableUtils.onQueryChange(_this.modVersionDeps, _this.tableConfig);
+    }
+
+    function getFormFlex() {
+      if (isCreation()) {
+        return '70';
+      }
+    }
+
     function _createVersion() {
       var newModVersion = $intFirebaseObject(new ModVersionRef($stateParams.modId, $filter('replaceChars')(_this.newModVersionId, '.', '_')));
       newModVersion.$loaded(function() {
@@ -116,14 +137,7 @@
     }
 
     function _notifySave() {
-      _this.saved = true;
-      if (_timeout) {
-        $timeout.cancel(_timeout);
-      }
-      _timeout = $timeout(function() {
-        _this.saved = false;
-        _timeout = null;
-      }, 3000);
+      ToastService.simple('kct.layout.messages.saved');
     }
   }
 
