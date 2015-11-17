@@ -1,25 +1,26 @@
-<div class="mod-details">
-  <a ui-sref="kct.saveManager.mods"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.return</span></a>
-  <fieldset>
-    <legend translate>kct.layout.saveManager.mods.details.creation.header</legend>
-    <form class="form-horizontal col-sm-6" ng-submit="newModCtrl.createMod()">
-      <div class="form-group">
-        <label class="col-sm-3 control-label" for="modTitle" translate>kct.layout.common.fields.title</label>
-        <div class="col-sm-9">
-          <input ng-model="newModCtrl.mod.title" type="text" class="form-control" id="modTitle" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label" for="modDesc" translate>kct.layout.common.fields.desc</label>
-        <div class="col-sm-9">
-          <textarea ng-model="newModCtrl.mod.desc" class="form-control desc-field" id="modDesc"></textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary" translate>kct.layout.saveManager.mods.details.creation.create</button>
-        </div>
-      </div>
-    </form>
-  </fieldset>
+<div class="mod-details" layout="column">
+  <div layout="row">
+    <md-button class="md-primary" ui-sref="kct.saveManager.mods" flex="initial" layout-align="left center">
+      <ng-md-icon icon="chevron_left"></ng-md-icon>
+      <span translate>kct.layout.saveManager.mods.details.return</span>
+    </md-button>
+  </div>
+  <div layout="row" layout-sm="column">
+    <md-card flex="70" flex-sm="100" layout-padding="">
+      <h2 class="md-headline" translate>kct.layout.saveManager.mods.details.creation.header</h2>
+      <form ng-submit="newModCtrl.createMod()" name="newModCtrl.modForm">
+        <md-input-container smart-field>
+          <label for="modTitle"><span translate>kct.layout.common.fields.title</span></label>
+          <input id="modTitle" required name="modTitle" type="text" ng-model="newModCtrl.mod.title" />
+        </md-input-container>
+        <md-input-container>
+          <label for="modDesc" translate>kct.layout.common.fields.desc</label>
+          <textarea ng-model="newModCtrl.mod.desc" id="modDesc" rows="5"></textarea>
+        </md-input-container>
+        <md-input-container layout="row" layout-md="column" layout-sm="column">
+          <md-button class="md-raised md-primary" flex="40" flex-md="100" flex-sm="100"><span translate>kct.layout.saveManager.mods.details.creation.create</span></md-button>
+        </md-input-container>
+      </form>
+    </md-card>
+  </div>
 </div>

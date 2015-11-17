@@ -1,17 +1,31 @@
-<div class="mod-list">
-  <h2 class="md-headline" translate>kct.layout.saveManager.mods.list.header</h2>
-  <div layout="row" layout-sm="column">
-    <div flex="50" flex-sm="100" layout="row">
-      <ng-md-icon icon="search"></ng-md-icon>
-      <md-input-container flex>
-        <label translate>kct.layout.common.search</label>
-        <input ng-model="modsCtrl.tableConfig.query" ng-change="modsCtrl.onQueryChange(modsCtrl.tableConfig.query)" type="text" />
-      </md-input-container>
-    </div>
-  </div>
+<md-card class="mod-list" layout-padding="">
+  <md-data-table-toolbar ng-show="!modsCtrl.isSearch">
+    <h2 class="md-headline" translate>kct.layout.saveManager.mods.list.header</h2>
+    <div flex></div>
+    <md-button
+      ng-click="modsCtrl.isSearch = true"
+      ng-class="{
+        'md-fg': modsCtrl.tableConfig.query.length,
+        'md-accent': modsCtrl.tableConfig.query.length}"
+      class="md-icon-button"
+      aria-label="Filter">
+      <ng-md-icon icon="filter_list" ></ng-md-icon>
+    </md-button>
+  </md-data-table-toolbar>
+  <md-data-table-toolbar ng-show="modsCtrl.isSearch">
+    <ng-md-icon icon="search"></ng-md-icon>
+    <md-input-container flex>
+      <label translate>kct.layout.common.search</label>
+      <input ng-model="modsCtrl.tableConfig.query" ng-change="modsCtrl.onQueryChange(modsCtrl.tableConfig.query)" type="text" />
+    </md-input-container>
+    <md-button ng-click="modsCtrl.isSearch = false" class="md-icon-button" aria-label="Close filter">
+      <ng-md-icon icon="close"></ng-md-icon>
+    </md-button>
+
+  </md-data-table-toolbar>
+  <span class="md-caption"><span translate translate-values="{count : modsCtrl.tableConfig.totalItems || 0}">kct.layout.common.resultCount</span> <a ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" ng-if="modsCtrl.tableConfig.totalItems === 0" translate>kct.layout.saveManager.mods.list.fastAdd</a></span>
   <md-data-table-container>
     <table md-data-table>
-      <caption class="md-caption"><span translate translate-values="{count : modsCtrl.tableConfig.totalItems || 0}">kct.layout.common.resultCount</span> <a ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" ng-if="modsCtrl.tableConfig.totalItems === 0" translate>kct.layout.saveManager.mods.list.fastAdd</a></caption>
       <thead md-order="modsCtrl.tableConfig.order" md-trigger="modsCtrl.onQueryChange">
         <tr>
           <th name-key="kct.layout.common.fields.title" order-by="title"></th>
@@ -37,4 +51,4 @@
   <div flex="50" flex-sm="100" layout="row">
     <md-button ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" class="md-primary md-raised" flex><span translate>kct.layout.saveManager.mods.list.addMod</span></md-button>
   </div>
-</div>
+</md-card>
