@@ -4,6 +4,7 @@
   angular.module('kct.layout.login', [
     'ui.router',
     'pascalprecht.translate',
+    'ngMaterial',
 
     'kct.angularFireInterceptor',
 

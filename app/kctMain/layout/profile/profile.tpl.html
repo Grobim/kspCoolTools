@@ -18,5 +18,9 @@
       <span translate>kct.layout.profile.makePublic</span>
     </md-switch>
   </div>
-  <md-button class="md-raised md-primary" ng-disabled="profileCtrl.profileForm.$invalid"><span translate>kct.layout.common.save</span></md-button>
+  <md-input-container layout="row">
+      <md-button class="md-raised md-primary save-button" ng-disabled="profileCtrl.profileForm.$invalid" flex="33" flex-sm="100">
+        <span translate>kct.layout.common.save</span>
+      </md-button>
+  </md-input-container>
 </form>
