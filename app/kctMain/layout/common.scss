@@ -7,8 +7,9 @@ table[kct-table] tbody tr.filler {
   margin-top: 17px;
 }
 
-md-data-table-container [md-table-cell] a.md-button {
-  height: 30px;
-  min-height: initial;
+md-data-table-container td[md-table-cell] a.md-button {
+  min-height: 30px; 
+  height:auto !important; 
+  height: 30px; 
   line-height: 30px;
 }
