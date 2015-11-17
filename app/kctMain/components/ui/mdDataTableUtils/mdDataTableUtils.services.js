@@ -16,7 +16,9 @@
           from = (tableConfig.page - 1) * tableConfig.limit,
           to;
       // Filtering
-      workingList = $filter('filter')(workingList, tableConfig.query) || [];
+      if (tableConfig.query && tableConfig.query.length) {
+        workingList = $filter('filter')(workingList, tableConfig.query) || [];
+      }
 
       if (_.isArray(workingList)) {
         tableConfig.totalItems = workingList.length;

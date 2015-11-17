@@ -1,4 +1,5 @@
 <md-card class="mod-list" layout-padding="">
+
   <md-data-table-toolbar ng-show="!modsCtrl.isSearch">
     <h2 class="md-headline" translate>kct.layout.saveManager.mods.list.header</h2>
     <div flex></div>
@@ -12,6 +13,7 @@
       <ng-md-icon icon="filter_list" ></ng-md-icon>
     </md-button>
   </md-data-table-toolbar>
+
   <md-data-table-toolbar ng-show="modsCtrl.isSearch">
     <ng-md-icon icon="search"></ng-md-icon>
     <md-input-container flex>
@@ -21,9 +23,10 @@
     <md-button ng-click="modsCtrl.isSearch = false" class="md-icon-button" aria-label="Close filter">
       <ng-md-icon icon="close"></ng-md-icon>
     </md-button>
-
   </md-data-table-toolbar>
+
   <span class="md-caption"><span translate translate-values="{count : modsCtrl.tableConfig.totalItems || 0}">kct.layout.common.resultCount</span> <a ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" ng-if="modsCtrl.tableConfig.totalItems === 0" translate>kct.layout.saveManager.mods.list.fastAdd</a></span>
+
   <md-data-table-container>
     <table md-data-table>
       <thead md-order="modsCtrl.tableConfig.order" md-trigger="modsCtrl.onQueryChange">
@@ -36,7 +39,7 @@
         <tr ng-repeat="mod in modsCtrl.tableMods">
           <td>{{mod.title}}</td>
           <td>
-            <md-button ui-sref="kct.saveManager.mod.details({modId : mod.$id})" class="md-primary md-raised"><span translate>kct.layout.common.details</span></md-button>
+            <md-button ui-sref="kct.saveManager.mod.details({modId : mod.$id})" class="md-raised"><span translate>kct.layout.common.details</span></md-button>
           </td>
         </tr>
       </tbody>
@@ -48,7 +51,7 @@
     md-total="{{modsCtrl.tableConfig.totalItems}}"
     md-trigger="modsCtrl.onQueryChange">
   </md-data-table-pagination>
-  <div flex="50" flex-sm="100" layout="row">
-    <md-button ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" class="md-primary md-raised" flex><span translate>kct.layout.saveManager.mods.list.addMod</span></md-button>
+  <div layout="row">
+    <md-button ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" class="md-primary md-raised" flex="50" flex-sm="100"><span translate>kct.layout.saveManager.mods.list.addMod</span></md-button>
   </div>
 </md-card>

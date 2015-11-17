@@ -1,40 +1,82 @@
-<div class="mod-versions-list">
-  <a ui-sref="kct.saveManager.mod.details({modId : modVersionsListCtrl.mod.$id})"><span class="glyphicon glyphicon-chevron-left return-label"></span>&nbsp;<span translate>kct.layout.saveManager.mods.details.modVersions.list.return</span></a>
-  <fieldset class="row no-gutters">
-    <legend translate translate-values="{modTitle : modVersionsListCtrl.mod.title}">kct.layout.saveManager.mods.details.modVersions.list.header</legend>
-    <form class="form-inline col-xs-12">
-      <div class="form-group">
+<div class="mod-versions-list" layout="column">
+
+  <div layout="row">
+    <md-button class="md-primary" ui-sref="kct.saveManager.mod.details({modId : modVersionsListCtrl.mod.$id})" flex="initial" layout-align="left center">
+      <ng-md-icon icon="chevron_left"></ng-md-icon>
+      <span translate>kct.layout.saveManager.mods.details.modVersions.list.return</span>
+    </md-button>
+  </div>
+
+  <md-card layout="column" layout-padding="">
+
+    <md-data-table-toolbar ng-show="!modVersionsListCtrl.isSearch">
+      <h2 class="md-headline" translate translate-values="{modTitle : modVersionsListCtrl.mod.title || ''}">kct.layout.saveManager.mods.details.modVersions.list.header</h2>
+      <div flex></div>
+      <md-button
+        ng-click="modVersionsListCtrl.isSearch = true"
+        ng-class="{
+          'md-fg': modVersionsListCtrl.customQuery.length,
+          'md-accent': modVersionsListCtrl.customQuery.length}"
+        class="md-icon-button"
+        aria-label="Filter">
+        <ng-md-icon icon="filter_list" ></ng-md-icon>
+      </md-button>
+    </md-data-table-toolbar>
+
+    <md-data-table-toolbar ng-show="modVersionsListCtrl.isSearch">
+      <ng-md-icon icon="search"></ng-md-icon>
+      <md-input-container flex>
         <label translate>kct.layout.common.search</label>
-        <input ng-model="modVersionsListCtrl.customQuery" type="text" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label translate>kct.layout.common.fields.modsPerPage</label>
-        <select ng-model="modVersionsListCtrl.tableConfig.itemsPerPage" ng-options="option as option for option in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
-      </div>
-    </form>
-    <table kct-table
-           kct-table-paginated
-           kct-table-list="modVersionsListCtrl.filteredModVersions"
-           kct-table-config="modVersionsListCtrl.tableConfig"
-           class="table table-striped table-condensed table-responsive">
-      <caption translate translate-values="{count : modVersionsListCtrl.filteredModVersions.length || 0}">kct.layout.common.resultCount</caption>
-      <thead></thead>
-      <tbody>
-        <td kct-table-title-key="kct.layout.common.fields.version" kct-table-attribute="$id" kct-table-sortable kct-table-initial-sorting="desc">
-          {{item.$id | replaceChars:'_':'.'}}
-        </td>
-        <td kct-table-implicit kct-table-attribute="desc" kct-table-sortable kct-table-title-key="kct.layout.common.fields.desc"></td>
-        <td kct-table-implicit kct-table-attribute="depsLength" kct-table-title-key="kct.layout.common.fields.knownDeps"></td>
-        <td kct-table-title-key="kct.layout.common.fields.details">
-          <a ui-sref="kct.saveManager.mod.version.details({modId : modVersionsListCtrl.mod.$id, modVersionId : item.$id})" class="btn btn-primary btn-xs" role="button" translate>kct.layout.common.details</a>
-        </td>
-      </tbody>
-    </table>
-    <div class="col-sm-12">
-      <kct-table-pagination kct-table-config="modVersionsListCtrl.tableConfig" rotate="false" boundary-links="true"></kct-table-pagination>
+        <input ng-model="modVersionsListCtrl.customQuery" ng-change="modVersionsListCtrl.onQueryChange(modVersionsListCtrl.customQuery)" type="text" />
+      </md-input-container>
+      <md-button ng-click="modVersionsListCtrl.isSearch = false" class="md-icon-button" aria-label="Close filter">
+        <ng-md-icon icon="close"></ng-md-icon>
+      </md-button>
+    </md-data-table-toolbar>
+
+    <span class="md-caption">
+      <span translate translate-values="{count : modVersionsListCtrl.tableConfig.totalItems || 0}">kct.layout.common.resultCount</span>
+    </span>
+
+    <md-data-table-container>
+      <table md-data-table>
+        <thead md-order="modVersionsListCtrl.tableConfig.order" md-trigger="modVersionsListCtrl.onQueryChange">
+          <tr>
+            <th name-key="kct.layout.common.fields.version" order-by="title"></th>
+            <th name-key="kct.layout.common.fields.knownDeps"></th>
+            <th name-key="kct.layout.common.fields.details"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="modVersion in modVersionsListCtrl.tableModVersions">
+            <td>{{modVersion.$id | replaceChars:'_':'.'}}</td>
+            <td>{{modVersion.depsLength}}</td>
+            <td>
+              <md-button 
+                  ui-sref="kct.saveManager.mod.version.details({
+                    modId : modVersionsListCtrl.mod.$id,
+                    modVersionId : modVersion.$id
+                  })"
+                  class="md-raised">
+                <span translate>kct.layout.common.details</span>
+              </md-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-data-table-container>
+
+    <md-data-table-pagination
+      md-limit="modVersionsListCtrl.tableConfig.limit"
+      md-page="modVersionsListCtrl.tableConfig.page"
+      md-total="{{modVersionsListCtrl.tableConfig.totalItems}}"
+      md-trigger="modVersionsListCtrl.onQueryChange">
+    </md-data-table-pagination>
+
+    <div layout="row">
+      <md-button ui-sref="kct.saveManager.mod.version.create({modId : modVersionsListCtrl.mod.$id, modVersionId : modVersionsListCtrl.creationKey})" class="md-primary md-raised" flex="50" flex-sm="100">
+        <span translate>kct.layout.saveManager.mods.details.modVersions.list.add</span>
+      </md-button>
     </div>
-    <div class="col-sm-6">
-      <a ui-sref="kct.saveManager.mod.version.create({modId : modVersionsListCtrl.mod.$id, modVersionId : modVersionsListCtrl.creationKey})" class="btn btn-primary btn-block" translate>kct.layout.saveManager.mods.details.modVersions.list.add</a>
-    </div>
-  </fieldset>
+  </md-card>
 </div>
