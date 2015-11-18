@@ -1,0 +1,31 @@
+<md-dialog aria-label="Dep dialog">
+  <md-dialog-content>
+    <h2 class="md-title" translate ng-if="depDetailsCtrl.isNew()">kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.add.header</h2>
+    <h2 class="md-title" translate ng-if="!depDetailsCtrl.isNew()">kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.edit.header</h2>
+    <form name="depDetailsCtrl.depForm" layout="column">
+      <md-input-container flex class="md-input-has-messages">
+        <label translate for="depTitle">kct.layout.common.fields.title</label>
+        <input ng-model="depDetailsCtrl.depDetails.$title" id="depTitle" name="depTitle" disabled type="text" />
+      </md-input-container>
+      <md-input-container flex smart-field="">
+        <label translate for="depMinVersion">kct.layout.common.fields.minVersion</label>
+        <input ng-model="depDetailsCtrl.depDetails.minVersion" id="depMinVersion" name="depMinVersion" required type="text" />
+      </md-input-container>
+      <md-input-container flex>
+        <label translate for="depNotes">kct.layout.common.fields.notes</label>
+        <textarea rows="3" ng-model="depDetailsCtrl.depDetails.notes" id="depNotes" name="depNotes" type="text"></textarea>
+      </md-input-container>
+    </form>
+  </md-dialog-content>
+  <div class="md-actions">
+    <md-button class="md-primary" ng-if="depDetailsCtrl.isNew()" ng-disabled="depDetailsCtrl.depForm.$invalid" ng-click="depDetailsCtrl.addDependence()">
+      <span translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.add.add</span>
+    </md-button>
+    <md-button class="md-primary" ng-if="!depDetailsCtrl.isNew()" ng-disabled="depDetailsCtrl.depForm.$invalid" ng-click="depDetailsCtrl.editDependence()">
+      <span translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.edit.edit</span>
+    </md-button>
+    <md-button ng-click="depDetailsCtrl.cancel()">
+      <span translate>kct.layout.common.cancel</span>
+    </md-button>
+  </div>
+</md-dialog>

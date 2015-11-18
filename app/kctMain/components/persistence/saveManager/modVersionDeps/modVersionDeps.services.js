@@ -4,7 +4,6 @@
   angular.module('kct.components.persistence.saveManager')
     .service('ModVersionDepsService', [
       '$state',
-      '$stateParams',
       '$filter',
       '$q',
       '$intFirebaseObject',
@@ -19,7 +18,6 @@
 
   function ModVersionDepsService(
     $state,
-    $stateParams,
     $filter,
     $q,
     $intFirebaseObject,
@@ -80,10 +78,10 @@
       return deferred.promise;
     }
 
-    function editVersionDep(editedDependence) {
+    function editVersionDep(modId, modVersionId, editedDependence) {
       var deferred = $q.defer();
 
-      var actualDep = $intFirebaseObject(new ModVersionDepRef($stateParams.modId, $stateParams.modVersionId, editedDependence.$id));
+      var actualDep = $intFirebaseObject(new ModVersionDepRef(modId, modVersionId, editedDependence.$id));
       actualDep.$loaded(function() {
         editedDependence.minVersion = $filter('replaceChars')(editedDependence.minVersion, '.', '_');
         if (editedDependence.minVersion !== actualDep.minVersion) {

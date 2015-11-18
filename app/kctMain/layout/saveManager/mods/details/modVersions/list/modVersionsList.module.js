@@ -10,7 +10,6 @@
     'kct.angularFireInterceptor',
     'kct.constants',
     'kct.components.persistence.saveManager',
-    'kct.components.ui.directives.kctTable',
     'kct.components.ui.mdDataTableUtils',
     'kct.components.filters'
   ]);

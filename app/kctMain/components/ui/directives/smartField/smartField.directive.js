@@ -12,7 +12,7 @@
     };
 
     function compile($element) {
-      var _input = $($element.find('input,select').get(0)),
+      var _input = $($element.find('input,select,textarea').get(0)),
           _config,
           _elementKey;
 

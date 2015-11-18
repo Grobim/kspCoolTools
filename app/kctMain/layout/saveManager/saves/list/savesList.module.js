@@ -7,8 +7,7 @@
 
     'kct.angularFireInterceptor',
 
-    'kct.components.persistence.saveManager',
-    'kct.components.ui.directives.kctTable'
+    'kct.components.persistence.saveManager'
   ]);
 
 })();

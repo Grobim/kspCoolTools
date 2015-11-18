@@ -3,7 +3,7 @@
 
   angular.module('kct.components.interceptors', [
     'kct.angularFireInterceptor',
-    'angular-growl'
+    'kct.components.ui.toast'
   ]);
 
 })();

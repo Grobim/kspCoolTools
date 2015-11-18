@@ -8,13 +8,13 @@
   </div>
   <md-card layout="" layout-margin="" layout-padding="">
     <div flex>
-      <md-data-table-toolbar ng-show="!depsListCtrl.isSearch">
+      <md-data-table-toolbar ng-show="!depsListCtrl.isDepsSearch">
         <h2 class="md-headline"
           translate
           translate-values="{modId : depsListCtrl.mod.title, modVersionId : depsListCtrl.getFilteredModVersionId()}">kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.header</h2>
         <div flex></div>
         <md-button
-          ng-click="depsListCtrl.isSearch = true"
+          ng-click="depsListCtrl.isDepsSearch = true"
           ng-class="{
             'md-fg': depsListCtrl.depsTableConfig.query.length,
             'md-accent': depsListCtrl.depsTableConfig.query.length}"
@@ -24,23 +24,23 @@
         </md-button>
       </md-data-table-toolbar>
 
-      <md-data-table-toolbar ng-show="depsListCtrl.isSearch">
+      <md-data-table-toolbar ng-show="depsListCtrl.isDepsSearch">
         <ng-md-icon icon="search"></ng-md-icon>
         <md-input-container flex>
           <label translate>kct.layout.common.search</label>
           <input ng-model="depsListCtrl.depsTableConfig.query" ng-change="depsListCtrl.onDepsListQueryChange()" type="text" />
         </md-input-container>
-        <md-button ng-click="depsListCtrl.isSearch = false" class="md-icon-button" aria-label="Close filter">
+        <md-button ng-click="depsListCtrl.isDepsSearch = false" class="md-icon-button" aria-label="Close filter">
           <ng-md-icon icon="close"></ng-md-icon>
         </md-button>
       </md-data-table-toolbar>
 
       <span class="md-caption">
-        <span translate translate-values="{count : depsListCtrl.modsTableConfig.totalItems || 0}">kct.layout.common.resultCount</span>
+        <span translate translate-values="{count : depsListCtrl.depsTableConfig.totalItems || 0}">kct.layout.common.resultCount</span>
       </span>
       <md-data-table-container>
         <table md-data-table>
-          <thead md-order="depsListCtrl.modsTableConfig.order" md-trigger="depsListCtrl.onDepsListQueryChange">
+          <thead md-order="depsListCtrl.depsTableConfig.order" md-trigger="depsListCtrl.onDepsListQueryChange">
             <tr>
               <th name-key="kct.layout.common.fields.title" order-by="title"></th>
               <th name-key="kct.layout.common.fields.version"></th>
@@ -53,7 +53,7 @@
               <td>{{dep.title | trunc:35}}</td>
               <td>{{dep.minVersion | replaceChars:'_':'.'}}</td>
               <td class="button-column">
-                <md-button class="md-raised" ng-click="depsListCtrl.setEditDependence(dep)">
+                <md-button class="md-raised" ng-click="depsListCtrl.setEditDependence(dep, $event)">
                   <span translate>kct.layout.common.edit</span>
                 </md-button>
               </td>
@@ -67,76 +67,72 @@
         </table>
       </md-data-table-container>
       <md-data-table-pagination
-        md-limit="depsListCtrl.modsTableConfig.limit"
-        md-page="depsListCtrl.modsTableConfig.page"
-        md-total="{{depsListCtrl.modsTableConfig.totalItems}}"
+        md-limit="depsListCtrl.depsTableConfig.limit"
+        md-page="depsListCtrl.depsTableConfig.page"
+        md-total="{{depsListCtrl.depsTableConfig.totalItems}}"
         md-trigger="depsListCtrl.onDepsListQueryChange"
         md-row-select="[5, 10, 20, 50]">
       </md-data-table-pagination>
     </div>
   </md-card>
   <md-card layout="" layout-margin=""  layout-padding="">
-
     <div flex>
-      <fieldset>
-        <legend ng-if="!depsListCtrl.newDependence || depsListCtrl.newDependence.$new" translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.add.header</legend>
-        <legend ng-if="depsListCtrl.newDependence && !depsListCtrl.newDependence.$new" translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.edit.header</legend>
-        <form class="form-inline col-xs-12 mod-list-filters-form" ng-if="!depsListCtrl.newDependence">
-          <div class="form-group">
-            <label translate>kct.layout.common.search</label>
-            <input ng-model="depsListCtrl.tempTableConfig.query" type="text" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label translate>kct.layout.common.fields.modsPerPage</label>
-            <select ng-model="depsListCtrl.tempTableConfig.itemsPerPage" ng-options="option as option for option in [1, 2, 5, 10, 20, 50]" class="form-control"></select>
-          </div>
-        </form>
-        <table kct-table
-               kct-table-paginated
-               kct-table-list="depsListCtrl.modList | omitFromField:depsListCtrl.depsList:'$id' | omitFromField:depsListCtrl.mod:'title'"
-               kct-table-config="depsListCtrl.tempTableConfig"
-               ng-show="!depsListCtrl.newDependence"
-               class="table table-striped table-condensed table-responsive">
-          <caption translate translate-values="{count : depsListCtrl.tempTableConfig.totalItems || 0}">kct.layout.common.resultCount</caption>
-          <thead></thead>
+      <md-data-table-toolbar ng-show="!depsListCtrl.isModsSearch">
+        <h2 class="md-headline"
+          translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.add.header</h2>
+        <div flex></div>
+        <md-button
+          ng-click="depsListCtrl.isModsSearch = true"
+          ng-class="{
+            'md-fg': depsListCtrl.modsTableConfig.query.length,
+            'md-accent': depsListCtrl.modsTableConfig.query.length}"
+          class="md-icon-button"
+          aria-label="Filter">
+          <ng-md-icon icon="filter_list" ></ng-md-icon>
+        </md-button>
+      </md-data-table-toolbar>
+
+      <md-data-table-toolbar ng-show="depsListCtrl.isModsSearch">
+        <ng-md-icon icon="search"></ng-md-icon>
+        <md-input-container flex>
+          <label translate>kct.layout.common.search</label>
+          <input ng-model="depsListCtrl.modsTableConfig.query" ng-change="depsListCtrl.onModsListQueryChange()" type="text" />
+        </md-input-container>
+        <md-button ng-click="depsListCtrl.isModsSearch = false" class="md-icon-button" aria-label="Close filter">
+          <ng-md-icon icon="close"></ng-md-icon>
+        </md-button>
+      </md-data-table-toolbar>
+
+      <span class="md-caption">
+        <span translate translate-values="{count : depsListCtrl.modsTableConfig.totalItems || 0}">kct.layout.common.resultCount</span>
+      </span>
+      <md-data-table-container>
+        <table md-data-table>
+          <thead md-order="depsListCtrl.modsTableConfig.order" md-trigger="depsListCtrl.onModsListQueryChange">
+            <tr>
+              <th name-key="kct.layout.common.fields.title" order-by="title"></th>
+              <th name-key="kct.layout.common.add"></th>
+            </tr>
+          </thead>
           <tbody>
-            <td kct-table-implicit kct-table-attribute="title" kct-table-sortable kct-table-initial-sorting="asc" kct-table-title-key="kct.layout.common.fields.title"></td>
-            <td kct-table-title-key="kct.layout.common.add">
-              <button ng-click="depsListCtrl.setNewDependence(item)" class="btn btn-primary btn-xs" translate>kct.layout.common.add</button>
-            </td>
+            <tr ng-repeat="mod in depsListCtrl.tableModList | omitFromField:depsListCtrl.depsList:'$id' | omitFromField:depsListCtrl.mod:'title'">
+              <td>{{mod.title}}</td>
+              <td class="button-column">
+                <md-button class="md-raised md-primary" ng-click="depsListCtrl.setNewDependence(mod, $event)">
+                  <span translate>kct.layout.common.add</span>
+                </md-button>
+              </td>
+            </tr>
           </tbody>
         </table>
-        <div class="col-sm-12" ng-show="!depsListCtrl.newDependence">
-          <kct-table-pagination kct-table-config="depsListCtrl.tempTableConfig" rotate="false" boundary-links="true" max-pages="4"></kct-table-pagination>
-        </div>
-        <form ng-if="depsListCtrl.newDependence" class="form-horizontal">
-          <div class="form-group">
-            <label class="col-sm-3 control-label" translate>kct.layout.common.fields.title</label>
-            <p class="col-sm-9 form-control-static">{{depsListCtrl.newDependence.$title}}</p>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-3 control-label" translate>kct.layout.common.fields.minVersion</label>
-            <div class="col-sm-9">
-              <input ng-model="depsListCtrl.newDependence.minVersion" type="text" class="form-control" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-3 control-label" translate>kct.layout.common.fields.notes</label>
-            <div class="col-sm-9">
-              <textarea ng-model="depsListCtrl.newDependence.notes" class="form-control notes-field"></textarea>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-6 col-md-offset-3 col-md-5">
-              <button ng-click="depsListCtrl.addDependence()" ng-if="depsListCtrl.newDependence.$new" class="btn btn-primary btn-block" type="submit" translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.add.add</button>
-              <button ng-click="depsListCtrl.editDependence()" ng-if="!depsListCtrl.newDependence.$new" class="btn btn-primary btn-block" type="submit" translate>kct.layout.saveManager.mods.details.modVersions.details.modVersionDeps.list.edit.edit</button>
-            </div>
-            <div class="col-sm-6 col-md-4">
-              <button ng-click="depsListCtrl.cancel()" class="btn btn-default btn-block" type="cancel" translate>kct.layout.common.cancel</button>
-            </div>
-          </div>
-        </form>
-      </fieldset>
+      </md-data-table-container>
+      <md-data-table-pagination
+        md-limit="depsListCtrl.modsTableConfig.limit"
+        md-page="depsListCtrl.modsTableConfig.page"
+        md-total="{{depsListCtrl.modsTableConfig.totalItems}}"
+        md-trigger="depsListCtrl.onModsListQueryChange"
+        md-row-select="[5, 10, 20, 50]">
+      </md-data-table-pagination>
     </div>
   </md-card>
 </div>

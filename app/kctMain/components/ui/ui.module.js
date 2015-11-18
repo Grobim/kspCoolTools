@@ -3,7 +3,6 @@
 
   angular.module('kct.components.ui', [
     'kct.components.ui.breadCrumb',
-    'kct.components.ui.growl',
     'kct.components.ui.toast',
     'kct.components.ui.mdDataTableUtils',
 
