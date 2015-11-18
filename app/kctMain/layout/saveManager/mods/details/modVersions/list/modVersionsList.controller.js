@@ -47,7 +47,7 @@
 
       _this.modVersions = $intFirebaseArray(new ModVersionsRef($stateParams.modId));
       _this.modVersions.$loaded(_initWatchers);
-      _this.modVersions.$loaded(onQueryChange);
+      _this.modVersions.$watch(onQueryChange);
       _this.modVersions.$watch(function() {
         ModVersionsService.addDepLengthToVersions($stateParams.modId, _this.modVersions);
       });

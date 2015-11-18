@@ -13,6 +13,7 @@
       'ModVersionDepRef',
       'ModVersionDepsRef',
       'ModVersionDepsService',
+      'MdDataTableUtils',
       ModDetailsModVersionDepListController
     ])
   ;
@@ -27,7 +28,8 @@
     ModsRef,
     ModVersionDepRef,
     ModVersionDepsRef,
-    ModVersionDepsService
+    ModVersionDepsService,
+    MdDataTableUtils
   ) {
     var _this = this;
 
@@ -42,22 +44,29 @@
 
     _this.getFilteredModVersionId = getFilteredModVersionId;
 
-    init();
+    _this.onDepsListQueryChange = onDepsListQueryChange;
+
+    return init();
 
     function init() {
 
       _this.params = $stateParams;
 
       _this.modsTableConfig = {
-        itemsPerPage : 5
+        limit : 5,
+        query : '',
+        order : 'title',
+        page  : 1
       };
 
       _this.mod = $intFirebaseObject(new ModRef($stateParams.modId));
 
       _this.depsList = $intFirebaseArray(new ModVersionDepsRef($stateParams.modId, $stateParams.modVersionId));
+
       _this.depsList.$watch(function() {
         ModVersionDepsService.addModTitleToDeps(_this.depsList);
       });
+      _this.depsList.$watch(onDepsListQueryChange);
 
       _this.modList = $intFirebaseArray(ModsRef);
 
@@ -109,6 +118,10 @@
 
     function getFilteredModVersionId() {
       return $filter('replaceChars')($stateParams.modVersionId, '_', '.');
+    }
+
+    function onDepsListQueryChange() {
+      _this.tableDepsList = MdDataTableUtils.onQueryChange(_this.depsList, _this.modsTableConfig);
     }
   }
 

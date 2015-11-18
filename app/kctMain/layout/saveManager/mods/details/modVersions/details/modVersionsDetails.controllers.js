@@ -71,7 +71,6 @@
 
       _this.params = $stateParams;
       _this.tableConfig = {
-        filter: '',
         order: '',
         limit: 5,
         page: 1
@@ -83,7 +82,7 @@
 
         _this.modVersion = $intFirebaseObject(new ModVersionRef($stateParams.modId, $stateParams.modVersionId));
         _this.modVersionDeps = $intFirebaseArray(new ModVersionDepsRef($stateParams.modId, $stateParams.modVersionId));
-        _this.modVersionDeps.$loaded(onQueryChange);
+        _this.modVersionDeps.$watch(onQueryChange);
         _this.modVersionDeps.$watch(function() {
           ModVersionDepsService.addModTitleToDeps(_this.modVersionDeps);
         });

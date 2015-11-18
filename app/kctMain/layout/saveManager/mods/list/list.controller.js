@@ -22,7 +22,6 @@
 
       _this.mods = $intFirebaseArray(ModsRef);
       _this.tableConfig = {
-        filter: '',
         order: '',
         limit: 10,
         page: 1
