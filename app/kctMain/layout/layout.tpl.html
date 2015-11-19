@@ -4,10 +4,11 @@
               md-is-locked-open="$mdMedia('gt-md')"
               ng-class="{'md-whiteframe-z3' : mainMenuHovered}"
               ng-mouseover="mainMenuHovered = true;"
-              ng-mouseleave="mainMenuHovered = false;">
+              ng-mouseleave="mainMenuHovered = false;"
+              md-swipe-left="layoutCtrl.toggleNavbar()">
     
     <md-toolbar class="md-hue-2 md-whiteframe-z1">
-      <div class="md-toolbar-tools" ng-click="layoutCtrl.toggleNavbar()">
+      <div class="md-toolbar-tools">
         <span translate>kct.layout.common.appName</span>
       </div>
     </md-toolbar>

@@ -9,7 +9,6 @@
   <h2 class="md-headline" translate>kct.layout.profile.privateData</h2>
   <div layout="" layout-sm="column">
     <md-input-container class="md-icon-float md-block" flex>
-      <md-tooltip ng-if="profileCtrl.userAuth.provider === 'password'"><span translate>kct.layout.profile.messages.cantEdit</span></md-tooltip>
       <label for="loginEmail"><span translate>kct.layout.common.fields.email</span></label>
       <ng-md-icon icon="email"></ng-md-icon>
       <input id="loginEmail" label="loginEmail" name="loginEmail" type="email" ng-model="profileCtrl.profilePrivateInfos.email" ng-disabled="profileCtrl.userAuth.provider === 'password'" />

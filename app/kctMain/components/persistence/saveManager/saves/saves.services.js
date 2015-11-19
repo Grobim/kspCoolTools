@@ -13,11 +13,11 @@
 
     function addAuthorNameToSaves(saves) {
       _.forEach(saves, function(save) {
-        var profile = $intFirebaseObject(new ProfileRef(save.author));
+        var profile = $intFirebaseObject(new ProfileRef(save.author).child('nickname'));
         profile.$watch(watcher);
 
         function watcher() {
-          save.$authorName = profile.nickname;
+          save.$authorName = profile.$value;
         }
       });
     }
