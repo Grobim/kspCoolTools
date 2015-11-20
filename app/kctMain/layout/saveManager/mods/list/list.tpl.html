@@ -18,7 +18,7 @@
     <ng-md-icon icon="search"></ng-md-icon>
     <md-input-container flex>
       <label translate>kct.layout.common.search</label>
-      <input ng-model="modsCtrl.tableConfig.query" ng-change="modsCtrl.onQueryChange(modsCtrl.tableConfig.query)" type="text" />
+      <input ng-model="modsCtrl.tableConfig.query" ng-change="modsCtrl.onQueryChange()" type="text" />
     </md-input-container>
     <md-button ng-click="modsCtrl.isSearch = false" class="md-icon-button" aria-label="Close filter">
       <ng-md-icon icon="close"></ng-md-icon>
@@ -45,6 +45,7 @@
       </tbody>
     </table>
   </md-data-table-container>
+
   <md-data-table-pagination
     md-limit="modsCtrl.tableConfig.limit"
     md-page="modsCtrl.tableConfig.page"
@@ -52,6 +53,7 @@
     md-trigger="modsCtrl.onQueryChange"
     md-row-select="[5, 10, 20, 50]">
   </md-data-table-pagination>
+
   <div layout="row">
     <md-button ui-sref="kct.saveManager.mod.creation({modId : modsCtrl.creationKey})" class="md-primary md-raised" flex="50" flex-sm="100"><span translate>kct.layout.saveManager.mods.list.addMod</span></md-button>
   </div>

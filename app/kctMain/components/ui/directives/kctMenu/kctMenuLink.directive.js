@@ -16,8 +16,7 @@
 
     function link($scope) {
 
-      $scope.goToState = function() {
-        $state.go($scope.section.state);
+      $scope.onClick = function() {
 
         if ($mdMedia('sm') || $mdMedia('md')) {
           $mdSidenav('mainMenu').close();

@@ -1,3 +1,60 @@
-<div class="save-list">
-  <pre>{{savesCtrl.saves | json}}</pre>
-</div>
+<md-card class="save-list" layout-padding="">
+  <md-data-table-toolbar ng-show="!savesCtrl.isSearch">
+    <h2 class="md-headline" translate>kct.layout.saveManager.saves.list.title</h2>
+    <div flex></div>
+    <md-button
+      ng-click="savesCtrl.isSearch = true"
+      ng-class="{
+        'md-fg': savesCtrl.tableConfig.query.length,
+        'md-accent': savesCtrl.tableConfig.query.length}"
+      class="md-icon-button"
+      aria-label="Filter">
+      <ng-md-icon icon="filter_list" ></ng-md-icon>
+    </md-button>
+  </md-data-table-toolbar>
+
+  <md-data-table-toolbar ng-show="savesCtrl.isSearch">
+    <ng-md-icon icon="search"></ng-md-icon>
+    <md-input-container flex>
+      <label translate>kct.layout.common.search</label>
+      <input ng-model="savesCtrl.tableConfig.query" ng-change="savesCtrl.onQueryChange()" type="text" />
+    </md-input-container>
+    <md-button ng-click="savesCtrl.isSearch = false" class="md-icon-button" aria-label="Close filter">
+      <ng-md-icon icon="close"></ng-md-icon>
+    </md-button>
+  </md-data-table-toolbar>
+
+  <span class="md-caption"><span translate translate-values="{count : savesCtrl.tableConfig.totalItems || 0}">kct.layout.common.resultCount</span></span>
+
+  <md-data-table-container>
+    <table md-data-table>
+      <thead md-order="savesCtrl.tableConfig.order" md-trigger="savesCtrl.onQueryChange">
+        <tr>
+          <th name-key="kct.layout.common.fields.title" order-by="title"></th>
+          <th name-key="kct.layout.common.fields.details"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="save in savesCtrl.tableSaves">
+          <td>{{save.title}}</td>
+          <td>
+            <md-button ui-sref="kct.saveManager.save.details({saveId : save.$id})" class="md-raised"><span translate>kct.layout.common.details</span></md-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-data-table-container>
+
+  <md-data-table-pagination
+    md-limit="savesCtrl.tableConfig.limit"
+    md-page="savesCtrl.tableConfig.page"
+    md-total="{{savesCtrl.tableConfig.totalItems}}"
+    md-trigger="savesCtrl.onQueryChange"
+    md-row-select="[5, 10, 20, 50]">
+  </md-data-table-pagination>
+
+  <div layout="row">
+    <md-button ui-sref="kct.saveManager.save.creation({saveId : savesCtrl.creationKey})" class="md-primary md-raised" flex="50" flex-sm="100"><span translate>kct.layout.saveManager.saves.list.add</span></md-button>
+  </div>
+
+</md-card>

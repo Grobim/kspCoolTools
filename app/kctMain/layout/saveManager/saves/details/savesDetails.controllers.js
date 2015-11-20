@@ -11,6 +11,9 @@
     ])
     .controller('SaveDetailsController', [
       '$stateParams',
+      '$intFirebaseObject',
+      'SaveRef',
+      'creationKey',
       SaveDetailsController
     ])
   ;
@@ -21,14 +24,38 @@
 
   }
 
-  function SaveDetailsController($stateParams) {
+  function SaveDetailsController(
+    $stateParams,
+    $intFirebaseObject,
+    SaveRef,
+    creationKey
+  ) {
 
     var _this = this;
 
-    init();
+    _this.isCreation = isCreation;
+    _this.getDetailsFlex = getDetailsFlex;
+
+    return init();
 
     function init() {
-      _this.id = $stateParams.saveId;
+      if (isCreation()) {
+        _this.save = {};
+      } else {
+        _this.save = $intFirebaseObject(new SaveRef($stateParams.saveId));
+      }
+    }
+
+    function isCreation() {
+      return $stateParams.saveId === creationKey;
+    }
+
+    function getDetailsFlex() {
+      if (isCreation()) {
+        return 70;
+      } else {
+        return '';
+      }
     }
 
   }

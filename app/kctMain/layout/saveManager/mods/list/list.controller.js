@@ -20,13 +20,13 @@
 
     function init() {
 
-      _this.mods = $intFirebaseArray(ModsRef);
       _this.tableConfig = {
         order: '',
         limit: 10,
         page: 1
       };
 
+      _this.mods = $intFirebaseArray(ModsRef);
       _this.mods.$loaded(function() {
         onQueryChange();
       });

@@ -50,7 +50,7 @@
     _this.editMod = editMod;
     _this.deleteMod = deleteMod;
 
-    init();
+    return init();
 
     function init() {
       if (_isCreation()) {

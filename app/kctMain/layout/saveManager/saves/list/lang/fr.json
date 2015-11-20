@@ -2,6 +2,7 @@
   "kct.layout.saveManager.saves.list" : {
     "windowTitle"     : "Parties",
     "breadCrumbTitle" : "Parties",
-    "title"           : "Parties"
+    "title"           : "Parties",
+    "add"             : "Ajouter une partie"
   }
 }

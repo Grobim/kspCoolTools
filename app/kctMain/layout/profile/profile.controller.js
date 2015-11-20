@@ -28,7 +28,7 @@
     _this.saveProfile = saveProfile;
     _this.userAuth = KctAuth.$getAuth();
 
-    init();
+    return init();
 
     function init() {
       _this.errors = [];

@@ -31,6 +31,19 @@
           parent          : 'kct.saveManager.saves'
         }
       })
+      .state('kct.saveManager.save.creation', {
+        url          : '/create',
+        templateUrl  : 'kctMain/layout/saveManager/saves/details/savesDetails.tpl.html',
+        controller   : 'SaveDetailsController',
+        controllerAs : 'saveDetailsCtrl',
+        data          : {
+          windowTitleKey    : 'kct.layout.saveManager.saves.details.creation.windowTitle'
+        },
+        ncyBreadcrumb : {
+          translate       : 'kct.layout.saveManager.saves.details.creation.breadCrumbTitle',
+          parent          : 'kct.saveManager.saves'
+        }
+      })
     ;
 
   }

@@ -1,3 +1,32 @@
-<div class="save-details">
-  {{saveDetailsCtrl.id}}
+<div class="save-details" layout="column">
+  <pre>{{saveDetailsCtrl.save | json}}</pre>
+  <div layout="row">
+    <md-button class="md-primary" ui-sref="kct.saveManager.saves" flex="initial" layout-align="left center">
+      <ng-md-icon icon="chevron_left"></ng-md-icon>
+      <span translate>kct.layout.saveManager.saves.details.return</span>
+    </md-button>
+  </div>
+  <div layout="row" layout-sm="column">
+    <md-card flex="{{saveDetailsCtrl.getDetailsFlex()}}" flex-sm="100" layout="column" layout-padding="">
+      <h2 class="md-headline" ng-if="!saveDetailsCtrl.isCreation()" translate translate-values="{saveTitle : saveDetailsCtrl.save.title || ''}">kct.layout.saveManager.saves.details.edition.title</h2>
+      <h2 class="md-headline" ng-if="saveDetailsCtrl.isCreation()" translate>kct.layout.saveManager.saves.details.creation.title</h2>
+      <md-divider></md-divider>
+      <div layout="row" layout-sm="column" layout-margin="">
+        <form ng-submit="saveDetailsCtrl.formAction()" flex flex-sm="100" name="saveDetailsCtrl.saveForm">
+          <md-input-container smart-field>
+            <label for="saveTitle"><span translate>kct.layout.common.fields.title</span></label>
+            <input id="saveTitle" required name="saveTitle" type="text" ng-model="saveDetailsCtrl.save.title" />
+          </md-input-container>
+          <md-input-container smart-field>
+            <label for="saveKspVersion"><span translate>kct.layout.common.fields.kspVersion</span></label>
+            <input id="saveKspVersion" required name="saveKspVersion" type="text" ng-model="saveDetailsCtrl.save.kspVersion" />
+          </md-input-container>
+          <md-input-container>
+            <label for="saveDesc"><span translate>kct.layout.common.fields.desc</span></label>
+            <textarea id="saveDesc" rows="3" name="saveDesc" type="text" ng-model="saveDetailsCtrl.save.desc"></textarea>
+          </md-input-container>
+        </form>
+      </div>
+    </md-card>
+  </div>
 </div>
