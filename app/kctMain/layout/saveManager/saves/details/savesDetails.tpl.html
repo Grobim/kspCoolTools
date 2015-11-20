@@ -30,3 +30,15 @@
     </md-card>
   </div>
 </div>
+
+<div>
+  <h2>File Upload with Material:</h2>
+
+  <md-button class="md-raised md-primary">
+    <label for="file-input">Select</label>  
+  </md-button>
+  <input id="file-input" type="file" ngf-select="" ng-model="saveDetailsCtrl.picFile" name="file" required="" style="display:none;" />
+  <pre>{{saveDetailsCtrl.picFile | json}}</pre>
+  <md-button ng-click="saveDetailsCtrl.test()">clic</md-button>
+
+</div>

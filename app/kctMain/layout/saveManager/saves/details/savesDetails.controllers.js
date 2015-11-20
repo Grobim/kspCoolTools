@@ -36,6 +36,14 @@
     _this.isCreation = isCreation;
     _this.getDetailsFlex = getDetailsFlex;
 
+    _this.test = function() {
+      var r = new FileReader();
+      r.onloadend = function(e) {
+        console.log(e.target.result);
+      };
+      r.readAsDataURL(_this.picFile);
+    };
+
     return init();
 
     function init() {

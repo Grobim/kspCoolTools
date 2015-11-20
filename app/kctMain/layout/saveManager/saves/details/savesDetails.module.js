@@ -5,6 +5,7 @@
     'ui.router',
     'pascalprecht.translate',
     'ngMaterial',
+    'ngFileUpload',
 
     'kct.constants',
     'kct.angularFireInterceptor',
