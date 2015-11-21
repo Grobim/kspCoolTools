@@ -14,7 +14,7 @@
     function onQueryChange(list, tableConfig) {
 
       var workingList = list,
-          from = (tableConfig.page - 1) * tableConfig.limit,
+          from,
           to;
       // Filtering
       if (tableConfig.query && tableConfig.query.length) {
@@ -29,6 +29,9 @@
         return list;
       }
 
+      tableConfig.page = Math.max(1, Math.min(tableConfig.page, Math.ceil(tableConfig.totalItems / tableConfig.limit)));
+
+      from = (tableConfig.page - 1) * tableConfig.limit;
       to = _.min([tableConfig.totalItems - 1, from + tableConfig.limit - 1]);
 
 
