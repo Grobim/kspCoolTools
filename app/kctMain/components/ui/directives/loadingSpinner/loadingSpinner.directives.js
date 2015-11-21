@@ -10,14 +10,14 @@
     return {
       restrict : 'A',
       compile  : compileFnc,
-      link     : linkFnc,
       scope    : true
     };
 
     function compileFnc($element, $attrs) {
+
       $element.prepend([
-        '<div id="' + $attrs.loadingSpinner + 'Spinner" ng-if="loading()">',
-        '  <md-progress-circular md-mode="indeterminate"></md-progress-circular>',
+        '<div id="' + $attrs.loadingSpinner + 'Spinner" ng-if="loading()" layout="" layout-align="center center">',
+        '  <md-progress-circular' + ((_isMdButton($element)) ? ' md-diameter="20px"' : '') + ' md-mode="indeterminate"></md-progress-circular>',
         '</div>'
       ].join(''));
 
@@ -28,13 +28,26 @@
 
       $scope.$watch(function() {
         return LoadingSpinner.get($attrs.loadingSpinner);
-      }, function(newVal) {
-        if (newVal) {
-          $element.css('height', $element.height());
+      }, function(loading) {
+        if (loading) {
+
+          if (!_isMdButton($element)) {
+            $element.css('height', $element.height());
+          } else {
+            $element.children().css('height', '36px');
+          }
+
           $element.children(':not(#' + $attrs.loadingSpinner + 'Spinner)').hide();
+
+
         } else {
-          $element.css('height', 'auto');
+
+          if (!_isMdButton($element)) {
+            $element.css('height', 'auto');
+          }
+
           $element.children(':not(#' + $attrs.loadingSpinner + 'Spinner)').show();
+
         }
       });
 
@@ -42,6 +55,10 @@
         return LoadingSpinner.get($attrs.loadingSpinner);
       };
 
+    }
+
+    function _isMdButton($element) {
+      return ['md-button', 'button'].indexOf($element.parent().get(0).localName) > -1;
     }
 
   }

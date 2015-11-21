@@ -11,8 +11,7 @@
     return {
       get     : get,
       loading : loading,
-      loaded  : loaded,
-      toggle  : toggle
+      loaded  : loaded
     };
 
     function get(key) {
@@ -25,10 +24,6 @@
 
     function loaded(key) {
       _keys[key] = false;
-    }
-
-    function toggle(key) {
-      _keys[key] = !_keys[key];
     }
 
   }
