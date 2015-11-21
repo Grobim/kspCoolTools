@@ -10,7 +10,7 @@
       "search"      : "Rechercher",
       "cancel"      : "Annuler",
       "resultCount" : "Résultats ({count})",
-      "fields" : {
+      "fields"      : {
         "title"           : "Titre",
         "desc"            : "Description",
         "details"         : "Détails",
@@ -23,7 +23,11 @@
         "email"           : "Email",
         "password"        : "Mot de passe",
         "confirmPassword" : "Confirmer mot de passe",
-        "author"          : "Auteur"
+        "author"          : "Auteur",
+        "saveFile"        : "Fichier de sauvegarde"
+      },
+      "buttons"     : {
+        "upload" : "Déposer"
       },
       "errors"      : {
         "required"    : "Ce champ est requis",
@@ -39,7 +43,6 @@
           "save"  : "Vous n'avez pas les droits suffisants pour éditer ça.",
           "error" : "Vous n'avez pas les droits suffisants pour consulter ça."
         }
-
       },
       "pagination"  : {
         "first" : "Première",

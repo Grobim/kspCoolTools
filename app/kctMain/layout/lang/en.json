@@ -23,7 +23,8 @@
         "email"           : "Email",
         "password"        : "Password",
         "confirmPassword" : "Confirm password",
-        "author"          : "Author"
+        "author"          : "Author",
+        "saveFile"        : "Save file"
       },
       "errors"      : {
         "required"    : "This field is required",
@@ -40,6 +41,9 @@
           "error"  : "Your permissions are insufficent to read that",
           "loaded" : "An error occured while loading data"
         }
+      },
+      "buttons"     : {
+        "upload" : "Upload"
       },
       "pagination"  : {
         "first" : "First",

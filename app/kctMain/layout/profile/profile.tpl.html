@@ -1,14 +1,14 @@
 <form name="profileCtrl.profileForm" ng-submit="profileCtrl.saveProfile()">
   <h2 class="md-headline" translate>kct.layout.profile.publicData</h2>
-  <md-input-container class="md-icon-float md-block" smart-field>
+  <md-input-container class="md-icon-float md-block" smart-field="">
     <label for="loginName"><span translate>kct.layout.profile.fields.name</span></label>
     <ng-md-icon icon="person"></ng-md-icon>
-    <input id="loginName" label="loginName" name="loginName" type="text" ng-model="profileCtrl.profile.nickname" required/>
+    <input id="loginName" label="loginName" name="loginName" type="text" ng-model="profileCtrl.profile.nickname" required />
   </md-input-container>
 
   <h2 class="md-headline" translate>kct.layout.profile.privateData</h2>
   <div layout="" layout-sm="column">
-    <md-input-container class="md-icon-float md-block" flex>
+    <md-input-container class="md-icon-float md-block" smart-field="" flex>
       <label for="loginEmail"><span translate>kct.layout.common.fields.email</span></label>
       <ng-md-icon icon="email"></ng-md-icon>
       <input id="loginEmail" label="loginEmail" name="loginEmail" type="email" ng-model="profileCtrl.profilePrivateInfos.email" ng-disabled="profileCtrl.userAuth.provider === 'password'" />

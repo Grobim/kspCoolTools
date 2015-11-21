@@ -16,17 +16,17 @@
 <md-divider id="login-divider"></md-divider>
 <h2 class="md-headline" translate>kct.layout.login.emailConnection.header</h2>
 <form name="loginCtrl.loginForm">
-  <md-input-container class="md-icon-float">
+  <md-input-container class="md-icon-float" smart-field="">
     <label for="loginEmail"><span translate>kct.layout.common.fields.email</span></label>
     <ng-md-icon icon="email"></ng-md-icon>
-    <input id="loginEmail" required name="email" email-override type="email" ng-model="loginCtrl.email" />
+    <input id="loginEmail" required name="email" type="email" ng-model="loginCtrl.email" />
   </md-input-container>
-  <md-input-container class="md-icon-float">
+  <md-input-container class="md-icon-float" smart-field="">
     <label for="loginPass"><span translate>kct.layout.common.fields.password</span></label>
     <ng-md-icon icon="lock"></ng-md-icon>
     <input id="loginPass" required name="pass" type="password" ng-model="loginCtrl.pass" />
   </md-input-container>
-  <md-input-container ng-cloak ng-show="loginCtrl.createMode" class="md-icon-float">
+  <md-input-container ng-cloak ng-show="loginCtrl.createMode" class="md-icon-float" smart-field="">
     <label for="loginConfirm"><span translate>kct.layout.common.fields.confirmPassword</span></label>
     <ng-md-icon icon="lock"></ng-md-icon>
     <input id="loginConfirm" ng-required="loginCtrl.createMode" name="confirm" type="password" ng-model="loginCtrl.confirm" />

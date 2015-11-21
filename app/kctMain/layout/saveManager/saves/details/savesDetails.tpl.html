@@ -1,5 +1,4 @@
 <div class="save-details" layout="column">
-  <pre>{{saveDetailsCtrl.save | json}}</pre>
   <div layout="row">
     <md-button class="md-primary" ui-sref="kct.saveManager.saves" flex="initial" layout-align="left center">
       <ng-md-icon icon="chevron_left"></ng-md-icon>
@@ -7,38 +6,63 @@
     </md-button>
   </div>
   <div layout="row" layout-sm="column">
-    <md-card flex="{{saveDetailsCtrl.getDetailsFlex()}}" flex-sm="100" layout="column" layout-padding="">
-      <h2 class="md-headline" ng-if="!saveDetailsCtrl.isCreation()" translate translate-values="{saveTitle : saveDetailsCtrl.save.title || ''}">kct.layout.saveManager.saves.details.edition.title</h2>
-      <h2 class="md-headline" ng-if="saveDetailsCtrl.isCreation()" translate>kct.layout.saveManager.saves.details.creation.title</h2>
-      <md-divider></md-divider>
-      <div layout="row" layout-sm="column" layout-margin="">
-        <form ng-submit="saveDetailsCtrl.formAction()" flex flex-sm="100" name="saveDetailsCtrl.saveForm">
-          <md-input-container smart-field>
-            <label for="saveTitle"><span translate>kct.layout.common.fields.title</span></label>
-            <input id="saveTitle" required name="saveTitle" type="text" ng-model="saveDetailsCtrl.save.title" />
-          </md-input-container>
-          <md-input-container smart-field>
-            <label for="saveKspVersion"><span translate>kct.layout.common.fields.kspVersion</span></label>
-            <input id="saveKspVersion" required name="saveKspVersion" type="text" ng-model="saveDetailsCtrl.save.kspVersion" />
-          </md-input-container>
-          <md-input-container>
-            <label for="saveDesc"><span translate>kct.layout.common.fields.desc</span></label>
-            <textarea id="saveDesc" rows="3" name="saveDesc" type="text" ng-model="saveDetailsCtrl.save.desc"></textarea>
-          </md-input-container>
-        </form>
+    <md-card flex="{{saveDetailsCtrl.getDetailsFlex()}}"
+             flex-sm="100"
+             layout="row"
+             layout-padding=""
+             loading-spinner="savesDetails"
+             layout-align="center center">
+      <div flex>
+        <h2 class="md-headline" ng-cloak ng-if="!saveDetailsCtrl.isCreation()" translate translate-values="{saveTitle : saveDetailsCtrl.save.title || ''}">kct.layout.saveManager.saves.details.edition.title</h2>
+        <h2 class="md-headline" ng-cloak ng-if="saveDetailsCtrl.isCreation()" translate>kct.layout.saveManager.saves.details.creation.title</h2>
+        <md-divider></md-divider>
+        <div layout="row" layout-sm="column" layout-margin="" flex>
+          <form ng-submit="saveDetailsCtrl.formAction()" flex flex-sm="100" name="saveDetailsCtrl.saveForm">
+            <md-input-container smart-field>
+              <label for="saveTitle"><span translate>kct.layout.common.fields.title</span></label>
+              <input id="saveTitle" required name="saveTitle" type="text" ng-model="saveDetailsCtrl.save.title" />
+            </md-input-container>
+            <md-input-container smart-field>
+              <label for="saveKspVersion"><span translate>kct.layout.common.fields.kspVersion</span></label>
+              <input id="saveKspVersion" required name="saveKspVersion" type="text" ng-model="saveDetailsCtrl.save.kspVersion" />
+            </md-input-container>
+            <md-input-container>
+              <label for="saveDesc"><span translate>kct.layout.common.fields.desc</span></label>
+              <textarea id="saveDesc" rows="3" name="saveDesc" type="text" ng-model="saveDetailsCtrl.save.desc"></textarea>
+            </md-input-container>
+            <div layout="row">
+              <md-input-container flex>
+                <label for="saveFile"><span translate>kct.layout.common.fields.saveFile</span></label>
+                <input id="saveFile" name="saveFile" type="text" ng-model="saveDetailsCtrl.saveFile.name" disabled />
+              </md-input-container>
+              <md-input-container>
+                <md-button type="button" class="md-icon-button" ng-click="saveDetailsCtrl.clearSaveFile()" ng-if="saveDetailsCtrl.saveFile.name.length" aria-label="Clear save file">
+                  <ng-md-icon icon="close"></ng-md-icon>
+                </md-button>
+              </md-input-container>
+              <md-input-container>
+                <md-button choose-file-button="file-input"
+                           class="md-raised"
+                           type="button"
+                           aria-label="file input">
+                  <ng-md-icon icon="file_upload"></ng-md-icon>
+                  <span translate>kct.layout.common.buttons.upload</span>
+                </md-button>
+              </md-input-container>
+              <input id="file-input" type="file" ngf-select="saveDetailsCtrl.uploadSaveFile($files)" name="file" style="display:none;" />
+              <md-input-container ng-if="saveDetailsCtrl.saveFile.name.length">
+                <md-button class="md-raised md-primary" type="button" ng-click="saveDetailsCtrl.downloadTest()">
+                <ng-md-icon icon="file_download"></ng-md-icon>
+                  [TEMP]Download
+                </md-button>
+              </md-input-container>
+            </div>
+            <md-input-container flex="50">
+              <md-button class="md-raised md-primary"><span translate>kct.layout.common.save</span></md-button>
+            </md-input-container>
+          </form>
+        </div>
       </div>
     </md-card>
   </div>
-</div>
-
-<div>
-  <h2>File Upload with Material:</h2>
-
-  <md-button class="md-raised md-primary">
-    <label for="file-input">Select</label>  
-  </md-button>
-  <input id="file-input" type="file" ngf-select="" ng-model="saveDetailsCtrl.picFile" name="file" required="" style="display:none;" />
-  <pre>{{saveDetailsCtrl.picFile | json}}</pre>
-  <md-button ng-click="saveDetailsCtrl.test()">clic</md-button>
-
 </div>

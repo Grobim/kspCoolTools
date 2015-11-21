@@ -9,7 +9,10 @@
 
     'kct.constants',
     'kct.angularFireInterceptor',
-    'kct.components.persistence.saveManager'
+    'kct.components.persistence.saveManager',
+    'kct.components.ui.directives.chooseFileButton',
+    'kct.components.ui.directives.loadingSpinner',
+    'kct.components.fileUtils'
   ]);
 
 })();

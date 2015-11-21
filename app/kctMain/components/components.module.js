@@ -6,7 +6,8 @@
     'kct.components.ui',
     'kct.components.persistence',
     'kct.components.filters',
-    'kct.components.interceptors'
+    'kct.components.interceptors',
+    'kct.components.fileUtils'
   ]);
 
 })();
