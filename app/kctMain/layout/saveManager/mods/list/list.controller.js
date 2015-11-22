@@ -27,9 +27,7 @@
       };
 
       _this.mods = $intFirebaseArray(ModsRef);
-      _this.mods.$loaded(function() {
-        onQueryChange();
-      });
+      _this.mods.$watch(onQueryChange);
 
       _this.creationKey = creationKey;
     }

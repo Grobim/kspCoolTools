@@ -59,7 +59,7 @@
         _this.mod = $intFirebaseObject(new ModRef($stateParams.modId));
 
         _this.modVersions = $intFirebaseArray(new ModVersionsRef($stateParams.modId).orderByKey().limitToLast(5));
-        _this.modVersions.$loaded(_reverseList);
+        _this.modVersions.$watch(_reverseList);
         _this.modVersions.$watch(function() {
           ModVersionsService.addDepLengthToVersions($stateParams.modId, _this.modVersions);
         });

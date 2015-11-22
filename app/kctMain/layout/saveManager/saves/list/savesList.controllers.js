@@ -34,7 +34,7 @@
       };
 
       _this.saves = $intFirebaseArray(SavesRef);
-      _this.saves.$loaded(function() {
+      _this.saves.$watch(function() {
         SavesService.addAuthorNameToSaves(_this.saves);
         onQueryChange();
       });
