@@ -6,7 +6,7 @@
     options : {
       src       : '<%= yeoman.app %>/**/lang/',
       srcSuffix : '.json',
-      dest      : '<%= yeoman.app %>/langs/',
+      dest      : '<%= yeoman.app %>/generated/langs/',
       prefix    : 'locale-',
       suffix    : '.json',
       langs     : [

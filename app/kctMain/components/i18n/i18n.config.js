@@ -48,7 +48,7 @@
       .useCookieStorage()
       .useSanitizeValueStrategy('escape')
       .useStaticFilesLoader({
-        prefix: 'langs/locale-',
+        prefix: 'generated/langs/locale-',
         suffix: '.json'
       });
   }

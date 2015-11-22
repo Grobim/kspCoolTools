@@ -2,13 +2,23 @@
   'use strict';
 
   angular.module('kct.components.i18n')
-    .service('i18nService', ['i18nAvailableLangs', '$translate', 'i18nFlagMap', I18nService])
+    .service('i18nService', [
+      'i18nAvailableLangs',
+      'i18nAvailableLangTranslated',
+      '$translate',
+      'i18nFlagMap',
+      I18nService
+    ])
   ;
 
-  function I18nService(i18nAvailableLangs, $translate, i18nFlagMap) {
+  function I18nService(
+    i18nAvailableLangs,
+    i18nAvailableLangTranslated,
+    $translate,
+    i18nFlagMap
+  ) {
     return {
       getLangList     : getLangList,
-      addTranslations : addTranslations,
       isValidLangKey  : isValidLangKey
     };
 
@@ -20,19 +30,11 @@
 
         langObj.lang = value;
         langObj.flag = i18nFlagMap[value] || value;
+        langObj.translation = i18nAvailableLangTranslated[value] || value;
 
         langList.push(langObj);
       });
 
-      return addTranslations(langList);
-    }
-
-    function addTranslations(langList) {
-      _.forEach(langList, function(lang) {
-        $translate('kct.layout.languages.' + lang.lang).then(function(translation) {
-          lang.translation = translation;
-        });
-      });
       return langList;
     }
 

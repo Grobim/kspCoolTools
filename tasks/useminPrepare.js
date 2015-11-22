@@ -8,7 +8,7 @@
     options: {
       dest: '<%= yeoman.dist %>'
     },
-    dist : {
+    dist    : {
       src: '.tmp/index.html',
       options: {
         flow: {
@@ -22,7 +22,7 @@
         }
       }
     },
-    prod : {
+    prod    : {
       src: '.tmp/index.html',
       options: {
         flow: {
@@ -36,7 +36,21 @@
         }
       }
     },
-    e2e : {
+    e2e     : {
+      src: '.e2e/index.html',
+      options: {
+        flow: {
+          html: {
+            steps: {
+              js: ['concat', 'uglifyjs'],
+              css: ['cssmin']
+            },
+            post: {}
+          }
+        }
+      }
+    },
+    e2eDist : {
       src: '.e2e/index.html',
       options: {
         flow: {

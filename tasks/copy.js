@@ -13,10 +13,9 @@
           '*.{ico,png,txt}',
           '.htaccess',
           '*.html',
-          '{,**/}*.html',
           'images/{,*/}*.{webp}',
           'styles/fonts/{,*/}*.*',
-          'langs/locale-*.json'
+          'generated/langs/locale-*.json'
         ]
       }, {
         expand: true,
@@ -44,11 +43,10 @@
         src: [
           '*.{ico,png,txt}',
           '.htaccess',
-          '404.html',
-          '{,**/}*.html',
+          '*.html',
           'images/{,*/}*.{webp}',
           'styles/fonts/{,*/}*.*',
-          'langs/locale-*.json'
+          'generated/langs/locale-*.json'
         ]
       }, {
         expand: true,

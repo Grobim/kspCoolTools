@@ -4,5 +4,6 @@ dist/*
 .e2e
 .sass-cache
 bower_components
-app/langs/locale*.json
+app/generated
 firebase-debug.log
+

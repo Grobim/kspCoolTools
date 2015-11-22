@@ -7,6 +7,10 @@
       'en',
       'fr'
     ])
+    .constant('i18nAvailableLangTranslated', {
+      en : 'English',
+      fr : 'Français'
+    })
     .constant('i18nAliasesLangMap', {
       en : 'en_*',
       fr : 'fr_*'

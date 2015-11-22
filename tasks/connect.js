@@ -63,8 +63,8 @@
               serveStatic('./' + utils.getConfig().app + '/kctProfiles')
             ),
             app.use(
-              '/langs',
-              serveStatic('./' + utils.getConfig().app + '/langs')
+              '/generated/langs',
+              serveStatic('./' + utils.getConfig().app + '/generated/langs')
             ),
             app.use(
               '/images',
@@ -122,8 +122,8 @@
           serveStatic('./' + utils.getConfig().app + '/kctProfiles')
         ),
         app.use(
-          '/langs',
-          serveStatic('./' + utils.getConfig().app + '/langs')
+          '/generated/langs',
+          serveStatic('./' + utils.getConfig().app + '/generated/langs')
         ),
         app.use(
           '/images',
