@@ -8,8 +8,7 @@
       "name" : "Name"
     },
     "messages"    : {
-      "success"  : "Your profile has been successfully saved",
-      "cantEdit" : "Can't edit as you are connected with email/password, consider switching to Google/Facebook/Twitter authentification"
+      "success"  : "Profile successfully saved"
     }
   }
 }

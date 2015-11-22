@@ -10,14 +10,16 @@
       SavesDetailsMainController
     ])
     .controller('SaveDetailsController', [
+      '$state',
       '$stateParams',
       '$intFirebaseObject',
       '$intFirebaseArray',
       'KctAuth',
       'SaveRef',
       'SavesRef',
+      'SaveSaveFilesRef',
+      'SaveSaveFileRef',
       'SaveSaveFiles',
-      'SaveSaveFile',
       'Upload',
       'FileUtils',
       'LoadingSpinner',
@@ -33,14 +35,16 @@
   }
 
   function SaveDetailsController(
+    $state,
     $stateParams,
     $intFirebaseObject,
     $intFirebaseArray,
     KctAuth,
     SaveRef,
     SavesRef,
+    SaveSaveFilesRef,
+    SaveSaveFileRef,
     SaveSaveFiles,
-    SaveSaveFile,
     Upload,
     FileUtils,
     LoadingSpinner,
@@ -62,22 +66,36 @@
     return init();
 
     function init() {
+
       if (isCreation()) {
-        _this.save = {};
+
+        _this.save = {
+          author : KctAuth.$getAuth().uid
+        };
+
       } else {
-        LoadingSpinner.loading('savesDetails');
+
+        LoadingSpinner.loading('savesDetailsLoad');
+
         _this.save = $intFirebaseObject(new SaveRef($stateParams.saveId));
         _this.save.$loaded(function() {
-          if (_this.save.fileName) {
-            $intFirebaseObject(new SaveSaveFile(_this.save.fileName).child('name')).$loaded(function(data) {
+
+          if (_this.save.saveFileId) {
+            LoadingSpinner.loading('savesDetailsLoadFile');
+            $intFirebaseObject(new SaveSaveFileRef(_this.save.saveFileId).child('name')).$loaded(function(data) {
               _this.saveFile = {
                 name : data.$value
               };
-              LoadingSpinner.loaded('savesDetails');
+              LoadingSpinner.loaded('savesDetailsLoadFile');
             });
           }
+
+          LoadingSpinner.loaded('savesDetailsLoad');
+
         });
+
       }
+
     }
 
     function isCreation() {
@@ -101,6 +119,7 @@
               name    : file.name,
               content : fileBase64
             };
+            _this.fileChanged = true;
           }
         });
       }
@@ -111,29 +130,52 @@
     }
 
     function clearSaveFile() {
-      delete _this.saveFile.name;
+      _this.saveFile = null;
+      _this.fileChanged = true;
     }
 
     function _createSave() {
-      _this.save.author = KctAuth.$getAuth().uid;
-      var saves = $intFirebaseArray(SavesRef);
-      saves.$add(_this.save).then(function(saveRef) {
+      LoadingSpinner.loading('savesDetailsSave');
 
+      $intFirebaseArray(SavesRef).$add(_this.save).then(function(saveRef) {
+        _this.save.$id = saveRef.key();
         if (_this.saveFile) {
-          $intFirebaseArray(SaveSaveFiles).$add(_this.saveFile).then(function(saveFileRef) {
-            var obj = saves.$getRecord(saveRef.key());
-            obj.fileName = saveFileRef.key();
-            saves.$save(obj);
+          SaveSaveFiles.saveFile(_this.save, _this.saveFile).then(function() {
+             _postCreate(saveRef.key());
           });
+        } else {
+          _postCreate(saveRef.key());
         }
       });
+
+      function _postCreate(saveKey) {
+        LoadingSpinner.loaded('savesDetailsSave');
+        $state.go('kct.saveManager.save.details', {saveId : saveKey});
+      }
     }
 
     function _editSave() {
+      LoadingSpinner.loading('savesDetailsSave');
       _this.save.$save().then(function() {
-        console.log('ok');
-      }, function(err) {
-        console.log(err);
+
+        if (_this.fileChanged) {
+
+          if (_this.saveFile) {
+            SaveSaveFiles.saveFile(_this.save, _this.saveFile).then(function() {
+              LoadingSpinner.loaded('savesDetailsSave');
+            });
+          } else {
+            SaveSaveFiles.deleteFile(_this.save).then(function() {
+              LoadingSpinner.loaded('savesDetailsSave');
+            });
+          }
+
+          _this.fileChanged = false;
+
+        } else {
+          LoadingSpinner.loaded('savesDetailsSave');
+        }
+
       });
     }
 

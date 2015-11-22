@@ -8,8 +8,7 @@
       "name"      : "Nom"
     },
     "messages"    : {
-      "success" : "Votre profil a été sauvegardé avec succès",
-      "cantEdit" : "Édition impossible car vous êtes connectés par mail/mot de passe. Considérez de basculer sur une authentification Facebook/Google/Twitter"
+      "success" : "Sauvegarde du profil réussie"
     }
   }
 }

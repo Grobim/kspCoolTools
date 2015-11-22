@@ -2,17 +2,17 @@
   'use strict';
 
   angular.module('kct.components.persistence.saveManager')
-    .factory('SaveSaveFiles', ['SaveManagerRef', SaveSaveFilesFactory])
-    .factory('SaveSaveFile', ['SaveSaveFiles', SaveSaveFileFactory])
+    .factory('SaveSaveFilesRef', ['SaveManagerRef', SaveSaveFilesRefFactory])
+    .factory('SaveSaveFileRef', ['SaveSaveFilesRef', SaveSaveFileRefFactory])
   ;
 
-  function SaveSaveFilesFactory(SaveManagerRef) {
+  function SaveSaveFilesRefFactory(SaveManagerRef) {
       return SaveManagerRef.child('saveSaveFiles');
   }
 
-  function SaveSaveFileFactory(SaveSaveFiles) {
+  function SaveSaveFileRefFactory(SaveSaveFilesRef) {
     return function(fileSaveId) {
-      return SaveSaveFiles.child(fileSaveId);
+      return SaveSaveFilesRef.child(fileSaveId);
     };
   }
 
