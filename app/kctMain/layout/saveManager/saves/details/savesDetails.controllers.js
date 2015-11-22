@@ -17,7 +17,6 @@
       'KctAuth',
       'SaveRef',
       'SavesRef',
-      'SaveSaveFilesRef',
       'SaveSaveFileRef',
       'SaveSaveFiles',
       'Upload',
@@ -42,7 +41,6 @@
     KctAuth,
     SaveRef,
     SavesRef,
-    SaveSaveFilesRef,
     SaveSaveFileRef,
     SaveSaveFiles,
     Upload,
@@ -126,7 +124,17 @@
     }
 
     function downloadTest() {
-      FileUtils.download(_this.saveFile);
+      if (LoadingSpinner.get('savesDetailsDownload')) {
+        return;
+      }
+
+      LoadingSpinner.loading('savesDetailsDownload');
+      $intFirebaseObject(new SaveSaveFileRef(_this.save.saveFileId)).$loaded(function(data) {
+        _this.saveFile.content = FileUtils.fromParts(data.content);
+        FileUtils.download(_this.saveFile).then(function() {
+          LoadingSpinner.loaded('savesDetailsDownload');
+        });
+      });
     }
 
     function clearSaveFile() {
@@ -135,6 +143,9 @@
     }
 
     function _createSave() {
+      if (LoadingSpinner.get('savesDetailsSave')) {
+        return;
+      }
       LoadingSpinner.loading('savesDetailsSave');
 
       $intFirebaseArray(SavesRef).$add(_this.save).then(function(saveRef) {
@@ -142,6 +153,9 @@
         if (_this.saveFile) {
           SaveSaveFiles.saveFile(_this.save, _this.saveFile).then(function() {
              _postCreate(saveRef.key());
+          }, function(err) {
+            console.log(err);
+            LoadingSpinner.loaded('savesDetailsSave');
           });
         } else {
           _postCreate(saveRef.key());
@@ -155,7 +169,11 @@
     }
 
     function _editSave() {
+      if (LoadingSpinner.get('savesDetailsSave')) {
+        return;
+      }
       LoadingSpinner.loading('savesDetailsSave');
+
       _this.save.$save().then(function() {
 
         if (_this.fileChanged) {
@@ -163,14 +181,20 @@
           if (_this.saveFile) {
             SaveSaveFiles.saveFile(_this.save, _this.saveFile).then(function() {
               LoadingSpinner.loaded('savesDetailsSave');
+              _this.fileChanged = false;
+            }, function(err) {
+              console.log(err);
+              LoadingSpinner.loaded('savesDetailsSave');
             });
           } else {
             SaveSaveFiles.deleteFile(_this.save).then(function() {
               LoadingSpinner.loaded('savesDetailsSave');
+              _this.fileChanged = false;
+            }, function(err) {
+              console.log(err);
+              LoadingSpinner.loaded('savesDetailsSave');
             });
           }
-
-          _this.fileChanged = false;
 
         } else {
           LoadingSpinner.loaded('savesDetailsSave');

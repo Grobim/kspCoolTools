@@ -55,10 +55,11 @@
                   <span translate>kct.layout.common.buttons.upload</span>
                 </md-button>
               </md-input-container>
-              <md-input-container ng-show="saveDetailsCtrl.saveFile.name.length">
-                <md-button class="md-raised md-primary" type="button" ng-click="saveDetailsCtrl.downloadTest()">
-                <ng-md-icon icon="file_download"></ng-md-icon>
-                  [TEMP]Download
+              <md-input-container ng-show="saveDetailsCtrl.saveFile.name.length" flex="initial">
+                <md-button ng-disabled="saveDetailsCtrl.fileChanged" class="md-raised" type="button" ng-click="saveDetailsCtrl.downloadTest()" aria-label="Download">
+                  <div loading-spinner="savesDetailsDownload">
+                    <ng-md-icon icon="file_download"></ng-md-icon>
+                  </div>
                 </md-button>
               </md-input-container>
             </div>

@@ -9,6 +9,7 @@
       'SavesRef',
       'SaveSaveFileRef',
       'SaveSaveFilesRef',
+      'FileUtils',
       SaveSaveFilesService
     ])
   ;
@@ -19,7 +20,8 @@
     $intFirebaseObject,
     SavesRef,
     SaveSaveFileRef,
-    SaveSaveFilesRef
+    SaveSaveFilesRef,
+    FileUtils
   ) {
     return {
       saveFile   : saveFile,
@@ -43,6 +45,7 @@
         }
 
         function _save() {
+          file.content = FileUtils.toParts(file.content);
           $intFirebaseArray(SaveSaveFilesRef).$add(file).then(function(fileRef) {
             saveObj.saveFileId = fileRef.key();
 

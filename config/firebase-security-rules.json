@@ -1,9 +1,8 @@
 {
   "rules": {
-    ".read": false,
+    ".read": true,
     ".write": false,
     "profiles": {
-      ".read": true,
       "$profile_id": {
         ".write": "auth != null && $profile_id === auth.uid"
       }
@@ -15,7 +14,6 @@
       }
     },
     "saveManager": {
-      ".read": true,
       ".write": "auth != null"
     }
   }
