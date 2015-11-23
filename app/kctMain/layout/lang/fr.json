@@ -62,7 +62,8 @@
     "messages"  : {
       "saved"         : "Sauvegarde réussie",
       "logout"        : "Déconnexion réussie",
-      "loginRedirect" : "Vous serez d'abord redirigé vers la page de connection"
+      "loginRedirect" : "Vous serez d'abord redirigé vers la page de connection",
+      "comingSoon"    : "Bientôt disponible"
     },
     "header"    : {
       "home"             : "Accueil",

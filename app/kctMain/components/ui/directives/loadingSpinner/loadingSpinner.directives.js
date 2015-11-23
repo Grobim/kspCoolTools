@@ -16,7 +16,7 @@
     function compileFnc($element, $attrs) {
 
       $element.prepend([
-        '<div id="' + $attrs.loadingSpinner + 'Spinner" ng-if="loading()" layout="" layout-align="center center">',
+        '<div id="' + $attrs.loadingSpinner + 'Spinner" ng-if="loading()" layout="" layout-align="center center" flex>',
         '  <md-progress-circular' + ((_isMdButton($element)) ? ' md-diameter="20px"' : '') + ' md-mode="indeterminate"></md-progress-circular>',
         '</div>'
       ].join(''));

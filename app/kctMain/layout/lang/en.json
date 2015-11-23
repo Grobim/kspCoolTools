@@ -62,7 +62,8 @@
     "messages"  : {
       "saved"         : "Save successfull",
       "logout"        : "Successfully logged out",
-      "loginRedirect" : "You will be redirected to the login page first"
+      "loginRedirect" : "You will be redirected to the login page first",
+      "comingSoon"    : "Coming soon"
     },
     "header"    : {
       "home"             : "Home",

@@ -5,6 +5,7 @@
       "header"   : "Fast connection",
       "facebook" : "Facebook",
       "google"   : "Google",
+      "github"   : "Github",
       "twitter"  : "Twitter"
     },
     "emailConnection" : {

@@ -1,13 +1,14 @@
 <form name="profileCtrl.profileForm" ng-submit="profileCtrl.saveProfile()">
   <h2 class="md-headline" translate>kct.layout.profile.publicData</h2>
-  <md-input-container class="md-icon-float md-block" smart-field="">
+  <md-input-container class="md-icon-float md-block"
+                      smart-field=""
+                      loading-spinner="profilePublicInfosLoad">
     <label for="loginName"><span translate>kct.layout.profile.fields.name</span></label>
     <ng-md-icon icon="person"></ng-md-icon>
     <input id="loginName" label="loginName" name="loginName" type="text" ng-model="profileCtrl.profile.nickname" required />
   </md-input-container>
-
   <h2 class="md-headline" translate>kct.layout.profile.privateData</h2>
-  <div layout="" layout-sm="column">
+  <div layout="" layout-sm="column" loading-spinner="profilePrivateInfosLoad">
     <md-input-container class="md-icon-float md-block" smart-field="" flex>
       <label for="loginEmail"><span translate>kct.layout.common.fields.email</span></label>
       <ng-md-icon icon="email"></ng-md-icon>

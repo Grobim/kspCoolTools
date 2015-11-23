@@ -1,16 +1,25 @@
 <h2 class="md-headline" translate>kct.layout.login.fastConnection.header</h2>
-<div layout="row" layout-sm="column" class="login-providers">
-  <md-button class="md-primary md-raised" flex ng-click="loginCtrl.oauthLogin('facebook')">
+<div layout="row" layout-wrap="" layout-sm="column" class="login-providers">
+  <md-button class="md-primary md-raised" flex flex-sm="50" ng-click="loginCtrl.oauthLogin('facebook')">
     <ng-md-icon icon="facebook-box"></ng-md-icon>
     <span translate>kct.layout.login.fastConnection.facebook</span>
   </md-button>
-  <md-button class="md-primary md-raised" flex ng-click="loginCtrl.oauthLogin('google')">
-    <ng-md-icon icon="google-plus"></ng-md-icon>
-    <span translate>kct.layout.login.fastConnection.google</span>
-  </md-button>
-  <md-button class="md-primary md-raised" flex ng-click="loginCtrl.oauthLogin('twitter')">
+  <div flex flex-sm="50" layout="" layout-fill="">
+    <md-tooltip>
+      <span translate>kct.layout.messages.comingSoon</span>
+    </md-tooltip>
+    <md-button class="md-primary md-raised" ng-click="loginCtrl.oauthLogin('google')" disabled flex>
+      <ng-md-icon icon="google-plus"></ng-md-icon>
+      <span translate>kct.layout.login.fastConnection.google</span>
+    </md-button>
+  </div>
+  <md-button class="md-primary md-raised" flex flex-sm="50" ng-click="loginCtrl.oauthLogin('twitter')">
     <ng-md-icon icon="twitter"></ng-md-icon>
     <span translate>kct.layout.login.fastConnection.twitter</span>
+  </md-button>
+  <md-button class="md-primary md-raised" flex flex-sm="50" ng-click="loginCtrl.oauthLogin('github')">
+    <ng-md-icon icon="github-circle"></ng-md-icon>
+    <span translate>kct.layout.login.fastConnection.github</span>
   </md-button>
 </div>
 <md-divider id="login-divider"></md-divider>

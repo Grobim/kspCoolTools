@@ -9,6 +9,7 @@
       'ToastService',
       'ProfileRef',
       'ProfilePrivateInfoRef',
+      'LoadingSpinner',
       'KctAuth',
       ProfileController
     ])
@@ -21,6 +22,7 @@
     ToastService,
     ProfileRef,
     ProfilePrivateInfoRef,
+    LoadingSpinner,
     KctAuth
   ) {
     var _this = this;
@@ -31,9 +33,25 @@
     return init();
 
     function init() {
+
+      LoadingSpinner.loading('profilePublicInfosLoad');
+      LoadingSpinner.loading('profilePrivateInfosLoad');
+
       _this.errors = [];
       _this.profile = $intFirebaseObject(new ProfileRef(_this.userAuth.uid));
       _this.profilePrivateInfos = $intFirebaseObject(new ProfilePrivateInfoRef(_this.userAuth.uid));
+
+      _this.profile.$loaded(function() {
+        LoadingSpinner.loaded('profilePublicInfosLoad');
+      }, function() {
+        LoadingSpinner.loaded('profilePublicInfosLoad');
+      });
+
+      _this.profilePrivateInfos.$loaded(function() {
+        LoadingSpinner.loaded('profilePrivateInfosLoad');
+      }, function() {
+        LoadingSpinner.loaded('profilePrivateInfosLoad');
+      });
 
       $scope.$on('$destroy', function() {
         _this.profilePrivateInfos.$destroy();
@@ -45,6 +63,7 @@
     }
 
     function _notifySave() {
+      _this.profileForm.$setPristine();
       ToastService.simple('kct.layout.profile.messages.success');
     }
   }

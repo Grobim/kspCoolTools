@@ -88,8 +88,8 @@
           profileData.public.nickname = authData[authData.provider].displayName;
         }
 
-        if (authData.provider !== 'twitter') {
-          profileData.private.email = authData[authData.provider].email;
+        if (authData.provider === 'password') {
+          profileData.private.email = authData.password.email;
         }
 
         return profileData;
