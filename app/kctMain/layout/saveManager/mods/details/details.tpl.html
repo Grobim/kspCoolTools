@@ -42,7 +42,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="modVersion in modDetailsCtrl.modVersions">
+              <tr ng-repeat="modVersion in modDetailsCtrl.tableModVersions">
                 <td>{{modVersion.$id | replaceChars:'_':'.'}}</td>
                 <td>{{modVersion.depsLength}}</td>
               </tr>

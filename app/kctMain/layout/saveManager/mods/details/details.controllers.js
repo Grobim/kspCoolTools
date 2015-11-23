@@ -59,7 +59,9 @@
         _this.mod = $intFirebaseObject(new ModRef($stateParams.modId));
 
         _this.modVersions = $intFirebaseArray(new ModVersionsRef($stateParams.modId).orderByKey().limitToLast(5));
-        _this.modVersions.$watch(_reverseList);
+        _this.modVersions.$watch(function() {
+          _this.tableModVersions = _this.modVersions.slice().reverse();
+        });
         _this.modVersions.$watch(function() {
           ModVersionsService.addDepLengthToVersions($stateParams.modId, _this.modVersions);
         });
@@ -90,10 +92,6 @@
         ToastService.error('kct.layout.saveManager.mods.details.edition.errors.isDep');
         console.error('error, is dep', error, error.length);
       });
-    }
-
-    function _reverseList() {
-      _this.modVersions = _this.modVersions.reverse();
     }
 
     function _notifySave() {

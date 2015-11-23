@@ -36,13 +36,13 @@
 
 
       // Sorting
-      if (tableConfig.order.length) {
+      if (tableConfig.order && tableConfig.order.length) {
         var reverse = false,
             predicate = tableConfig.order;
 
         if (tableConfig.order.charAt(0) === '-') {
           reverse = true;
-          predicate = _.trimLeft(predicate, '-');
+          predicate = predicate.slice(1);
         }
         workingList = $filter('orderBy')(workingList, predicate, reverse);
       }
