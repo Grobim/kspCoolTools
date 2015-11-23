@@ -10,11 +10,13 @@
       SavesDetailsMainController
     ])
     .controller('SaveDetailsController', [
+      '$scope',
       '$q',
       '$state',
       '$stateParams',
       '$intFirebaseObject',
       '$intFirebaseArray',
+      '$translate',
       'KctAuth',
       'SaveRef',
       'SavesRef',
@@ -25,6 +27,7 @@
       'FileUtils',
       'LoadingSpinner',
       'ToastService',
+      'LoginRooterService',
       'creationKey',
       SaveDetailsController
     ])
@@ -37,11 +40,13 @@
   }
 
   function SaveDetailsController(
+    $scope,
     $q,
     $state,
     $stateParams,
     $intFirebaseObject,
     $intFirebaseArray,
+    $translate,
     KctAuth,
     SaveRef,
     SavesRef,
@@ -52,15 +57,17 @@
     FileUtils,
     LoadingSpinner,
     ToastService,
+    LoginRooterService,
     creationKey
   ) {
 
-    var _this = this;
+    var _this = this,
+        _cancelOnAuth;
 
     _this.isCreation = isCreation;
-
-    _this.formAction = (isCreation()) ? _createSave : _editSave;
     _this.deleteSave = deleteSave;
+
+    _this.formAction = _.noop;
 
     _this.getDetailsFlex = getDetailsFlex;
     _this.uploadSaveFile = uploadSaveFile;
@@ -72,11 +79,47 @@
 
     function init() {
 
+      _this.auth = KctAuth.$getAuth();
+
+      _cancelOnAuth = KctAuth.$onAuth(function(auth) {
+        _this.auth = auth;
+        _this.formAction = _determineFormAction();
+      });
+
+      $scope.$on('$destroy', function() {
+        _cancelOnAuth();
+      });
+
       if (isCreation()) {
 
         _this.save = {
-          author : KctAuth.$getAuth().uid
+          author : _this.auth.uid
         };
+
+        if ($stateParams.copy) {
+
+          $intFirebaseObject(new SaveRef($stateParams.copy)).$loaded(function(copiedSave) {
+            _this.save.kspVersion = copiedSave.kspVersion || null;
+
+            $translate('kct.layout.common.copyTitle', {title : copiedSave.title}).then(function(translation) {
+              _this.save.title = translation;
+            });
+
+            _this.save.desc = copiedSave.desc || null;
+
+            if (copiedSave.saveFileId) {
+              _this.save.$copyFileId = copiedSave.saveFileId;
+
+              $intFirebaseObject(new SaveSaveFileRef(_this.save.$copyFileId).child('name')).$loaded(function(data) {
+                _this.saveFile = {
+                  name : data.$value
+                };
+              });
+            }
+
+          });
+
+        }
 
         SavesService.addAuthorNameToSave(_this.save);
 
@@ -104,6 +147,8 @@
         });
 
       }
+
+      _this.formAction = _determineFormAction();
 
     }
 
@@ -153,7 +198,7 @@
       }
 
       LoadingSpinner.loading('savesDetailsDownload');
-      $intFirebaseObject(new SaveSaveFileRef(_this.save.saveFileId)).$loaded(function(data) {
+      $intFirebaseObject(new SaveSaveFileRef(_this.save.saveFileId || _this.save.$copyFileId)).$loaded(function(data) {
         _this.saveFile.content = FileUtils.fromParts(data.content);
         FileUtils.download(_this.saveFile).then(function() {
           LoadingSpinner.loaded('savesDetailsDownload');
@@ -166,6 +211,14 @@
       _this.fileChanged = true;
     }
 
+    function _determineFormAction() {
+      if (_this.auth && _this.auth.uid === _this.save.author) {
+        return (isCreation()) ? _createSave : _editSave;
+      } else {
+        return _createCopy;
+      }
+    }
+
     function _createSave() {
       if (LoadingSpinner.get('savesDetailsSave')) {
         return;
@@ -174,7 +227,14 @@
 
       $intFirebaseArray(SavesRef).$add(_this.save).then(function(saveRef) {
         _this.save.$id = saveRef.key();
-        if (_this.saveFile) {
+
+        if (_this.save.$copyFileId && !_this.saveFile.content) {
+          SaveSaveFiles.copyFile($stateParams.copy, _this.save.$id).then(function() {
+            _postCreate();
+          }, function(error) {
+            _postCreate(error);
+          });
+        } else if (_this.saveFile) {
           SaveSaveFiles.saveFile(_this.save, _this.saveFile).then(function() {
              _postCreate();
           }, function(error) {
@@ -235,6 +295,24 @@
           ToastService.simple('kct.layout.saveManager.saves.details.messages.edit.success');
         }
         LoadingSpinner.loaded('savesDetailsSave');
+      }
+    }
+
+    function _createCopy() {
+      if (_this.auth) {
+        $state.go('kct.saveManager.save.creation', {
+          copy   : _this.save.$id,
+          saveId : creationKey
+        });
+      } else {
+        LoginRooterService.nextState(
+          'kct.saveManager.save.creation',
+          {
+            copy   : _this.save.$id,
+            saveId : creationKey
+          }
+        );
+        $state.go('kct.login');
       }
     }
 

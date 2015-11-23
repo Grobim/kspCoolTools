@@ -7,6 +7,7 @@
       '$intFirebaseArray',
       '$intFirebaseObject',
       'SavesRef',
+      'SaveRef',
       'SaveSaveFileRef',
       'SaveSaveFilesRef',
       'FileUtils',
@@ -19,12 +20,14 @@
     $intFirebaseArray,
     $intFirebaseObject,
     SavesRef,
+    SaveRef,
     SaveSaveFileRef,
     SaveSaveFilesRef,
     FileUtils
   ) {
     return {
       saveFile   : saveFile,
+      copyFile   : copyFile,
       deleteFile : deleteFile
     };
 
@@ -64,6 +67,36 @@
       }, function(err) {
         deferred.reject(err);
       });
+
+      return deferred.promise;
+    }
+
+    function copyFile(fromSaveId, toSaveId) {
+
+      var deferred = $q.defer();
+
+      $intFirebaseObject(new SaveRef(fromSaveId).child('saveFileId')).$loaded(function(fromSaveFileId) {
+
+        $intFirebaseObject(new SaveSaveFileRef(fromSaveFileId.$value)).$loaded(function(fromSaveFile) {
+
+          $intFirebaseArray(SaveSaveFilesRef).$add({
+            name    : fromSaveFile.name,
+            saveId  : toSaveId,
+            content : fromSaveFile.content
+          }).then(function(newFileRef) {
+
+            var newSave = $intFirebaseObject(new SaveRef(toSaveId));
+
+            newSave.$loaded(function() {
+              newSave.saveFileId = newFileRef.key();
+              newSave.$save().then(deferred.resolve, deferred.reject);
+            }, deferred.reject);
+
+          }, deferred.reject);
+
+        }, deferred.reject);
+
+      }, deferred.reject);
 
       return deferred.promise;
     }

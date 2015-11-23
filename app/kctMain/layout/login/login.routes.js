@@ -33,14 +33,8 @@
             $state.current.name.length &&
             !$state.current.abstract
           ) {
-            LoginRooterService.previousState($state.current, $state.params);
+            LoginRooterService.previousState($state.current.name, $state.params);
           }
-        }
-      ],
-      onExit        : [
-        'LoginRooterService',
-        function(LoginRooterService) {
-          LoginRooterService.clear();
         }
       ]
     });

@@ -62,7 +62,7 @@
         if (profileExists) {
 
           ToastService.simple('kct.layout.login.emailConnection.success.login');
-          LoginRooterService.goToPreviousState();
+          LoginRooterService.goToNextState();
 
         } else {
 

@@ -58,7 +58,11 @@
     }
 
     function _isMdButton($element) {
-      return ['md-button', 'button'].indexOf($element.parent().get(0).localName) > -1;
+      var parent = $element.parent().get(0);
+      if (!parent) {
+        return false;
+      }
+      return ['md-button', 'button'].indexOf(parent.localName) > -1;
     }
 
   }

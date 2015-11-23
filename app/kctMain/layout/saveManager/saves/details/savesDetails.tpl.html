@@ -19,7 +19,9 @@
         <div layout="row" layout-sm="column" layout-margin="" flex>
           <form ng-submit="saveDetailsCtrl.formAction()" flex flex-sm="100" name="saveDetailsCtrl.saveForm">
             <md-input-container smart-field>
-              <label for="saveTitle"><span translate>kct.layout.common.fields.title</span></label>
+              <label for="saveTitle">
+                <span translate>kct.layout.common.fields.title</span>
+              </label>
               <input id="saveTitle" required name="saveTitle" type="text" ng-model="saveDetailsCtrl.save.title" />
             </md-input-container>
             <md-input-container>
@@ -27,7 +29,9 @@
               <input id="saveKspVersion" disabled name="saveKspVersion" type="text" ng-model="saveDetailsCtrl.save.$authorName" />
             </md-input-container>
             <md-input-container smart-field>
-              <label for="saveKspVersion"><span translate>kct.layout.common.fields.kspVersion</span></label>
+              <label for="saveKspVersion">
+                <span translate>kct.layout.common.fields.kspVersion</span>
+              </label>
               <input id="saveKspVersion" required name="saveKspVersion" type="text" ng-model="saveDetailsCtrl.save.kspVersion" />
             </md-input-container>
             <md-input-container>
@@ -75,19 +79,36 @@
                 </md-input-container>
               </div>
             </div>
-            <div layout="row">
-              <md-input-container flex="50">
-                <md-button class="md-raised md-primary">
-                  <div loading-spinner="savesDetailsSave">
-                    <span translate>kct.layout.common.save</span>
-                  </div>
-                </md-button>
-              </md-input-container>
-              <md-input-container flex="50" ng-if="!saveDetailsCtrl.isCreation()">
-                <md-button type="button" ng-click="saveDetailsCtrl.deleteSave()" class="md-raised md-warn">
-                  <div loading-spinner="savesDetailsDelete">
-                    <span translate>kct.layout.common.remove</span>
-                  </div>
+            <div ng-if="saveDetailsCtrl.auth && saveDetailsCtrl.auth.uid === saveDetailsCtrl.save.author"
+                 layout="row"
+                 layout-sm="column">
+              <md-button class="md-raised md-primary"
+                         flex
+                         flex-sm="100">
+                <div loading-spinner="savesDetailsSave">
+                  <span translate>kct.layout.common.save</span>
+                </div>
+              </md-button>
+
+              <md-button type="button"
+                         ng-click="saveDetailsCtrl.deleteSave()"
+                         class="md-raised md-warn"
+                         ng-if="!saveDetailsCtrl.isCreation()"
+                         flex
+                         flex-sm="100">
+                <div loading-spinner="savesDetailsDelete">
+                  <span translate>kct.layout.common.remove</span>
+                </div>
+              </md-button>
+
+            </div>
+            <div ng-if="!saveDetailsCtrl.auth || saveDetailsCtrl.auth.uid !== saveDetailsCtrl.save.author" layout="row" layout-sm="column">
+              <md-input-container flex="50" flex-sm="100">
+                <md-button class="md-raised">
+                  <span translate>kct.layout.common.createCopy</span>
+                  <md-tooltip ng-if="!saveDetailsCtrl.auth">
+                    <span translate>kct.layout.messages.loginRedirect</span>
+                  </md-tooltip>
                 </md-button>
               </md-input-container>
             </div>

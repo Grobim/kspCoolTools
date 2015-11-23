@@ -9,6 +9,8 @@
       "remove"      : "Supprimer",
       "search"      : "Rechercher",
       "cancel"      : "Annuler",
+      "createCopy"  : "Créer une copie",
+      "copyTitle"   : "Copie de : {title}",
       "resultCount" : "Résultats ({count})",
       "fields"      : {
         "title"           : "Titre",
@@ -58,8 +60,9 @@
       }
     },
     "messages"  : {
-      "saved"  : "Sauvegarde réussie",
-      "logout" : "Déconnexion réussie"
+      "saved"         : "Sauvegarde réussie",
+      "logout"        : "Déconnexion réussie",
+      "loginRedirect" : "Vous serez d'abord redirigé vers la page de connection"
     },
     "header"    : {
       "home"             : "Accueil",

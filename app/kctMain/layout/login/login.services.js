@@ -7,11 +7,16 @@
 
   function LoginRooterService($state) {
     var _previousState,
-        _previousParams;
+        _previousParams,
+        _nextState,
+        _nextParams;
     return {
-      previousState     : previousState,
-      clear             : clear,
-      goToPreviousState : goToPreviousState
+      previousState : previousState,
+      nextState     : nextState,
+      clear         : clear,
+      clearPrevious : clearPrevious,
+      clearNext     : clearNext,
+      goToNextState : goToNextState
     };
 
     function previousState(stateSet, paramsSet) {
@@ -27,14 +32,41 @@
       };
     }
 
+    function nextState(stateSet, paramsSet) {
+      if (stateSet) {
+        _nextState = stateSet;
+        if (paramsSet) {
+          _nextParams = paramsSet;
+        }
+      }
+      return {
+        state  : _nextState,
+        params : _nextParams
+      };
+    }
+
     function clear() {
+      clearPrevious();
+      clearNext();
+    }
+
+    function clearPrevious() {
       _previousState = null;
       _previousParams = null;
     }
 
-    function goToPreviousState() {
-      if (_previousState) {
-        $state.go(_previousState.name, _previousParams);
+    function clearNext() {
+      _nextState = null;
+      _nextParams = null;
+    }
+
+    function goToNextState() {
+      if (_nextState) {
+        $state.go(_nextState, _nextParams);
+        clearNext();
+      } else if (_previousState) {
+        $state.go(_previousState, _previousParams);
+        clearPrevious();
       } else {
         $state.go('kct.home');
       }

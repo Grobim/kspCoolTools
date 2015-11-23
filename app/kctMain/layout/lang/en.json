@@ -9,6 +9,8 @@
       "remove"      : "Remove",
       "search"      : "Search",
       "cancel"      : "Cancel",
+      "createCopy"  : "Create a copy",
+      "copyTitle"   : "Copy of : {title}",
       "resultCount" : "Results ({count})",
       "fields" : {
         "title"           : "Title",
@@ -58,8 +60,9 @@
       }
     },
     "messages"  : {
-      "saved"  : "Save successfull",
-      "logout" : "Successfully logged out"
+      "saved"         : "Save successfull",
+      "logout"        : "Successfully logged out",
+      "loginRedirect" : "You will be redirected to the login page first"
     },
     "header"    : {
       "home"             : "Home",

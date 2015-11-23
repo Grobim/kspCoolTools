@@ -32,7 +32,7 @@
         }
       })
       .state('kct.saveManager.save.creation', {
-        url          : '/create',
+        url          : '/create?copy',
         templateUrl  : 'kctMain/layout/saveManager/saves/details/savesDetails.tpl.html',
         controller   : 'SaveDetailsController',
         controllerAs : 'saveDetailsCtrl',
