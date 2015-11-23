@@ -23,7 +23,7 @@
         controller   : 'SaveDetailsController',
         controllerAs : 'saveDetailsCtrl',
         data          : {
-          windowTitleKey    : 'kct.layout.saveManager.saves.details.edition.windowTitle'
+          windowTitleKey : 'kct.layout.saveManager.saves.details.edition.windowTitle'
         },
         ncyBreadcrumb : {
           translate       : 'kct.layout.saveManager.saves.details.edition.breadCrumbTitle',
@@ -37,11 +37,12 @@
         controller   : 'SaveDetailsController',
         controllerAs : 'saveDetailsCtrl',
         data          : {
-          windowTitleKey    : 'kct.layout.saveManager.saves.details.creation.windowTitle'
+          windowTitleKey : 'kct.layout.saveManager.saves.details.creation.windowTitle',
+          requireAuth    : true
         },
         ncyBreadcrumb : {
-          translate       : 'kct.layout.saveManager.saves.details.creation.breadCrumbTitle',
-          parent          : 'kct.saveManager.saves'
+          translate : 'kct.layout.saveManager.saves.details.creation.breadCrumbTitle',
+          parent    : 'kct.saveManager.saves'
         }
       })
     ;

@@ -31,7 +31,7 @@
       files   : [
         '<%= yeoman.app %>/index.html'
       ],
-      tasks   : ['preprocess:dist']
+      tasks   : ['preprocess:app']
     },
     langs: {
       files: ['<%= yeoman.app %>/{,**/}lang/*.json'],

@@ -9,6 +9,7 @@
       'KctAuth',
       'ProfileRef',
       'ProfilesService',
+      'LoginRooterService',
       LoginController
     ])
   ;
@@ -19,7 +20,8 @@
     ToastService,
     KctAuth,
     ProfileRef,
-    ProfilesService
+    ProfilesService,
+    LoginRooterService
   ) {
     var _this = this;
 
@@ -60,7 +62,7 @@
         if (profileExists) {
 
           ToastService.simple('kct.layout.login.emailConnection.success.login');
-          $state.go('kct.home');
+          LoginRooterService.goToPreviousState();
 
         } else {
 

@@ -46,6 +46,10 @@
           "remove" : "Vous n'avez pas les droits suffisants pour supprimer ça.",
           "error"  : "Vous n'avez pas les droits suffisants pour consulter ça.",
           "loaded" : "Une erreur est survenue lors du chargement de cette donnée"
+        },
+        "rooting"       : {
+          "requireAuth"   : "Cette page n'est disponible que pour les utilisateurs connectés",
+          "requireUnauth" : "Cette page n'est disponible que pour les utilisateurs déconnectés"
         }
       },
       "pagination"  : {

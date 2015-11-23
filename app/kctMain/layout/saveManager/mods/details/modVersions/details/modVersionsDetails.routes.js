@@ -25,7 +25,8 @@
         controller    : 'ModDetailsModVersionsDetailsController',
         controllerAs  : 'modVersionsDetailsCtrl',
         data          : {
-          windowTitleKey : 'kct.layout.saveManager.mods.details.modVersions.details.create.header'
+          windowTitleKey : 'kct.layout.saveManager.mods.details.modVersions.details.create.header',
+          requireAuth    : true
         },
         ncyBreadcrumb : {
           translate : 'kct.layout.saveManager.mods.details.modVersions.details.create.header',

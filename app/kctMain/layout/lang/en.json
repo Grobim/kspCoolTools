@@ -43,6 +43,10 @@
           "remove" : "Your permissions are insufficent to delete this",
           "error"  : "Your permissions are insufficent to read this",
           "loaded" : "An error occured while loading data"
+        },
+        "rooting"       : {
+          "requireAuth"   : "This page is only available to logged users",
+          "requireUnauth" : "This page is only available to unlogged users"
         }
       },
       "buttons"     : {

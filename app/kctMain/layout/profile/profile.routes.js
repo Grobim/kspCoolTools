@@ -14,7 +14,8 @@
       data          : {
         bodyClass      : 'profile',
         windowTitleKey : 'kct.layout.header.profile',
-        titleKey       : 'kct.layout.profile.header'
+        titleKey       : 'kct.layout.profile.header',
+        requireAuth    : true
       },
       ncyBreadcrumb : {
         translate : 'kct.layout.header.profile',

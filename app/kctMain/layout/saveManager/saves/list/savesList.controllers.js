@@ -3,6 +3,7 @@
 
   angular.module('kct.layout.saveManager.saves.list')
     .controller('SavesController', [
+      '$scope',
       '$intFirebaseArray',
       'KctAuth',
       'SavesRef',
@@ -14,6 +15,7 @@
   ;
 
   function SavesController(
+    $scope,
     $intFirebaseArray,
     KctAuth,
     SavesRef,
@@ -22,7 +24,8 @@
     creationKey
   ) {
 
-    var _this = this;
+    var _this = this,
+        _cancelOnAuth;
 
     _this.onQueryChange = onQueryChange;
 
@@ -36,6 +39,14 @@
       };
 
       _this.auth = KctAuth.$getAuth();
+
+      _cancelOnAuth = KctAuth.$onAuth(function(auth) {
+        _this.auth = auth;
+      });
+
+      $scope.$on('$destroy', function() {
+        _cancelOnAuth();
+      });
 
       _this.saves = $intFirebaseArray(SavesRef);
       _this.saves.$watch(function() {

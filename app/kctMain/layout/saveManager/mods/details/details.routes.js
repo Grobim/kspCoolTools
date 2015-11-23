@@ -23,7 +23,8 @@
         controller   : 'ModDetailController',
         controllerAs : 'newModCtrl',
         data          : {
-          windowTitleKey : 'kct.layout.saveManager.mods.details.creation.header'
+          windowTitleKey : 'kct.layout.saveManager.mods.details.creation.header',
+          requireAuth    : true
         },
         ncyBreadcrumb : {
           translate : 'kct.layout.saveManager.mods.details.creation.header',

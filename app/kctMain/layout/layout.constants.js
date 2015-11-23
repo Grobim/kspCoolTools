@@ -27,13 +27,11 @@
         name  : 'kct.layout.header.profile',
         state : 'kct.profile',
         type  : 'link',
-        icon  : 'person',
-        auth  : true
+        icon  : 'person'
       }, {
         name  : 'kct.layout.header.login',
         state : 'kct.login',
         type  : 'link',
-        auth  : false,
         icon  : 'login'
       }
     ])

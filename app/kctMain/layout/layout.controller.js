@@ -66,23 +66,37 @@
       return $state.includes(stateName);
     }
 
-    function userHasAuthRights(state) {
-      if (_.isBoolean(state.auth)) {
+    function userHasAuthRights(menuState) {
+      var state = $state.get(menuState.state);
+      if (_.isBoolean(state.data.requireAuth)) {
         var authData = KctAuth.$getAuth();
         if (authData) {
-          return state.auth === true;
+          return state.data.requireAuth === true;
         } else {
-          return state.auth === false;
+          return state.data.requireAuth === false;
         }
       }
       return true;
     }
 
     function logout() {
-      $state.go('kct.home').then(function() {
-        KctAuth.$unauth();
-        ToastService.simple('kct.layout.messages.logout');
-      });
+      var hasError,
+          cancel = $rootScope.$on('requireAuthPageError', onPageError),
+          authCancel = KctAuth.$onAuth(onAuth);
+      
+      KctAuth.$unauth();
+
+      function onAuth(auth) {
+        if (!auth && !hasError) {
+          ToastService.simple('kct.layout.messages.logout');
+        }
+        cancel();
+        authCancel();
+      }
+
+      function onPageError() {
+        hasError = true;
+      }
     }
 
     function toggleNavbar() {
