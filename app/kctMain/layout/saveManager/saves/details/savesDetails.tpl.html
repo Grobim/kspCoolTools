@@ -47,7 +47,7 @@
                   <label for="saveFile"><span translate>kct.layout.common.fields.saveFile</span></label>
                   <input id="saveFile" name="saveFile" type="text" ng-model="saveDetailsCtrl.saveFile.name" disabled />
                 </md-input-container>
-                <md-input-container>
+                <md-input-container ng-if="saveDetailsCtrl.auth && saveDetailsCtrl.auth.uid === saveDetailsCtrl.save.author">
                   <md-button type="button"
                              class="md-icon-button"
                              ng-click="saveDetailsCtrl.clearSaveFile()"
@@ -58,7 +58,7 @@
                 </md-input-container>
               </div>
               <div layout="row" flex-sm="100">
-                <md-input-container flex-sm="">
+                <md-input-container flex-sm="" ng-if="saveDetailsCtrl.auth && saveDetailsCtrl.auth.uid === saveDetailsCtrl.save.author">
                   <md-button choose-file-button="file-input"
                              class="md-raised"
                              type="button"
