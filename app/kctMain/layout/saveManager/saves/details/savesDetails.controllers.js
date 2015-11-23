@@ -69,7 +69,6 @@
 
     _this.formAction = _.noop;
 
-    _this.getDetailsFlex = getDetailsFlex;
     _this.uploadSaveFile = uploadSaveFile;
     _this.clearSaveFile = clearSaveFile;
 
@@ -165,14 +164,6 @@
       }, function() {
         LoadingSpinner.loaded('savesDetailsDelete');
       });
-    }
-
-    function getDetailsFlex() {
-      if (isCreation()) {
-        return 70;
-      } else {
-        return '';
-      }
     }
 
     function uploadSaveFile($files) {
