@@ -11,7 +11,12 @@
     ])
   ;
 
-  function ModsController($intFirebaseArray, ModsRef, MdDataTableUtils, creationKey) {
+  function ModsController(
+    $intFirebaseArray,
+    ModsRef,
+    MdDataTableUtils,
+    creationKey
+  ) {
     var _this = this;
 
     _this.onQueryChange = onQueryChange;
