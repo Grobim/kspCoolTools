@@ -10,6 +10,7 @@
       SavesDetailsMainController
     ])
     .controller('SaveDetailsController', [
+      '$q',
       '$state',
       '$stateParams',
       '$intFirebaseObject',
@@ -19,9 +20,11 @@
       'SavesRef',
       'SaveSaveFileRef',
       'SaveSaveFiles',
+      'SavesService',
       'Upload',
       'FileUtils',
       'LoadingSpinner',
+      'ToastService',
       'creationKey',
       SaveDetailsController
     ])
@@ -34,6 +37,7 @@
   }
 
   function SaveDetailsController(
+    $q,
     $state,
     $stateParams,
     $intFirebaseObject,
@@ -43,9 +47,11 @@
     SavesRef,
     SaveSaveFileRef,
     SaveSaveFiles,
+    SavesService,
     Upload,
     FileUtils,
     LoadingSpinner,
+    ToastService,
     creationKey
   ) {
 
@@ -54,12 +60,13 @@
     _this.isCreation = isCreation;
 
     _this.formAction = (isCreation()) ? _createSave : _editSave;
+    _this.deleteSave = deleteSave;
 
     _this.getDetailsFlex = getDetailsFlex;
     _this.uploadSaveFile = uploadSaveFile;
     _this.clearSaveFile = clearSaveFile;
 
-    _this.downloadTest = downloadTest;
+    _this.downloadFile = downloadFile;
 
     return init();
 
@@ -71,12 +78,16 @@
           author : KctAuth.$getAuth().uid
         };
 
+        SavesService.addAuthorNameToSave(_this.save);
+
       } else {
 
         LoadingSpinner.loading('savesDetailsLoad');
 
         _this.save = $intFirebaseObject(new SaveRef($stateParams.saveId));
         _this.save.$loaded(function() {
+
+          SavesService.addAuthorNameToSave(_this.save);
 
           if (_this.save.saveFileId) {
             LoadingSpinner.loading('savesDetailsLoadFile');
@@ -100,6 +111,17 @@
       return $stateParams.saveId === creationKey;
     }
 
+    function deleteSave() {
+      LoadingSpinner.loading('savesDetailsDelete');
+      SavesService.deleteSave(_this.save).then(function() {
+        ToastService.simple('kct.layout.saveManager.saves.details.messages.delete.success');
+        $state.go('kct.saveManager.saves');
+        LoadingSpinner.loaded('savesDetailsDelete');
+      }, function() {
+        LoadingSpinner.loaded('savesDetailsDelete');
+      });
+    }
+
     function getDetailsFlex() {
       if (isCreation()) {
         return 70;
@@ -119,11 +141,13 @@
             };
             _this.fileChanged = true;
           }
+        }, function() {
+          ToastService.error('kct.layout.saveManager.saves.details.messages.fileUpload.error');
         });
       }
     }
 
-    function downloadTest() {
+    function downloadFile() {
       if (LoadingSpinner.get('savesDetailsDownload')) {
         return;
       }
@@ -152,19 +176,23 @@
         _this.save.$id = saveRef.key();
         if (_this.saveFile) {
           SaveSaveFiles.saveFile(_this.save, _this.saveFile).then(function() {
-             _postCreate(saveRef.key());
-          }, function(err) {
-            console.log(err);
-            LoadingSpinner.loaded('savesDetailsSave');
+             _postCreate();
+          }, function(error) {
+            _postCreate(error);
           });
         } else {
-          _postCreate(saveRef.key());
+          _postCreate();
         }
+      }, function(error) {
+          _postCreate(error);
       });
 
-      function _postCreate(saveKey) {
+      function _postCreate(error) {
         LoadingSpinner.loaded('savesDetailsSave');
-        $state.go('kct.saveManager.save.details', {saveId : saveKey});
+        if (!error) {
+          ToastService.simple('kct.layout.saveManager.saves.details.messages.create.success');
+          $state.go('kct.saveManager.save.details', {saveId : _this.save.$id});
+        }
       }
     }
 
@@ -180,27 +208,34 @@
 
           if (_this.saveFile) {
             SaveSaveFiles.saveFile(_this.save, _this.saveFile).then(function() {
-              LoadingSpinner.loaded('savesDetailsSave');
+              _postEdit();
               _this.fileChanged = false;
             }, function(err) {
-              console.log(err);
-              LoadingSpinner.loaded('savesDetailsSave');
+              _postEdit(err);
             });
           } else {
             SaveSaveFiles.deleteFile(_this.save).then(function() {
-              LoadingSpinner.loaded('savesDetailsSave');
               _this.fileChanged = false;
+              _postEdit();
             }, function(err) {
-              console.log(err);
-              LoadingSpinner.loaded('savesDetailsSave');
+              _postEdit(err);
             });
           }
 
         } else {
-          LoadingSpinner.loaded('savesDetailsSave');
+          _postEdit();
         }
 
+      }, function(err) {
+        _postEdit(err);
       });
+
+      function _postEdit(error) {
+        if (!error) {
+          ToastService.simple('kct.layout.saveManager.saves.details.messages.edit.success');
+        }
+        LoadingSpinner.loaded('savesDetailsSave');
+      }
     }
 
   }

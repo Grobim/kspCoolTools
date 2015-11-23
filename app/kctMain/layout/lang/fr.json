@@ -30,18 +30,22 @@
         "upload" : "Déposer"
       },
       "errors"      : {
-        "required"    : "Ce champ est requis",
-        "maxlength"   : "This field should not exceed {max, plural, one{1 character} other{# characters}}",
-        "minlength"   : "This field should contain {min, plural, one{1 maximun character} other{# maximum characters}}",
-        "rangelength" : "This field should contain between {min} and {max} characters",
-        "email"       : "Invalid email",
-        "number"      : "Invalid number",
-        "min"         : "The value should be higher than {min}",
-        "max"         : "The value should be lower than {max}",
-        "rangenumber" : "The value should be between {min} and {max}",
-        "permissions" : {
-          "save"  : "Vous n'avez pas les droits suffisants pour éditer ça.",
-          "error" : "Vous n'avez pas les droits suffisants pour consulter ça."
+        "required"      : "Ce champ est requis",
+        "maxlength"     : "This field should not exceed {max, plural, one{1 character} other{# characters}}",
+        "minlength"     : "This field should contain {min, plural, one{1 maximun character} other{# maximum characters}}",
+        "rangelength"   : "This field should contain between {min} and {max} characters",
+        "email"         : "Invalid email",
+        "number"        : "Invalid number",
+        "min"           : "The value should be higher than {min}",
+        "max"           : "The value should be lower than {max}",
+        "rangenumber"   : "The value should be between {min} and {max}",
+        "shouldConnect" : "Connexion requise",
+        "permissions"   : {
+          "save"   : "Vous n'avez pas les droits suffisants pour éditer ça.",
+          "add"    : "Vous n'avez pas les droits suffisants pour ajouter ça.",
+          "remove" : "Vous n'avez pas les droits suffisants pour supprimer ça.",
+          "error"  : "Vous n'avez pas les droits suffisants pour consulter ça.",
+          "loaded" : "Une erreur est survenue lors du chargement de cette donnée"
         }
       },
       "pagination"  : {

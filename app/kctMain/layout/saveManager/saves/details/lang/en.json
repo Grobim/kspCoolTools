@@ -6,10 +6,24 @@
       "windowTitle"     : "Save creation",
       "breadCrumbTitle" : "Save creation"
     },
-    "edition" : {
+    "edition"  : {
       "windowTitle"     : "Save edition",
       "title"           : "Save edition : {saveTitle}",
       "breadCrumbTitle" : "Save edition : {saveTitle}"
+    },
+    "messages" : {
+      "delete" : {
+        "success" : "Save deleted"
+      },
+      "fileUpload" : {
+        "error"   : "An error occured uploading the file"
+      },
+      "create" : {
+        "success" : "Save created successfully"
+      },
+      "edit" : {
+        "success" : "Save edited successfully"
+      }
     }
   }
 }

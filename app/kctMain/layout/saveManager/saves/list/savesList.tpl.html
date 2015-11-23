@@ -31,12 +31,14 @@
       <thead md-order="savesCtrl.tableConfig.order" md-trigger="savesCtrl.onQueryChange">
         <tr>
           <th name-key="kct.layout.common.fields.title" order-by="title"></th>
+          <th name-key="kct.layout.common.fields.author"></th>
           <th name-key="kct.layout.common.fields.details"></th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="save in savesCtrl.tableSaves">
           <td>{{save.title}}</td>
+          <td>{{save.$authorName}}</td>
           <td>
             <md-button ui-sref="kct.saveManager.save.details({saveId : save.$id})" class="md-raised"><span translate>kct.layout.common.details</span></md-button>
           </td>
@@ -54,7 +56,16 @@
   </md-data-table-pagination>
 
   <div layout="row">
-    <md-button ui-sref="kct.saveManager.save.creation({saveId : savesCtrl.creationKey})" class="md-primary md-raised" flex="50" flex-sm="100"><span translate>kct.layout.saveManager.saves.list.add</span></md-button>
+    <md-button ui-sref="kct.saveManager.save.creation({saveId : savesCtrl.creationKey})"
+               class="md-primary md-raised"
+               flex="50"
+               flex-sm="100"
+               ng-disabled="!savesCtrl.auth">
+      <md-tooltip ng-if="!savesCtrl.auth">
+        <span translate>kct.layout.common.errors.shouldConnect</span>
+      </md-tooltip>
+      <span translate>kct.layout.saveManager.saves.list.add</span>
+    </md-button>
   </div>
 
 </md-card>

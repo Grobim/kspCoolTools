@@ -22,6 +22,10 @@
               <label for="saveTitle"><span translate>kct.layout.common.fields.title</span></label>
               <input id="saveTitle" required name="saveTitle" type="text" ng-model="saveDetailsCtrl.save.title" />
             </md-input-container>
+            <md-input-container>
+              <label for="saveKspVersion"><span translate>kct.layout.common.fields.author</span></label>
+              <input id="saveKspVersion" disabled name="saveKspVersion" type="text" ng-model="saveDetailsCtrl.save.$authorName" />
+            </md-input-container>
             <md-input-container smart-field>
               <label for="saveKspVersion"><span translate>kct.layout.common.fields.kspVersion</span></label>
               <input id="saveKspVersion" required name="saveKspVersion" type="text" ng-model="saveDetailsCtrl.save.kspVersion" />
@@ -31,45 +35,59 @@
               <textarea id="saveDesc" rows="3" name="saveDesc" type="text" ng-model="saveDetailsCtrl.save.desc"></textarea>
             </md-input-container>
             <div layout="row"
+                 layout-wrap=""
                  loading-spinner="savesDetailsLoadFile"
                  layout-align="center center">
-              <md-input-container flex>
-                <label for="saveFile"><span translate>kct.layout.common.fields.saveFile</span></label>
-                <input id="saveFile" name="saveFile" type="text" ng-model="saveDetailsCtrl.saveFile.name" disabled />
-              </md-input-container>
-              <md-input-container>
-                <md-button type="button"
-                           class="md-icon-button"
-                           ng-click="saveDetailsCtrl.clearSaveFile()"
-                           ng-if="saveDetailsCtrl.saveFile.name.length"
-                           aria-label="Clear save file">
-                  <ng-md-icon icon="close"></ng-md-icon>
+              <div layout="row" flex-gt-sm="" flex-sm="100">
+                <md-input-container flex>
+                  <label for="saveFile"><span translate>kct.layout.common.fields.saveFile</span></label>
+                  <input id="saveFile" name="saveFile" type="text" ng-model="saveDetailsCtrl.saveFile.name" disabled />
+                </md-input-container>
+                <md-input-container>
+                  <md-button type="button"
+                             class="md-icon-button"
+                             ng-click="saveDetailsCtrl.clearSaveFile()"
+                             ng-if="saveDetailsCtrl.saveFile.name.length"
+                             aria-label="Clear save file">
+                    <ng-md-icon icon="close"></ng-md-icon>
+                  </md-button>
+                </md-input-container>
+              </div>
+              <div layout="row" flex-sm="100">
+                <md-input-container flex-sm="">
+                  <md-button choose-file-button="file-input"
+                             class="md-raised"
+                             type="button"
+                             aria-label="file input">
+                    <ng-md-icon icon="file_upload"></ng-md-icon>
+                    <span translate>kct.layout.common.buttons.upload</span>
+                  </md-button>
+                </md-input-container>
+                <md-input-container ng-show="saveDetailsCtrl.saveFile.name.length" flex="initial" flex-sm="">
+                  <md-button ng-disabled="saveDetailsCtrl.fileChanged" class="md-raised" type="button" ng-click="saveDetailsCtrl.downloadFile()" aria-label="Download">
+                    <div loading-spinner="savesDetailsDownload">
+                      <ng-md-icon icon="file_download"></ng-md-icon>
+                    </div>
+                  </md-button>
+                </md-input-container>
+              </div>
+            </div>
+            <div layout="row">
+              <md-input-container flex="50">
+                <md-button class="md-raised md-primary">
+                  <div loading-spinner="savesDetailsSave">
+                    <span translate>kct.layout.common.save</span>
+                  </div>
                 </md-button>
               </md-input-container>
-              <md-input-container>
-                <md-button choose-file-button="file-input"
-                           class="md-raised"
-                           type="button"
-                           aria-label="file input">
-                  <ng-md-icon icon="file_upload"></ng-md-icon>
-                  <span translate>kct.layout.common.buttons.upload</span>
-                </md-button>
-              </md-input-container>
-              <md-input-container ng-show="saveDetailsCtrl.saveFile.name.length" flex="initial">
-                <md-button ng-disabled="saveDetailsCtrl.fileChanged" class="md-raised" type="button" ng-click="saveDetailsCtrl.downloadTest()" aria-label="Download">
-                  <div loading-spinner="savesDetailsDownload">
-                    <ng-md-icon icon="file_download"></ng-md-icon>
+              <md-input-container flex="50" ng-if="!saveDetailsCtrl.isCreation()">
+                <md-button type="button" ng-click="saveDetailsCtrl.deleteSave()" class="md-raised md-warn">
+                  <div loading-spinner="savesDetailsDelete">
+                    <span translate>kct.layout.common.remove</span>
                   </div>
                 </md-button>
               </md-input-container>
             </div>
-            <md-input-container flex="50">
-              <md-button class="md-raised md-primary">
-                <div loading-spinner="savesDetailsSave">
-                  <span translate>kct.layout.common.save</span>
-                </div>
-              </md-button>
-            </md-input-container>
             <input id="file-input" type="file" ngf-select="saveDetailsCtrl.uploadSaveFile($files)" name="file" style="display:none;" />
           </form>
         </div>

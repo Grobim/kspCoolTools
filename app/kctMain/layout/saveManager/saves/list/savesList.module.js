@@ -7,6 +7,7 @@
 
     'kct.angularFireInterceptor',
 
+    'kct.common',
     'kct.constants',
     'kct.components.persistence.saveManager',
     'kct.components.ui.mdDataTableUtils'

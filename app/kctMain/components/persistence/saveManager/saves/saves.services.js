@@ -2,24 +2,44 @@
   'use strict';
 
   angular.module('kct.components.persistence.saveManager')
-    .service('SavesService', ['$intFirebaseObject', 'ProfileRef', SavesService])
+    .service('SavesService', [
+      '$q',
+      '$intFirebaseObject',
+      'SaveSaveFileRef',
+      'ProfileRef',
+      SavesService
+    ])
   ;
 
-  function SavesService($intFirebaseObject, ProfileRef) {
+  function SavesService(
+    $q,
+    $intFirebaseObject,
+    SaveSaveFileRef,
+    ProfileRef
+  ) {
 
     return {
-      addAuthorNameToSaves : addAuthorNameToSaves
+      addAuthorNameToSaves : addAuthorNameToSaves,
+      addAuthorNameToSave  : addAuthorNameToSave,
+      deleteSave           : deleteSave
     };
 
     function addAuthorNameToSaves(saves) {
-      _.forEach(saves, function(save) {
-        var profile = $intFirebaseObject(new ProfileRef(save.author).child('nickname'));
-        profile.$watch(watcher);
+      _.forEach(saves, addAuthorNameToSave);
+    }
 
-        function watcher() {
-          save.$authorName = profile.$value;
-        }
+    function addAuthorNameToSave(save) {
+      var authorName = $intFirebaseObject(new ProfileRef(save.author).child('nickname'));
+      authorName.$watch(function() {
+        save.$authorName = authorName.$value;
       });
+    }
+
+    function deleteSave(save) {
+      return $q.all([
+        (save.saveFileId) ? $intFirebaseObject(new SaveSaveFileRef(save.saveFileId)).$remove() : $q.resolve(),
+        save.$remove()
+      ]);
     }
 
   }

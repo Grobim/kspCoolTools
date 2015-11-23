@@ -46,6 +46,7 @@
 
         function _save() {
           file.content = FileUtils.toParts(file.content);
+          file.saveId = save.$id;
           $intFirebaseArray(SaveSaveFilesRef).$add(file).then(function(fileRef) {
             saveObj.saveFileId = fileRef.key();
 
@@ -68,16 +69,21 @@
     }
 
     function deleteFile(save) {
-      var deletePromose = $intFirebaseObject(new SaveSaveFileRef(save.saveFileId)).$remove(),
-          updatePromise;
+      var updatePromise = $q.defer();
+      $intFirebaseObject(new SaveSaveFileRef(save.saveFileId)).$remove().then(function() {
+        
 
-      save.saveFileId = null;
-      updatePromise = (save.$save) ? save.$save() : $intFirebaseArray(SavesRef).$save(save);
+        save.saveFileId = null;
+        ((save.$save) ? save.$save() : $intFirebaseArray(SavesRef).$save(save)).then(function() {
+          updatePromise.resolve();
+        }, function(err) {
+          updatePromise.reject(err);
+        });
+      }, function(err) {
+        updatePromise.reject(err);
+      });
 
-      return $q.all([
-        updatePromise,
-        deletePromose
-      ]);
+      return updatePromise.promise;
     }
 
   }

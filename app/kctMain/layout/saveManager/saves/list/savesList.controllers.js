@@ -4,6 +4,7 @@
   angular.module('kct.layout.saveManager.saves.list')
     .controller('SavesController', [
       '$intFirebaseArray',
+      'KctAuth',
       'SavesRef',
       'SavesService',
       'MdDataTableUtils',
@@ -14,6 +15,7 @@
 
   function SavesController(
     $intFirebaseArray,
+    KctAuth,
     SavesRef,
     SavesService,
     MdDataTableUtils,
@@ -32,6 +34,8 @@
         limit: 10,
         page: 1
       };
+
+      _this.auth = KctAuth.$getAuth();
 
       _this.saves = $intFirebaseArray(SavesRef);
       _this.saves.$watch(function() {

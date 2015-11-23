@@ -6,10 +6,24 @@
       "windowTitle"     : "Création de partie",
       "breadCrumbTitle" : "Création de partie"
     },
-    "edition" : {
+    "edition"  : {
       "windowTitle"     : "Édition de partie",
       "title"           : "Édition de partie : {saveTitle}",
       "breadCrumbTitle" : "Édition de partie : {saveTitle}"
+    },
+    "messages" : {
+      "delete" : {
+        "success" : "Partie supprimée"
+      },
+      "fileUpload" : {
+        "error"   : "Une error est survenue lors de la sauvegarde du fichier"
+      },
+      "create" : {
+        "success" : "Partie créée avec succès"
+      },
+      "edit" : {
+        "success" : "Partie éditée avec succès"
+      }
     }
   }
 }
