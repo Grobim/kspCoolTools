@@ -9,7 +9,8 @@
     "edition"  : {
       "windowTitle"     : "Save edition",
       "title"           : "Save edition : {saveTitle}",
-      "breadCrumbTitle" : "Save edition : {saveTitle}"
+      "breadCrumbTitle" : "Save edition : {saveTitle}",
+      "saveFirst"       : "Save first"
     },
     "messages" : {
       "delete" : {

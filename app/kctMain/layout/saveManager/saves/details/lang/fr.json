@@ -9,7 +9,8 @@
     "edition"  : {
       "windowTitle"     : "Édition de partie",
       "title"           : "Édition de partie : {saveTitle}",
-      "breadCrumbTitle" : "Édition de partie : {saveTitle}"
+      "breadCrumbTitle" : "Édition de partie : {saveTitle}",
+      "saveFirst"       : "Sauvegarde requise"
     },
     "messages" : {
       "delete" : {

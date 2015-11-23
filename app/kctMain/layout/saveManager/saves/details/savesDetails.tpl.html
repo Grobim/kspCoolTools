@@ -67,6 +67,9 @@
                   <md-button ng-disabled="saveDetailsCtrl.fileChanged" class="md-raised" type="button" ng-click="saveDetailsCtrl.downloadFile()" aria-label="Download">
                     <div loading-spinner="savesDetailsDownload">
                       <ng-md-icon icon="file_download"></ng-md-icon>
+                      <md-tooltip ng-if="saveDetailsCtrl.fileChanged">
+                        <span translate>kct.layout.saveManager.saves.details.edition.saveFirst</span>
+                      </md-tooltip>
                     </div>
                   </md-button>
                 </md-input-container>
