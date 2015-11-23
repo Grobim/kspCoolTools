@@ -228,7 +228,7 @@
       $intFirebaseArray(SavesRef).$add(_this.save).then(function(saveRef) {
         _this.save.$id = saveRef.key();
 
-        if (_this.save.$copyFileId && !_this.saveFile.content) {
+        if (_this.save.$copyFileId && _this.saveFile && !_this.saveFile.content) {
           SaveSaveFiles.copyFile($stateParams.copy, _this.save.$id).then(function() {
             _postCreate();
           }, function(error) {
