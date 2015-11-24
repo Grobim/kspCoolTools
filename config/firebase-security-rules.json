@@ -1,8 +1,9 @@
 {
   "rules": {
-    ".read": true,
+    ".read": false,
     ".write": false,
     "profiles": {
+      ".read": true,
       "$profile_id": {
         ".write": "auth != null && $profile_id === auth.uid"
       }
@@ -10,15 +11,20 @@
     "profilePrivateInfos": {
       "$profilePrivateInfo_id": {
         ".read": "auth != null && $profilePrivateInfo_id === auth.uid",
-        ".write": "auth != null && $profilePrivateInfo_id === auth.uid"
+        ".write": "auth != null && $profilePrivateInfo_id === auth.uid",
+        "$keyName": {
+          ".read": "root.child('publicProfilePrivateInfos').child($profilePrivateInfo_id).child($keyName).val() === true"
+        }
       }
     },
     "publicProfilePrivateInfos": {
+      ".read": true,
       "$publicProfilePrivateInfos_id": {
         ".write": "auth != null && $publicProfilePrivateInfos_id === auth.uid"
       }
     },
     "saveManager": {
+      ".read": true,
       "biDirModVersionDeps" : {
         ".write": "auth != null"
       },
@@ -37,7 +43,7 @@
       "saveSaveFiles" : {
         ".write" : "auth != null",
         "$saveFile_id" : {
-          ".write": "auth != null && ((!data.exists() && root.child('saveManager').child('saves').child(newData.child('saveId').val()).child('author').val() === auth.uid) ||(!newData.exists() && root.child('saveManager').child('saves').child(data.child('saveId').val()).child('author').val() === auth.uid))"
+          ".write": "auth != null && ((!data.exists() && root.child('saveManager').child('saves').child(newData.child('saveId').val()).child('author').val() === auth.uid) || (!newData.exists() && root.child('saveManager').child('saves').child(data.child('saveId').val()).child('author').val() === auth.uid))"
         }
       },
       "saves" : {
