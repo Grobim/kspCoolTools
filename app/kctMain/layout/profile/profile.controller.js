@@ -37,7 +37,6 @@
       LoadingSpinner.loading('profilePublicInfosLoad');
       LoadingSpinner.loading('profilePrivateInfosLoad');
 
-      _this.errors = [];
       _this.profile = $intFirebaseObject(new ProfileRef(_this.userAuth.uid));
       _this.profilePrivateInfos = $intFirebaseObject(new ProfilePrivateInfoRef(_this.userAuth.uid));
 

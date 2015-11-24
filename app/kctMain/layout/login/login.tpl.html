@@ -4,15 +4,10 @@
     <ng-md-icon icon="facebook-box"></ng-md-icon>
     <span translate>kct.layout.login.fastConnection.facebook</span>
   </md-button>
-  <div flex flex-sm="50" layout="" layout-fill="">
-    <md-tooltip>
-      <span translate>kct.layout.messages.comingSoon</span>
-    </md-tooltip>
-    <md-button class="md-primary md-raised" ng-click="loginCtrl.oauthLogin('google')" disabled flex>
-      <ng-md-icon icon="google-plus"></ng-md-icon>
-      <span translate>kct.layout.login.fastConnection.google</span>
-    </md-button>
-  </div>
+  <md-button flex flex-sm="50" class="md-primary md-raised" ng-click="loginCtrl.oauthLogin('google')" flex>
+    <ng-md-icon icon="google-plus"></ng-md-icon>
+    <span translate>kct.layout.login.fastConnection.google</span>
+  </md-button>
   <md-button class="md-primary md-raised" flex flex-sm="50" ng-click="loginCtrl.oauthLogin('twitter')">
     <ng-md-icon icon="twitter"></ng-md-icon>
     <span translate>kct.layout.login.fastConnection.twitter</span>
