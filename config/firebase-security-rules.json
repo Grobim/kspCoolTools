@@ -13,6 +13,11 @@
         ".write": "auth != null && $profilePrivateInfo_id === auth.uid"
       }
     },
+    "publicProfilePrivateInfos": {
+      "$publicProfilePrivateInfos_id": {
+        ".write": "auth != null && $publicProfilePrivateInfos_id === auth.uid"
+      }
+    },
     "saveManager": {
       "biDirModVersionDeps" : {
         ".write": "auth != null"

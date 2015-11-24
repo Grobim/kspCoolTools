@@ -8,19 +8,21 @@
     <input id="loginName" label="loginName" name="loginName" type="text" ng-model="profileCtrl.profile.nickname" required />
   </md-input-container>
   <h2 class="md-headline" translate>kct.layout.profile.privateData</h2>
-  <div layout="" layout-sm="column" loading-spinner="profilePrivateInfosLoad">
-    <md-input-container class="md-icon-float md-block" smart-field="" flex>
+  <div layout="" layout-sm="column">
+    <md-input-container class="md-icon-float md-block" smart-field="" loading-spinner="profilePrivateInfosLoad" flex>
       <label for="loginEmail"><span translate>kct.layout.common.fields.email</span></label>
       <ng-md-icon icon="email"></ng-md-icon>
       <input id="loginEmail" label="loginEmail" name="loginEmail" type="email" ng-model="profileCtrl.profilePrivateInfos.email" ng-disabled="profileCtrl.userAuth.provider === 'password'" />
     </md-input-container>
-    <md-switch id="loginName" ng-model="data.cb1" aria-label="Switch 1" class="md-block" disabled>
+    <md-switch loading-spinner="publicProfilePrivateInfoLoad" id="loginName" ng-model="profileCtrl.publicProfilePrivateInfo.email" aria-label="Make public" class="md-primary md-block" md-no-ink>
       <span translate>kct.layout.profile.makePublic</span>
     </md-switch>
   </div>
   <md-input-container layout="row">
       <md-button class="md-raised md-primary save-button" ng-disabled="profileCtrl.profileForm.$invalid" flex="33" flex-sm="100">
-        <span translate>kct.layout.common.save</span>
+        <div loading-spinner="profilePublicInfosSave">
+          <span translate>kct.layout.common.save</span>
+        </div>
       </md-button>
   </md-input-container>
 </form>

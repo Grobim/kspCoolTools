@@ -10,6 +10,7 @@
 
     'kct.common',
     'kct.components.persistence',
+    'kct.components.ui.formStateCheck',
     'kct.components.ui.directives.loadingSpinner',
     'kct.components.ui.directives.smartField',
     'kct.components.ui.toast'
